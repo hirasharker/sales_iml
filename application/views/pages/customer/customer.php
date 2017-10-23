@@ -35,7 +35,7 @@
             </div>
             <div class="x_content" style="display:none">
             <br />
-            <form class="form-horizontal form-label-left" method="get" action="#">
+            <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url();?>customer/add_customer/">
 
                 <div class="x_title">
                 <h2>Basic Info <small></small></h2>
@@ -43,17 +43,29 @@
                 </div>
 
 
-                <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                <!-- <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Customer ID </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <input type="text" class="form-control" placeholder="">
+                  </div>
+                </div> -->
+                <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Reference </label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                      <select class="form-control select-tag" name="reference" id="reference">
+                      <option value="" permanentAddress="none">none</option>
+                      <?php foreach($reference_list as $value){?>
+                      <!-- <option customerName="<?php echo $value->CustName; ?>" permanentAddress="<?php echo $value->PermanentAddress; ?>" presentAddress="<?php echo $value->PresentAddress; ?>" value="<?php echo $value->CustCode; ?>"><?php echo $value->CustCode; ?></option> -->
+                      <option customerName="<?php echo $value->CustName; ?>" value="<?php echo $value->CustCode; ?>"><?php echo $value->CustCode; ?></option>
+                      <?php }?>
+                      </select>
                   </div>
                 </div>
 
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Name </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" placeholder="">
+                      <input type="text" id="customerName" class="form-control" name="customer_name" placeholder="">
                   </div>
                 </div>
                 <!-- <div class="form-group col-md-6 col-sm-12 col-xs-12">
@@ -69,39 +81,39 @@
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">National ID </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" placeholder="">
+                      <input type="text" class="form-control" name="national_id" placeholder="">
                   </div>
                 </div>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Occupation </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" placeholder="">
+                      <input type="text" class="form-control" name="occupation" placeholder="">
                   </div>
                 </div>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Father's Name </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" placeholder="">
+                      <input id="fatherName" type="text" class="form-control" name="father_name" placeholder="">
                   </div>
                 </div>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Mother's Name </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" placeholder="">
+                      <input id="motherName" type="text" class="form-control" name="mother_name" placeholder="">
                   </div>
                 </div>
 
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Upload Image (Passport Size) </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="file" class="form-control" placeholder="">
+                      <input type="file" class="form-control" name="customer_image" placeholder="">
                   </div>
                 </div>
                 
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Upload NID </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="file" class="form-control" placeholder="">
+                      <input type="file" class="form-control" name="customer_nid" placeholder="">
                   </div>
                 </div>
 
@@ -111,71 +123,60 @@
                 <h2>Contact Info <small></small></h2>
                   <div class="clearfix"></div>
                 </div>
-
-                <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Reference </label>
-                  <div class="col-md-9 col-sm-9 col-xs-12">
-                      <select class="form-control select-tag">
-                      <option value="">select</option>
-                      <option>00-00-000-000-88888</option>
-                      <option>00-00-000-000-11111</option>
-                      <option>00-00-000-000-55555</option>
-                      <option>00-00-000-000-99999</option>
-                      </select>
-                  </div>
-                </div>
-
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Present Address <span class="required">*</span>
                   </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <textarea class="form-control" rows="3" placeholder=""></textarea>
+                      <textarea class="form-control" rows="3" id="presentAddress" name="present_address" placeholder=""></textarea>
                   </div>
                 </div>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Permanent Address <span class="required">*</span>
                   </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <textarea class="form-control" rows="3" placeholder=""></textarea>
+                      <textarea id="permanentAddress" class="form-control" rows="3" name="permanent_address" placeholder=""></textarea>
                   </div>
                 </div>
+                
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Business Address <span class="required">(optional)</span>
                   </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <textarea class="form-control" rows="3" placeholder=""></textarea>
+                      <textarea class="form-control" rows="3" name="business_address" placeholder=""></textarea>
                   </div>
                 </div>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Spouse's Address <span class="required">(optional)</span>
                   </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <textarea class="form-control" rows="3" placeholder=""></textarea>
+                      <textarea class="form-control" rows="3" name="spouse_address" placeholder=""></textarea>
                   </div>
                 </div>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Zone </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">City </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <select class="form-control select-tag">
-                      <option>Narayangonj</option>
-                      <option>Comilla</option>
-                      <option>Chittagong</option>
-                      <option>Sylhet</option>
+                      <select id="cityId" class="form-control select-tag" name="city_id" required>
+                        <option value="">select</option>
+                        <?php foreach($city_list as $value){?> 
+                        <option cityCode="<?php echo $value->city_code; ?>" zoneId="<?php echo $value->zone_id; ?>" value="<?php echo $value->city_id; ?>"><?php echo $value->city_name;?></option>
+                        <?php }?>
                       </select>
                   </div>
+                  <input id="zoneId" type="hidden" name="zone_id">
+                  <input id="cityCode" type="hidden" name="city_code">
                 </div>
 
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Mobile No </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" placeholder="">
+                      <input type="text" class="form-control" name="phone" placeholder="">
                   </div>
                 </div>
 
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Email ID </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" placeholder="">
+                      <input type="text" class="form-control" name="email_id" placeholder="">
                   </div>
                 </div>
                 <div class="clearfix"></div>
@@ -189,46 +190,34 @@
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Model </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <select class="form-control select-tag">
-                      <option>TS1616 IL</option>
-                      <option>B1212</option>
-                      <option>TAURUS</option>
-                      <option>DOST</option>
+                      <select id="vehicleModel" class="form-control select-tag" name="model_id" required>
+                        <option value="">select</option>
+                        <?php foreach($model_list as $value){?> 
+                        <option modelCode="<?php echo $value->model_code;?>" value="<?php echo $value->model_id; ?>"><?php echo $value->model_name;?></option>
+                        <?php }?>
                       </select>
+                      <input id="modelCode" type="hidden" name="model_code">
                   </div>
                 </div>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Engine No </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" placeholder="">
+                      <input type="text" class="form-control" name="engine_no" placeholder="">
                   </div>
                 </div>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Chassis No </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" placeholder="">
+                      <input type="text" class="form-control" name="chassis_no" placeholder="">
                   </div>
                 </div>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Registration </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" placeholder="">
+                      <input type="text" class="form-control" name="registration_no" placeholder="">
                   </div>
                 </div>
-                <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Total Price </label>
-                  <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" placeholder="">
-                  </div>
-                </div>
-
-                <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Discount </label>
-                  <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" placeholder="">
-                  </div>
-                </div>
-
+                
 
                 <div class="clearfix"></div>
                 <br />
@@ -242,36 +231,48 @@
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Payment Mode </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <select class="form-control select-tag">
-                      <option>Credit</option>
-                      <option>Semi Cash</option>
-                      <option>Cash</option>
+                      <select id="paymentMode" class="form-control select-tag" name="payment_mode">
+                      <option value="1">Credit</option>
+                      <option value="2">Semi Cash</option>
+                      <option value="3">Cash</option>
                       </select>
+                  </div>
+                </div>
+                <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Total Price </label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                      <input id="totalPrice" type="text" class="form-control" name="total_price" placeholder="">
                   </div>
                 </div>
 
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Downpayment </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" placeholder="">
+                      <input id="downpayment" type="text" class="form-control" name="downpayment" placeholder="">
                   </div>
                 </div>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Period </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" placeholder="">
+                      <input type="text" class="form-control" name="period" placeholder="">
                   </div>
                 </div>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Interest Rate </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" placeholder="">
+                      <input id="interestRate" type="text" class="form-control" name="interest_rate" placeholder="">
                   </div>
                 </div>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Installment Starts from </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="number" class="form-control" placeholder="" value="60">
+                      <input type="number" class="form-control" name="installment_start_date" placeholder="" value="60">
+                  </div>
+                </div>
+                <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Discount </label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                      <input id="discount" type="text" class="form-control" name="discount" placeholder="">
                   </div>
                 </div>
 
@@ -290,6 +291,64 @@
                       </div>
                     </fieldset>
                 </div> -->
+                <script>
+                  $(function() { 
+                      $("#reference").change(function(){ 
+                          var element = $(this).find('option:selected'); 
+                          var customerName = element.attr("customerName");
+                          var permanentAddress = element.attr("permanentAddress");
+                          var presentAddress = element.attr("presentAddress");
+
+                          // $('#permanentAddress').val(permanentAddress);
+                          // $('#presentAddress').val(presentAddress);
+                            $('#customerName').val(customerName);
+                            $('#permanentAddress').prop('disabled', true);
+                            $('#presentAddress').prop('disabled', true);
+                      });
+                      $("#cityId").change(function(){ 
+                          var element = $(this).find('option:selected'); 
+                          var zoneId = element.attr("zoneId");
+                          var cityCode = element.attr("cityCode");
+                          
+                          $('#zoneId').val(zoneId);
+                          $('#cityCode').val(cityCode);
+
+                      });
+                      $("#vehicleModel").change(function(){ 
+                          var element = $(this).find('option:selected'); 
+                          var modelCode = element.attr("modelCode");
+                          
+                          $('#modelCode').val(modelCode);
+
+                      });
+                      $("#paymentMode").change(function(){ 
+                          var element = $(this).find('option:selected'); 
+                          var paymentMode = element.attr("value");
+                          if(paymentMode==3){
+                            $('#totalPrice').prop('disabled', true);
+                            $('#downPayment').prop('disabled', true);
+                            $('#interestRate').prop('disabled', true);
+                            $('#discount').prop('disabled', true);
+                          }
+                          
+                          // $('#zoneId').val(zoneId);
+                      });
+
+                      $("#reset").click(function(){
+                          $('#permanentAddress').prop('disabled', false);
+                          $('#presentAddress').prop('disabled', false);
+                          $('#totalPrice').prop('disabled', false);
+                          $('#downPayment').prop('disabled', false);
+                          $('#interestRate').prop('disabled', false);
+                          $('#discount').prop('disabled', false);
+                          $("#paymentMode").val("1").change();
+                      });
+                  }); 
+                </script>
+                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                    <button class="btn btn-primary" type="reset" id="reset">Reset</button>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
                 
                 <div class="clearfix"></div>
                 <br />
@@ -329,24 +388,36 @@
               </tr>
             </thead>
             <tbody>
+              <?php foreach($customer_list as $value){?>
               <tr>
-                <td>00-00-000-000-00001</td>
-                <td>Md. Salim Uddin</td>
-                <td>1616IL</td>
-                <td>26,00,000</td>
-                <td>7,00,000</td>
-                <td>2017/10/25</td>
-                <td>Waiting For Inspection</td>
+                <td><?php echo $value->customer_code; ?></td>
+                <td><?php echo $value->customer_name; ?></td>
+                <td><?php foreach($model_list as $model_value){if($value->model_id==$model_value->model_id){echo $model_value->model_name;}}?></td>
+                <td><?php echo $value->total_price; ?></td>
+                <td><?php echo $value->downpayment; ?></td>
+                <td><?php echo $value->time_stamp; ?></td>
+                <td><?php 
+                  switch ($value->status){
+                    case 1:
+                    echo "Waiting for approval of Zonal Head";
+                    break;
+                    case 2:
+                    echo "Waiting for inspection";
+                    break;
+                    case 3:
+                    echo "Waiting for printing Aggreements";
+                    break;
+                    case 4:
+                    echo "Waiting for printing DO";
+                    break;
+                    case 5:
+                    echo "Delivered";
+                    default:
+                    break;
+                  }
+                ?></td>
               </tr>
-              <tr>
-                <td>00-00-000-000-00002</td>
-                <td>Md. Kalim Uddin</td>
-                <td>TS1613</td>
-                <td>24,00,000</td>
-                <td>6,00,000</td>
-                <td>2017/11/15</td>
-                <td>Delivered</td>
-              </tr>
+              <?php } ?>
             </tbody>
           </table>
         </div>

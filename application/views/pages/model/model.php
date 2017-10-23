@@ -35,7 +35,7 @@
             </div>
             <div class="x_content" style="display:none">
             <br />
-            <form class="form-horizontal form-label-left" method="get" action="#">
+            <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url();?>model/add_model/">
 
                 <div class="x_title">
                 <h2>Vehicle Model <small></small></h2>
@@ -46,26 +46,36 @@
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Model Name </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" placeholder="">
+                      <input type="text" class="form-control" name="model_name" placeholder="">
+                  </div>
+                </div>
+                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Model Code </label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                      <input type="number" class="form-control" name="model_code" placeholder="">
                   </div>
                 </div>
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Price </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" placeholder="">
+                      <input type="text" class="form-control" name="total_price" placeholder="">
                   </div>
                 </div>
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Downpayment </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" placeholder="">
+                      <input type="text" class="form-control" name="downpayment" placeholder="">
                   </div>
                 </div>
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Interest Rate </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" placeholder="">
+                      <input type="text" class="form-control" name="interest_rate" placeholder="">
                   </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                  <button class="btn btn-primary" type="reset">Reset</button>
+                  <button type="submit" class="btn btn-success">Submit</button>
                 </div>
                 <div class="x_title">
                   <div class="clearfix"></div>
@@ -114,20 +124,15 @@
             </thead>
 
             <tbody>
+            <?php foreach($model_list as $value){?>
               <tr>
-                <td>1616IL</td>
-                <td>24,00,000</td>
-                <td>7,00,000</td>
-                <td>10%</td>
+                <td><?php echo $value->model_name; ?></td>
+                <td><?php echo $value->total_price; ?></td>
+                <td><?php echo $value->downpayment; ?></td>
+                <td><?php echo $value->interest_rate; ?>%</td>
                 <td><a href="#">edit</a> | <a href="#">delete</a></td>
               </tr>
-              <tr>
-                <td>TS1613</td>
-                <td>22,00,000</td>
-                <td>6,00,000</td>
-                <td>10%</td>
-                <td><a href="#">edit</a> | <a href="#">delete</a></td>
-              </tr>
+            <?php }?>
             </tbody>
           </table>
         </div>

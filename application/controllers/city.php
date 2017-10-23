@@ -9,6 +9,7 @@ class City extends CI_Controller {
 		}
 		$this->load->model('zone_model','zone_model',TRUE);
 		$this->load->model('city_model','city_model',TRUE);
+		
 	}
 
 	/**
@@ -45,6 +46,7 @@ class City extends CI_Controller {
 	public function add_city()
 	{
 		$city_data						=	array();
+
 		$city_data['user_id']			=	$this->session->userdata('employee_id');
 		$city_data['user_name']			=	$this->session->userdata('email_id');
 		$city_data['city_name']			=	$this->input->post('city_name','',TRUE);

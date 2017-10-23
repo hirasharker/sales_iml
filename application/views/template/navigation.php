@@ -14,10 +14,10 @@
         <ul class="nav child_menu">
             <li><a href="<?php echo base_url();?>inspection">Inspection</a></li>
             <li><a href="<?php echo base_url();?>accounts_clearence">Accounts Clearence</a></li>
-            <li><a href="<?php echo base_url();?>aggreement">Aggreement</a></li>
             <li><a href="<?php echo base_url();?>checklist">Documents Checklist</a></li>
             <li><a href="<?php echo base_url();?>delivery_order">Delivery Order</a></li>
             <li><a href="<?php echo base_url();?>delivery_challan">Delivery challan</a></li>
+            <li><a href="<?php echo base_url();?>aggreement">Aggreement</a></li>
         </ul>
         </li>
         <li><a><i class="fa fa-check"></i> Approvals <span class="fa fa-chevron-down"></span></a>
