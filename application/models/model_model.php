@@ -24,7 +24,6 @@ class Model_Model extends CI_Model {
         $result=$result_query->row();
         return $result;
     }
-
     
     public function add_model($data){
         $this->db->insert('tbl_model',$data);

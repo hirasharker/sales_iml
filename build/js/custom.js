@@ -361,7 +361,7 @@ if (typeof NProgress != 'undefined') {
 		  [gd(2012, 1, 2), 23],
 		  [gd(2012, 1, 3), 66],
 		  [gd(2012, 1, 4), 9],
-		  [gd(2012, 1, 5), 119],
+		  [gd(2012, 1, 5), 10],
 		  [gd(2012, 1, 6), 6],
 		  [gd(2012, 1, 7), 9]
 		];
@@ -682,59 +682,11 @@ if (typeof NProgress != 'undefined') {
 	}  
 	   
 	   
-	function init_chart_doughnut(){
-				
-		if( typeof (Chart) === 'undefined'){ return; }
-		
-		console.log('init_chart_doughnut');
-	 
-		if ($('.canvasDoughnut').length){
-			
-		var chart_doughnut_settings = {
-				type: 'doughnut',
-				tooltipFillColor: "rgba(51, 51, 51, 0.55)",
-				data: {
-					labels: [
-						"Symbian",
-						"Blackberry",
-						"Other",
-						"Android",
-						"IOS"
-					],
-					datasets: [{
-						data: [15, 20, 30, 10, 30],
-						backgroundColor: [
-							"#BDC3C7",
-							"#9B59B6",
-							"#E74C3C",
-							"#26B99A",
-							"#3498DB"
-						],
-						hoverBackgroundColor: [
-							"#CFD4D8",
-							"#B370CF",
-							"#E95E4F",
-							"#36CAAB",
-							"#49A9EA"
-						]
-					}]
-				},
-				options: { 
-					legend: false, 
-					responsive: false 
-				}
-			}
-		
-			$('.canvasDoughnut').each(function(){
-				
-				var chart_element = $(this);
-				var chart_doughnut = new Chart( chart_element, chart_doughnut_settings);
-				
-			});			
-		
-		}  
-	   
-	}
+	
+
+
+
+
 	   
 	function init_gauge() {
 			
@@ -1577,7 +1529,7 @@ if (typeof NProgress != 'undefined') {
 		
 			var cb = function(start, end, label) {
 			  console.log(start.toISOString(), end.toISOString(), label);
-			  $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+			  $('#reportrange span').html(start.format('YYYY/MM/DD') + ' - ' + end.format('YYYY/MM/DD'));
 			};
 
 			var optionSet1 = {
@@ -1620,6 +1572,7 @@ if (typeof NProgress != 'undefined') {
 			};
 			
 			$('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+
 			$('#reportrange').daterangepicker(optionSet1, cb);
 			$('#reportrange').on('show.daterangepicker', function() {
 			  console.log("show event fired");
@@ -1652,7 +1605,8 @@ if (typeof NProgress != 'undefined') {
 		  
 				var cb = function(start, end, label) {
 				  console.log(start.toISOString(), end.toISOString(), label);
-				  $('#reportrange_right span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+				  $('#reportrange_right span').html(start.format('YYYY/MM/DD') + '-' + end.format('YYYY/MM/DD'));
+				  $('#date').val(start.format('YYYY/MM/DD') + '-' + end.format('YYYY/MM/DD'));
 				};
 
 				var optionSet1 = {
@@ -1661,7 +1615,7 @@ if (typeof NProgress != 'undefined') {
 				  minDate: '01/01/2012',
 				  maxDate: '12/31/2020',
 				  dateLimit: {
-					days: 60
+					days: 365
 				  },
 				  showDropdowns: true,
 				  showWeekNumbers: true,
@@ -1694,7 +1648,8 @@ if (typeof NProgress != 'undefined') {
 				  }
 				};
 
-				$('#reportrange_right span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+				$('#reportrange_right span').html(moment().subtract(29, 'days').format('YYYY/MM/DD') + '-' + moment().format('YYYY/MM/DD'));
+				$('#date').val(moment().subtract(29, 'days').format('YYYY/MM/DD') + '-' + moment().format('YYYY/MM/DD'));
 
 				$('#reportrange_right').daterangepicker(optionSet1, cb);
 
@@ -1705,7 +1660,7 @@ if (typeof NProgress != 'undefined') {
 				  console.log("hide event fired");
 				});
 				$('#reportrange_right').on('apply.daterangepicker', function(ev, picker) {
-				  console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
+				  console.log("apply event fired, start/end dates are " + picker.startDate.format('YYYY/MM/DD') + " to " + picker.endDate.format('YYYY/MM/DD'));
 				});
 				$('#reportrange_right').on('cancel.daterangepicker', function(ev, picker) {
 				  console.log("cancel event fired");
@@ -2537,6 +2492,11 @@ if (typeof NProgress != 'undefined') {
 								className: "btn-sm"
 							},
 							{
+								extend: 'pdf',
+								className: "btn-sm",
+                messageBottom: null
+            	},
+							{
 								extend: "pdfHtml5",
 								className: "btn-sm"
 							},
@@ -2564,6 +2524,11 @@ if (typeof NProgress != 'undefined') {
 						{
 						  extend: "excel",
 						  className: "btn-sm"
+						},
+						{
+							extend: 'pdf',
+							className: "btn-sm",
+							messageBottom: null
 						},
 						{
 						  extend: "pdfHtml5",
@@ -2595,6 +2560,11 @@ if (typeof NProgress != 'undefined') {
 								className: "btn-sm"
 							},
 							{
+								extend: 'pdf',
+								className: "btn-sm",
+                messageBottom: null
+            	},
+							{
 								extend: "pdfHtml5",
 								className: "btn-sm"
 							},
@@ -2622,6 +2592,11 @@ if (typeof NProgress != 'undefined') {
 								{
 									extend: "excel",
 									className: "btn-sm"
+								},
+								{
+									extend: 'pdf',
+									className: "btn-sm",
+									messageBottom: null
 								},
 								{
 									extend: "pdfHtml5",

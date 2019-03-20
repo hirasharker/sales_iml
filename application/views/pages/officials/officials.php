@@ -19,7 +19,7 @@
 
   <div class="clearfix"></div>
   <div class="row">
-    <div class="col-md-5 col-sm-6 col-xs-12">
+    <div class="col-md-7 col-sm-8 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
             <!-- <h2>Add new Employees <small>click the plus icon to add new employee..</small></h2> -->
@@ -46,41 +46,56 @@
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Name </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" name="employee_name" placeholder="">
+                      <input type="text" class="form-control" name="employee_name" placeholder="" required>
                   </div>
                 </div>
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Designation </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" name="designation" placeholder="">
+                      <input type="text" class="form-control" name="designation" placeholder="" required>
+                  </div>
+                </div>
+                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Role </label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                      <select id="role" name="role" class="form-control select-tag">
+                      <option value="1">Marketing Correspondent</option>
+                      <option value="2">Recovery Manager</option>
+                      <option value="3">Co-ordinator</option>
+                      <option value="4">Zonal Head</option>
+                      <option value="5">Head of Sales</option>
+                      <option value="6">Controller</option>
+                      <option value="7">Documentation</option>
+                      <option value="8">Accounts</option>
+                      <option value="9">Delivery Yard</option>
+                      </select>
+                  </div>
+                </div>
+                <div id="zone" class="form-group col-md-12 col-sm-12 col-xs-12">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Zone </label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                      <select  name="zone_id" class="form-control select-tag" >
+                      <?php foreach($zone_list as $value){?>
+                      <option value="<?php echo $value->zone_id?>"><?php echo $value->zone_name; ?></option>
+                      <?php }?>
+                      </select>
                   </div>
                 </div>
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Email ID </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" name="email_id" placeholder="">
+                      <input type="text" class="form-control" name="email_id" placeholder="" required>
                   </div>
                 </div>
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Contact No </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" name="phone" placeholder="">
+                      <input type="text" class="form-control" name="phone" placeholder="" required>
                   </div>
                 </div>
-                <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Role </label>
-                  <div class="col-md-9 col-sm-9 col-xs-12">
-                      <select name="role" class="form-control select-tag">
-                      <option value="1">Marketing Correspondent</option>
-                      <option value="2">Recovery Manager</option>
-                      <option value="3">Co-ordinator</option>
-                      <option value="4">Zonal Head</option>
-                      <option value="5">Controller</option>
-                      </select>
-                  </div>
-                </div>
+                
                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-						      <button class="btn btn-primary" type="reset">Reset</button>
+						      <button id="reset" class="btn btn-primary" type="reset">Reset</button>
                   <button type="submit" class="btn btn-success">Submit</button>
                 </div>
 
@@ -94,7 +109,7 @@
   </div>
 
   <div class="row">
-    <div class="col-md-5 col-sm-6 col-xs-12">
+    <div class="col-md-7 col-sm-8 col-xs-12">
       <div class="x_panel">
         <div class="x_title">
           <h2>List of Authorized Officials <small></small></h2>
@@ -122,8 +137,10 @@
           <table id="datatable-buttons" class="table table-striped table-bordered">
             <thead>
               <tr>
+                <th>ID</th>
                 <th>Name</th>
                 <th>Designation</th>
+                <th>Role</th>
                 <th>Email ID</th>
                 <th>Contact No</th>
                 <th>Action</th>
@@ -131,15 +148,53 @@
             </thead>
 
             <tbody>
-            <?php foreach($employee_list as $value){?>
+            <?php foreach($employee_list as $value){ if($value->role != 15){?>
               <tr>
+                <td><?php echo $value->employee_id;?></td>
                 <td><?php echo $value->employee_name; ?></td>
                 <td><?php echo $value->designation; ?></td>
+                <td><?php 
+                    switch($value->role){
+                      case 1:
+                      echo "Sales Person";
+                      break;
+                      case 2:
+                      echo "Recovery Manager";
+                      break;
+                      case 3:
+                      echo "Co-ordinator";
+                      break;
+                      case 4:
+                      echo "Zonal Head";
+                      break;
+                      case 5:
+                      echo "Head of Sales";
+                      break;
+                      case 6:
+                      echo "Controller";
+                      break;
+                      case 7:
+                      echo "Documentation";
+                      break;
+                      case 8:
+                      echo "Accounts";
+                      break;
+                      case 9:
+                      echo "Delivery Yard";
+                      break;
+                      case 15:
+                      echo "Admin";
+                      break;
+                      default:
+                      break;
+                    }
+                ?>
+                </td>
                 <td><?php echo $value->email_id; ?></td>
                 <td><?php echo $value->phone; ?></td>
                 <td><a href="#">edit </a>|<a href="#"> delete</a></td>
               </tr>
-            <?php }?>
+            <?php } }?>
             </tbody>
           </table>
         </div>
@@ -148,3 +203,25 @@
   </div>
 </div>
 </div>
+<script>
+  $(function() {
+      
+      $("#role").change(function(){ 
+          // var element = $(this).find('option:selected'); 
+          
+          if($("#role").val()!=1){
+            // $('#zone').attr('disabled', 'disabled');
+            $('#zone').hide();
+            $('#zone').val=1;
+          }else{
+            // $('#zone').prop('disabled', false);
+            $('#zone').show();
+          }
+            
+      });
+      $("#reset").click(function(){
+        $('#zone').prop('disabled', false);
+      });
+  }); 
+  
+</script>

@@ -7,6 +7,9 @@ class Zone extends CI_Controller {
 		if($this->session->userdata('employee_id')==NULL){
 			redirect('login','refresh');
 		}
+		if($this->session->userdata('role')!=15){
+			redirect('dashboard','refresh');
+		}
 		$this->load->model('zone_model','zone_model',TRUE);
 		$this->load->model('employee_model','employee_model',TRUE);
 	}
@@ -48,8 +51,9 @@ class Zone extends CI_Controller {
 		$zone_data['user_name']			=	$this->session->userdata('email_id');
 		$zone_data['zone_name']			=	$this->input->post('zone_name','',TRUE);
 		$zone_data['zhead_id']			=	$this->input->post('zhead_id','',TRUE);
+		$zone_data['head_of_sales_id']	=	$this->input->post('head_of_sales_id','',TRUE);
 		$zone_data['coordinator_id']	=	$this->input->post('coordinator_id','',TRUE);
-		$zone_data['rm_id']				=	$this->input->post('rm_id','',TRUE);
+		// $zone_data['rm_id']				=	$this->input->post('rm_id','',TRUE);
 
 		$result							=	$this->zone_model->add_zone($zone_data);
 

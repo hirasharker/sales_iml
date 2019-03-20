@@ -19,7 +19,7 @@
 
   <div class="clearfix"></div>
   <div class="row">
-    <div class="col-md-5 col-sm-6 col-xs-12">
+    <div class="col-md-8 col-sm-10 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
             <!-- <h2>Add new Employees <small>click the plus icon to add new employee..</small></h2> -->
@@ -56,23 +56,53 @@
                   </div>
                 </div>
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Price </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Category </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" name="total_price" placeholder="">
+                      <input type="text" class="form-control" name="category" placeholder="">
                   </div>
                 </div>
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Downpayment </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Sub Category </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" name="downpayment" placeholder="">
+                      <input type="text" class="form-control" name="sub_category" placeholder="">
                   </div>
                 </div>
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Credit/semicash Price </label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                      <input type="text" class="form-control" name="credit_price" placeholder="">
+                  </div>
+                </div>
+                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Corporate Price </label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                      <input type="text" class="form-control" name="corporate_price" placeholder="">
+                  </div>
+                </div>
+                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Retail Cash Price </label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                      <input type="text" class="form-control" name="retail_cash_price" placeholder="">
+                  </div>
+                </div>
+                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Minimum Downpayment (Credit) </label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                      <input type="text" class="form-control" name="min_dp_credit" placeholder="">
+                  </div>
+                </div>
+                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Minimum Downpayment (Semi-Cash) </label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                      <input type="text" class="form-control" name="min_dp_semicash" placeholder="">
+                  </div>
+                </div>
+                <!-- <div class="form-group col-md-12 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Interest Rate </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <input type="text" class="form-control" name="interest_rate" placeholder="">
                   </div>
-                </div>
+                </div> -->
                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                   <button class="btn btn-primary" type="reset">Reset</button>
                   <button type="submit" class="btn btn-success">Submit</button>
@@ -87,7 +117,7 @@
   </div>
 
   <div class="row">
-    <div class="col-md-5 col-sm-6 col-xs-12">
+    <div class="col-md-8 col-sm-10 col-xs-12">
       <div class="x_panel">
         <div class="x_title">
           <h2>Vehicle Model List <small></small></h2>
@@ -115,21 +145,33 @@
           <table id="datatable-buttons" class="table table-striped table-bordered">
             <thead>
               <tr>
+                <th>ID</th>
                 <th>Model Name</th>
-                <td>Price</td>
-                <td>Downpayment</td>
-                <td>Interest Rate</td>
-                <td>Action</td>
+                <th>Code</th>
+                <th>Category</th>
+                <th>Sub Category</th>
+                <th>Cr/SC Price</th>
+                <th>Corp Price</th>
+                <th>Retail Cash Price</th>
+                <th>Min DP Cr</th>
+                <th>Min DP SC</th>
+                <th>Action</th>
               </tr>
             </thead>
 
             <tbody>
             <?php foreach($model_list as $value){?>
               <tr>
+                <td><?php echo $value->model_id; ?></td>
                 <td><?php echo $value->model_name; ?></td>
-                <td><?php echo $value->total_price; ?></td>
-                <td><?php echo $value->downpayment; ?></td>
-                <td><?php echo $value->interest_rate; ?>%</td>
+                <td><?php echo $value->model_code; ?></td>
+                <td><?php echo $value->category; ?></td>
+                <td><?php echo $value->sub_category; ?></td>
+                <td><?php echo $value->credit_price; ?></td>
+                <td><?php echo $value->corporate_price; ?></td>
+                <td><?php echo $value->retail_cash_price; ?></td>
+                <td><?php echo $value->min_dp_credit; ?></td>
+                <td><?php echo $value->min_dp_semicash; ?></td>
                 <td><a href="#">edit</a> | <a href="#">delete</a></td>
               </tr>
             <?php }?>

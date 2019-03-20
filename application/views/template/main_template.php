@@ -53,22 +53,26 @@
     <script src="<?php echo base_url();?>vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- anchor -->
     <script src="<?php echo base_url();?>vendors/anchor.js"></script>
+    <script type="text/javascript" src="<?php echo base_url();?>build/js/loader.js"></script>
     
   </head>
+  
 
+  <!-- <body class="nav-md" oncontextmenu="return false"> -->
   <body class="nav-md">
+  
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
-          <div class="left_col scroll-view">
+          <div class="left_col scroll-view no-print">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="<?php echo base_url();?>" class="site_title"><!--<i class="fa fa-paw"></i>--> <span>IAL SALES</span></a>
+              <a href="<?php echo base_url();?>" class="site_title no-print"><!--<i class="fa fa-paw"></i>--> <span>IAL SALES</span></a>
             </div>
 
             <div class="clearfix"></div>
 
             <!-- menu profile quick info -->
-            <div class="profile clearfix">
+            <div class="profile clearfix no-print">
               <div class="profile_pic">
                 <img src="<?php echo base_url();?>images/img.jpg" alt="..." class="img-circle profile_img">
               </div>
@@ -105,7 +109,7 @@
         </div>
 
         <!-- top navigation -->
-        <div class="top_nav">
+        <div class="top_nav no-print">
           <div class="nav_menu">
             <nav>
               <div class="nav toggle">
@@ -115,18 +119,54 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="<?php echo base_url();?>javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="<?php echo base_url();?>images/img.jpg" alt="">Admin
+                    <img src="<?php echo base_url();?>images/img.jpg" alt="">
+                    <?php echo $this->session->userdata('employee_name').' '.'(';
+                    switch($this->session->userdata('role')){
+                      case 1:
+                      echo "Sales Person";
+                      break;
+                      case 2:
+                      echo "Recovery Manager";
+                      break;
+                      case 3:
+                      echo "Co-ordinator";
+                      break;
+                      case 4:
+                      echo "Zonal Head";
+                      break;
+                      case 5:
+                      echo "Head of Sales";
+                      break;
+                      case 6:
+                      echo "Controller";
+                      break;
+                      case 7:
+                      echo "Documentation";
+                      break;
+                      case 8:
+                      echo "Accounts";
+                      break;
+                      case 9:
+                      echo "Delivery Yard";
+                      break;
+                      case 20:
+                      echo "Admin";
+                      break;
+                      default:
+                      break;
+                    } echo ')';?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="<?php echo base_url();?>javascript:;"> Profile</a></li>
+                    <!-- <li><a href="<?php echo base_url();?>javascript:;"> Profile</a></li>
                     <li>
                       <a href="<?php echo base_url();?>javascript:;">
                         <span class="badge bg-red pull-right">50%</span>
                         <span>Settings</span>
                       </a>
                     </li>
-                    <li><a href="<?php echo base_url();?>javascript:;">Help</a></li>
+                    <li><a href="<?php echo base_url();?>javascript:;">Help</a></li> -->
+                    <li><a href="<?php echo base_url();?>password/"> Change Password</a></li>
                     <li><a href="<?php echo base_url();?>log_out/"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>

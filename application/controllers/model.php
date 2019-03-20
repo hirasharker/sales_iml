@@ -7,6 +7,9 @@ class Model extends CI_Controller {
 		if($this->session->userdata('employee_id')==NULL){
 			redirect('login','refresh');
 		}
+		if($this->session->userdata('role')!=15){
+			redirect('dashboard','refresh');
+		}
 		$this->load->model('model_model','model_model',TRUE);
 	}
 
@@ -41,12 +44,17 @@ class Model extends CI_Controller {
 	{
 		$model_data							=	array();
 		$model_data['user_id']				=	$this->session->userdata('employee_id');
-		$model_data['user_name']				=	$this->session->userdata('email_id');
+		$model_data['user_name']			=	$this->session->userdata('email_id');
 		$model_data['model_name']			=	$this->input->post('model_name','',TRUE);
 		$model_data['model_code']			=	$this->input->post('model_code','',TRUE);
-		$model_data['total_price']			=	$this->input->post('total_price','',TRUE);
-		$model_data['downpayment']			=	$this->input->post('downpayment','',TRUE);
-		$model_data['interest_rate']		=	$this->input->post('interest_rate','',TRUE);
+		$model_data['category']				=	$this->input->post('category','',TRUE);
+		$model_data['sub_category']			=	$this->input->post('sub_category','',TRUE);
+		$model_data['credit_price']			=	$this->input->post('credit_price','',TRUE);
+		$model_data['corporate_price']		=	$this->input->post('corporate_price','',TRUE);
+		$model_data['retail_cash_price']	=	$this->input->post('retail_cash_price','',TRUE);
+		$model_data['min_dp_credit']		=	$this->input->post('min_dp_credit','',TRUE);
+		$model_data['min_dp_semicash']		=	$this->input->post('min_dp_semicash','',TRUE);
+		// $model_data['interest_rate']		=	$this->input->post('interest_rate','',TRUE);
 
 		$result								=	$this->model_model->add_model($model_data);
 

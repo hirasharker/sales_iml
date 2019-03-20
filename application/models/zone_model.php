@@ -9,11 +9,11 @@ class Zone_Model extends CI_Model {
 
     public function get_all_zones(){
         $this->db->select('tbl_zone.*,tbl_zonal_head.employee_name as zonal_head,
-                          tbl_recovery_manager.employee_name as recovery_manager,
+                          tbl_head_of_sales.employee_name as head_of_sales,
                           tbl_coordinator.employee_name as coordinator');
         $this->db->from('tbl_zone');
         $this->db->join('tbl_employee as tbl_zonal_head','tbl_zone.zhead_id = tbl_zonal_head.employee_id','left');
-        $this->db->join('tbl_employee as tbl_recovery_manager','tbl_zone.rm_id = tbl_recovery_manager.employee_id','left');
+        $this->db->join('tbl_employee as tbl_head_of_sales','tbl_zone.head_of_sales_id = tbl_head_of_sales.employee_id','left');
         $this->db->join('tbl_employee as tbl_coordinator','tbl_zone.coordinator_id = tbl_coordinator.employee_id','left');
         $this->db->order_by('time_stamp','desc');
         $result_query=$this->db->get();

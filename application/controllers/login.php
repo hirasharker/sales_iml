@@ -5,6 +5,7 @@ class Login extends CI_Controller {
   public function __construct()
   {
           parent::__construct();
+          
           $this->load->model('login_model','l_model',TRUE);
           if($this->session->userdata('employee_id')!=NULL){
             redirect('dashboard','refresh');
@@ -48,8 +49,10 @@ class Login extends CI_Controller {
       redirect('login','refresh');
     } else {
       $sdata['employee_id']     = $result->employee_id;
+      $sdata['employee_name']   = $result->employee_name;
       $sdata['email_id']        = $result->email_id;
-      $sdata['user_type']       = $result->role;
+      $sdata['role']            = $result->role;
+      $sdata['zone_id']         = $result->zone_id;
       $this->session->set_userdata($sdata);
       redirect('dashboard','refresh');
     }

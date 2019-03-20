@@ -1,0 +1,148 @@
+@charset "utf-8";
+/* CSS Document */
+@page{
+	size: 8.27in 11.69in;
+	margin-top : .4in;	
+	margin-left : .4in;
+	margin-bottom: -5px;
+}
+.header{
+	position: relative;
+	padding-bottom: 0;
+	margin-bottom: 0;
+	}
+.banner {
+	position: relative;
+	width: 7.27in;
+}
+.logo {
+	float: left;
+	width: .7in;
+}
+.logo img {
+	width: 100%;
+}
+.title {
+	vertical-align: middle;
+	text-align: center;
+	margin: 0;
+	width: 6.5in;
+	float : left;
+}
+.title h1{
+	margin-top: 0;
+	margin-right: 0;
+	/*margin-left: .2in;*/
+	margin-bottom: 0;
+	padding: 0;
+	width: 100%;
+	font-size: 37pt;
+	text-decoration: none !important;
+}
+.title .address1 {
+	margin-top: 0;
+	margin-right: 0;
+	margin-left: .2in;
+	margin-bottom: 0;
+	padding: 0;
+	font-size: 9pt;
+}
+.title .address2 {
+	margin-top: 0;
+	margin-right: 0;
+	margin-left: .2in;
+	margin-bottom: 0;
+	padding: 0;
+	font-size: 9pt;
+}
+.title .address3 {
+	margin-top: 0;
+	margin-right: 0;
+	margin-left: .2in;
+	margin-bottom: 0;
+	padding: 0;
+	font-size: 9pt;
+}
+
+
+.header h2 {
+	margin-top: .3in;
+	float: left;
+	margin-right:1in;
+	}
+.header h1 {
+	float: left;
+	margin-right:.5in;
+	padding-top: 0;
+	/*text-decoration: underline;*/
+	}
+.header p {
+	margin-top: .3in;
+	float: left;
+	}
+.header h4 {
+	margin-top: 0;
+	padding-top: 0;
+	float: left;
+	margin-left:3in;
+	}
+.content {
+	position: relative;
+	}
+.content table {
+	}
+.content table tr td.left {
+	width: 1.5in;
+	padding-right:.5in;
+	padding-bottom: .05in;
+	font-weight: bold;
+	}
+.content table tr td.right {
+	padding-bottom: .05in;
+	/*padding-left: 2in;*/
+}
+
+.without-vts {
+	padding: .1in;
+	border: double;
+	height: .3in;
+	width: 2in;
+	font-size: 20pt;
+	font-weight: 400;
+}
+.with-vts {
+	padding: .1in;
+	border: double;
+	height: .3in;
+	width: 1.5in;
+	font-size: 20pt;
+	font-weight: 400;
+}
+
+
+.footer {
+	position: relative;	
+	}
+.footer .left {
+	float: left;	
+	}	
+.footer .right {
+	float: right;		
+	}
+.no-print {
+	display: block;	
+	}
+	
+	
+	
+	
+	
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+	
+
+

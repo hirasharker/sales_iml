@@ -47,7 +47,7 @@
                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Zone Name </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            <input type="text" class="form-control" placeholder="Name" name="zone_name">
+                            <input type="text" class="form-control" placeholder="Name" name="zone_name" required>
                         </div>
                     </div>
                 </div>
@@ -55,20 +55,20 @@
             <div class="form-group col-md-12 col-sm-12 col-xs-12">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Zonal Head </label>
                 <div class="col-md-9 col-sm-9 col-xs-12">
-                    <select class="form-control select-tag" name="zhead_id">
+                    <select class="form-control select-tag" name="zhead_id" required>
                         <option value="">Select</option>
-                        <?php foreach($employee_list as $value){if($value->role==4){?>
+                        <?php foreach($employee_list as $value){if($value->role==4 || $value->role==5){?>
                         <option value="<?php echo $value->employee_id?>"><?php echo $value->employee_name; ?></option>
                         <?php }} ?>
                     </select>
                 </div>
             </div>
             <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Recovery Manager </label>
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Head of Sales </label>
                 <div class="col-md-9 col-sm-9 col-xs-12">
-                    <select class="form-control select-tag" name="rm_id">
+                    <select class="form-control select-tag" name="head_of_sales_id" required>
                         <option value="">Select</option>
-                        <?php foreach($employee_list as $value){if($value->role==2){?>
+                        <?php foreach($employee_list as $value){if($value->role==5){?>
                         <option value="<?php echo $value->employee_id?>"><?php echo $value->employee_name; ?></option>
                         <?php }} ?>
                     </select>
@@ -77,7 +77,7 @@
             <div class="form-group col-md-12 col-sm-12 col-xs-12">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Coordinator </label>
                 <div class="col-md-9 col-sm-9 col-xs-12">
-                    <select class="form-control select-tag" name="coordinator_id">
+                    <select class="form-control select-tag" name="coordinator_id" required>
                         <option value="">Select</option>
                         <?php foreach($employee_list as $value){if($value->role==3){?>
                         <option value="<?php echo $value->employee_id?>"><?php echo $value->employee_name; ?></option>
@@ -124,9 +124,10 @@
           <table id="datatable-buttons" class="table table-striped table-bordered">
             <thead>
               <tr>
+                <th>Zone ID</th>
                 <th>Zone Name</th>
                 <th>Zonal Head</th>
-                <th>Recovery Manager</th>
+                <th>Head of Sales</th>
                 <th>Co-Ordinator</th>
                 <th>Action</th>
               </tr>
@@ -135,9 +136,10 @@
             <tbody>
             <?php foreach($zone_list as $value){?>
               <tr>
+                <td><?php echo $value->zone_id; ?></td>
                 <td><?php echo $value->zone_name; ?></td>
                 <td><?php echo $value->zonal_head; ?></td>
-                <td><?php echo $value->recovery_manager; ?></td>
+                <td><?php echo $value->head_of_sales; ?></td>
                 <td><?php echo $value->coordinator; ?></td>
                 <td><a href="#">edit </a>|<a href="#"> delete</a></td>
               </tr>

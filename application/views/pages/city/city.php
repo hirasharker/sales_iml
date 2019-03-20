@@ -70,6 +70,17 @@
                         </select>
                     </div>
                 </div>
+                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                  <label class="control-label col-md-3 col-sm-12 col-xs-12">Select Recovery Manager </label>
+                  <div class="col-md-8 col-sm-9 col-xs-12">
+                      <select class="form-control select-tag" name="rm_id" required>
+                          <option value="">Select</option>
+                          <?php foreach($employee_list as $value){if($value->role==2){?>
+                          <option value="<?php echo $value->employee_id?>"><?php echo $value->employee_name; ?></option>
+                          <?php }} ?>
+                      </select>
+                  </div>
+              </div>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
 				        <button class="btn btn-primary" type="reset">Reset</button>
@@ -114,6 +125,8 @@
                 <th>City Name</th>
                 <th>Zone</th>
                 <th>Code</th>
+                <th>Recovery Manager</th>
+                <th>Email</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -124,6 +137,14 @@
                 <td><?php echo $value->city_name; ?></td>
                 <td><?php echo $value->zone_name; ?></td>
                 <td><?php echo $value->city_code ?></td>
+                <td><?php foreach($employee_list as $emp_value){if($emp_value->employee_id==$value->rm_id){
+                      echo $emp_value->employee_name;
+                } }
+                ?></td>
+                <td><?php foreach($employee_list as $emp_value){if($emp_value->employee_id==$value->rm_id){
+                      echo $emp_value->email_id;
+                } }
+                ?></td>
                 <td><a href="#">edit </a>|<a href="#"> delete</a></td>
               </tr>
             <?php }?>

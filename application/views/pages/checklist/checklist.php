@@ -56,72 +56,107 @@
                             <!-- <p class="text-muted font-13 m-b-30">
                                 DataTables has most features enabled by default, so all you need to do to use it with your own tables is to call the construction function: <code>$().DataTable();</code>
                             </p> -->
-                                <table id="datatable-buttons1" class="table table-striped table-bordered">
+                            <!-- datatable-buttons -->
+                                <table id="" class="table table-striped table-bordered">
                                     <thead>
                                     <tr>
                                         <th>ID</th>
                                         <th>Customer Name</th>
-                                        <th>Date</th>
+                                        <th>SP/DLR</th>
+                                        <th>Model</th>
+                                        <th>Net Price</th>
+                                        <th>Downpayment</th>
+                                        <th>Booking Date</th>
+                                        <th>Mode</th>
                                         <th>PP. Image</th>
                                         <th>NID / Birth Cert./ Passport</th>
                                         <th>Inspection</th>
                                         <th>Cheque</th>
+                                        <th>MICR Cheque</th>
                                         <th>MR for DP and Reg</th>
                                         <th>Trade License</th>
                                         <th>Due DP Cheque</th>
                                         <th>Purchase Order</th>
                                         <th>Aggreements</th>
+                                        <th>Promissary</th>
                                         <th>V.T.S.</th>
-                                        <th>Auth Letter</th>
-                                        <th>Bank Application Form</th>
+                                        <!-- <th>Auth Letter</th> -->
+                                        <!-- <th>Bank Application Form</th> -->
+                                        <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    <?php foreach($customer_list as $value){ ?>
                                     <tr>
-                                    <form action="#" method="get">
-                                        <td>00-00-000-000-00001</td>
-                                        <td>Md. Salim Uddin</td>
-                                        <td>2017/12/25</td>
+                                    <form action="<?php echo base_url();?>checklist/update_checklist/" method="post">
+                                        <td><?php echo $value->customer_code; ?></td>
+                                        <td><?php echo $value->customer_name; ?></td>
                                         <td>
-                                            <input type="hidden" value="1" name="customer_id">
-                                            <input type="checkbox" placeholder="" name="image" >
+                                            <?php if($value->mkt_id!= 0 || $value->mkt_id != NULL){
+                                                     foreach($employee_list as $e_value){
+                                                        if($e_value->employee_id == $value->mkt_id){
+                                                            echo $e_value->employee_name;
+                                                        }
+                                                    }
+                                                }
+
+                                                 if($value->dealer_id!= 0 || $value->dealer_id != NULL){
+                                                 foreach($dealer_list as $d_value){
+                                                    if($d_value->dealer_id == $value->dealer_id){
+                                                        echo $d_value->dealer_name;
+                                                    }
+                                                 }
+
+                                                }?>
                                         </td>
-                                        <td><input type="checkbox" placeholder="" name="" ></td>
-                                        <td><input type="checkbox" placeholder="" name="" ></td>
-                                        <td><input type="checkbox" placeholder="" name="" ></td>
-                                        <td><input type="checkbox" placeholder="" name="" ></td>
-                                        <td><input type="checkbox" placeholder="" name="" ></td>
-                                        <td><input type="checkbox" placeholder="" name="" ></td>
-                                        <td><input type="checkbox" placeholder="" name="" ></td>
-                                        <td><input type="checkbox" placeholder="" name="" ></td>
-                                        <td><input type="checkbox" placeholder="" name="" ></td>
-                                        <td><input type="checkbox" placeholder="" name="" ></td>
+                                        <td><?php foreach($model_list as $m_value){
+                                                if($m_value->model_id == $value->model_id){
+                                                    echo $m_value->model_name;
+                                                }
+                                            }?>
+                                        </td>
+                                        <td><?php echo $value->total_price - $value->discount;?></td>
+                                        <td><?php echo $value->downpayment;?></td>
+                                        <td><?php echo $value->time_stamp; ?></td>
+                                        <td><?php
+                                        switch ($value->payment_mode) {
+                                            case 1:
+                                                echo 'Credit';
+                                                break;
+
+                                            case 2:
+                                                echo 'Semi-cash';
+                                                break;
+
+                                            case 3:
+                                                echo 'Cash';
+                                                break;
+                                            
+                                            default:
+                                                break;
+                                        }
+                                        ?></td>
+                                        <td>
+                                            <input type="hidden" value="<?php echo $value->customer_id; ?>" name="customer_id">
+                                            <input type="checkbox" placeholder="" name="image" value="1">
+                                        </td>
+                                        <td><input type="checkbox" placeholder="" name="nid_birth_passport" value="1"></td>
+                                        <td><input type="checkbox" placeholder="" name="inspection" value="1" ></td>
+                                        <td><input type="checkbox" placeholder="" name="installment_cheque" value="1"></td>
+                                        <td><input type="checkbox" placeholder="" name="installment_micr_cheque" value="1"></td>
+                                        <td><input type="checkbox" placeholder="" name="money_receipt" value="1"></td>
+                                        <td><input type="checkbox" placeholder="" name="trade_license" value="1"></td>
+                                        <td><input type="checkbox" placeholder="" name="due_dp_cheque" value="1"></td>
+                                        <td><input type="checkbox" placeholder="" name="purchase_order" value="1"></td>
+                                        <td><input type="checkbox" placeholder="" name="aggreement" value="1"></td>
+                                        <td><input type="checkbox" placeholder="" name="promissary" value="1"></td>
+                                        <td><input type="checkbox" placeholder="" name="vts" value="1"></td>
+                                        <!-- <td><input type="checkbox" placeholder="" name="auth_letter" value="1"></td> -->
+                                        <!-- <td><input type="checkbox" placeholder="" name="ba_form" value="1"></td> -->
                                         <td><button type="submit" class="btn btn-primary">Update</button></td>
                                     </form>
                                     </tr>
-                                    <tr>
-                                    <form action="#" method="get">
-                                        <td>00-00-000-000-00002</td>
-                                        <td>Md. Kalim Uddin</td>
-                                        <td>2018/01/25</td>
-                                        <td>
-                                            <input type="hidden" value="1" name="customer_id">
-                                            <input type="checkbox" placeholder="" name="image" >
-                                        </td>
-                                        <td><input type="checkbox" placeholder="" name="" ></td>
-                                        <td><input type="checkbox" placeholder="" name="" ></td>
-                                        <td><input type="checkbox" placeholder="" name="" ></td>
-                                        <td><input type="checkbox" placeholder="" name="" ></td>
-                                        <td><input type="checkbox" placeholder="" name="" ></td>
-                                        <td><input type="checkbox" placeholder="" name="" ></td>
-                                        <td><input type="checkbox" placeholder="" name="" ></td>
-                                        <td><input type="checkbox" placeholder="" name="" ></td>
-                                        <td><input type="checkbox" placeholder="" name="" ></td>
-                                        <td><input type="checkbox" placeholder="" name="" ></td>
-                                        <td><button type="submit" class="btn btn-primary">Update</button></td>
-                                    </form>
-                                    </tr>
-                                    
+                                    <?php }?>
                                     </tbody>
                                 </table>
                             </div>

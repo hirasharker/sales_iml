@@ -25,6 +25,29 @@ class Employee_Model extends CI_Model {
         return $result;
     }
 
+    public function get_employee_by_zone_id_and_role($zone_id, $role){
+        $this->db->select('*');
+        $this->db->from('tbl_employee');
+        $this->db->where('zone_id',$zone_id);
+        $this->db->where('role',$role);
+        $result_query=$this->db->get();
+        $result=$result_query->result();
+        return $result;
+    }
+
+
+    public function get_employee_by_role($role){
+        $this->db->select('*');
+        $this->db->from('tbl_employee');
+        $this->db->where('role',$role);
+        if($role == 4){
+            $this->db->or_where('role',5);
+        }
+        $result_query=$this->db->get();
+        $result=$result_query->result();
+        return $result;
+    }
+
     
     public function add_employee($data){
         $this->db->insert('tbl_employee',$data);

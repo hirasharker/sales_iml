@@ -12,17 +12,37 @@ class City_Model extends CI_Model {
         $this->db->from('tbl_city');
         $this->db->join('tbl_zone','tbl_zone.zone_id = tbl_city.zone_id','left');
         $this->db->order_by('tbl_city.time_stamp','desc');
+        $result_query   =   $this->db->get();
+        $result         =   $result_query->result();
+        return $result;
+    }
+
+    public function get_city_by_zone_id($zone_id){
+        $this->db->select('*');
+        $this->db->from('tbl_city');
+        $this->db->where('zone_id',$zone_id);
         $result_query=$this->db->get();
         $result=$result_query->result();
         return $result;
     }
 
     public function get_city_by_id($city_id){
-        $this->db->select('*');
+        $this->db->select('tbl_city.*,tbl_employee.employee_name as recovery_manager');
         $this->db->from('tbl_city');
+        $this->db->join('tbl_employee','tbl_employee.employee_id = tbl_city.rm_id', 'left');
         $this->db->where('city_id',$city_id);
         $result_query=$this->db->get();
         $result=$result_query->row();
+        return $result;
+    }
+    public function get_all_cities_by_coordinator_id($coordinator_id){
+        $this->db->select('tbl_city.*,tbl_zone.coordinator_id');
+        $this->db->from('tbl_city');
+        $this->db->join('tbl_zone','tbl_zone.zone_id = tbl_city.zone_id','inner');
+        $this->db->where('tbl_zone.coordinator_id',$coordinator_id);
+
+        $result_query=$this->db->get();
+        $result=$result_query->result();
         return $result;
     }
 

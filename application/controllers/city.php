@@ -7,8 +7,12 @@ class City extends CI_Controller {
 		if($this->session->userdata('employee_id')==NULL){
 			redirect('login','refresh');
 		}
+		if($this->session->userdata('role')!=15){
+			redirect('dashboard','refresh');
+		}
 		$this->load->model('zone_model','zone_model',TRUE);
 		$this->load->model('city_model','city_model',TRUE);
+		$this->load->model('employee_model','employee_model',TRUE);
 		
 	}
 
@@ -34,6 +38,7 @@ class City extends CI_Controller {
 		
 		$city_data['zone_list']		=	$this->zone_model->get_all_zones();
 		$city_data['city_list']		=	$this->city_model->get_all_cities();
+		$city_data['employee_list']	=	$this->employee_model->get_all_employees();
 
 		
 
@@ -49,6 +54,7 @@ class City extends CI_Controller {
 
 		$city_data['user_id']			=	$this->session->userdata('employee_id');
 		$city_data['user_name']			=	$this->session->userdata('email_id');
+		$city_data['rm_id']				=	$this->input->post('rm_id','',TRUE);
 		$city_data['city_name']			=	$this->input->post('city_name','',TRUE);
 		$city_data['city_code']			=	$this->input->post('city_code','',TRUE);
 		$city_data['zone_id']			=	$this->input->post('zone_id','',TRUE);

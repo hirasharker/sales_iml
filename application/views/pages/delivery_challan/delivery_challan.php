@@ -34,7 +34,7 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                            <h4>Customer List for Delivery Challan<small></small></h2>
+                            <h4>Customer List for Delivery Challan<small></small></h4>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -53,48 +53,121 @@
                             <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
-                            <!-- <p class="text-muted font-13 m-b-30">
-                                DataTables has most features enabled by default, so all you need to do to use it with your own tables is to call the construction function: <code>$().DataTable();</code>
-                            </p> -->
-                                <table id="datatable-buttons1" class="table table-striped table-bordered">
+                                <table id="" class="table table-striped table-bordered responsive">
                                     <thead>
                                     <tr>
                                         <th>ID</th>
                                         <th>Customer Name</th>
-                                        <th>Date</th>
-                                        <th>Engine No</th>
+                                        <th>Booking Date</th>
+                                        <th>Delivery Yard</th>
                                         <th>Chassis No</th>
+                                        <th>Engine No</th>
+                                        <th>LC Bank</th>
+                                        <th>Type</th>
+                                        
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
+
+                                    <?php if($this->session->userdata('role')!=15){?>
+
+                                    <?php foreach($customer_list as $value){ if($value->delivery_yard_id==$yard_detail->delivery_yard_id){?>
+
+
                                     <tr>
-                                    <form action="#" method="get">
-                                        <td>00-00-000-000-00001</td>
-                                        <td>Md. Salim Uddin</td>
-                                        <td>2017/12/25</td>
+                                    <form action="<?php echo base_url();?>delivery_challan/update_engine_and_chassis_no" method="post">
+                                        <td><?php echo $value->customer_code; ?></td>
+                                        <td><?php echo $value->customer_name; ?></td>
+                                        <td ><?php echo $value->time_stamp; ?></td>
                                         <td>
-                                            <input type="hidden" value="1" name="customer_id">
-                                            <input type="text" placeholder="" name="engine_no">
+                                            <?php foreach($yard_list as $y_value){if($value->delivery_yard_id==$y_value->delivery_yard_id){
+                                                    echo $y_value->yard_name;
+                                                }
+                                            }?>
                                         </td>
-                                        <td><input type="text" placeholder="" name="chassis_no"></td>
+                                        <td>
+                                            <input type="hidden" name="customer_id" value="<?php echo $value->customer_id;?>">
+                                            <input type="text" placeholder="" name="chassis_no" required>
+                                            
+                                        </td>
+                                        <td><input type="text" placeholder="" name="engine_no" required></td>
+                                        <td>
+                                            <!-- <input type="text" placeholder="" name="chassis_no"> -->
+                                            <select class="form-control select-tag"  name="lc_bank_id">
+                                                <option value="">Select LC Bank</option>
+                                                <?php foreach($bank_list as $b_value){?>
+                                                <option value="<?php echo $b_value->bank_id;?>"><?php echo $b_value->bank_name;?></option>
+                                                <?php }?>   
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="form-control"  name="vehicle_mfg_type">
+                                                <option value="1">CBU</option>
+                                                <option value="2">CKD</option>
+                                            </select>
+                                        </td>
+                                        
+                                        <!-- <input type="hidden" placeholder="" id="engineNo<?php echo $value->customer_id;?>" name="engine_no"></td> -->
                                         <td><button type="submit" class="btn btn-primary">Update</button></td>
                                     </form>
                                     </tr>
+
+
+                                    <?php } } ?>
+
+                                    <?php } else {?>
+
+
+                                    <?php foreach($customer_list as $value){ ?>
+
+
                                     <tr>
-                                    <form action="#" method="get">
-                                        <td>00-00-000-000-00002</td>
-                                        <td>Md. Kalim Uddin</td>
-                                        <td>2018/01/25</td>
+                                    <form action="<?php echo base_url();?>delivery_challan/update_engine_and_chassis_no" method="post">
+                                        <td><?php echo $value->customer_code; ?></td>
+                                        <td><?php echo $value->customer_name; ?></td>
+                                        <td ><?php echo $value->time_stamp; ?></td>
                                         <td>
-                                            <input type="hidden" value="1" name="customer_id">
-                                            <input type="text" placeholder="" name="engine_no">
+                                            <?php foreach($yard_list as $y_value){if($value->delivery_yard_id==$y_value->delivery_yard_id){
+                                                    echo $y_value->yard_name;
+                                                }
+                                            }?>
                                         </td>
-                                        <td><input type="text" placeholder="" name="chassis_no"></td>
+                                        <td>
+                                            <input type="hidden" name="customer_id" value="<?php echo $value->customer_id;?>">
+                                            <input type="text" placeholder="" name="chassis_no" required>
+                                        </td>
+                                        <td><input type="text" placeholder="" name="engine_no" required></td>
+                                        <td>
+                                            <!-- <input type="text" placeholder="" name="chassis_no"> -->
+                                            <select class="form-control select-tag"  name="lc_bank_id">
+                                                <option value="">Select LC Bank</option>
+                                                <?php foreach($bank_list as $b_value){?>
+                                                <option value="<?php echo $b_value->bank_id;?>"><?php echo $b_value->bank_name;?></option>
+                                                <?php }?>   
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="form-control"  name="vehicle_mfg_type">
+                                                <option value="1">CBU</option>
+                                                <option value="2">CKD</option>
+                                            </select>
+                                        </td>
+                                        
+                                        
+                                        <input type="hidden" placeholder="" id="engineNo<?php echo $value->customer_id;?>" name="engine_no"></td>
                                         <td><button type="submit" class="btn btn-primary">Update</button></td>
                                     </form>
                                     </tr>
-                                    
+
+
+                       
+
+                                    <?php  } } ?>
+
+
+
+
                                     </tbody>
                                 </table>
                             </div>
@@ -106,7 +179,7 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                            <h4>Delivery Challan for Printing<small></small></h2>
+                            <h4>Delivery Challan for Printing<small></small></h4>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -133,6 +206,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Customer Name</th>
+                                        <th>Phone</th>
                                         <th>Date</th>
                                         <th>Engine No</th>
                                         <th>Chassis No</th>
@@ -140,27 +214,51 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+
+
+                                    <?php if($this->session->userdata('role')!=15){?>
+
+
+                                    <?php foreach($customer_list_for_printing_challan as $value){ if($value->delivery_yard_id==$yard_detail->delivery_yard_id){ ?>
                                     <tr>
-                                    <form action="#" method="get">
-                                        <td>00-00-000-000-00001</td>
-                                        <td>Md. Salim Uddin</td>
-                                        <td>2017/12/25</td>
-                                        <td>ABC-500200</td>
-                                        <td>CXE-400300</td>
-                                        <td><a href="#"><i class="fa fa-print"> Print</i></a></td>
-                                    </form>
-                                    </tr>
-                                    <tr>
-                                    <form action="#" method="get">
-                                        <td>00-00-000-000-00002</td>
-                                        <td>Md. Kalim Uddin</td>
-                                        <td>2018/01/25</td>
-                                        <td>ABC-600800</td>
-                                        <td>CXE-300900</td>
-                                        <td><a href="#"><i class="fa fa-print"> Print</i></a></td>
-                                    </form>
+                                        <td><?php echo $value->customer_code; ?></td>
+                                        <td><?php echo $value->customer_name; ?></td>
+                                        <td><?php echo $value->phone; ?></td>
+                                        <td><?php echo $value->time_stamp; ?></td>
+                                        <td><?php echo $value->engine_no; ?></td>
+                                        <td><?php echo $value->chassis_no; ?></td>
+                                        <td>
+                                            <form action="<?php echo base_url(); ?>delivery_challan/print_dc/" target="_blank" method="post">
+                                                <input type="hidden" value="<?php echo $value->customer_id; ?>" name="customer_id">
+                                                <a onclick='this.parentNode.submit(); return false;' href="#"><i class="fa fa-print"></i> print</a>
+                                            </form>
+                                        </td>
                                     </tr>
                                     
+                                    <?php } }?>
+
+                                    <?php } else {?>
+
+                                    <?php foreach($customer_list_for_printing_challan as $value){ ?>
+                                    <tr>
+                                        <td><?php echo $value->customer_code; ?></td>
+                                        <td><?php echo $value->customer_name; ?></td>
+                                        <td><?php echo $value->phone; ?></td>
+                                        <td><?php echo $value->time_stamp; ?></td>
+                                        <td><?php echo $value->engine_no; ?></td>
+                                        <td><?php echo $value->chassis_no; ?></td>
+                                        <td>
+                                            <form action="<?php echo base_url(); ?>delivery_challan/print_dc/" target="_blank" method="post">
+                                                <input type="hidden" value="<?php echo $value->customer_id; ?>" name="customer_id">
+                                                <a onclick='this.parentNode.submit(); return false;' href="#"><i class="fa fa-print"></i> print</a>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    
+                                    <?php  }?>
+
+                                    <?php }?>
+
                                     </tbody>
                                 </table>
                             </div>
@@ -175,6 +273,4 @@
 </div>
 </div>
 
-<script>
-</script>
 

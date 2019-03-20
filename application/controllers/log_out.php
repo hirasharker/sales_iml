@@ -21,9 +21,11 @@ class Log_Out extends CI_Controller {
   {
 
     $this->session->unset_userdata('employee_id');
-        $this->session->unset_userdata('email_id');
-        session_destroy();
-       
-        redirect('login','refresh');
+    $this->session->unset_userdata('email_id');
+    $this->session->unset_userdata('user_type');
+    $this->session->unset_userdata('zone_id');
+    session_destroy();
+    
+    redirect('login','refresh');
   }
 }
