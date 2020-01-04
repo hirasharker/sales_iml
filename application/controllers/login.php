@@ -54,7 +54,7 @@ class Login extends CI_Controller {
       $sdata['role']            = $result->role;
       $sdata['zone_id']         = $result->zone_id;
       $this->session->set_userdata($sdata);
-      redirect('dashboard','refresh');
+      redirect('inventory/receive','refresh');
     }
   }
 }

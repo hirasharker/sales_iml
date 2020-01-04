@@ -62,7 +62,7 @@
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Finance Name </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="text" id="customerName" class="form-control" name="finance_name" placeholder="">
+                      <input type="text" id="financeName" class="form-control" name="finance_name" placeholder="">
                   </div>
                 </div>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
@@ -189,11 +189,12 @@
                         <?php foreach($marketing_person_list as $value){?> 
                         <option value="<?php echo $value->employee_id; ?>"><?php echo $value->employee_name;?></option>
                         <?php }?>
-                        <option value="0">Dealer</option>
                       </select>
                   </div>
                 </div>
                 <?php }?>
+
+
 
 
                 <div class="form-group col-md-6 col-sm-12 col-xs-12" style="display:block">
@@ -226,11 +227,11 @@
 
 
 
-                <div class="form-group col-md-6 col-sm-12 col-xs-12" id="dealer" style="display:none">
+                <div class="form-group col-md-6 col-sm-12 col-xs-12" id="dealer" style="display:block;">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Dealer </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <select class="form-control select-tag" name="dealer_id">
-                        <option value="0">Select Dealer</option>
+                      <select id="dealerId" class="form-control select-tag" name="dealer_id" required>
+                        <option value="">Select Dealer</option>
                         <?php foreach($dealer_list as $value){?> 
                         <option value="<?php echo $value->dealer_id; ?>"><?php echo $value->dealer_name;?></option>
                         <?php }?>
@@ -238,10 +239,13 @@
                   </div>
                 </div>
 
+                
+
+
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Postal Code </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="number" class="form-control" name="post_code" placeholder="" required>
+                      <input type="number" min = "1000" max="9999" class="form-control" name="post_code" placeholder="" required>
                   </div>
                 </div>
 
@@ -266,10 +270,10 @@
                   <div class="clearfix"></div>
                 </div>
 
-                <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                <!-- <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Model </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <select id="vehicleModel" class="form-control select-tag" name="model_id" required>
+                      <select id="vehicleModel" class="form-control" name="model_id" required>
                         <option value="">select</option>
                         <?php foreach($model_list as $value){?> 
                         <option modelCode="<?php echo $value->model_code;?>" creditPrice="<?php echo $value->credit_price;?>" value="<?php echo $value->model_id; ?>"><?php echo $value->model_name;?></option>
@@ -277,13 +281,39 @@
                       </select>
                       <input id="modelCode" type="hidden" name="model_code">
                   </div>
+                </div> -->
+
+                <div class="form-group col-md-6 col-sm-12 col-xs-12 chassis-container" style="display: none;">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Chassis No </label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                      <select id="chassisNo" class="form-control select-tag" name="chassis_no" required>
+                        <option value="">select</option>
+                      </select>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-6 col-sm-12 col-xs-12 engine-container" style="display: none;">
+                  <input type="hidden" name="delivery_yard_id" id="delivery-yard-id">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Engine No </label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                      <input id="engineNo" readonly type="text" class="form-control" name="engine_no" placeholder="" >
+                  </div>
+                </div>
+
+                <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Model </label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                      <input id="modelName" type="text" class="form-control" name="model_name" placeholder="" readonly>
+                      <input id="modelId" type="hidden" name="model_id">
+                      <input id="modelCode" type="hidden" name="model_code">
+                  </div>
                 </div>
                 
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Application </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <select id="application" class="form-control select-tag" name="application_id" required>
-                        <option value="">select</option>
+                      <select id="application" class="form-control select-tag" name="application_id">
+                        <option value="0">Others</option>
                         <?php foreach($application_list as $value){?> 
                         <option value="<?php echo $value->application_id; ?>"><?php echo $value->application_detail;?></option>
                         <?php }?>
@@ -291,20 +321,11 @@
                   </div>
                 </div>
 
+                
+                
+
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Engine No </label>
-                  <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" name="engine_no" placeholder="">
-                  </div>
-                </div>
-                <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Chassis No </label>
-                  <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="text" class="form-control" name="chassis_no" placeholder="">
-                  </div>
-                </div>
-                <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Registration </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Registration NO </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <input type="text" class="form-control" name="registration_no" placeholder="">
                   </div>
@@ -413,7 +434,14 @@
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Price </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input id="total-price" type="number" class="form-control" name="total_price"  min="0" value="0" placeholder="" disabled="true">
+                      <input id="totalPrice" type="number" class="form-control" name="total_price"  min="0" value="0" placeholder="" disabled="true">
+                  </div>
+                </div>
+
+                <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Registration Cost </label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                      <input id="registrationCost" type="number" class="form-control" name="registration_cost"  min="0" value="0" placeholder="" disabled="true">
                   </div>
                 </div>
 
@@ -725,7 +753,7 @@
                 <div class="form-group col-md-6 col-sm-12 col-xs-12" id="dealer" style="display:none">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Dealer </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <select class="form-control select-tag" name="dealer_id">
+                      <select id="dealerId" class="form-control select-tag" name="dealer_id">
                         <option value="">Select Dealer</option>
                         <?php foreach($dealer_list as $value){?> 
                         <option value="<?php echo $value->dealer_id; ?>" <?php if($customer_detail->dealer_id == $value->dealer_id){ echo 'selected';} ?> ><?php echo $value->dealer_name;?></option>
@@ -761,6 +789,24 @@
                 <h2>Vehicle Info <small></small></h2>
                   <div class="clearfix"></div>
                 </div>
+
+
+                <div class="form-group col-md-6 col-sm-12 col-xs-12 chassis-container" style="display: none;">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Chassis No </label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                      <select id="chassisNo" class="form-control select-tag" name="chassis_no" required>
+                        <option value="">select</option>
+                      </select>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-6 col-sm-12 col-xs-12 engine-container" style="display: none;">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Engine No </label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                      <input id="engineNo" readonly type="text" class="form-control" name="engine_no" placeholder="" >
+                  </div>
+                </div>
+
 
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Model </label>
@@ -1262,6 +1308,87 @@
               }
           });
       });
+
+      $("#dealerId").change(function(){
+          // $('#subDistrictId').val('');
+          // $('#subDistrictId').change();
+          if($('#dealerId').val()!="NULL"){
+            $('#chassisNo').empty();
+            $('#engineNo').val('');
+            $('#modelId').val('');
+            $('#modelName').val('');
+            $('#modelCode').val('');
+            $('#totalPrice').val('');
+
+            $(".chassis-container").css("display", "block");
+            // $('.sub-district-container').show(500);
+          }
+          var dealerId = $('#dealerId option:selected').val();
+          console.log(dealerId);
+          $.ajax({
+              type: "POST",
+              url: "<?php echo base_url()?>customer/ajax_generate_stock/",
+              data: { 'dealer_id': dealerId  },
+              success: function(data){
+                  // Parse the returned json data
+                  var opts = $.parseJSON(data);
+                  // Use jQuery's each to iterate over the opts value
+                  console.log(opts);
+                  $('#chassisNo').append('<option value="">Select </option>');
+
+                  $.each(opts, function(i, d) {
+                    console.log(d.sub_district_id);
+                      // You will need to alter the below to get the right values from your json object.  Guessing that d.id / d.modelName are columns in your carModels data
+                      $('#chassisNo').append('<option value="' + d.chassis_no + '">' + d.chassis_no + '</option>');
+
+                  });
+              }
+          });
+      });
+
+      $("#chassisNo").change(function(){
+          // $('#subDistrictId').val('');
+          // $('#subDistrictId').change();
+          if($('#chassisNo').val()!=""){
+            $(".engine-container").css("display", "block");
+            // $('.sub-district-container').show(500);
+          }else {
+            $('#engineNo').val('');
+            $(".engine-container").css("display", "none");
+            $('#modelId').val('');
+            $('#modelCode').val('');
+            $('#modelName').val('');
+            $('#totalPrice').val('');
+            $('#registrationCost').val('0');
+          }
+
+          var chassisNo = $('#chassisNo option:selected').val();
+          console.log(chassisNo);
+          $.ajax({
+              type: "POST",
+              url: "<?php echo base_url()?>customer/ajax_generate_engine_no/",
+              data: { 'chassis_no': chassisNo  },
+              success: function(data){
+                  // Parse the returned json data
+                  var opts = $.parseJSON(data);
+                  // Use jQuery's each to iterate over the opts value
+                  console.log(opts);
+                  $('#engineNo').val(opts.engine_no);
+                  $('#modelId').val(opts.model_id);
+                  $('#modelCode').val(opts.model_code);
+                  $('#modelName').val(opts.model_name);
+                  $('#totalPrice').val(opts.credit_price);
+                  $('#delivery-yard-id').val(opts.yard_id);
+                  if(opts.registration_cost == null){
+                     $('#registrationCost').val("0");
+                  }else {
+                     $('#registrationCost').val(opts.registration_cost);
+                  }
+              }
+          });
+      });
+
+
       $("#vehicleModel").change(function(){ 
           var element = $(this).find('option:selected'); 
           var modelCode = element.attr("modelCode");
@@ -1271,14 +1398,7 @@
           $('#total-price').val(totalPrice);
 
       });
-      $("#salesPerson").change(function(){ 
-          if($("#salesPerson").val()=='0'){
-            $("#dealer").css("display", "block");
-          }else{
-            $("#dealer").css("display", "none");
-          }
-
-      });
+      
       $("#paymentMode").change(function(){ 
           var element = $(this).find('option:selected'); 
           if($("#paymentMode").val()==3){
@@ -1362,6 +1482,30 @@
           $("#reference").val("NULL").change();
       });
   }); 
+</script>
+
+<script type="text/javascript">
+  var dealerId = $('#dealerId option:selected').val();
+  console.log(dealerId);
+  $.ajax({
+      type: "POST",
+      url: "<?php echo base_url()?>customer/ajax_generate_stock/",
+      data: { 'dealer_id': dealerId  },
+      success: function(data){
+          // Parse the returned json data
+          var opts = $.parseJSON(data);
+          // Use jQuery's each to iterate over the opts value
+          console.log(opts);
+          $('#chassisNo').append('<option value="">Select </option>');
+
+          $.each(opts, function(i, d) {
+            console.log(d.sub_district_id);
+              // You will need to alter the below to get the right values from your json object.  Guessing that d.id / d.modelName are columns in your carModels data
+              $('#chassisNo').append('<option value="' + d.chassis_no + '">' + d.chassis_no + '</option>');
+
+          });
+      }
+  });
 </script>
 
 

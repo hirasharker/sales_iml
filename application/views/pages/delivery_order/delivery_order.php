@@ -58,7 +58,6 @@
                                         <th>ID</th>
                                         <th>Customer Name</th>
                                         <th>Date</th>
-                                        <th>Delivery Yard</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -69,16 +68,8 @@
                                         <td><?php echo $value->customer_code; ?></td>
                                         <td><?php echo $value->customer_name; ?></td>
                                         <td ><?php echo $value->time_stamp; ?></td>
-                                        <td>
-                                            <input type="hidden" name="customer_id" value="<?php echo $value->customer_id;?>">
-                                            <select class="form-control select-tag"  name="delivery_yard_id" id="chassisNo<?php echo $value->customer_id;?>" required>
-                                                <option value="">Select Delivery Yard</option>
-                                                <?php foreach($yard_list as $value){?>
-                                                <option value="<?php echo $value->delivery_yard_id;?>" required><?php echo $value->yard_name;?></option>
-                                                <?php }?>   
-                                            </select>
-                                        </td>
-                                        <td><button type="submit" class="btn btn-primary">Update</button></td>
+                                        <input type="hidden" name="customer_id" value="<?php echo $value->customer_id;?>">
+                                        <td><button type="submit" class="btn btn-primary">Generate DO</button></td>
                                     </form>
                                     </tr>
 
@@ -88,16 +79,8 @@
                                         <td><?php echo $value->customer_code; ?></td>
                                         <td><?php echo $value->customer_name; ?></td>
                                         <td ><?php echo $value->time_stamp; ?></td>
-                                        <td>
                                             <input type="hidden" name="customer_id" value="<?php echo $value->customer_id;?>">
-                                            <select class="form-control select-tag"  name="delivery_yard_id" id="chassisNo<?php echo $value->customer_id;?>" required>
-                                                <option value="">Select Delivery Yard</option>
-                                                <?php foreach($yard_list as $value){?>
-                                                <option value="<?php echo $value->delivery_yard_id;?>" ><?php echo $value->yard_name;?></option>
-                                                <?php }?>   
-                                            </select>
-                                        </td>
-                                        <td><button type="submit" class="btn btn-primary">Update</button></td>
+                                        <td><button type="submit" class="btn btn-primary">Generate DO</button></td>
                                     </form>
                                     </tr>
                                     <?php } }?>

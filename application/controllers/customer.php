@@ -26,6 +26,8 @@ class Customer extends CI_Controller {
 		$this->load->model('checklist_model','ck_model',TRUE);
 		$this->load->model('email_model','mail_model',TRUE);
 		$this->load->model('upload_model','upload_model',TRUE);
+
+		$this->load->model('stock_model','stock_model',TRUE);
 	}
 
 	/**
@@ -57,7 +59,7 @@ class Customer extends CI_Controller {
 			$customer_data['city_list']			=	$this->city_model->get_all_cities_by_coordinator_id($this->session->userdata('employee_id'));
 		}
 		$customer_data['district_list']			=	$this->district_model->get_all_districts();
-		$customer_data['dealer_list']			=	$this->dealer_model->get_all_dealers();
+		$customer_data['dealer_list']			=	$this->dealer_model->get_all_dealers_by_status($dealer_status = 2);
 		
 		$customer_data['customer_id']			=	$this->input->post('customer_id','',TRUE);
 		$zone_id 								=	'';
@@ -157,6 +159,7 @@ class Customer extends CI_Controller {
 		$customer_data['email_id']							=	$this->input->post('email_id','',TRUE);
 		$customer_data['model_id']							=	$this->input->post('model_id','0',TRUE);
 		$customer_data['model_code']						=	$this->input->post('model_code','0',TRUE);
+		$customer_data['delivery_yard_id']					=	$this->input->post('delivery_yard_id','0',TRUE);
 		$customer_data['engine_no']							=	$this->input->post('engine_no','',TRUE);
 		$customer_data['chassis_no']						=	$this->input->post('chassis_no','',TRUE);
 		$customer_data['application_id']					=	$this->input->post('application_id','0',TRUE);
@@ -231,6 +234,15 @@ class Customer extends CI_Controller {
 			// echo '<pre>'; print_r($customer_data); echo '</pre>';exit();
 
 			$result												=	$this->customer_model->add_customer($customer_data);
+
+			$stock_data 										=	array();
+
+			$stock_data['customer_id']							=	$result;
+
+			$current_stock_position 							=	$this->stock_model->get_stock_by_chassis_no($customer_data['chassis_no'])->stock_position;
+			$stock_data['stock_position']						=	$current_stock_position + 1;
+
+			$update_stock										=	$this->stock_model->update_stock_by_chassis_no($stock_data, $customer_data['chassis_no']);
 
 			$update_code_data									=	array();
 			
@@ -680,6 +692,24 @@ class Customer extends CI_Controller {
 		$district_id 				=	$this->input->post('district_id');
 
 		$result						=	$this->sub_district_model->get_sub_district_by_district_id($district_id);
+
+		echo json_encode($result);
+		// a die here helps ensure a clean ajax call
+	}
+
+	public function ajax_generate_stock(){
+		$dealer_id 					=	$this->input->post('dealer_id');
+
+		$result						=	$this->stock_model->get_stock_by_dealer_id_for_booking($dealer_id);
+
+		echo json_encode($result);
+		// a die here helps ensure a clean ajax call
+	}
+	
+	public function ajax_generate_engine_no(){
+		$chassis_no 				=	$this->input->post('chassis_no');
+
+		$result						=	$this->stock_model->get_stock_by_chassis_no($chassis_no);
 
 		echo json_encode($result);
 		// a die here helps ensure a clean ajax call

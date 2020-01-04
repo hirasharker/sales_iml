@@ -396,6 +396,7 @@ class Customer_Model extends CI_Model {
     public function get_all_customers(){
         $this->db->select('*');
         $this->db->from('tbl_customer');
+        $this->db->limit(1000);
         $this->db->order_by('time_stamp','desc');
         $result_query=$this->db->get();
         $result=$result_query->result();

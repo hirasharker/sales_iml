@@ -96,10 +96,10 @@ $query_builder = TRUE;
 // );
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '192.168.10.151',
+	'hostname' => 'localhost',
 	'username' => 'postgres',
 	'password' => '1f@dt0w3r123#',
-	'database' => 'sales_db',
+	'database' => 'sales_db_iml',
 	'dbdriver' => 'postgre',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

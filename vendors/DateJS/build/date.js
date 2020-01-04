@@ -261,7 +261,7 @@
 		},
 		formatPatterns: function () {
 			return getText.getFromObjectValues({
-				shortDate: "M/d/yyyy",
+				shortDate: "yyyy/M/d",
 				longDate: "dddd, MMMM dd, yyyy",
 				shortTime: "h:mm tt",
 				longTime: "h:mm:ss tt",
@@ -1380,7 +1380,7 @@
 	 * STANDARD DATE AND TIME FORMAT STRINGS
 	 * Format  Description                                                                  Example
 	 *------  ---------------------------------------------------------------------------  -----------------------
-	 * d      The CultureInfo shortDate Format Pattern                                     "M/d/yyyy"
+	 * d      The CultureInfo shortDate Format Pattern                                     "yyyy/M/d"
 	 * D      The CultureInfo longDate Format Pattern                                      "dddd, MMMM dd, yyyy"
 	 * F      The CultureInfo fullDateTime Format Pattern                                  "dddd, MMMM dd, yyyy h:mm:ss tt"
 	 * m      The CultureInfo monthDay Format Pattern                                      "MMMM dd"
@@ -3725,7 +3725,7 @@
 	 * Example
 	<pre><code>
 	// 15-Oct-2004
-	var d1 = Date.parseExact("10/15/2004", "M/d/yyyy");
+	var d1 = Date.parseExact("10/15/2004", "yyyy/M/d");
 
 	// 15-Oct-2004
 	var d1 = Date.parse("15-Oct-2004", "M-ddd-yyyy");
@@ -3734,7 +3734,7 @@
 	var d1 = Date.parse("2004.10.15", "yyyy.MM.dd");
 
 	// Multiple formats
-	var d1 = Date.parseExact("10/15/2004", ["M/d/yyyy", "MMMM d, yyyy"]);
+	var d1 = Date.parseExact("10/15/2004", ["yyyy/M/d", "MMMM d, yyyy"]);
 	</code></pre>
 	 *
 	 * @param {String}   The string value to convert into a Date object [Required].

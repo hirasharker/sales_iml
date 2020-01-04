@@ -22,6 +22,7 @@ class Report extends CI_Controller {
 		$this->load->model('bank_model', 'bank_model', TRUE);
 		$this->load->model('dealer_model','dealer_model',TRUE);
 		$this->load->model('district_model','district_model',TRUE);
+		$this->load->model('stock_model','stock_model',TRUE);
 		
 	}
 
@@ -199,4 +200,55 @@ class Report extends CI_Controller {
 			// a die here helps ensure a clean ajax call
 			die();
 	}
+
+
+
+
+
+
+
+
+	public function stock_report(){
+		$report_data										=	array();
+		$sales_data										=	array();
+		
+		$sales_data['zone_list']							=	$this->zone_model->get_all_zones();
+		$sales_data['model_list']							=	$this->model_model->get_all_models();
+		$sales_data['yard_list']							=	$this->yard_model->get_all_delivery_yards();
+		$sales_data['dealer_list']							=	$this->dealer_model->get_all_dealers();
+		$sales_data['bank_list']							=	$this->bank_model->get_all_banks();	
+		
+		$report_data['navigation'] 							=   $this->load->view('template/navigation','',TRUE);
+        $report_data['content']								=	$this->load->view('pages/report/stock_report',$sales_data,TRUE);
+        $report_data['footer']     							=   $this->load->view('template/footer','',TRUE);
+		
+		$this->load->view('template/main_template',$report_data);
+	}
+
+	public function generate_stock_report(){
+		$report_data										=	array();
+		$stock_data											=	array();
+
+		$zone_id											=	$this->input->post('zone_id');
+		$model_id											=	$this->input->post('model_id');
+		$yard_id											=	$this->input->post('yard_id');
+		$bank_id											=	$this->input->post('bank_id');
+		$dealer_id											=	$this->input->post('dealer_id');
+		$status 											=	$this->input->post('status');
+		// echo json_encode($sub_district_id);die();
+		
+		$stock_data['stock_list']						=	$this->stock_model->get_all_stock_data_by_search_criteria($zone_id, $model_id, $yard_id , $bank_id, $dealer_id, $status);
+
+		$stock_data['dealer_list']							=	$this->dealer_model->get_all_dealers();
+		$stock_data['bank_list']							=	$this->bank_model->get_all_banks();
+		
+        $report_data['content']								=	$this->load->view('pages/report/stock_report_table',$stock_data,TRUE);
+		
+		echo json_encode($report_data['content']);
+		// echo json_encode();
+			// a die here helps ensure a clean ajax call
+			die();
+	}
+
+
 }

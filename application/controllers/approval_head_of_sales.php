@@ -86,8 +86,8 @@ class Approval_Head_Of_Sales extends CI_Controller {
 
 			$mail_body				=	$this->load->view('template/inspection_mail',$customer_data,TRUE);
 			
-			$this->mail_model->send_email($recovery_manager_info->email_id,$customer_data->customer_code. ' Waiting for Inspection',$mail_body);
-			$this->mail_model->send_email($controller_info->email_id,$customer_data->customer_code. ' Waiting for Inspection',$mail_body);
+			// $this->mail_model->send_email($recovery_manager_info->email_id,$customer_data->customer_code. ' Waiting for Inspection',$mail_body);
+			// $this->mail_model->send_email($controller_info->email_id,$customer_data->customer_code. ' Waiting for Inspection',$mail_body);
 		}
 		
 		$customer_status['head_of_sales_approval_time']	=	date('Y-m-d H:i:s');

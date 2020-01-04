@@ -1,0 +1,2 @@
+COPY Public."tbl_dealer" FROM 'D:\xampp\htdocs\sales_iml\postgresData\tbl_dealer.csv' DELIMITER ',' CSV HEADER;
+select * from tbl_dealer

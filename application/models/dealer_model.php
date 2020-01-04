@@ -24,6 +24,15 @@ class Dealer_Model extends CI_Model {
         return $result;
     }
 
+    public function get_all_dealers_by_status($dealer_status = 1){
+        $this->db->select('tbl_dealer.*, tbl_zone.zone_name');
+        $this->db->from('tbl_dealer');
+        $this->db->join('tbl_zone','tbl_zone.zone_id = tbl_dealer.zone_id','left');
+        $this->db->where('dealer_status',$dealer_status);
+        $result_query   =   $this->db->get();
+        $result         =   $result_query->result();
+        return $result;
+    }
     
     public function add_dealer($data){
         $this->db->insert('tbl_dealer',$data);

@@ -35,7 +35,7 @@
             </div>
             <div class="x_content" style="display:none">
             <br />
-            <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url();?>city/add_city/">
+            <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url();?>lead/add_lead/">
 
             <div class="x_title">
                 <h2>Lead Info <small></small></h2>
@@ -43,33 +43,53 @@
             </div>
 
             <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Customer Name </label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                            <input type="text" class="form-control" name="customer_name" placeholder="Customer Name">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Phone No </label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                            <input type="text" class="form-control" name="phone" placeholder="Phone No">
-                        </div>
+                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Customer Name </label>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <input type="text" class="form-control" name="customer_name" placeholder="Customer Name">
                     </div>
                 </div>
 
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                     <label class="control-label col-md-3 col-sm-12 col-xs-12">Select Source </label>
                     <div class="col-md-8 col-sm-9 col-xs-12">
-                        <select class="form-control select-tag" name="zone_id">
+                        <select class="form-control select-tag" name="source_id">
                           <option value="">select</option>
-                          <?php foreach($zone_list as $value){?>
-                          <option value="<?php echo $value->zone_id;?>"><?php echo $value->zone_name;?></option>
+                          <?php foreach($source_list as $value){?>
+                          <option value="<?php echo $value->source_id;?>"><?php echo $value->source_name;?></option>
                           <?php }?>
                         </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Select Model </label>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <select class="form-control select-tag" name="model_id">
+                          <option value="">select</option>
+                          <?php foreach($model_list as $value){?>
+                          <option value="<?php echo $value->model_id;?>"><?php echo $value->model_name;?></option>
+                          <?php }?>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Select Sales Person </label>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <select class="form-control select-tag" name="mkt_id">
+                          <option value="">select</option>
+                          <?php foreach($sales_person_list as $value){?>
+                          <option value="<?php echo $value->employee_id;?>"><?php echo $value->employee_name;?></option>
+                          <?php }?>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Phone No </label>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <input type="text" class="form-control" name="phone1" placeholder="Phone No">
                     </div>
                 </div>
 
@@ -86,16 +106,37 @@
                 </div>
 
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Select Model </label>
+                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Select District </label>
                     <div class="col-md-8 col-sm-9 col-xs-12">
-                        <select class="form-control select-tag" name="zone_id">
+                        <select class="form-control select-tag" name="district_id">
                           <option value="">select</option>
-                          <?php foreach($zone_list as $value){?>
-                          <option value="<?php echo $value->zone_id;?>"><?php echo $value->zone_name;?></option>
+                          <?php foreach($district_list as $value){?>
+                          <option value="<?php echo $value->district_id;?>"><?php echo $value->district_name;?></option>
                           <?php }?>
                         </select>
                     </div>
                 </div>
+
+                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Select Sub District/PS </label>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <select class="form-control select-tag" name="sub_district_id">
+                          <option value="">select</option>
+                          <?php foreach($sub_district_list as $value){?>
+                          <option value="<?php echo $value->sub_district_id;?>"><?php echo $value->sub_district_name;?></option>
+                          <?php }?>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Address Line </label>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <textarea class="form-control" name="address_line_1"></textarea>
+                    </div>
+                </div>
+
+                
 
 
             </div>
@@ -139,27 +180,24 @@
           <table id="datatable-buttons" class="table table-striped table-bordered responsive">
             <thead>
               <tr>
-                <th>City Name</th>
-                <th>Zone</th>
-                <th>Code</th>
-                <th>Recovery Manager</th>
-                <th>Email</th>
+                <th>Customer Name</th>
+                <th>Phone</th>
+                <th>District</th>
+                <th>P/S</th>
+                <th>Sales Person</th>
                 <th>Action</th>
               </tr>
             </thead>
 
             <tbody>
-            <?php foreach($city_list as $value){?>
+            <?php foreach($lead_list as $value){?>
               <tr>
-                <td><?php echo $value->city_name; ?></td>
-                <td><?php echo $value->zone_name; ?></td>
-                <td><?php echo $value->city_code ?></td>
-                <td><?php foreach($employee_list as $emp_value){if($emp_value->employee_id==$value->rm_id){
-                      echo $emp_value->employee_name;
-                } }
-                ?></td>
-                <td><?php foreach($employee_list as $emp_value){if($emp_value->employee_id==$value->rm_id){
-                      echo $emp_value->email_id;
+                <td><?php echo $value->customer_name; ?></td>
+                <td><?php echo $value->phone1; ?></td>
+                <td><?php echo $value->district_id; ?></td>
+                <td><?php echo $value->sub_district_id ?></td>
+                <td><?php foreach($sales_person_list as $mkt_value){if($mkt_value->employee_id==$value->mkt_id){
+                      echo $mkt_value->employee_name;
                 } }
                 ?></td>
                 <td><a href="#">edit </a>|<a href="#"> delete</a></td>

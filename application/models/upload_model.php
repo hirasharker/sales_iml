@@ -4,7 +4,7 @@
 public function upload_file($type,$path){
     $this->load->library('upload');
     $config['upload_path']='./'.$path.'/';
-    $config['allowed_types']='gif|jpg|png|pdf';
+    $config['allowed_types']='gif|jpg|png|pdf|csv';
     $config['max_size']='5000000';
     $config['max_width']='100000';
     $config['max_height']='100000';

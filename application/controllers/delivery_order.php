@@ -73,18 +73,15 @@ class Delivery_Order extends CI_Controller {
 
 		$customer_data['model_detail']					=	$this->model_model->get_model_by_id($customer_data['customer_detail']->model_id);
 
-
-		$delivery_yard_detail							=	$this->yard_model->get_delivery_yard_by_id($customer_data['delivery_yard_id']);
-
 		$correspondent_detail							=	$this->employee_model->get_employee_by_id($delivery_yard_detail->correspondent_id);
 
 		$yard_head_detail								=	$this->employee_model->get_employee_by_id($delivery_yard_detail->yard_head_id);
 
-		$mail_body				=	$this->load->view('template/mail_delivery_yard',$customer_data,TRUE);
+		// $mail_body				=	$this->load->view('template/mail_delivery_yard',$customer_data,TRUE);
 		
-		$this->mail_model->send_email($correspondent_detail->email_id,$customer_data['customer_detail']->customer_code. ' Waiting for Delivery',$mail_body);
+		// $this->mail_model->send_email($correspondent_detail->email_id,$customer_data['customer_detail']->customer_code. ' Waiting for Delivery',$mail_body);
 
-		$this->mail_model->send_email($yard_head_detail->email_id,$customer_data['customer_detail']->customer_code. ' Waiting for Delivery',$mail_body);
+		// $this->mail_model->send_email($yard_head_detail->email_id,$customer_data['customer_detail']->customer_code. ' Waiting for Delivery',$mail_body);
 
 		redirect('delivery_order/index',"refresh");
 	}

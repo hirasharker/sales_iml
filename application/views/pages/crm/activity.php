@@ -35,7 +35,8 @@
             </div>
             <div class="x_content" style="display:none">
             <br />
-            <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url();?>city/add_city/">
+            <!-- <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url();?>city/add_city/"> -->
+            <form action="#" method="get">
 
             <div class="x_title">
                 <h2>Activity Detail <small></small></h2>
@@ -68,7 +69,7 @@
                               <div class="control-group">
                                 <div class="controls">
                                   <div class="col-md-11 xdisplay_inputx form-group has-feedback">
-                                    <input type="text" class="form-control has-feedback-left" id="single_cal4" placeholder="First Name" aria-describedby="inputSuccess2Status4">
+                                    <input type="text" name="date" class="form-control has-feedback-left" id="single_cal4" placeholder="First Name" aria-describedby="inputSuccess2Status4">
                                     <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
                                     <span id="inputSuccess2Status4" class="sr-only">(success)</span>
                                   </div>
@@ -78,6 +79,18 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Contact Type </label>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <select class="form-control select-tag" name="zone_id">
+                          <option value="">select</option>
+                          <option value="">select</option>
+                          
+                        </select>
+                    </div>
+                </div>
+
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                     <label class="control-label col-md-3 col-sm-12 col-xs-12">Select Zone </label>
                     <div class="col-md-8 col-sm-9 col-xs-12">
