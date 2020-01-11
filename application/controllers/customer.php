@@ -160,6 +160,7 @@ class Customer extends CI_Controller {
 		$customer_data['model_id']							=	$this->input->post('model_id','0',TRUE);
 		$customer_data['model_code']						=	$this->input->post('model_code','0',TRUE);
 		$customer_data['delivery_yard_id']					=	$this->input->post('delivery_yard_id','0',TRUE);
+		$customer_data['stock_id']							=	$this->input->post('stock_id','0',TRUE);
 		$customer_data['engine_no']							=	$this->input->post('engine_no','',TRUE);
 		$customer_data['chassis_no']						=	$this->input->post('chassis_no','',TRUE);
 		$customer_data['application_id']					=	$this->input->post('application_id','0',TRUE);

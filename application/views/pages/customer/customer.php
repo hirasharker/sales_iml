@@ -59,7 +59,7 @@
                       <input type="text" id="customerName" class="form-control" name="customer_name" placeholder="" required>
                   </div>
                 </div>
-                <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group col-md-6 col-sm-12 col-xs-12" style="display: none;">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Finance Name </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <input type="text" id="financeName" class="form-control" name="finance_name" placeholder="">
@@ -68,7 +68,7 @@
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">National ID </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="number" class="form-control" name="national_id" min="0" placeholder="" value="0">
+                      <input type="number" class="form-control" name="national_id" min="0" placeholder="" value="0" required>
                   </div>
                 </div>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
@@ -293,6 +293,7 @@
                 </div>
 
                 <div class="form-group col-md-6 col-sm-12 col-xs-12 engine-container" style="display: none;">
+                  <input type="hidden" name="stock_id" id="stockId">
                   <input type="hidden" name="delivery_yard_id" id="delivery-yard-id">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Engine No </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
@@ -567,7 +568,7 @@
                       <input type="text" id="customerName" class="form-control" name="customer_name" placeholder="" value="<?php echo $customer_detail->customer_name; ?>" required>
                   </div>
                 </div>
-                <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group col-md-6 col-sm-12 col-xs-12" style="display: none;">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Finance Name </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <input type="text" id="customerName" class="form-control" name="finance_name" placeholder="" value="<?php echo $customer_detail->finance_name; ?>">
@@ -1353,6 +1354,7 @@
             $(".engine-container").css("display", "block");
             // $('.sub-district-container').show(500);
           }else {
+            $('#stockId').val('');
             $('#engineNo').val('');
             $(".engine-container").css("display", "none");
             $('#modelId').val('');
@@ -1373,6 +1375,7 @@
                   var opts = $.parseJSON(data);
                   // Use jQuery's each to iterate over the opts value
                   console.log(opts);
+                  $('#stockId').val(opts.stock_id);
                   $('#engineNo').val(opts.engine_no);
                   $('#modelId').val(opts.model_id);
                   $('#modelCode').val(opts.model_code);

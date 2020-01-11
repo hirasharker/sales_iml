@@ -17,6 +17,8 @@ class Customer_Model extends CI_Model {
         return $result;
     }
 
+
+
     public function count_customers(){
         $this->db->select('customer_id');
         $this->db->from('tbl_customer');
@@ -341,14 +343,7 @@ class Customer_Model extends CI_Model {
         $result=$result_query->row();
         return $result;
     }
-    public function get_customers_by_status($status){
-        $this->db->select('*');
-        $this->db->from('tbl_customer');
-        $this->db->where('status',$status);
-        $result_query=$this->db->get();
-        $result=$result_query->result();
-        return $result;
-    }
+    
 
     public function get_customer_by_customer_id_and_user_id($customer_id,$user_id){
         $this->db->select('*');
@@ -402,6 +397,24 @@ class Customer_Model extends CI_Model {
         $result=$result_query->result();
         return $result;
     }
+
+    public function get_customers_by_status($status){
+        $this->db->select('tbl_customer.*,tbl_registration.registration_cost, tbl_model.model_name, tbl_delivery_yards.yard_name');
+        $this->db->from('tbl_customer');
+        $this->db->join('tbl_model','tbl_model.model_id = tbl_customer.model_id' , 'left');
+        $this->db->join('tbl_delivery_yards','tbl_delivery_yards.delivery_yard_id = tbl_customer.delivery_yard_id' , 'left');
+        $this->db->join('tbl_stock','tbl_stock.stock_id = tbl_customer.stock_id','left');
+        $this->db->join('tbl_registration','tbl_registration.registration_id = tbl_stock.registration_id','left');
+        $this->db->where('tbl_customer.status',$status);
+        $this->db->limit(1000);
+        $this->db->order_by('tbl_customer.time_stamp','desc');
+        $result_query=$this->db->get();
+        $result=$result_query->result();
+        return $result;
+    }
+
+    
+
     public function get_all_customers_by_head_of_sales_id($head_of_sales_id){
         $this->db->select('tbl_customer.*,tbl_zone.head_of_sales_id');
         $this->db->from('tbl_customer');

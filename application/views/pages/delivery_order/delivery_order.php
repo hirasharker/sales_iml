@@ -69,6 +69,7 @@
                                         <td><?php echo $value->customer_name; ?></td>
                                         <td ><?php echo $value->time_stamp; ?></td>
                                         <input type="hidden" name="customer_id" value="<?php echo $value->customer_id;?>">
+                                        <input type="hidden" name="delivery_yard_id" value="<?php echo $value->delivery_yard_id;?>">
                                         <td><button type="submit" class="btn btn-primary">Generate DO</button></td>
                                     </form>
                                     </tr>
@@ -80,6 +81,7 @@
                                         <td><?php echo $value->customer_name; ?></td>
                                         <td ><?php echo $value->time_stamp; ?></td>
                                             <input type="hidden" name="customer_id" value="<?php echo $value->customer_id;?>">
+                                            <input type="hidden" name="delivery_yard_id" value="<?php echo $value->delivery_yard_id;?>">
                                         <td><button type="submit" class="btn btn-primary">Generate DO</button></td>
                                     </form>
                                     </tr>

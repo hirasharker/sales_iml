@@ -58,13 +58,11 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Customer Name</th>
+                                        <th>Model Name</th>
                                         <th>Booking Date</th>
                                         <th>Delivery Yard</th>
                                         <th>Chassis No</th>
                                         <th>Engine No</th>
-                                        <th>LC Bank</th>
-                                        <th>Type</th>
-                                        
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -79,36 +77,15 @@
                                     <form action="<?php echo base_url();?>delivery_challan/update_engine_and_chassis_no" method="post">
                                         <td><?php echo $value->customer_code; ?></td>
                                         <td><?php echo $value->customer_name; ?></td>
-                                        <td ><?php echo $value->time_stamp; ?></td>
-                                        <td>
-                                            <?php foreach($yard_list as $y_value){if($value->delivery_yard_id==$y_value->delivery_yard_id){
-                                                    echo $y_value->yard_name;
-                                                }
-                                            }?>
-                                        </td>
+                                        <td><?php echo $value->model_name ?></td>
+                                        <td><?php echo $value->time_stamp; ?></td>
+                                        <td><?php echo $value->yard_name; ?></td>
                                         <td>
                                             <input type="hidden" name="customer_id" value="<?php echo $value->customer_id;?>">
-                                            <input type="text" placeholder="" name="chassis_no" required>
+                                            <?php echo $value->chassis_no; ?>
                                             
                                         </td>
-                                        <td><input type="text" placeholder="" name="engine_no" required></td>
-                                        <td>
-                                            <!-- <input type="text" placeholder="" name="chassis_no"> -->
-                                            <select class="form-control select-tag"  name="lc_bank_id">
-                                                <option value="">Select LC Bank</option>
-                                                <?php foreach($bank_list as $b_value){?>
-                                                <option value="<?php echo $b_value->bank_id;?>"><?php echo $b_value->bank_name;?></option>
-                                                <?php }?>   
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <select class="form-control"  name="vehicle_mfg_type">
-                                                <option value="1">CBU</option>
-                                                <option value="2">CKD</option>
-                                            </select>
-                                        </td>
-                                        
-                                        <!-- <input type="hidden" placeholder="" id="engineNo<?php echo $value->customer_id;?>" name="engine_no"></td> -->
+                                        <td><?php echo $value->engine_no; ?></td>
                                         <td><button type="submit" class="btn btn-primary">Update</button></td>
                                     </form>
                                     </tr>
@@ -126,36 +103,15 @@
                                     <form action="<?php echo base_url();?>delivery_challan/update_engine_and_chassis_no" method="post">
                                         <td><?php echo $value->customer_code; ?></td>
                                         <td><?php echo $value->customer_name; ?></td>
-                                        <td ><?php echo $value->time_stamp; ?></td>
-                                        <td>
-                                            <?php foreach($yard_list as $y_value){if($value->delivery_yard_id==$y_value->delivery_yard_id){
-                                                    echo $y_value->yard_name;
-                                                }
-                                            }?>
-                                        </td>
+                                        <td><?php echo $value->model_name ?></td>
+                                        <td><?php echo $value->time_stamp; ?></td>
+                                        <td><?php echo $value->yard_name; ?></td>
                                         <td>
                                             <input type="hidden" name="customer_id" value="<?php echo $value->customer_id;?>">
-                                            <input type="text" placeholder="" name="chassis_no" required>
+                                            <?php echo $value->chassis_no; ?>
+                                            
                                         </td>
-                                        <td><input type="text" placeholder="" name="engine_no" required></td>
-                                        <td>
-                                            <!-- <input type="text" placeholder="" name="chassis_no"> -->
-                                            <select class="form-control select-tag"  name="lc_bank_id">
-                                                <option value="">Select LC Bank</option>
-                                                <?php foreach($bank_list as $b_value){?>
-                                                <option value="<?php echo $b_value->bank_id;?>"><?php echo $b_value->bank_name;?></option>
-                                                <?php }?>   
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <select class="form-control"  name="vehicle_mfg_type">
-                                                <option value="1">CBU</option>
-                                                <option value="2">CKD</option>
-                                            </select>
-                                        </td>
-                                        
-                                        
-                                        <input type="hidden" placeholder="" id="engineNo<?php echo $value->customer_id;?>" name="engine_no"></td>
+                                        <td><?php echo $value->engine_no; ?></td>
                                         <td><button type="submit" class="btn btn-primary">Update</button></td>
                                     </form>
                                     </tr>

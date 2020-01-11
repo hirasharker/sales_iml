@@ -46,9 +46,6 @@ class Delivery_Challan extends CI_Controller {
 
 		
 		$customer_data['customer_list']		=	$this->customer_model->get_customers_by_status(8);
-		$customer_data['model_list']		=	$this->model_model->get_all_models();
-		$customer_data['yard_list']			=	$this->yard_model->get_all_delivery_yards();
-		$customer_data['bank_list']			=	$this->bank_model->get_all_banks();
 		$customer_data['yard_detail']		=	$this->yard_model->get_delivery_yard_by_employee_id($this->session->userdata('employee_id'));
 
 		$customer_data['customer_list_for_printing_challan']	=	$this->customer_model->get_customers_by_status(9);
@@ -70,11 +67,6 @@ class Delivery_Challan extends CI_Controller {
 
 		$customer_data['delivery_challan_no']			=	$max_challan_no->delivery_challan_no + 1;
 
-		$customer_data['lc_bank_id']					=	$this->input->post('lc_bank_id','',TRUE);
-		$customer_data['vehicle_mfg_type']				=	$this->input->post('vehicle_mfg_type','',TRUE);
-
-		$customer_data['engine_no']						=	$this->input->post('engine_no','',TRUE);
-		$customer_data['chassis_no']					=	$this->input->post('chassis_no','',TRUE);
 		$customer_status['status']						=	9;
 
 		// print_r($customer_data);exit();

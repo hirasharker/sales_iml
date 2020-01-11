@@ -62,6 +62,7 @@
                                     <th>Customer Name</th>
                                     <th>Model No</th>
                                     <th>Total Price</th>
+                                    <th>Registration Fee</th>
                                     <th>Downpayment</th>
                                     <th>Discount</th>
                                     <th>Purchase Order</th>
@@ -79,6 +80,7 @@
                                     <td><?php echo $value->customer_name; ?></td>
                                     <td><?php foreach($model_list as $m_value){if($m_value->model_id == $value->model_id){ echo $m_value->model_name; }} ?></td>
                                     <td><?php echo $value->total_price; ?></td>
+                                    <td><?php echo $value->registration_cost; ?></td>
                                     <td><?php echo $value->downpayment; ?></td>
                                     <td><?php echo $value->discount; ?></td>
                                     <td>

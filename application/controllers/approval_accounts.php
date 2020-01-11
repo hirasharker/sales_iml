@@ -40,7 +40,7 @@ class Approval_Accounts extends CI_Controller {
 		// $info 	=	$this->payment_model->get_downpayment_by_customer_code('17-16-310-124-32100');
 		// print_r($info);exit();
 		
-		$customer_data['customer_list']		=	$this->customer_model->get_all_customers();
+		$customer_data['customer_list']		=	$this->customer_model->get_customers_by_status(5);
 		$customer_data['model_list']		=	$this->model_model->get_all_models();
 		$customer_data['dp_info']			=	array();
 		$customer_data['reg_info']			=	array();

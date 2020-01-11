@@ -1,5 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Delivery Order</title>
@@ -28,7 +29,7 @@
                 <img src="<?php echo base_url()?>images/img.jpg">
             </div>
             <div class="title">
-                <h1 class="compnay-name">IFAD AUTOS LIMITED</h1>
+                <h1 class="compnay-name">IFAD MOTORS LIMITED</h1>
                 <!-- <p class="address1">Registered Office : Vill: Narsingpur, PS: Ashulia, Upzilla: Savar, Dist: Dhaka. Vat Registration no: 017151004202</p> -->
                 <p class="address1">Registered Office : <?php 
                 foreach ($yard_list as $y_value) {
@@ -37,7 +38,7 @@
                     }
                 }
                 ?> Vat Registration no: </p>
-                <p class="address2">Corporate Office : Sonartori Tower (13th - 18th floor), 12 Biponon C/A, Sonargaon Road, Dhaka. Tel # 9632753-7,</p>
+                <p class="address2">Corporate Office : Ifad Tower, 07 (New) Tejgaon Industrial Area, Tejgaon, Dhaka - 1208. Tel # 8870305-8,</p>
                 <p class="address3">Fax: 880-2-9632765, E-mail : contact@ifadgroup.com</p>
             </div>
         </div><!-- banner -->
@@ -134,7 +135,7 @@
     
     <div class="footer no-print">
     	<div class="left">
-        	<p>For IFAD AUTOS LTD</p>
+        	<p>For IFAD MOTORS LTD</p>
             <br />
             <br />
             <p>(AUTHORIZED SIGNATURE)</p>
@@ -175,7 +176,7 @@
                 <img src="<?php echo base_url()?>images/img.jpg">
             </div>
             <div class="title">
-                <h1 class="compnay-name">IFAD AUTOS LIMITED</h1>
+                <h1 class="compnay-name">IFAD MOTORS LIMITED</h1>
                 <!-- <p class="address1">Registered Office : Vill: Narsingpur, PS: Ashulia, Upzilla: Savar, Dist: Dhaka. Vat Registration no: 017151004202</p> -->
                 <p class="address1">Registered Office : <?php 
                 foreach ($yard_list as $y_value) {
@@ -184,7 +185,7 @@
                     }
                 }
                 ?> Vat Registration no: </p>
-                <p class="address2">Corporate Office : Sonartori Tower (13th - 18th floor), 12 Biponon C/A, Sonargaon Road, Dhaka. Tel # 9632753-7,</p>
+                <p class="address2">Corporate Office : Ifad Tower, 07 (New) Tejgaon Industrial Area, Tejgaon, Dhaka - 1208. Tel # 8870305-8,</p>
                 <p class="address3">Fax: 880-2-9632765, E-mail : contact@ifadgroup.com</p>
             </div>
         </div><!-- banner -->
@@ -281,7 +282,7 @@
     
     <div class="footer no-print">
         <div class="left">
-            <p>For IFAD AUTOS LTD</p>
+            <p>For IFAD MOTORS LTD</p>
             <br />
             <br />
             <p>(AUTHORIZED SIGNATURE)</p>
