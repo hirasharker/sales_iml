@@ -330,10 +330,10 @@ class Customer_Model extends CI_Model {
     public function get_customer_by_id($customer_id){
         $this->db->select('tbl_customer.*,tbl_model.*,tbl_dealer.dealer_name, tbl_employee.employee_name as zonal_head, tbl_city.city_name,tbl_district.district_name,tbl_sub_district.sub_district_name, tbl_application.application_detail, tbl_body_builder.body_builder_name');
         $this->db->from('tbl_customer');
-        $this->db->join('tbl_city','tbl_city.city_id = tbl_customer.city_id');
+        $this->db->join('tbl_city','tbl_city.city_id = tbl_customer.city_id', 'left' );
         $this->db->join('tbl_district','tbl_district.district_id = tbl_customer.district_id','left');
         $this->db->join('tbl_sub_district','tbl_sub_district.sub_district_id = tbl_customer.sub_district_id','left');
-        $this->db->join('tbl_model','tbl_model.model_id = tbl_customer.model_id');
+        $this->db->join('tbl_model','tbl_model.model_id = tbl_customer.model_id', 'left');
         $this->db->join('tbl_dealer','tbl_dealer.dealer_id = tbl_customer.dealer_id', 'left');
         $this->db->join('tbl_application','tbl_application.application_id = tbl_customer.application_id','left');
         $this->db->join('tbl_body_builder','tbl_body_builder.body_builder_id = tbl_customer.body_builder_id','left');
@@ -343,6 +343,8 @@ class Customer_Model extends CI_Model {
         $result=$result_query->row();
         return $result;
     }
+    
+   
     
 
     public function get_customer_by_customer_id_and_user_id($customer_id,$user_id){

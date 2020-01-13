@@ -90,6 +90,7 @@
 	padding: 0;
 	}
 .content table tr td.left {
+	font-size: 4;
 	width: 1.5in;
 	padding-right:.5in;
 	padding-bottom: 0in;

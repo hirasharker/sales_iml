@@ -1,3 +1,4 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -51,6 +52,14 @@
                 <td class="right"><?php echo $customer_detail->customer_name; ?></td>
             </tr>
             <tr>
+                <td class="left no-print">NATIONAL ID </td>
+                <td class="right"><?php echo $customer_detail->national_id; ?></td>
+            </tr>
+            <tr>
+                <td class="left no-print">OCCUPATION </td>
+                <td class="right"><?php echo $customer_detail->occupation; ?></td>
+            </tr>
+            <tr>
                 <td class="left no-print">PHONE </td>
                 <td class="right"><?php echo $customer_detail->phone; ?></td>
             </tr>
@@ -71,8 +80,12 @@
                 <td class="right"><p><?php echo $customer_detail->permanent_address; ?></p></td>
             </tr>
             <tr>
-                <td class="left no-print">BUSINESS ADDRESS </td>
-                <td class="right"><p><?php echo $customer_detail->business_address; ?></p></td>
+                <td class="left no-print">ENGINE NO </td>
+                <td class="right"><p><?php echo $customer_detail->engine_no; ?></p></td>
+            </tr>
+            <tr>
+                <td class="left no-print">CHASSIS NO </td>
+                <td class="right"><p><?php echo $customer_detail->chassis_no; ?></p></td>
             </tr>
             <tr>
             	<td class="left no-print">MODEL </td>
@@ -81,24 +94,24 @@
             <tr>
                 <td class="left no-print">PAYMENT MODE </td>
                 <td class="right">
-                <?php 
-                switch ($customer_detail->payment_mode){
-                    case 1:
-                    echo "CREDIT";
-                    break;
-                    case 2:
-                    echo "SEMI-CASH";
-                    break;
-                    case 3:
-                    echo "CASH";
-                    break;
-                     case 3:
-                    echo "CORPORATE";
-                    break;
-                    default:
-                    break;
-                }
-        ?></td>
+                    <?php 
+                    switch ($customer_detail->payment_mode){
+                        case 1:
+                        echo "CREDIT";
+                        break;
+                        case 2:
+                        echo "SEMI-CASH";
+                        break;
+                        case 3:
+                        echo "CASH";
+                        break;
+                         case 3:
+                        echo "CORPORATE";
+                        break;
+                        default:
+                        break;
+                    }
+            ?></td>
             </tr>
             <tr>
                 <td class="left no-print">PERIOD </td>
@@ -107,6 +120,18 @@
             <tr>
                 <td class="left no-print">DOWNPAYMENT </td>
                 <td class="right"><?php echo $customer_detail->downpayment; ?></td>
+            </tr>
+            <tr>
+                <td class="left no-print">INTEREST RATE </td>
+                <td class="right"><?php echo $customer_detail->interest_rate; ?></td>
+            </tr>
+            <tr>
+                <td class="left no-print">DEALER NAME </td>
+                <td class="right"><?php echo strtoupper($customer_detail->dealer_name); ?></td>
+            </tr>
+            <tr>
+                <td class="left no-print">RECOVERY OFFICER </td>
+                <td class="right"></td>
             </tr>
             <tr>
                 <td class="left no-print">COMMENT </td>
