@@ -232,7 +232,7 @@ class Customer_Model extends CI_Model {
         
         $this->db->select('COUNT(customer_id) as count');
         $this->db->from('tbl_customer');
-        $this->db->where('MONTH(time_stamp) =',$month);
+        $this->db->where('EXTRACT(MONTH FROM time_stamp) = ',$month);
         $result_query=$this->db->get();
         $result=$result_query->row();
         return $result;
@@ -260,7 +260,7 @@ class Customer_Model extends CI_Model {
         
         $this->db->select('COUNT(customer_id) as count');
         $this->db->from('tbl_customer');
-        $this->db->where('MONTH(time_stamp) =',$month);
+        $this->db->where('EXTRACT(MONTH FROM time_stamp) = ',$month);
         $this->db->where('status',9);
         $result_query=$this->db->get();
         $result=$result_query->row();
@@ -274,7 +274,7 @@ class Customer_Model extends CI_Model {
         $month = $date->format('m');
         $this->db->select('COUNT(customer_id) as count, model_id, sum(quantity) as qty');
         $this->db->from('tbl_customer');
-        $this->db->where('MONTH(time_stamp) =',$month);
+        $this->db->where('EXTRACT(MONTH FROM time_stamp) = ',$month);
         $this->db->where('status',9);
         $this->db->group_by('model_id');
         $this->db->order_by('qty','desc');
@@ -290,7 +290,7 @@ class Customer_Model extends CI_Model {
         $month = $date->format('m');
         $this->db->select('sum(quantity) as qty');
         $this->db->from('tbl_customer');
-        $this->db->where('MONTH(time_stamp) =',$month);
+        $this->db->where('EXTRACT(MONTH FROM time_stamp) = ',$month);
         $this->db->where('status',9);
         $result_query=$this->db->get();
         $result=$result_query->row();
@@ -300,8 +300,8 @@ class Customer_Model extends CI_Model {
         $year = date("Y");
         $this->db->select('sum(quantity) as qty');
         $this->db->from('tbl_customer');
-        $this->db->where('MONTH(do_update_time) =',$month);
-        $this->db->where('YEAR(do_update_time) =',$year);
+        $this->db->where('EXTRACT(MONTH FROM do_update_time) = ',$month);
+        $this->db->where('EXTRACT(YEAR FROM do_update_time) = ',$year);
         // $this->db->where('status',9);
         $result_query=$this->db->get();
         $result=$result_query->row();
@@ -315,7 +315,7 @@ class Customer_Model extends CI_Model {
         $month = $date->format('m');
         $this->db->select('COUNT(customer_id) as count, zone_id, sum(quantity) as qty');
         $this->db->from('tbl_customer');
-        $this->db->where('MONTH(time_stamp) =',$month);
+        $this->db->where('EXTRACT(MONTH FROM time_stamp) = ',$month);
         $this->db->where('status',9);
         $this->db->group_by('zone_id');
         $this->db->order_by('qty','desc');
