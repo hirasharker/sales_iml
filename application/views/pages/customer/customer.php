@@ -405,7 +405,17 @@
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Period </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input id="period" type="number" class="form-control" name="period" min="0" value="0" placeholder="" required>
+                      <select id="period" class="form-control select-tag" name="period" required>
+                      <option value="">Select </option>
+                      <option value="3">3</option>
+                      <option value="6">6</option>
+                      <option value="9">9</option>
+                      <option value="12">12</option>
+                      <option value="15">15</option>
+                      <option value="24">24</option>
+                      <option value="36">36</option>
+                      <!-- <option value="4">Corporate</option> -->
+                      </select>
                   </div>
                 </div>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
@@ -1389,6 +1399,40 @@
                   }
               }
           });
+      });
+
+
+      $("#period").change(function(){
+
+          var chassisNo = $('#chassisNo option:selected').val();
+          var period  = $('#period option:selected').val();
+          var totalPrice =  $('#totalPrice').val();
+
+          switch(period){
+            case 3:
+              $('#totalPrice').val(parseFloat(totalPrice) + 5000);
+              break;
+            case 6:
+              $('#totalPrice').val(parseFloat(totalPrice) + 10000);
+              break;
+            case 9:
+              $('#totalPrice').val(parseFloat(totalPrice) + 15000);
+              break;
+            case 12:
+              $('#totalPrice').val(parseFloat(totalPrice) + 20000);
+              break;
+            case 15:
+              $('#totalPrice').val(parseFloat(totalPrice) + 30000);
+              break;
+            default:
+              $customer_data['total_price']       = $model_detail->credit_price;
+          }
+
+          $('#totalPrice').val(parseFloat(totalPrice) + 5000);
+
+
+
+          console.log(period);
       });
 
 
