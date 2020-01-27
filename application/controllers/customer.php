@@ -181,7 +181,7 @@ class Customer extends CI_Controller {
 			
 			$customer_data['period']							=	$this->input->post('period','0',TRUE);
 			switch ($customer_data['period']) {
-				case 3:
+				case 3 || 1 || 2:
 					$customer_data['total_price']				=	$model_detail->credit_price + 5000;
 					break;
 				case 6:

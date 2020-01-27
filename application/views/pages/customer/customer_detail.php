@@ -312,7 +312,7 @@
                              ?>
                           </td>
                           <td><b>Price</b></td>
-                          <td><?php echo $customer_detail->credit_price;?></td>
+                          <td><?php echo $customer_detail->total_price;?></td>
                         </tr>
                         <tr>
                           <td><b>Discount</b></td>

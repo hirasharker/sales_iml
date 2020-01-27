@@ -427,7 +427,7 @@
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Installment Starts from </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input type="number" class="form-control" name="installment_start_date" placeholder="" min="0" value="60" required>
+                      <input type="number" class="form-control" name="installment_start_date" placeholder="" min="0" value="30" required>
                   </div>
                 </div>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
@@ -1227,6 +1227,13 @@
 
 <script>
   $(function() { 
+      $("#period option[value='3']").remove();
+      $("#period option[value='6']").remove();
+      $("#period option[value='9']").remove();
+      $("#period option[value='12']").remove();
+      $("#period option[value='15']").remove();
+
+
       $("#reference").change(function(){ 
           var element = $(this).find('option:selected'); 
           var customerName = element.attr("customerName");
@@ -1384,7 +1391,7 @@
                   // Parse the returned json data
                   var opts = $.parseJSON(data);
                   // Use jQuery's each to iterate over the opts value
-                  console.log(opts);
+                  // console.log(opts);
                   $('#stockId').val(opts.stock_id);
                   $('#engineNo').val(opts.engine_no);
                   $('#modelId').val(opts.model_id);
@@ -1417,6 +1424,8 @@
                   // Use jQuery's each to iterate over the opts value
                   var totalPrice  = opts.credit_price;
                   switch(period){
+                    case "1":
+                    case "2":
                     case "3":
                       console.log(period);
                       $('#totalPrice').val(parseFloat(totalPrice) + 5000);
@@ -1478,6 +1487,13 @@
             $('#period').val("0");
             $('#interestRate').val("0");
             $('#downpayment').val("0");
+            $("#period option[value='24']").remove();
+            $("#period option[value='36']").remove();
+            $('#period').append('<option value="3">3</option>');
+            $('#period').append('<option value="6">6</option>');
+            $('#period').append('<option value="9">9</option>');
+            $('#period').append('<option value="12">12</option>');
+            $('#period').append('<option value="15">15</option>');
           } else{
             $('#period').prop('disabled', false);
             $('#totalPrice').prop('disabled', false);
@@ -1486,6 +1502,13 @@
             $('#period').val("0");
             $('#interestRate').val("0");
             $('#downpayment').val("0");
+            $("#period option[value='3']").remove();
+            $("#period option[value='6']").remove();
+            $("#period option[value='9']").remove();
+            $("#period option[value='12']").remove();
+            $("#period option[value='15']").remove();
+            $('#period').append('<option value="24">24</option>');
+            $('#period').append('<option value="36">36</option>');
           }
           // $('#zoneId').val(zoneId);
       });
