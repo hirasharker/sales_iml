@@ -1406,33 +1406,42 @@
 
           var chassisNo = $('#chassisNo option:selected').val();
           var period  = $('#period option:selected').val();
-          var totalPrice =  $('#totalPrice').val();
+          // var totalPrice =  $('#totalPrice').val();
+          $.ajax({
+              type: "POST",
+              url: "<?php echo base_url()?>customer/ajax_generate_engine_no/",
+              data: { 'chassis_no': chassisNo  },
+              success: function(data){
+                  // Parse the returned json data
+                  var opts = $.parseJSON(data);
+                  // Use jQuery's each to iterate over the opts value
+                  var totalPrice  = opts.credit_price;
+                  switch(period){
+                    case "3":
+                      console.log(period);
+                      $('#totalPrice').val(parseFloat(totalPrice) + 5000);
+                      break;
+                    case "6":
+                      $('#totalPrice').val(parseFloat(totalPrice) + 10000);
+                      break;
+                    case "9":
+                      $('#totalPrice').val(parseFloat(totalPrice) + 15000);
+                      break;
+                    case "12":
+                      $('#totalPrice').val(parseFloat(totalPrice) + 20000);
+                      break;
+                    case "15":
+                      $('#totalPrice').val(parseFloat(totalPrice) + 30000);
+                      break;
+                    default:
+                      $('#totalPrice').val(parseFloat(totalPrice));
+                      break;
+                  } // Switch---
+                 
+              }
+          });
 
-          switch(period){
-            case 3:
-              $('#totalPrice').val(parseFloat(totalPrice) + 5000);
-              break;
-            case 6:
-              $('#totalPrice').val(parseFloat(totalPrice) + 10000);
-              break;
-            case 9:
-              $('#totalPrice').val(parseFloat(totalPrice) + 15000);
-              break;
-            case 12:
-              $('#totalPrice').val(parseFloat(totalPrice) + 20000);
-              break;
-            case 15:
-              $('#totalPrice').val(parseFloat(totalPrice) + 30000);
-              break;
-            default:
-              $customer_data['total_price']       = $model_detail->credit_price;
-          }
-
-          $('#totalPrice').val(parseFloat(totalPrice) + 5000);
-
-
-
-          console.log(period);
+          // $('#totalPrice').val(parseFloat(totalPrice) + 5000);
       });
 
 

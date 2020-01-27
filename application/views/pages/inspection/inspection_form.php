@@ -73,19 +73,19 @@
             </tr>
             <tr>
             	<td class="left no-print">PRESENT ADDRESS </td>
-                <td class="right"><p><?php echo $customer_detail->present_address; ?></p></td>
+                <td class="right"><?php echo $customer_detail->present_address; ?></td>
             </tr>
             <tr>
                 <td class="left no-print">PERMANENT ADDRESS </td>
-                <td class="right"><p><?php echo $customer_detail->permanent_address; ?></p></td>
+                <td class="right"><?php echo $customer_detail->permanent_address; ?></td>
             </tr>
             <tr>
                 <td class="left no-print">ENGINE NO </td>
-                <td class="right"><p><?php echo $customer_detail->engine_no; ?></p></td>
+                <td class="right"><?php echo $customer_detail->engine_no; ?></td>
             </tr>
             <tr>
                 <td class="left no-print">CHASSIS NO </td>
-                <td class="right"><p><?php echo $customer_detail->chassis_no; ?></p></td>
+                <td class="right"><?php echo $customer_detail->chassis_no; ?></td>
             </tr>
             <tr>
             	<td class="left no-print">MODEL </td>
