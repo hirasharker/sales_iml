@@ -176,11 +176,33 @@ class Customer extends CI_Controller {
 			// $customer_data['downpayment']						=	$model_detail->min_dp_credit;
 			$customer_data['downpayment']						=	$this->input->post('downpayment','0',TRUE);
 			$customer_data['period']							=	$this->input->post('period','0',TRUE);
+		
 		} elseif ($customer_data['payment_mode'] == 2){
-			$customer_data['total_price']						=	$model_detail->credit_price;
-			// $customer_data['downpayment']						=	$model_detail->min_dp_semicash;
-			$customer_data['downpayment']						=	$this->input->post('downpayment','0',TRUE);
+			
 			$customer_data['period']							=	$this->input->post('period','0',TRUE);
+			switch ($customer_data['period']) {
+				case 3:
+					$customer_data['total_price']				=	$model_detail->credit_price + 5000;
+					break;
+				case 6:
+					$customer_data['total_price']				=	$model_detail->credit_price + 10000;
+					break;
+				case 9:
+					$customer_data['total_price']				=	$model_detail->credit_price + 15000;
+					break;
+				case 12:
+					$customer_data['total_price']				=	$model_detail->credit_price + 20000;
+					break;
+				case 15:
+					$customer_data['total_price']				=	$model_detail->credit_price + 30000;
+					break;
+				
+				default:
+					$customer_data['total_price']				=	$model_detail->credit_price + 30000;
+			}
+
+			$customer_data['downpayment']						=	$this->input->post('downpayment','',TRUE);
+			
 		} elseif ($customer_data['payment_mode'] == 3){
 			// $customer_data['total_price']						=	$model_detail->retail_cash_price;
 			$customer_data['total_price']						=	$model_detail->credit_price;
