@@ -40,22 +40,30 @@ class Approval_Registration extends CI_Controller {
 	 */
 	public function index()
 	{
-		$data               				=   array();
-		$registration_data 					=	array();
-		
-		$registration_data['pending_registration_list']		=	$this->reg_model->get_all_registrations_by_status($status =NULL);
-		$registration_data['model_list']					=	$this->model_model->get_all_models();
-		$registration_data['yard_list']						=	$this->yard_model->get_all_delivery_yards();
-		$registration_data['employee_list']					=	$this->employee_model->get_all_employees();
-		$registration_data['reg_area_list']					=	$this->reg_model->get_all_registration_areas();
-		$registration_data['bank_list']						=	$this->bank_model->get_all_banks();
+		if($this->session->userdata('role') == 15 || $this->session->userdata('role')== 10){
 
-		
+			$data               				=   array();
+			$registration_data 					=	array();
+			
+			$registration_data['pending_registration_list']		=	$this->reg_model->get_all_registrations_by_status($status =NULL);
+			$registration_data['model_list']					=	$this->model_model->get_all_models();
+			$registration_data['yard_list']						=	$this->yard_model->get_all_delivery_yards();
+			$registration_data['employee_list']					=	$this->employee_model->get_all_employees();
+			$registration_data['reg_area_list']					=	$this->reg_model->get_all_registration_areas();
+			$registration_data['bank_list']						=	$this->bank_model->get_all_banks();
 
-        $data['navigation'] =   $this->load->view('template/navigation','',TRUE);
-        $data['content']    =   $this->load->view('pages/approvals/registration',$registration_data,TRUE);
-        $data['footer']     =   $this->load->view('template/footer','',TRUE);
-		$this->load->view('template/main_template',$data);
+			
+
+	        $data['navigation'] =   $this->load->view('template/navigation','',TRUE);
+	        $data['content']    =   $this->load->view('pages/approvals/registration',$registration_data,TRUE);
+	        $data['footer']     =   $this->load->view('template/footer','',TRUE);
+			$this->load->view('template/main_template',$data);
+
+		} else {
+			
+			redirect('dashboard','refresh');
+		}
+		
 	}
 
 	public function decision(){

@@ -7,9 +7,9 @@ class Inventory extends CI_Controller {
 		if($this->session->userdata('employee_id')==NULL){
 			redirect('login','refresh');
 		}
-		if($this->session->userdata('role')!=15){
-			redirect('dashboard','refresh');
-		}
+		// if($this->session->userdata('role')!=15){
+		// 	redirect('dashboard','refresh');
+		// }
 		$this->load->model('received_model','received_model',TRUE);
 		$this->load->model('issued_model','issued_model',TRUE);
 		$this->load->model('dealer_model','dealer_model',TRUE);
@@ -56,21 +56,30 @@ class Inventory extends CI_Controller {
 
 	public function receive()
 	{
-		$data               				=   array();
-		$inventory_data 					=	array();
-		
-		$inventory_data['received_list']	=	$this->received_model->get_all_receives();
-		$inventory_data['model_list']		=	$this->model_model->get_all_models();
-		$inventory_data['yard_list']		=	$this->yard_model->get_all_delivery_yards();
-		$inventory_data['employee_list']	=	$this->employee_model->get_all_employees();
-		$inventory_data['bank_list']		=	$this->bank_model->get_all_banks();
+		if($this->session->userdata('role') == 15 || $this->session->userdata('role')== 3){
+			
+			$data               				=   array();
+			$inventory_data 					=	array();
+			
+			$inventory_data['received_list']	=	$this->received_model->get_all_receives();
+			$inventory_data['model_list']		=	$this->model_model->get_all_models();
+			$inventory_data['yard_list']		=	$this->yard_model->get_all_delivery_yards();
+			$inventory_data['employee_list']	=	$this->employee_model->get_all_employees();
+			$inventory_data['bank_list']		=	$this->bank_model->get_all_banks();
+
+			
+
+	        $data['navigation'] =   $this->load->view('template/navigation','',TRUE);
+	        $data['content']    =   $this->load->view('pages/inventory/receive',$inventory_data,TRUE);
+	        $data['footer']     =   $this->load->view('template/footer','',TRUE);
+			$this->load->view('template/main_template',$data);
+
+		} else {
+
+			redirect('dashboard','refresh');
+		}
 
 		
-
-        $data['navigation'] =   $this->load->view('template/navigation','',TRUE);
-        $data['content']    =   $this->load->view('pages/inventory/receive',$inventory_data,TRUE);
-        $data['footer']     =   $this->load->view('template/footer','',TRUE);
-		$this->load->view('template/main_template',$data);
 	}
 
 	public function add_received_product() {
@@ -194,22 +203,30 @@ class Inventory extends CI_Controller {
 
 	public function issue()
 	{
-		$data               				=   array();
-		$inventory_data 					=	array();
-		
-		$inventory_data['issued_list']		=	$this->issued_model->get_all_issues();
-		$inventory_data['model_list']		=	$this->model_model->get_all_models();
-		$inventory_data['yard_list']		=	$this->yard_model->get_all_delivery_yards();
-		$inventory_data['dealer_list']		=	$this->dealer_model->get_all_dealers_by_status($dealer_status = 2);
-		$inventory_data['stock_list']		=	$this->stock_model->get_all_stocks_for_isssue();
-		$inventory_data['employee_list']	=	$this->employee_model->get_all_employees();
+		if($this->session->userdata('role') == 15 || $this->session->userdata('role')== 9){
 
-		
+			$data               				=   array();
+			$inventory_data 					=	array();
+			
+			$inventory_data['issued_list']		=	$this->issued_model->get_all_issues();
+			$inventory_data['model_list']		=	$this->model_model->get_all_models();
+			$inventory_data['yard_list']		=	$this->yard_model->get_all_delivery_yards();
+			$inventory_data['dealer_list']		=	$this->dealer_model->get_all_dealers_by_status($dealer_status = 2);
+			$inventory_data['stock_list']		=	$this->stock_model->get_all_stocks_for_isssue();
+			$inventory_data['employee_list']	=	$this->employee_model->get_all_employees();
 
-        $data['navigation'] =   $this->load->view('template/navigation','',TRUE);
-        $data['content']    =   $this->load->view('pages/inventory/issue',$inventory_data,TRUE);
-        $data['footer']     =   $this->load->view('template/footer','',TRUE);
-		$this->load->view('template/main_template',$data);
+			
+
+	        $data['navigation'] =   $this->load->view('template/navigation','',TRUE);
+	        $data['content']    =   $this->load->view('pages/inventory/issue',$inventory_data,TRUE);
+	        $data['footer']     =   $this->load->view('template/footer','',TRUE);
+			$this->load->view('template/main_template',$data);
+
+		} else {
+			
+			redirect('dashboard','refresh');
+		}
+		
 	}
 
 

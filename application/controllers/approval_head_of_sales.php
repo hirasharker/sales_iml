@@ -8,7 +8,7 @@ class Approval_Head_Of_Sales extends CI_Controller {
 		if($this->session->userdata('employee_id')==NULL){
 			redirect('login','refresh');
 		}
-		if($this->session->userdata('role')!=5 && $this->session->userdata('role')!=15){
+		if($this->session->userdata('role')!=5 && $this->session->userdata('role')!=10 && $this->session->userdata('role')!=15){
 			redirect('dashboard','refresh');
 		}
 		$this->load->model('customer_model','customer_model',TRUE);
