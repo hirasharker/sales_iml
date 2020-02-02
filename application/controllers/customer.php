@@ -171,6 +171,8 @@ class Customer extends CI_Controller {
 		
 		$model_detail										=	$this->model_model->get_model_by_id($customer_data['model_id']);
 
+		$control_account									=	$model_detail->control_account;
+
 		if($customer_data['payment_mode'] == 1){
 			$customer_data['total_price']						=	$model_detail->credit_price;
 			// $customer_data['downpayment']						=	$model_detail->min_dp_credit;
@@ -282,13 +284,13 @@ class Customer extends CI_Controller {
 
 			$customer_data['customer_code']						=	$update_code_data['customer_code'];
 			
-			// $result_msdb										=	$this->add_customer_to_msdb($customer_data, $result);
+			$result_msdb										=	$this->add_customer_to_msdb($customer_data, $control_account, $result);
 
 			$mail_body											=	$this->load->view('template/mail',$customer_data,TRUE);
 
 			echo '<h4>Sending Email ....</h4>';
 
-			// $this->mail_model->send_email($zonal_head_info->email_id,$update_code_data['customer_code']. ' Waiting for Approval',$mail_body);
+			$this->mail_model->send_email($zonal_head_info->email_id,$update_code_data['customer_code']. ' Waiting for Approval',$mail_body);
 		}
 		
 
@@ -458,7 +460,7 @@ class Customer extends CI_Controller {
 	}
 
 
-	private function add_customer_to_msdb($customer_data, $customer_id){
+	private function add_customer_to_msdb($customer_data, $control_account, $customer_id){
 		$customer_data_for_ms_db									=	array();
 		$customer_data_for_ms_db['ComID']							=	1;
 		$customer_data_for_ms_db['CustCode']						=	$customer_data['customer_code'];
@@ -466,7 +468,6 @@ class Customer extends CI_Controller {
 		$customer_data_for_ms_db['FathersName']						=	$customer_data['father_name'];
 		$customer_data_for_ms_db['MothersName']						=	$customer_data['mother_name'];
 		$customer_data_for_ms_db['PresentAddress']					=	$customer_data['present_address'];
-
 
 		$customer_data_for_ms_db['City']							=	$this->city_model->get_city_by_id($customer_data['city_id'])->city_name;
 		$customer_data_for_ms_db['Postal']							=	$customer_data['post_code'];
@@ -482,7 +483,7 @@ class Customer extends CI_Controller {
 		$customer_data_for_ms_db['RecoveryPerson']					=	'NULL';
 		$customer_data_for_ms_db['TDate']							=	date ("Y-m-d");
 		$customer_data_for_ms_db['Remarks']							=	$this->employee_model->get_employee_by_id($customer_data['mkt_id'])->employee_name;
-		$customer_data_for_ms_db['ControlAC']						=	'Customer Account';
+		$customer_data_for_ms_db['ControlAC']						=	$control_account;
 		$customer_data_for_ms_db['RowNo']							=	$customer_id;
 
 
@@ -525,7 +526,6 @@ class Customer extends CI_Controller {
 		$zone_id								=	$this->city_model->get_city_by_id($city_id)->zone_id;
 		$marketing_list							=	$this->employee_model->get_employee_by_zone_id_and_role($zone_id,1);
 		// $marketing_list							=	$this->employee_model->get_employee_by_role(1);
-
 			
 			// Add below to output the json for your javascript to pick up.
 			echo json_encode($marketing_list);
