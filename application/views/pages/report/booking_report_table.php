@@ -8,6 +8,8 @@
                     <th>Present Address</th>
                     <th>Phone</th>
                     <th>Model</th>
+                    <th>Chassis No</th>
+                    <th>Engine No</th>
                     <th>Price</th>
                     <th>Sales Person</th>
                     <th>Dealer Name</th>
@@ -30,6 +32,8 @@
                             echo $m_value->model_name;
                             }}?>
                         </td>
+                        <td><?php echo $value->chassis_no; ?></td>
+                        <td><?php echo $value->engine_no; ?></td>
                         <td><?php echo $value->total_price; ?></td>
                         <td>
                             <?php foreach($employee_list as $e_value){if($e_value->employee_id==$value->mkt_id){

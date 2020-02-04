@@ -18,6 +18,8 @@ class Delivery_Order extends CI_Controller {
 		$this->load->model('email_model','mail_model',TRUE);
 		$this->load->model('checklist_model','ck_model',TRUE);
 		$this->load->model('dealer_model','dealer_model',TRUE);
+
+		$this->load->model('stock_model','stock_model',TRUE);
 		
 	}
 	/**
@@ -68,9 +70,12 @@ class Delivery_Order extends CI_Controller {
 
 		$this->customer_model->update_customer($customer_data, $customer_id);
 
-		$customer_data['customer_detail']				=	$this->customer_model->get_customer_by_id($customer_id);
+		$customer_data['customer_detail']					=	$this->customer_model->get_customer_by_id($customer_id);
 
-		$customer_data['model_detail']					=	$this->model_model->get_model_by_id($customer_data['customer_detail']->model_id);
+		$current_stock_position 							=	$this->stock_model->get_stock_by_chassis_no($customer_data['customer_detail']->chassis_no)->stock_position;
+		$stock_data['stock_position']						=	$current_stock_position + 1;
+
+		$update_stock										=	$this->stock_model->update_stock_by_chassis_no($stock_data, $customer_data['customer_detail']->chassis_no);
 
 		// $correspondent_detail							=	$this->employee_model->get_employee_by_id($delivery_yard_detail->correspondent_id);
 

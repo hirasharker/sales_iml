@@ -13,6 +13,7 @@
                   <th>Dealer</th>
                   <th>Received Date</th>
                   <th>Issue Date</th>
+                  <th>Stock Position</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -43,6 +44,50 @@
 							</td>
 							<td><?php echo $value->received_date; ?></td>
 							<td><?php echo $value->issue_date; ?></td>
+							<td>
+								<?php 
+									switch ($value->stock_position) {
+										case 1:
+											echo "Received at Stockyard";
+											break;
+
+										case 4:
+											echo "Issued to Dealer Point";
+											break;
+
+										case 6:
+											echo "Issued to Dealer Point (Registered)";
+											break;
+
+										case 2:
+											echo "Apply for Registration";
+											break;
+
+										case 3:
+											echo "Registration Completed";
+											break;
+
+										case 5:
+											echo "Booked for Sale";
+											break;
+
+										case 7:
+											echo "Booked for Sale (Registered)";
+											break;
+
+										case 8:
+											echo "Sold (Without Registration)";
+											break;
+
+										case 10:
+											echo "Sold (With Registration)";
+											break;
+										
+										default:
+											break;
+									}
+								?>
+							</td>
 
 						</tr>
 					<?php }?>

@@ -82,7 +82,10 @@
                       
                       <option value="4">Dealer Stock (Non Registered VH)</option>
                       <option value="6">Dealer Stock (Registered VH)</option>
-                      <option value="5">Booked</option>
+                      <option value="5">Booked (Without Registration)</option>
+                      <option value="7">Booked (With Registration)</option>
+                      <option value="8">Sold (Without Registration)</option>
+                      <option value="10">Sold (With Registration)</option>
                       
                       </select>
                   </div>
