@@ -57,8 +57,8 @@ class Customer_Model extends CI_Model {
         }
         
         if($start_date!=''){
-            $this->db->where('STR_TO_DATE(time_stamp, "%Y-%m-%d") >=',$start_date);
-            $this->db->where('STR_TO_DATE(time_stamp, "%Y-%m-%d") <=',$end_date);
+            $this->db->where('date(time_stamp) >=',$start_date);
+            $this->db->where('date(time_stamp) <=',$end_date);  
         }
         if($status==9){
             $this->db->where('status',$status);

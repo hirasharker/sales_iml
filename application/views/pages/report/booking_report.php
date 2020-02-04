@@ -321,27 +321,16 @@
           <!-- <p class="text-muted font-13 m-b-30">
             DataTables has most features enabled by default, so all you need to do to use it with your own tables is to call the construction function: <code>$().DataTable();</code>
           </p> -->
-          <table id="datatable-buttons5" class="table table-striped table-bordered" >
-            <thead>
-              <tr>
-                <th>SN</th>
-                <th>Customer ID</th>
-                <th>Customer Name</th>
-                <th>Present Address</th>
-                <th>Phone</th>
-                <th>Model</th>
-                <th>Price</th>
-                <th>Sales Person</th>
-                <th>Dealer Name</th>
-                <th>Payment Mode</th>
-                <th>Booking Date</th>
-                <th>Status</th>
-                <th>Co-ordinator</th>
-              </tr>
-              </thead>
-              <tbody id="report-view">
-              </tbody>
-          </table>
+          <div id="report-view">
+            <!-- AJAX REPORT GOES HERE -->
+            <!-- AJAX REPORT GOES HERE -->
+            <!-- AJAX REPORT GOES HERE -->
+            <!-- AJAX REPORT GOES HERE -->
+            <!-- AJAX REPORT GOES HERE -->
+            <!-- AJAX REPORT GOES HERE -->
+            <!-- AJAX REPORT GOES HERE -->
+            <!-- AJAX REPORT GOES HERE -->
+          </div>
           
         </div>
       </div>

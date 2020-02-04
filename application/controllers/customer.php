@@ -223,8 +223,9 @@ class Customer extends CI_Controller {
 		$customer_data['installment_start_date']				=	$this->input->post('installment_start_date','0',TRUE);
 		$customer_data['broker_name']							=	$this->input->post('broker_name','',TRUE);
 		$customer_data['broker_nid']							=	$this->input->post('broker_nid','0',TRUE);
-		$customer_data['broker_commission']						=	$this->input->post('broker_commission','',TRUE);
+		$customer_data['broker_commission']						=	$this->input->post('broker_commission','0',TRUE);
 		$customer_data['dealer_commission']						=	$this->input->post('dealer_commission','0',TRUE);
+		$customer_data['registration_cost']						=	$this->input->post('registration_cost','0',TRUE);
 
 		$image_upload										=	$this->upload_model->upload_file('customer_image','files'); //after upload
 		if(isset($image_upload['file_name'])){

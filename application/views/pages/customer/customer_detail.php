@@ -279,7 +279,7 @@
                           <td><?php echo $customer_detail->body_builder_name;?></td>
                         </tr>
                         <tr>
-                          <td><b>Registration</b></td>
+                          <td><b>Registration No</b></td>
                           <td><?php echo $customer_detail->registration_no;?></td>
                         </tr>
                       </tbody>
@@ -337,6 +337,8 @@
                           <td><?php echo $customer_detail->broker_commission;?></td>
                         </tr>
                         <tr>
+                          <td><b>Registration Fee</b></td>
+                          <td><?php echo $customer_detail->registration_cost;?></td>
                           <td><b>Comment</b></td>
                           <td><?php echo $customer_detail->user_comment;?></td>
                         </tr>
