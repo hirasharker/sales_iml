@@ -11,9 +11,13 @@
                     <th>Chassis No</th>
                     <th>Engine No</th>
                     <th>Price</th>
+                    <th>Registration Fee</th>
                     <th>Sales Person</th>
                     <th>Dealer Name</th>
                     <th>Payment Mode</th>
+                    <th>Downpayment</th>
+                    <th>Interest Rate</th>
+                    <th>Period</th>
                     <th>Booking Date</th>
                     <th>Status</th>
                     <th>Co-ordinator</th>
@@ -35,6 +39,7 @@
                         <td><?php echo $value->chassis_no; ?></td>
                         <td><?php echo $value->engine_no; ?></td>
                         <td><?php echo $value->total_price; ?></td>
+                        <td><?php echo $value->registration_cost; ?></td>
                         <td>
                             <?php foreach($employee_list as $e_value){if($e_value->employee_id==$value->mkt_id){
                                 echo $e_value->employee_name;
@@ -63,6 +68,9 @@
                                 break;
                         }?>
                         </td>
+                        <td><?php echo $value->downpayment; ?></td>
+                        <td><?php echo $value->interest_rate; ?></td>
+                        <td><?php echo $value->period; ?></td>
                         <td><?php echo $value->time_stamp; ?></td>
                         <td><?php 
                           switch ($value->status){

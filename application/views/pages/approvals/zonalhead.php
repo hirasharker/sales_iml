@@ -65,7 +65,9 @@
                                         <th>Purchase Order</th>
                                         <th>Model No</th>
                                         <th>Total Price</th>
+                                        <th>Registration Fee</th>
                                         <th>Downlpayment</th>
+                                        <th>Interest Rate</th>
                                         <th>Discount</th>
                                         <th>BC</th>
                                         <th>DC</th>
@@ -89,7 +91,9 @@
                                         </td>
                                         <td><?php foreach($model_list as $m_value){ if($m_value->model_id==$value->model_id){ echo $m_value->model_name; }}?></td>
                                         <td><?php echo $value->total_price; ?></td>
+                                        <td><?php echo $value->registration_cost; ?></td>
                                         <td><?php echo $value->downpayment; ?></td>
+                                        <td><?php echo $value->interest_rate; ?></td>
                                         <td><?php echo $value->discount; ?></td>
                                         <td><?php echo $value->broker_commission; ?></td>
                                         <td><?php echo $value->dealer_commission; ?></td>

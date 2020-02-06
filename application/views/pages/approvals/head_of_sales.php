@@ -60,9 +60,9 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Customer Name</th>
-                                        <th>Purchase Order</th>
                                         <th>Model No</th>
                                         <th>Total Price</th>
+                                        <th>Registration Fee</th>
                                         <th>Downpayment</th>
                                         <th>Discount</th>
                                         <th>Remarks</th>
@@ -77,13 +77,9 @@
                                         <form action="<?php echo base_url();?>approval_head_of_sales/decision/approve/<?php echo $value->customer_id;?>" method="post">
                                         <td><?php echo $value->customer_code; ?></td>
                                         <td><?php echo $value->customer_name; ?></td>
-                                        <td>
-                                        <?php if($value->purchase_order!=''){?>
-                                        <a href="<?php echo base_url().'purchase_order/'.$value->purchase_order;?>" target="_blank"><img width="30px" height="40px" src="<?php echo base_url().'purchase_order/'.$value->purchase_order?>" alt="p_order"></a>
-                                        <?php } else { echo '___';}?>
-                                        </td>
                                         <td><?php foreach($model_list as $m_value){ if($m_value->model_id==$value->model_id){ echo $m_value->model_name; }}?></td>
                                         <td><?php echo $value->total_price; ?></td>
+                                        <td><?php echo $value->registration_cost; ?></td>
                                         <td><?php echo $value->downpayment; ?></td>
                                         <td><input type="number" name="discount" value="<?php echo $value->discount;?>" ></td>
                                         <td><textarea name="head_of_sales_note"></textarea></td>

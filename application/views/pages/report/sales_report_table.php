@@ -14,6 +14,7 @@
     <th>Engine No</th>
     <th>Chassis No</th>
     <th>Price</th>
+    <th>Registration Fee</th>
     <th>Downpayment</th>
     <th>Period</th>
     <th>Sales Person</th>
@@ -64,6 +65,7 @@
 		<td><?php echo $value->engine_no; ?></td>
 		<td><?php echo $value->chassis_no; ?></td>
 		<td><?php echo $value->total_price-$value->discount; ?></td>
+		<td><?php echo $value->registration_cost; ?></td>
 		<td><?php echo $value->downpayment; ?></td>
 		<td><?php echo $value->period; ?></td>
 		<td>
