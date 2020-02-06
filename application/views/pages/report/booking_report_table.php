@@ -5,6 +5,7 @@
                     <th>SN</th>
                     <th>Customer ID</th>
                     <th>Customer Name</th>
+                    <th>Status</th>
                     <th>Present Address</th>
                     <th>Phone</th>
                     <th>Model</th>
@@ -19,7 +20,6 @@
                     <th>Interest Rate</th>
                     <th>Period</th>
                     <th>Booking Date</th>
-                    <th>Status</th>
                     <th>Co-ordinator</th>
                   </tr>
                 </thead>
@@ -29,49 +29,6 @@
                         <td><?php echo $i; $i++; ?></td>
                         <td><?php echo $value->customer_code; ?></td>           
                         <td><?php echo $value->customer_name; ?></td>
-                        <td><?php echo $value->present_address; ?></td>
-                        <td><?php echo $value->phone; ?></td>
-                        <td>
-                        <?php foreach($model_list as $m_value){if($m_value->model_id==$value->model_id){
-                            echo $m_value->model_name;
-                            }}?>
-                        </td>
-                        <td><?php echo $value->chassis_no; ?></td>
-                        <td><?php echo $value->engine_no; ?></td>
-                        <td><?php echo $value->total_price; ?></td>
-                        <td><?php echo $value->registration_cost; ?></td>
-                        <td>
-                            <?php foreach($employee_list as $e_value){if($e_value->employee_id==$value->mkt_id){
-                                echo $e_value->employee_name;
-                                }}?>
-                        </td>
-                        <td>
-                            <?php foreach($dealer_list as $d_value){if($d_value->dealer_id == $value->dealer_id){ 
-                                echo $d_value->dealer_name; 
-                                }}?>
-                        </td>
-                        <td>
-                        <?php switch ($value->payment_mode) {
-                            case 1:
-                                echo 'Credit';
-                                break;
-                            case 2:
-                                echo 'Semi-Cash';
-                                break;
-                            case 3:
-                                echo 'Cash';
-                                break;
-                            case 4:
-                                echo 'Corporate';
-                                break;
-                            default:
-                                break;
-                        }?>
-                        </td>
-                        <td><?php echo $value->downpayment; ?></td>
-                        <td><?php echo $value->interest_rate; ?></td>
-                        <td><?php echo $value->period; ?></td>
-                        <td><?php echo $value->time_stamp; ?></td>
                         <td><?php 
                           switch ($value->status){
                             case 0:
@@ -132,6 +89,50 @@
                             break;
                           }
                         ?></td>
+                        <td><?php echo $value->present_address; ?></td>
+                        <td><?php echo $value->phone; ?></td>
+                        <td>
+                        <?php foreach($model_list as $m_value){if($m_value->model_id==$value->model_id){
+                            echo $m_value->model_name;
+                            }}?>
+                        </td>
+                        <td><?php echo $value->chassis_no; ?></td>
+                        <td><?php echo $value->engine_no; ?></td>
+                        <td><?php echo $value->total_price; ?></td>
+                        <td><?php echo $value->registration_cost; ?></td>
+                        <td>
+                            <?php foreach($employee_list as $e_value){if($e_value->employee_id==$value->mkt_id){
+                                echo $e_value->employee_name;
+                                }}?>
+                        </td>
+                        <td>
+                            <?php foreach($dealer_list as $d_value){if($d_value->dealer_id == $value->dealer_id){ 
+                                echo $d_value->dealer_name; 
+                                }}?>
+                        </td>
+                        <td>
+                        <?php switch ($value->payment_mode) {
+                            case 1:
+                                echo 'Credit';
+                                break;
+                            case 2:
+                                echo 'Semi-Cash';
+                                break;
+                            case 3:
+                                echo 'Cash';
+                                break;
+                            case 4:
+                                echo 'Corporate';
+                                break;
+                            default:
+                                break;
+                        }?>
+                        </td>
+                        <td><?php echo $value->downpayment; ?></td>
+                        <td><?php echo $value->interest_rate; ?></td>
+                        <td><?php echo $value->period; ?></td>
+                        <td><?php echo $value->time_stamp; ?></td>
+                        
                         <td>
                             <?php foreach($employee_list as $e_value){if($e_value->employee_id==$value->coordinator_id){
                                 echo $e_value->employee_name;

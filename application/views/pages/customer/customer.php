@@ -413,6 +413,7 @@
                       <option value="12">12</option>
                       <option value="15">15</option>
                       <option value="24">24</option>
+                      <option value="30">30</option>
                       <option value="36">36</option>
                       <!-- <option value="4">Corporate</option> -->
                       </select>
@@ -1488,6 +1489,7 @@
             $('#interestRate').val("0");
             $('#downpayment').val("0");
             $("#period option[value='24']").remove();
+            $("#period option[value='30']").remove();
             $("#period option[value='36']").remove();
             $('#period').append('<option value="3">3</option>');
             $('#period').append('<option value="6">6</option>');
@@ -1508,6 +1510,7 @@
             $("#period option[value='12']").remove();
             $("#period option[value='15']").remove();
             $('#period').append('<option value="24">24</option>');
+            $('#period').append('<option value="30">30</option>');
             $('#period').append('<option value="36">36</option>');
           }
           // $('#zoneId').val(zoneId);
