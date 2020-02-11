@@ -254,6 +254,7 @@
                                         <th>Present Address</th>
                                         <th>Permanent Address</th>
                                         <th>Business Address</th>
+                                        <th>Note</th>
                                         <th>Phone</th>
                                         <th>Date</th>
                                         <th>Action</th>
@@ -267,9 +268,10 @@
                                             <td><?php echo $value->present_address; ?></td>
                                             <td><?php echo $value->permanent_address; ?></td>
                                             <td><?php echo $value->business_address; ?></td>
+                                            <td><?php echo $value->address_verification_note; ?></td>
                                             <td><?php echo $value->phone; ?></td>
                                             <td><?php echo $value->time_stamp; ?></td>
-                                            <td><a data-toggle="modal" data-target=".bs-example-modal-lg<?php echo $value->customer_id;?>" ><i class="fa fa-expand" aria-hidden="true" ></i> Detail</a> | <a href="#" data-toggle="modal" data-target=".bs-example-modal-lg-verify<?php echo $value->customer_id;?>"  style="color:#269414"><i class="fa fa-check" aria-hidden="true" ></i> Verify</a></td>
+                                            <td><!-- <a data-toggle="modal" data-target=".bs-example-modal-lg<?php echo $value->customer_id;?>" ><i class="fa fa-expand" aria-hidden="true" ></i> Detail</a> | <a href="#" data-toggle="modal" data-target=".bs-example-modal-lg-verify<?php echo $value->customer_id;?>"  style="color:#269414"><i class="fa fa-check" aria-hidden="true" ></i> Verify</a> --></td>
                                         </tr>
                                     <?php }}?>
                                     </tbody>

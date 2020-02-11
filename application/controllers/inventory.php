@@ -19,6 +19,7 @@ class Inventory extends CI_Controller {
 		$this->load->model('employee_model','employee_model',TRUE);
 		$this->load->model('upload_model','upload_model',TRUE);
 		$this->load->model('bank_model','bank_model',TRUE);
+		$this->load->model('zone_model','zone_model');
 		
 	}
 
@@ -375,5 +376,23 @@ class Inventory extends CI_Controller {
 
 	public function delete_issue($issued_id){
 		$result 				=	$this->issued_model->delete_issue($issued_id);
+	}
+
+
+	public function inventory_status () {
+		$report_data										=	array();
+		$sales_data										=	array();
+		
+		$sales_data['zone_list']							=	$this->zone_model->get_all_zones();
+		$sales_data['model_list']							=	$this->model_model->get_all_models();
+		$sales_data['yard_list']							=	$this->yard_model->get_all_delivery_yards();
+		$sales_data['dealer_list']							=	$this->dealer_model->get_all_dealers();
+		$sales_data['bank_list']							=	$this->bank_model->get_all_banks();	
+		
+		$report_data['navigation'] 							=   $this->load->view('template/navigation','',TRUE);
+        $report_data['content']								=	$this->load->view('pages/inventory/inventory_status',$sales_data,TRUE);
+        $report_data['footer']     							=   $this->load->view('template/footer','',TRUE);
+		
+		$this->load->view('template/main_template',$report_data);
 	}
 }
