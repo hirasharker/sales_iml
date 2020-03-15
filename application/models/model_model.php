@@ -35,6 +35,8 @@ class Model_Model extends CI_Model {
         
         $this->db->where('model_id',$model_id);
         $this->db->update('tbl_model',$data);
+        $result             =   $this->db->affected_rows();
+        return $result;
     }
    
     public function delete_model($model_id){

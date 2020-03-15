@@ -73,7 +73,7 @@ class Delivery_Order extends CI_Controller {
 		$customer_data['customer_detail']					=	$this->customer_model->get_customer_by_id($customer_id);
 
 		$current_stock_position 							=	$this->stock_model->get_stock_by_chassis_no($customer_data['customer_detail']->chassis_no)->stock_position;
-		$stock_data['stock_position']						=	$current_stock_position + 1;
+		$stock_data['stock_position']						=	$current_stock_position + 3;
 
 		$update_stock										=	$this->stock_model->update_stock_by_chassis_no($stock_data, $customer_data['customer_detail']->chassis_no);
 

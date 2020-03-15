@@ -57,7 +57,7 @@ class Inventory extends CI_Controller {
 
 	public function receive()
 	{
-		if($this->session->userdata('role') == 15 || $this->session->userdata('role')== 3){
+		if($this->session->userdata('role') == 15 || $this->session->userdata('role')== 3 || $this->session->userdata('role')== 8){
 			
 			$data               				=   array();
 			$inventory_data 					=	array();

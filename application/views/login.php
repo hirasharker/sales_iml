@@ -38,12 +38,21 @@
               <div>
                 <input type="password" class="form-control" placeholder="Password" required=""  name="password" />
               </div>
+
+              <?php if($this->session->userdata('error') != NULL){ ?>
+                  <div class="form-group">
+                      <p class="alarm" style="color:#f00;"><?php echo $this->session->userdata('error'); $this->session->unset_userdata('error'); ?></p>
+                  </div>
+              <?php } ?>
+              
+
               <div>
                 <input class="btn btn-default submit" type="submit" value="Log In"/>
                 <a class="reset_pass" href="#">Lost your password?</a>
               </div>
 
               <div class="clearfix"></div>
+              
 
               <div class="separator">
                 <p class="change_link">New to site?

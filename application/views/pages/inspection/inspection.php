@@ -566,7 +566,7 @@
                             <tr>
                             <th scope="row">Upload Inspection Form </th>
                             <input type="hidden" name="customer_id" value="<?php echo $value->customer_id; ?>" required >
-                            <td><input type="file" class="form-control" name="inspection_form" required></td>
+                            <td><input type="file" class="form-control" name="inspection_form"></td>
                             </tr>
                             
                         </tbody>
@@ -707,7 +707,7 @@
                             <tr>
                             <th scope="row">Upload Inspection Form </th>
                             <input type="hidden" name="customer_id" value="<?php echo $value->customer_id; ?>" required >
-                            <td><input type="file" class="form-control" name="inspection_form" required></td>
+                            <td><input type="file" class="form-control" name="inspection_form"></td>
                             </tr>
                             
                         </tbody>

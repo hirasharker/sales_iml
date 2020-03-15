@@ -162,12 +162,12 @@ class Inspection extends CI_Controller {
 		$sdata=array();
 
 		if(isset($inspection_form['file_name'])){
-			$customer_status['inspection_form'] 				=	$inspection_form['file_name'];
+			$customer_status['inspection_form'] 			=	$inspection_form['file_name'];
 			$this->customer_model->update_customer_status($customer_status, $customer_id);
 			$sdata['message'] = 'Verification Successfull';
 			$this->session->set_userdata($sdata);
 		}else{
-			
+			$this->customer_model->update_customer_status($customer_status, $customer_id);
 			$sdata['inspection_error'] = $inspection_form['error'];
 			$this->session->set_userdata($sdata);
 		}

@@ -38,7 +38,7 @@ class Customer_Model extends CI_Model {
     
 
     public function get_all_customers_booking_data_by_search_criteria($zone_id='',$city_id='',$mkt_id='',$model_id='',$payment_mode='',$start_date='',$end_date='',$status){
-        $this->db->select('*');
+        $this->db->select('tbl_customer.*');
         $this->db->from('tbl_customer');
         if($zone_id!=''){
             $this->db->where('zone_id',$zone_id);    

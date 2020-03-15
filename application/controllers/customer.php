@@ -479,7 +479,13 @@ class Customer extends CI_Controller {
 		$customer_data_for_ms_db['Fax']								=	'NULL';
 		$customer_data_for_ms_db['Email']							=	$customer_data['email_id'];
 		$customer_data_for_ms_db['NationalID']						=	$customer_data['national_id'];
-		$customer_data_for_ms_db['BillWise']						=	'No';
+
+		if($customer_data['payment_mode'] == 3){
+			$customer_data_for_ms_db['BillWise']					=	'No';
+		}else {
+			$customer_data_for_ms_db['BillWise']					=	'Yes';
+		}
+		
 		$customer_data_for_ms_db['CreditLimit']						=	0;
 		$customer_data_for_ms_db['RecoveryPerson']					=	'NULL';
 		$customer_data_for_ms_db['TDate']							=	date ("Y-m-d");

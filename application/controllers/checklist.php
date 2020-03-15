@@ -8,7 +8,7 @@ class Checklist extends CI_Controller {
 		if($this->session->userdata('employee_id')==NULL){
 			redirect('login','refresh');
 		}
-		if($this->session->userdata('role')!=7 && $this->session->userdata('role')!=15){
+		if($this->session->userdata('role')!=7 && $this->session->userdata('role')!=15 && $this->session->userdata('role')!=3){
 			redirect('dashboard','refresh');
 		}
 		$this->load->model('customer_model','customer_model',TRUE);
