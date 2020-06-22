@@ -21,6 +21,11 @@
   <div class="row">
     <div class="col-md-12 col-xs-12">
       
+      <style type="text/css">
+        .required {
+          color: #f00;
+        }
+      </style>
 
       <?php if($customer_id == NULL){?>
         <div class="x_panel">
@@ -41,7 +46,7 @@
                 <h2>Basic Info <small></small></h2>
                   <div class="clearfix"></div>
                 </div>
-                <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group col-md-6 col-sm-12 col-xs-12" style="display: none;">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Reference </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <select class="form-control select-tag" name="reference" id="reference">
@@ -54,7 +59,7 @@
                 </div>
 
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Customer's Name </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Customer's Name <span class="required">*</span></label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <input type="text" id="customerName" class="form-control" name="customer_name" placeholder="" required>
                   </div>
@@ -66,7 +71,7 @@
                   </div>
                 </div>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">National ID </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">National ID <span class="required">*</span></label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <input type="number" class="form-control" name="national_id" min="0" placeholder="" value="0" required>
                   </div>
@@ -78,19 +83,19 @@
                   </div>
                 </div>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Father's Name </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Father's Name <span class="required">*</span></label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input id="fatherName" type="text" class="form-control" name="father_name" placeholder="" >
+                      <input id="fatherName" type="text" class="form-control" name="father_name" placeholder="" required>
                   </div>
                 </div>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Mother's Name </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Mother's Name <span class="required">*</span></label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input id="motherName" type="text" class="form-control" name="mother_name" placeholder="" >
+                      <input id="motherName" type="text" class="form-control" name="mother_name" placeholder="" required>
                   </div>
                 </div>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Contact Person </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Contact Person <span class="required">*</span></label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <input type="text" class="form-control" name="contact_person" placeholder=""  required maxlength="50">
                   </div>
@@ -148,7 +153,7 @@
                 </div>
 
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">City </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">City <span class="required">*</span></label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <select id="cityId" class="form-control select-tag" name="city_id" required>
                         <option value="0">select</option>
@@ -162,7 +167,7 @@
                 </div>
 
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">District </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">District <span class="required">*</span></label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <select id="districtId" class="form-control select-tag" name="district_id" required>
                         <option value="0">select</option>
@@ -173,7 +178,7 @@
                   </div>
                 </div>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12 sub-district-container" style="display: none;">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Sub District/ Police Station </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Sub District/ Police Station <span class="required">*</span></label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <select id="subDistrictId" class="form-control select-tag" name="sub_district_id" required>
                         <option value="0">select</option>
@@ -182,7 +187,7 @@
                 </div>
                 <?php if($this->session->userdata('user_type')!=1){?>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Sales Person </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Sales Person <span class="required">*</span></label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <select id="salesPerson" class="form-control select-tag" name="mkt_id" required>
                         <option value="0">select</option>
@@ -198,7 +203,7 @@
 
 
                 <div class="form-group col-md-6 col-sm-12 col-xs-12" style="display:block">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Sales Generated By </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Sales Generated By <span class="required">*</span></label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <select class="form-control select-tag" name="sales_generated_by">
                         <option value="0">Select Employee</option>
@@ -214,7 +219,7 @@
 
 
                 <div class="form-group col-md-6 col-sm-12 col-xs-12" style="display:block">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Zonal Head </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Zonal Head <span class="required">*</span></label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <select class="form-control select-tag" name="zhead_id" required>
                         <option value="">Select Zonal Head</option>
@@ -228,7 +233,7 @@
 
 
                 <div class="form-group col-md-6 col-sm-12 col-xs-12" id="dealer" style="display:block;">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Dealer </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Dealer <span class="required">*</span></label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <select id="dealerId" class="form-control select-tag" name="dealer_id" required>
                         <option value="">Select Dealer</option>
@@ -243,14 +248,14 @@
 
 
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Postal Code </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Postal Code <span class="required">*</span></label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <input type="number" min = "1000" max="9999" class="form-control" name="post_code" placeholder="" required>
                   </div>
                 </div>
 
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Mobile No </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Mobile No <span class="required">*</span></label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <input id="phone" type="text" class="form-control" name="phone" placeholder="" required>
                   </div>
@@ -284,7 +289,7 @@
                 </div> -->
 
                 <div class="form-group col-md-6 col-sm-12 col-xs-12 chassis-container" style="display: none;">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Chassis No </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Chassis No <span class="required">*</span></label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <select id="chassisNo" class="form-control select-tag" name="chassis_no" required>
                         <option value="">select</option>
@@ -379,7 +384,7 @@
                 </div>
 
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Payment Mode </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Payment Mode <span class="required">*</span></label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <select id="paymentMode" class="form-control select-tag" name="payment_mode" required>
                       <option value="1">Credit</option>
@@ -397,13 +402,13 @@
                 </div>
 
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Downpayment </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Downpayment <span class="required">*</span></label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <input id="downPayment" type="number" class="form-control"  value="0" min="0" name="downpayment" placeholder="" required>
                   </div>
                 </div>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Period </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Period <span class="required">*</span></label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <select id="period" class="form-control select-tag" name="period" required>
                       <option value="">Select </option>
@@ -420,25 +425,25 @@
                   </div>
                 </div>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Interest Rate </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Interest Rate <span class="required">*</span></label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <input id="interestRate" type="number" class="form-control" name="interest_rate" min="0" placeholder="" value="0" required>
                   </div>
                 </div>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Installment Starts from </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Installment Starts from <span class="required">*</span></label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <input type="number" class="form-control" name="installment_start_date" placeholder="" min="0" value="30" required>
                   </div>
                 </div>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Proposed Discount </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Proposed Discount <span class="required">*</span></label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <input id="discount" type="text" class="form-control" name="discount"  min="0" value="0" placeholder="" required>
                   </div>
                 </div>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Dealer Commission </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Dealer Commission <span class="required">*</span></label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <input id="dealer-commission" type="number" class="form-control" name="dealer_commission"  min="0" value="0" placeholder="" required>
                   </div>

@@ -304,6 +304,102 @@ class Inventory extends CI_Controller {
 	}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public function dealer_transfer(){
+		if($this->session->userdata('role') == 15 || $this->session->userdata('role')== 9){
+
+			$data               				=   array();
+			$inventory_data 					=	array();
+			
+			$inventory_data['dealer_list']		=	$this->dealer_model->get_all_dealers_by_status($dealer_status = 2);
+
+	        $data['navigation'] =   $this->load->view('template/navigation','',TRUE);
+	        $data['content']    =   $this->load->view('pages/inventory/dealer_transfer',$inventory_data,TRUE);
+	        $data['footer']     =   $this->load->view('template/footer','',TRUE);
+			$this->load->view('template/main_template',$data);
+
+		} else {
+			
+			redirect('dashboard','refresh');
+		}
+	}
+
+
+	add_dealer_transfer
+
+
+	public function add_dealer_transfer()
+	{
+		$transfer_data 										=	array();
+
+		$transfer_data['user_id']							=	$this->session->userdata('employee_id');
+
+		$transfer_data['transfer_date']						=	$this->input->post('transfer_date', '', TRUE);
+
+		$transfer_data['transfer_from_dealer_id']			=	$this->input->post('transfer_from_dealer_id', '', TRUE);
+
+		$transfer_data['transfer_to_dealer_id']				=	$this->input->post('transfer_to_dealer_id', '', TRUE);
+
+		$result 											=	$this->dealer_model->add_dealer_transfer($transfer_data);
+
+		$count 												=	0;
+
+		$transfer_detail_data 								=	array();
+
+		$stock_detail_data									=	array();
+
+		$transfer_detail_data['dealer_transfer_id']			=	$result;
+
+		$model_id						=	$this->input->post('model_id','',TRUE);
+		$model_name						=	$this->input->post('model_name','',TRUE);
+		$chassis_no						=	$this->input->post('chassis_no','',TRUE);
+		$engine_no						=	$this->input->post('engine_no','',TRUE);
+		$stock_id						=	$this->input->post('stock_id','',TRUE);
+
+		$is_dealer_limit_exceeds		=	$this->check_dealer_stock($transfer_data['transfer_from_dealer_id']);
+		
+		if($is_dealer_limit_exceeds == 1){
+			$session_data['error']								=	'insertion failed! dealer stock limit exceeded!';
+			$this->session->set_userdata($session_data);
+			$this->delete_dealer_transfer($transfer_detail_data['dealer_transfer_id']);
+			redirect('inventory/dealer_transfer','refresh');
+		}
+		
+		for ($i=0; $i < count($model_id) ; $i++) {
+			$transfer_detail_data['model_id'] 					=	$model_id[$i];
+			$transfer_detail_data['model_name'] 				=	$model_name[$i];
+			$transfer_detail_data['chassis_no'] 				=	$chassis_no[$i];
+			$transfer_detail_data['engine_no'] 					=	$engine_no[$i];
+			$transfer_detail_data['stock_id'] 					=	$stock_id[$i];
+
+			$detail_result										=	$this->dealer_model->add_dealer_transfer_detail($transfer_detail_data);
+
+			$stock_detail_data['dealer_id']						=	$transfer_data['transfer_to_dealer_id'];
+			
+			$stock_update_result								=	$this->stock_model->update_stock($stock_detail_data, $transfer_detail_data['stock_id']);
+		}
+
+		$session_data										=	array();
+
+		redirect('inventory/dealer_transfer','refresh');
+	}
+
+
+
+
+
 	public function check_duplicate_issue($chassis_list){
 		$duplicate_issue 							=	array();
 
@@ -355,7 +451,7 @@ class Inventory extends CI_Controller {
 		// a die here helps ensure a clean ajax call
 	}
 
-	public function ajax_generate_items_by_dealer_id(){
+	public function ajax_generate_items_by_dealer_id_and_yard_id(){
 		$yard_id 					=	$this->input->post('yard_id');
 		$dealer_id 					=	$this->input->post('dealer_id');
 
@@ -366,8 +462,15 @@ class Inventory extends CI_Controller {
 		echo json_encode($result);
 		// a die here helps ensure a clean ajax call
 	}
-	
 
+	public function ajax_generate_items_by_dealer_id(){
+		$dealer_id 					=	$this->input->post('dealer_id');
+
+		$result						=	$this->stock_model->get_stock_by_dealer_id($dealer_id);
+
+		echo json_encode($result);
+		// a die here helps ensure a clean ajax call
+	}
 
 
 	public function delete_received($received_id){
@@ -376,6 +479,12 @@ class Inventory extends CI_Controller {
 
 	public function delete_issue($issued_id){
 		$result 				=	$this->issued_model->delete_issue($issued_id);
+	}
+
+	dealer_transfer
+
+	public function dealer_transfer($dealer_transfer_id){
+		$result 				=	$this->dealer_model->dealer_transfer($dealer_transfer_id);
 	}
 
 

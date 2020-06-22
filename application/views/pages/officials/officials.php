@@ -141,6 +141,7 @@
                 <th>Name</th>
                 <th>Designation</th>
                 <th>Role</th>
+                <th>Zone</th>
                 <th>Email ID</th>
                 <th>Contact No</th>
                 <th>Action</th>
@@ -190,6 +191,7 @@
                     }
                 ?>
                 </td>
+                <td><?php echo $value->zone_name; ?></td>
                 <td><?php echo $value->email_id; ?></td>
                 <td><?php echo $value->phone; ?></td>
                 <td><a href="#">edit </a>|<a href="#"> delete</a></td>

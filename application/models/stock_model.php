@@ -101,6 +101,7 @@ class Stock_Model extends CI_Model {
         return $result;
     }
 
+    
     public function get_stock_by_yard_id_for_registration($yard_id){
         $this->db->select('*');
         $this->db->from('tbl_stock');

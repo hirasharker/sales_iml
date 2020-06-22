@@ -8,8 +8,9 @@
 class Employee_Model extends CI_Model {
 
     public function get_all_employees(){
-        $this->db->select('*');
+        $this->db->select('tbl_employee.*, tbl_zone.zone_name');
         $this->db->from('tbl_employee');
+        $this->db->join('tbl_zone','tbl_zone.zone_id = tbl_employee.zone_id','left');
         $this->db->order_by('time_stamp','desc');
         $result_query=$this->db->get();
         $result=$result_query->result();

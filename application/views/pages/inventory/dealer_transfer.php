@@ -2,7 +2,7 @@
 <div class="">
   <div class="page-title">
     <div class="title_left">
-      <h3>Issue <small></small></h3>
+      <h3>Dealer Transfer <small></small></h3>
     </div>
 
     <div class="title_right">
@@ -35,11 +35,11 @@
             </div>
             <div class="x_content" style="display:block">
             <br />
-            <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url();?>inventory/add_issued_product/" enctype='multipart/form-data'>
+            <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url();?>inventory/add_dealer_transfer/" enctype='multipart/form-data'>
               <!-- <form class="form-horizontal form-label-left" method="get" action="#" enctype='multipart/form-data'> -->
 
             <div class="x_title">
-                <h2>Issued Info <small></small></h2>
+                <h2>Trasfer Info <small></small></h2>
                 <div class="clearfix"></div>
             </div>
 
@@ -61,16 +61,21 @@
                 <?php }?>
 
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Pre-Registration </label>
-                  <div class="col-md-8 col-sm-9 col-xs-12">
-                     <input type="checkbox" class="js-switch" id="pre-registration" value="1" name="pre_registration" />
-                  </div>
-                </div>
-                
-                <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Select Dealer </label>
+                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Transfer From </label>
                     <div class="col-md-8 col-sm-9 col-xs-12">
-                        <select class="form-control select-tag" name="dealer_id" required id="dealer-id">
+                        <select class="form-control select-tag" name="transfer_from_dealer_id" required id="dealer-id">
+                          <option value="">select</option>
+                          <?php foreach($dealer_list as $value){?>
+                          <option value="<?php echo $value->dealer_id;?>"><?php echo $value->dealer_name;?></option>
+                          <?php }?>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Transfer To </label>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <select class="form-control select-tag" name="transfer_to_dealer_id" required>
                           <option value="">select</option>
                           <?php foreach($dealer_list as $value){?>
                           <option value="<?php echo $value->dealer_id;?>"><?php echo $value->dealer_name;?></option>
@@ -96,18 +101,6 @@
                 </div> -->
                 
               
-                <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Select Yard </label>
-                    <div class="col-md-8 col-sm-9 col-xs-12">
-                        <select class="form-control select-tag" name="yard_id" id="delivery-yard" required>
-                          <option value="">select</option>
-                          <?php foreach($yard_list as $value){?>
-                          <option value="<?php echo $value->delivery_yard_id;?>"><?php echo $value->yard_name;?></option>
-                          <?php }?>
-                        </select>
-                    </div>
-                </div>
-                
 
                 <div class="form-group col-md-12 col-sm-12 col-xs-12 item-container" id="manuallyAddItem" style="display: none;">
                     <label class="control-label col-md-3 col-sm-12 col-xs-12">Select Vehicle</label>
@@ -128,13 +121,13 @@
                 </div>
 
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Issued Date </label>
+                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Transfer Date </label>
                     <div class="col-md-8 col-sm-9 col-xs-12">
                         <fieldset>
                           <div class="control-group">
                             <div class="controls">
                               <div class="col-md-12 xdisplay_inputx form-group has-feedback">
-                                <input type="text" name="issued_date" class="form-control has-feedback-left" id="single_cal4" placeholder="First Name" aria-describedby="inputSuccess2Status4">
+                                <input type="text" name="transfer_date" class="form-control has-feedback-left" id="single_cal4" placeholder="transfer_date" aria-describedby="inputSuccess2Status4">
                                 <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
                                 <span id="inputSuccess2Status4" class="sr-only">(success)</span>
                               </div>
@@ -194,7 +187,7 @@
             </thead>
 
             <tbody>
-            <?php foreach($issued_list as $value){?>
+            <!-- <?php foreach($issued_list as $value){?>
               <tr>
                 <td><?php echo $value->issued_date; ?></td>
                 <td><?php echo $value->dealer_name; ?></td>
@@ -202,7 +195,7 @@
                 <td><?php echo $value->engine_no; ?></td>
                 <td><a href="#">edit </a>|<a href="#"> delete</a></td>
               </tr>
-            <?php }?>
+            <?php }?> -->
             </tbody>
           </table>
         </div>
@@ -213,115 +206,47 @@
 </div>
 
 <script>
-  $("#pre-registration").change(function(){
-    $('#item').empty();
-    $(".item-container").css("display", "block");
-    $('#delivery-yard').val(''); // Select the option with a value of '1'
-    $('#delivery-yard').trigger('change'); // Notify any JS components that the value changed
-    $('#dealer-id').val(''); // Select the option with a value of '1'
-    $('#dealer-id').trigger('change'); // Notify any JS components that the value changed
-      // $('.sub-district-container').show(500);
-    $('#create').empty();
-    var preCode = '<div id="quantity-error">'
-                  +'</div>'
-                  +'<input type="hidden" id="count" value="0" name="count">';
-    $('#create').append(preCode);
-  });
 
   $("#dealer-id").change(function(){
     $('#item').empty();
     $(".item-container").css("display", "block");
-    $('#delivery-yard').val(''); // Select the option with a value of '1'
-    $('#delivery-yard').trigger('change'); // Notify any JS components that the value changed
-      // $('.sub-district-container').show(500);
+
+    var dealerId = $('#dealer-id option:selected').val();
+
+    $.ajax({
+        type: "POST",
+        url: "<?php echo base_url()?>inventory/ajax_generate_items_by_dealer_id/",
+        data: { 'dealer_id': dealerId },
+        success: function(data){
+            // Parse the returned json data
+            var opts = $.parseJSON(data);
+            // Use jQuery's each to iterate over the opts value
+            console.log(opts);
+            $('#item').append('<option value="">Select </option>');
+
+            $.each(opts, function(i, d) {
+              console.log(d.sub_district_id);
+                // You will need to alter the below to get the right values from your json object.  Guessing that d.id / d.modelName are columns in your carModels data
+                $('#item').append('<option value="' + d.stock_id + '" modelId="'+d.model_id+'" modelName="'+d.model_name+'" engineNo="'+d.engine_no+'" chassisNo="'+d.chassis_no+'">' + d.chassis_no + '</option>');
+
+            });
+        }
+    }); //ajax
+
+
+
+
     $('#create').empty();
     var preCode = '<div id="quantity-error">'
                   +'</div>'
                   +'<input type="hidden" id="count" value="0" name="count">';
     $('#create').append(preCode);
+
+    
   });
 
 
-  $("#delivery-yard").change(function(){
-          console.log('clicked!');
-          if( $("#pre-registration").is(':checked') ) {
-             console.log('checked!');
-              if($('#dealer-id').val()==""){
-                $('#delivery-yard').val(''); // Select the option with a value of '1'
-                $('#delivery-yard').trigger('change'); // Notify any JS components that the value changed
-              }else {
-                  if($('#delivery-yard').val()!="NULL"){
-                    $('#item').empty();
-                    $(".item-container").css("display", "block");
-                    // $('.sub-district-container').show(500);
-                  }
-                  $('#create').empty();
-                  var preCode = '<div id="quantity-error">'
-                                +'</div>'
-                                +'<input type="hidden" id="count" value="0" name="count">';
-                  $('#create').append(preCode);
-                  var yardId = $('#delivery-yard option:selected').val();
-                  var dealerId = $('#dealer-id option:selected').val();
-                  console.log(yardId);
-                  $.ajax({
-                      type: "POST",
-                      url: "<?php echo base_url()?>inventory/ajax_generate_items_by_dealer_id_and_yard_id/",
-                      data: { 'yard_id': yardId, 'dealer_id': dealerId },
-                      success: function(data){
-                          // Parse the returned json data
-                          var opts = $.parseJSON(data);
-                          // Use jQuery's each to iterate over the opts value
-                          console.log(opts);
-                          $('#item').append('<option value="">Select </option>');
-
-                          $.each(opts, function(i, d) {
-                            console.log(d.sub_district_id);
-                              // You will need to alter the below to get the right values from your json object.  Guessing that d.id / d.modelName are columns in your carModels data
-                              $('#item').append('<option value="' + d.stock_id + '" modelId="'+d.model_id+'" modelName="'+d.model_name+'" engineNo="'+d.engine_no+'" chassisNo="'+d.chassis_no+'">' + d.chassis_no + '</option>');
-
-                          });
-                      }
-                  }); //ajax
-                } //else
-          } else {
-                if($('#delivery-yard').val()!="NULL"){
-                    $('#item').empty();
-                    $(".item-container").css("display", "block");
-                    // $('.sub-district-container').show(500);
-                  }
-                  $('#create').empty();
-                  var preCode = '<div id="quantity-error">'
-                                +'</div>'
-                                +'<input type="hidden" id="count" value="0" name="count">';
-                  $('#create').append(preCode);
-                  var yardId = $('#delivery-yard option:selected').val();
-                  console.log(yardId);
-                  $.ajax({
-                      type: "POST",
-                      url: "<?php echo base_url()?>inventory/ajax_generate_items/",
-                      data: { 'yard_id': yardId },
-                      success: function(data){
-                          // Parse the returned json data
-                          var opts = $.parseJSON(data);
-                          // Use jQuery's each to iterate over the opts value
-                          console.log(opts);
-                          $('#item').append('<option value="">Select </option>');
-
-                          $.each(opts, function(i, d) {
-                            console.log(d.sub_district_id);
-                              // You will need to alter the below to get the right values from your json object.  Guessing that d.id / d.modelName are columns in your carModels data
-                              $('#item').append('<option value="' + d.stock_id + '" modelId="'+d.model_id+'" modelName="'+d.model_name+'" engineNo="'+d.engine_no+'" chassisNo="'+d.chassis_no+'">' + d.chassis_no + '</option>');
-
-                          });
-                      }
-                  }); //ajax
-          }
-
-
-          // $('#subDistrictId').val('');
-          // $('#subDistrictId').change();
-          
-      });
+  
 </script>
 
 <script>

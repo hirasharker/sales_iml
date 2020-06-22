@@ -169,6 +169,7 @@
                 <th>Registration Area</th>
                 <th>Chassis No</th>
                 <th>Engine No</th>
+                <th>Registratoin Cost</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -181,6 +182,7 @@
                 <td><?php echo $value->registration_area_name; ?></td>
                 <td><?php echo $value->chassis_no; ?></td>
                 <td><?php echo $value->engine_no; ?></td>
+                <td><?php echo $value->registration_cost; ?></td>
                 <td><a href="#">edit </a>|<a href="#"> delete</a></td>
               </tr>
             <?php }?>
