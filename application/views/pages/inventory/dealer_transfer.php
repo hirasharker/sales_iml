@@ -39,7 +39,7 @@
               <!-- <form class="form-horizontal form-label-left" method="get" action="#" enctype='multipart/form-data'> -->
 
             <div class="x_title">
-                <h2>Trasfer Info <small></small></h2>
+                <h2>Transfer Info <small></small></h2>
                 <div class="clearfix"></div>
             </div>
 
@@ -153,7 +153,7 @@
     <div class="col-md-8 col-sm-12 col-xs-12">
       <div class="x_panel">
         <div class="x_title">
-          <h2>Issued Records <small></small></h2>
+          <h2>Transfer Records <small></small></h2>
           <ul class="nav navbar-right panel_toolbox">
             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
             </li>
@@ -178,8 +178,9 @@
           <table id="datatable-buttons" class="table table-striped table-bordered responsive">
             <thead>
               <tr>
-                <th>Issued Date</th>
-                <th>Dealer Name</th>
+                <th>Transfer Date</th>
+                <th>Transfer From</th>
+                <th>Transfer to</th>
                 <th>Chassis No</th>
                 <th>Engine No</th>
                 <th>Action</th>
@@ -187,15 +188,32 @@
             </thead>
 
             <tbody>
-            <!-- <?php foreach($issued_list as $value){?>
+            <?php foreach($transfer_list as $value){?>
               <tr>
-                <td><?php echo $value->issued_date; ?></td>
-                <td><?php echo $value->dealer_name; ?></td>
+                <td><?php echo $value->transfer_date; ?></td>
+                <td>
+                  <?php 
+                    foreach ($dealer_list as $d_value) {
+                      if($d_value->dealer_id == $value->transfer_from_dealer_id){
+                        echo $d_value->dealer_name;
+                      }
+                    }
+                  ?>
+                </td>
+                <td>
+                  <?php 
+                    foreach ($dealer_list as $d_value) {
+                      if($d_value->dealer_id == $value->transfer_to_dealer_id){
+                        echo $d_value->dealer_name;
+                      }
+                    }
+                  ?>
+                </td>
                 <td><?php echo $value->chassis_no ?></td>
                 <td><?php echo $value->engine_no; ?></td>
                 <td><a href="#">edit </a>|<a href="#"> delete</a></td>
               </tr>
-            <?php }?> -->
+            <?php }?>
             </tbody>
           </table>
         </div>
@@ -242,7 +260,7 @@
                   +'<input type="hidden" id="count" value="0" name="count">';
     $('#create').append(preCode);
 
-    
+
   });
 
 

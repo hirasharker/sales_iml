@@ -65,6 +65,7 @@
                                     <th>Permanent Address</th>
                                     <th>Business Address</th>
                                     <th>Inspection Form</th>
+                                    <th>All Chassis</th>
                                     <th>Phone</th>
                                     <th>Date</th>
                                     <th>Action</th>
@@ -72,7 +73,8 @@
                                 </thead>
                                 <tbody>
                                 <?php foreach($customer_list as $value){ if($value->status==2 ||$value->status==3){?>
-                                    <tr>
+
+                                    <tr <?php if(strstr($value->duplicate_chassis,',')){ ?> style="color:#f00;" <?php }?>>
                                         <td><?php echo $value->customer_code; ?></td>
                                         <td><?php echo $value->customer_name; ?></td>
                                         <td><?php echo $value->present_address; ?></td>
@@ -83,6 +85,7 @@
                                             <a href="<?php echo base_url().'inspection_form/'.$value->inspection_form;?>" target="_blank"><img width="30px" height="40px" src="<?php echo base_url().'inspection_form/'.$value->inspection_form?>" alt="i_form"></a>
                                             <?php } else { echo '___';}?>
                                         </td>
+                                        <td><?php echo $value->duplicate_chassis; ?></td>
                                         <td><?php echo $value->phone; ?></td>
                                         <td><?php echo $value->time_stamp; ?></td>
                                         <td><a href="#" data-toggle="modal" data-target=".bs-example-modal-lg-verify<?php echo $value->customer_id;?>"  style="color:#269414"><i class="fa fa-check" aria-hidden="true" ></i> Verify</a> | <a href="#" data-toggle="modal" data-target=".bs-example-modal-lg-deny<?php echo $value->customer_id;?>" style="color:#f00"><i class="fa fa-times" aria-hidden="true" ></i> Deny</a></td>

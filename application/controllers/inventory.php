@@ -12,6 +12,7 @@ class Inventory extends CI_Controller {
 		// }
 		$this->load->model('received_model','received_model',TRUE);
 		$this->load->model('issued_model','issued_model',TRUE);
+		$this->load->model('dealer_transfer_model','dealer_transfer_model',TRUE);
 		$this->load->model('dealer_model','dealer_model',TRUE);
 		$this->load->model('stock_model','stock_model',TRUE);
 		$this->load->model('model_model','model_model',TRUE);
@@ -204,7 +205,7 @@ class Inventory extends CI_Controller {
 
 	public function issue()
 	{
-		if($this->session->userdata('role') == 15 || $this->session->userdata('role')== 9){
+		if($this->session->userdata('role') == 15 || $this->session->userdata('role')== 9 || $this->session->userdata('role')==3){
 
 			$data               				=   array();
 			$inventory_data 					=	array();
@@ -325,6 +326,8 @@ class Inventory extends CI_Controller {
 			
 			$inventory_data['dealer_list']		=	$this->dealer_model->get_all_dealers_by_status($dealer_status = 2);
 
+			$inventory_data['transfer_list']	=	$this->dealer_transfer_model->get_all_dealer_transfers();
+
 	        $data['navigation'] =   $this->load->view('template/navigation','',TRUE);
 	        $data['content']    =   $this->load->view('pages/inventory/dealer_transfer',$inventory_data,TRUE);
 	        $data['footer']     =   $this->load->view('template/footer','',TRUE);
@@ -337,11 +340,11 @@ class Inventory extends CI_Controller {
 	}
 
 
-	add_dealer_transfer
-
 
 	public function add_dealer_transfer()
 	{
+		$session_data										=	array();
+
 		$transfer_data 										=	array();
 
 		$transfer_data['user_id']							=	$this->session->userdata('employee_id');
@@ -352,7 +355,13 @@ class Inventory extends CI_Controller {
 
 		$transfer_data['transfer_to_dealer_id']				=	$this->input->post('transfer_to_dealer_id', '', TRUE);
 
-		$result 											=	$this->dealer_model->add_dealer_transfer($transfer_data);
+		$result 											=	$this->dealer_transfer_model->add_dealer_transfer($transfer_data);
+
+		if(!$result){
+			$session_data['error']								=	'insertion failed!';
+			$this->session->set_userdata($session_data);
+			redirect('inventory/dealer_transfer','refresh');
+		}
 
 		$count 												=	0;
 
@@ -368,7 +377,7 @@ class Inventory extends CI_Controller {
 		$engine_no						=	$this->input->post('engine_no','',TRUE);
 		$stock_id						=	$this->input->post('stock_id','',TRUE);
 
-		$is_dealer_limit_exceeds		=	$this->check_dealer_stock($transfer_data['transfer_from_dealer_id']);
+		$is_dealer_limit_exceeds		=	$this->check_dealer_stock($transfer_data['transfer_to_dealer_id'], $chassis_no);
 		
 		if($is_dealer_limit_exceeds == 1){
 			$session_data['error']								=	'insertion failed! dealer stock limit exceeded!';
@@ -384,14 +393,23 @@ class Inventory extends CI_Controller {
 			$transfer_detail_data['engine_no'] 					=	$engine_no[$i];
 			$transfer_detail_data['stock_id'] 					=	$stock_id[$i];
 
-			$detail_result										=	$this->dealer_model->add_dealer_transfer_detail($transfer_detail_data);
+			$detail_result										=	$this->dealer_transfer_model->add_dealer_transfer_detail($transfer_detail_data);
 
 			$stock_detail_data['dealer_id']						=	$transfer_data['transfer_to_dealer_id'];
 			
 			$stock_update_result								=	$this->stock_model->update_stock($stock_detail_data, $transfer_detail_data['stock_id']);
+
+			if(!$detail_result){
+				$session_data['error']							=	'insertion failed!';
+				$this->session->set_userdata($session_data);
+				redirect('inventory/dealer_transfer','refresh');
+			}
 		}
 
-		$session_data										=	array();
+		
+
+		$session_data['message']								=	'Successfully added transfer data..';
+		$this->session->set_userdata($session_data);
 
 		redirect('inventory/dealer_transfer','refresh');
 	}
@@ -481,16 +499,15 @@ class Inventory extends CI_Controller {
 		$result 				=	$this->issued_model->delete_issue($issued_id);
 	}
 
-	dealer_transfer
 
-	public function dealer_transfer($dealer_transfer_id){
-		$result 				=	$this->dealer_model->dealer_transfer($dealer_transfer_id);
+	public function delete_dealer_transfer($dealer_transfer_id){
+		$result 				=	$this->dealer_transfer_model->delete_dealer_transfer($dealer_transfer_id);
 	}
 
 
 	public function inventory_status () {
 		$report_data										=	array();
-		$sales_data										=	array();
+		$sales_data											=	array();
 		
 		$sales_data['zone_list']							=	$this->zone_model->get_all_zones();
 		$sales_data['model_list']							=	$this->model_model->get_all_models();

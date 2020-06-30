@@ -400,6 +400,20 @@ class Customer_Model extends CI_Model {
         return $result;
     }
 
+    public function get_all_customers_for_history_verification(){
+        $this->db->select("tbl_customer.*, string_agg(tbl_customer_new.chassis_no , ',') as duplicate_chassis ");
+        $this->db->from('tbl_customer');
+        $this->db->join('tbl_customer tbl_customer_new','tbl_customer_new.phone = tbl_customer.phone or tbl_customer_new.national_id = tbl_customer.national_id');
+        $this->db->group_by('tbl_customer.customer_id');
+        $this->db->order_by('tbl_customer.time_stamp','desc');
+        
+        $result_query=$this->db->get();
+        $result=$result_query->result();
+        return $result;
+    }
+
+    
+
     public function get_customers_by_status($status){
         $this->db->select('tbl_customer.*,tbl_registration.registration_cost, tbl_model.model_name, tbl_delivery_yards.yard_name');
         $this->db->from('tbl_customer');

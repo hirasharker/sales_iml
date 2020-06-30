@@ -167,7 +167,6 @@ class Inspection extends CI_Controller {
 			$sdata['message'] = 'Verification Successfull';
 			$this->session->set_userdata($sdata);
 		}else{
-			$this->customer_model->update_customer_status($customer_status, $customer_id);
 			$sdata['inspection_error'] = $inspection_form['error'];
 			$this->session->set_userdata($sdata);
 		}
@@ -224,7 +223,7 @@ class Inspection extends CI_Controller {
 		$data               =   array();
 		$customer_data		=	array();
 		
-		$customer_data['customer_list']		=	$this->customer_model->get_all_customers();
+		$customer_data['customer_list']		=	$this->customer_model->get_all_customers_for_history_verification();
 		$customer_data['model_list']		=	$this->model_model->get_all_models();
 
         $data['navigation'] =   $this->load->view('template/navigation','',TRUE);

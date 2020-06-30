@@ -65,6 +65,7 @@
                                     <th>Registration Fee</th>
                                     <th>Downpayment</th>
                                     <th>Discount</th>
+                                    <th>Deposit Slip</th>
                                     <th>Purchase Order</th>
                                     <th>Payment Mode</th>
                                     <!-- <th>Paid Amount as DP</th> -->
@@ -83,6 +84,11 @@
                                     <td><?php echo $value->registration_cost; ?></td>
                                     <td><?php echo $value->downpayment; ?></td>
                                     <td><?php echo $value->discount; ?></td>
+                                    <td>
+                                        <?php if($value->deposit_slip_path!=''){?>
+                                        <a href="<?php echo base_url().'ds/'.$value->deposit_slip_path;?>" target="_blank"><img width="30px" height="40px" src="<?php echo base_url().'ds/'.$value->deposit_slip_path?>" alt="i_form"></a>
+                                        <?php } else { echo '___';}?>
+                                    </td>
                                     <td>
                                     <?php if($value->purchase_order!=''){?>
                                     <a href="<?php echo base_url().'purchase_order/'.$value->purchase_order;?>" target="_blank"><img width="30px" height="40px" src="<?php echo base_url().'purchase_order/'.$value->purchase_order?>" alt="p_order"></a>

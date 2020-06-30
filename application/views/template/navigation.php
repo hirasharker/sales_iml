@@ -6,6 +6,7 @@
         <ul class="nav child_menu">
             <li><a href="<?php echo base_url();?>inventory/receive">Receive</a></li>
             <li><a href="<?php echo base_url();?>inventory/issue">Issue</a></li>
+            <li><a href="<?php echo base_url();?>inventory/dealer_transfer">Dealer Transfer</a></li>
             <!-- <li><a href="<?php echo base_url();?>inventory/status">Invenotry Stauts</a></li> -->
         </ul>
         </li>

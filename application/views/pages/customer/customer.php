@@ -109,7 +109,7 @@
                 </div>
                 
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Upload NID </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Upload NID / Birth Certificate / Passport </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <input type="file" class="form-control" name="nid_file" placeholder="">
                   </div>
@@ -315,7 +315,7 @@
                   </div>
                 </div>
                 
-                <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group col-md-6 col-sm-12 col-xs-12" style="display: none;">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Application </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <select id="application" class="form-control select-tag" name="application_id">
@@ -340,7 +340,7 @@
                 <div class="clearfix"></div>
                 <br />
 
-                <div class="row">
+                <div class="row" style="display: none;">
                   <div class="form-group col-md-6 col-sm-12 col-xs-12">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">With Body </label>
                     <div class="col-md-9 col-sm-9 col-xs-12">
@@ -459,6 +459,13 @@
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Registration Cost </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <input id="registrationCost" type="number" class="form-control" name="registration_cost"  min="0" value="0" placeholder="" readonly="true">
+                  </div>
+                </div>
+
+                <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Upload Deposit Slip (DP) <span class="required">*</span></label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                      <input type="file" class="form-control" name="deposit_slip" placeholder="" required>
                   </div>
                 </div>
 
@@ -1419,6 +1426,8 @@
 
           var chassisNo = $('#chassisNo option:selected').val();
           var period  = $('#period option:selected').val();
+          var modelId = $("#modelId"). val();
+          // alert(modelId);
           // var totalPrice =  $('#totalPrice').val();
           $.ajax({
               type: "POST",
@@ -1446,7 +1455,11 @@
                       $('#totalPrice').val(parseFloat(totalPrice) + 20000);
                       break;
                     case "15":
-                      $('#totalPrice').val(parseFloat(totalPrice) + 30000);
+                      if(modelId == 71 || modelId == 72){
+                         $('#totalPrice').val(parseFloat(totalPrice) + 20000);
+                      } else {
+                        $('#totalPrice').val(parseFloat(totalPrice) + 30000);
+                      }
                       break;
                     default:
                       $('#totalPrice').val(parseFloat(totalPrice));

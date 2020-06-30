@@ -33,6 +33,29 @@ class Dealer_Model extends CI_Model {
         $result         =   $result_query->result();
         return $result;
     }
+
+    public function get_all_dealers_by_coordinator_id($dealer_status = 1, $coordinator_id){
+        $this->db->select('tbl_dealer.*, tbl_zone.zone_name');
+        $this->db->from('tbl_dealer');
+        $this->db->join('tbl_zone','tbl_zone.zone_id = tbl_dealer.zone_id','left');
+        $this->db->where('dealer_status',$dealer_status);
+        $this->db->where('coordinator_id',$coordinator_id);
+        $result_query   =   $this->db->get();
+        $result         =   $result_query->result();
+        return $result;
+    }
+
+
+    public function get_all_dealers_by_status_and_zone_id($dealer_status = 1, $zone_id){
+        $this->db->select('tbl_dealer.*, tbl_zone.zone_name');
+        $this->db->from('tbl_dealer');
+        $this->db->join('tbl_zone','tbl_zone.zone_id = tbl_dealer.zone_id','left');
+        $this->db->where('dealer_status',$dealer_status);
+        $this->db->where('tbl_dealer.zone_id',$zone_id);
+        $result_query   =   $this->db->get();
+        $result         =   $result_query->result();
+        return $result;
+    }
     
     public function add_dealer($data){
         $this->db->insert('tbl_dealer',$data);

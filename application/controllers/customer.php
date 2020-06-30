@@ -53,14 +53,33 @@ class Customer extends CI_Controller {
 
 		$data               =   array();
 		$customer_data		=	array();
-		if($this->session->userdata('role')!=3){
-			$customer_data['city_list']			=	$this->city_model->get_all_cities();
-		}else{
-			$customer_data['city_list']			=	$this->city_model->get_all_cities_by_coordinator_id($this->session->userdata('employee_id'));
-		}
-		$customer_data['district_list']			=	$this->district_model->get_all_districts();
-		$customer_data['dealer_list']			=	$this->dealer_model->get_all_dealers_by_status($dealer_status = 2);
+
+		if($this->session->userdata('role')==1){
+			
+			$employee_detail 						=	$this->employee_model->get_employee_by_id($this->session->userdata('employee_id'));
+			
+			$customer_data['city_list']				=	$this->city_model->get_city_by_zone_id($employee_detail->zone_id);
+
+			$zone_id 								=	$this->employee_model->get_employee_by_id($this->session->userdata('employee_id'))->zone_id;
+
+			$customer_data['dealer_list']			=	$this->dealer_model->get_all_dealers_by_status_and_zone_id($dealer_status = 2,$zone_id);
+
+		} elseif ($this->session->userdata('role')==3) {
+
+			$customer_data['city_list']				=	$this->city_model->get_all_cities_by_coordinator_id($this->session->userdata('employee_id'));
+
+			$customer_data['dealer_list']			=	$this->dealer_model->get_all_dealers_by_coordinator_id($dealer_status = 2,$this->session->userdata('employee_id'));
 		
+		}else {
+			
+			$customer_data['city_list']			=	$this->city_model->get_all_cities();
+
+			$customer_data['dealer_list']			=	$this->dealer_model->get_all_dealers_by_status($dealer_status = 2);
+		
+		}
+
+		$customer_data['district_list']			=	$this->district_model->get_all_districts();
+
 		$customer_data['customer_id']			=	$this->input->post('customer_id','',TRUE);
 		$zone_id 								=	'';
 
@@ -129,8 +148,8 @@ class Customer extends CI_Controller {
 		$customer_data['business_address']					=	$this->input->post('business_address','',TRUE);
 		$customer_data['spouse_address']					=	$this->input->post('spouse_address','',TRUE);
 		$customer_data['city_id']							=	$this->input->post('city_id','0',TRUE);
-		$customer_data['district_id']							=	$this->input->post('district_id','0',TRUE);
-		$customer_data['sub_district_id']							=	$this->input->post('sub_district_id','0',TRUE);
+		$customer_data['district_id']						=	$this->input->post('district_id','0',TRUE);
+		$customer_data['sub_district_id']					=	$this->input->post('sub_district_id','0',TRUE);
 		$customer_data['dealer_id']							=	$this->input->post('dealer_id','0',TRUE);
 		$customer_data['city_code']							=	$this->input->post('city_code','',TRUE);
 		$customer_data['zone_id']							=	$this->input->post('zone_id','0',TRUE);
@@ -243,6 +262,16 @@ class Customer extends CI_Controller {
 			$sdata['nid_error'] = $nid_upload['error'];
 			$this->session->set_userdata($sdata);
 		}
+
+		$deposit_slip_upload								=	$this->upload_model->upload_file('deposit_slip','ds'); //after upload
+		if(isset($deposit_slip_upload['file_name'])){
+			$customer_data['deposit_slip_path'] 			=	$deposit_slip_upload['file_name'];
+		}else{
+			$sdata=array();
+			$sdata['deposit_slip_error'] = $deposit_slip_upload['error'];
+			$this->session->set_userdata($sdata);
+		}
+
 
 		$purchase_order_upload								=	$this->upload_model->upload_file('purchase_order','purchase_order'); //after upload
 		if(isset($purchase_order_upload['file_name'])){

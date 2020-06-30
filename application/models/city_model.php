@@ -35,6 +35,7 @@ class City_Model extends CI_Model {
         $result=$result_query->row();
         return $result;
     }
+
     public function get_all_cities_by_coordinator_id($coordinator_id){
         $this->db->select('tbl_city.*,tbl_zone.coordinator_id');
         $this->db->from('tbl_city');

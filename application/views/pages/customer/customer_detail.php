@@ -398,6 +398,11 @@
                             <a href="<?php echo base_url();?>purchase_order/<?php echo $customer_detail->purchase_order;?>" target="_blank">Click here to download!</a>
                             <?php } else { echo "Not Found!";}?>
                           </td>
+                          <td><b>Deposit Slip (DP)</b></td>
+                          <td><?php if($customer_detail->deposit_slip_path != NULL){ ?>
+                            <a href="<?php echo base_url();?>ds/<?php echo $customer_detail->deposit_slip_path;?>" target="_blank">Click here to download!</a>
+                            <?php } else { echo "Not Found!";}?>
+                          </td>
                         </tr>
                       </tbody>
                     </table>
