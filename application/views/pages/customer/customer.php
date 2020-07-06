@@ -442,6 +442,12 @@
                       <input id="discount" type="text" class="form-control" name="discount"  min="0" value="0" placeholder="" required>
                   </div>
                 </div>
+                <div class="form-group col-md-6 col-sm-12 col-xs-12 additional-charge-container" style="display: none;">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Additional Charge <span class="required">*</span></label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                      <input id="additional-charge" type="text" class="form-control" name="additional_charge"  min="0" value="0" placeholder="" required>
+                  </div>
+                </div>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Dealer Commission <span class="required">*</span></label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
@@ -459,6 +465,13 @@
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Registration Cost </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <input id="registrationCost" type="number" class="form-control" name="registration_cost"  min="0" value="0" placeholder="" readonly="true">
+                  </div>
+                </div>
+
+                <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Depositted Amount <span class="required">*</span></label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                      <input id="deposit-amount" type="number" class="form-control"  value="0" min="20000" name="deposit_amount" placeholder="" required>
                   </div>
                 </div>
 
@@ -1427,41 +1440,61 @@
           var chassisNo = $('#chassisNo option:selected').val();
           var period  = $('#period option:selected').val();
           var modelId = $("#modelId"). val();
-          // alert(modelId);
-          // var totalPrice =  $('#totalPrice').val();
+         
           $.ajax({
               type: "POST",
               url: "<?php echo base_url()?>customer/ajax_generate_engine_no/",
               data: { 'chassis_no': chassisNo  },
               success: function(data){
-                  // Parse the returned json data
                   var opts = $.parseJSON(data);
-                  // Use jQuery's each to iterate over the opts value
                   var totalPrice  = opts.credit_price;
                   switch(period){
                     case "1":
                     case "2":
                     case "3":
                       console.log(period);
-                      $('#totalPrice').val(parseFloat(totalPrice) + 5000);
+
+                      if(modelId == 71 || modelId == 72){
+                        $(".additional-charge-container").css("display", "block");
+                      } else {
+                        $(".additional-charge-container").css("display", "none");
+                        $('#totalPrice').val(parseFloat(totalPrice) + 5000);
+                      }
                       break;
                     case "6":
-                      $('#totalPrice').val(parseFloat(totalPrice) + 10000);
+                      if(modelId == 71 || modelId == 72){
+                        $(".additional-charge-container").css("display", "block");
+                      } else {
+                        $(".additional-charge-container").css("display", "none");
+                        $('#totalPrice').val(parseFloat(totalPrice) + 10000);
+                      }
                       break;
                     case "9":
-                      $('#totalPrice').val(parseFloat(totalPrice) + 15000);
+                      if(modelId == 71 || modelId == 72){
+                        $(".additional-charge-container").css("display", "block");
+                      } else {
+                        $(".additional-charge-container").css("display", "none");
+                        $('#totalPrice').val(parseFloat(totalPrice) + 15000);
+                      }
                       break;
                     case "12":
-                      $('#totalPrice').val(parseFloat(totalPrice) + 20000);
+                      if(modelId == 71 || modelId == 72){
+                        $(".additional-charge-container").css("display", "block");
+                      } else {
+                        $(".additional-charge-container").css("display", "none");
+                        $('#totalPrice').val(parseFloat(totalPrice) + 20000);
+                      }
                       break;
                     case "15":
                       if(modelId == 71 || modelId == 72){
-                         $('#totalPrice').val(parseFloat(totalPrice) + 20000);
+                        $(".additional-charge-container").css("display", "block");
                       } else {
+                        $(".additional-charge-container").css("display", "none");
                         $('#totalPrice').val(parseFloat(totalPrice) + 30000);
                       }
                       break;
                     default:
+                      $(".additional-charge-container").css("display", "none");
                       $('#totalPrice').val(parseFloat(totalPrice));
                       break;
                   } // Switch---
@@ -1469,7 +1502,6 @@
               }
           });
 
-          // $('#totalPrice').val(parseFloat(totalPrice) + 5000);
       });
 
 

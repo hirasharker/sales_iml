@@ -13,6 +13,7 @@
                   <th>Dealer</th>
                   <th>Received Date</th>
                   <th>Issue Date</th>
+                  <th>Customer ID</th>
                   <th>Stock Position</th>
                 </tr>
                 </thead>
@@ -44,6 +45,7 @@
 							</td>
 							<td><?php echo $value->received_date; ?></td>
 							<td><?php echo $value->issue_date; ?></td>
+							<td><?php echo $value->customer_id; ?></td>
 							<td>
 								<?php 
 									switch ($value->stock_position) {

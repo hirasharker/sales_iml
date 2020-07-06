@@ -120,7 +120,9 @@ class Approval_Zonalhead extends CI_Controller {
 		if($customer_status['status']==1){
 			if($required_approval_of_head_of_sales==0){
 				if($customer_status['inspection_required']==1){
-				$customer_status['status']	=	2;
+					$customer_status['status']	=	2;
+					// $this->mail_model->send_email($recovery_manager_info->email_id,$customer_data->customer_code. ' Waiting for Inspection',$mail_body);
+					// $this->mail_model->send_email($controller_info->email_id,$customer_data->customer_code. ' Waiting for Inspection',$mail_body);
 				}else{
 					$customer_status['status']	=	5;
 				}

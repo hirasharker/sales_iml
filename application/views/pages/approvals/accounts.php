@@ -66,6 +66,7 @@
                                     <th>Downpayment</th>
                                     <th>Discount</th>
                                     <th>Deposit Slip</th>
+                                    <th>Deposit Amount</th>
                                     <th>Purchase Order</th>
                                     <th>Payment Mode</th>
                                     <!-- <th>Paid Amount as DP</th> -->
@@ -89,6 +90,7 @@
                                         <a href="<?php echo base_url().'ds/'.$value->deposit_slip_path;?>" target="_blank"><img width="30px" height="40px" src="<?php echo base_url().'ds/'.$value->deposit_slip_path?>" alt="i_form"></a>
                                         <?php } else { echo '___';}?>
                                     </td>
+                                    <td><?php echo $value->deposit_amount; ?></td>
                                     <td>
                                     <?php if($value->purchase_order!=''){?>
                                     <a href="<?php echo base_url().'purchase_order/'.$value->purchase_order;?>" target="_blank"><img width="30px" height="40px" src="<?php echo base_url().'purchase_order/'.$value->purchase_order?>" alt="p_order"></a>

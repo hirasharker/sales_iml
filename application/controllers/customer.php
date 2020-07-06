@@ -238,7 +238,9 @@ class Customer extends CI_Controller {
 
 		
 		$customer_data['discount']								=	$this->input->post('discount','0',TRUE);
+		$customer_data['additional_charge']						=	$this->input->post('additional_charge','0',TRUE);
 		$customer_data['interest_rate']							=	$this->input->post('interest_rate','0',TRUE);
+		$customer_data['deposit_amount']						=	$this->input->post('deposit_amount','0',TRUE);
 		$customer_data['installment_start_date']				=	$this->input->post('installment_start_date','0',TRUE);
 		$customer_data['broker_name']							=	$this->input->post('broker_name','',TRUE);
 		$customer_data['broker_nid']							=	$this->input->post('broker_nid','0',TRUE);

@@ -61,6 +61,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Customer Name</th>
+                                    <th>National ID</th>
                                     <th>Present Address</th>
                                     <th>Permanent Address</th>
                                     <th>Business Address</th>
@@ -77,6 +78,7 @@
                                     <tr <?php if(strstr($value->duplicate_chassis,',')){ ?> style="color:#f00;" <?php }?>>
                                         <td><?php echo $value->customer_code; ?></td>
                                         <td><?php echo $value->customer_name; ?></td>
+                                        <td><?php echo $value->national_id; ?></td>
                                         <td><?php echo $value->present_address; ?></td>
                                         <td><?php echo $value->permanent_address; ?></td>
                                         <td><?php echo $value->business_address; ?></td>
