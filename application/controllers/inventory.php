@@ -17,6 +17,7 @@ class Inventory extends CI_Controller {
 		$this->load->model('stock_model','stock_model',TRUE);
 		$this->load->model('model_model','model_model',TRUE);
 		$this->load->model('delivery_yard_model','yard_model',TRUE);
+		$this->load->model('yard_transfer_model','yard_transfer_model',TRUE);
 		$this->load->model('employee_model','employee_model',TRUE);
 		$this->load->model('upload_model','upload_model',TRUE);
 		$this->load->model('bank_model','bank_model',TRUE);
@@ -355,6 +356,8 @@ class Inventory extends CI_Controller {
 
 		$transfer_data['transfer_to_dealer_id']				=	$this->input->post('transfer_to_dealer_id', '', TRUE);
 
+		$transfer_data['remarks']							=	$this->input->post('remarks','',TRUE);
+
 		$result 											=	$this->dealer_transfer_model->add_dealer_transfer($transfer_data);
 
 		if(!$result){
@@ -403,6 +406,96 @@ class Inventory extends CI_Controller {
 				$session_data['error']							=	'insertion failed!';
 				$this->session->set_userdata($session_data);
 				redirect('inventory/dealer_transfer','refresh');
+			}
+		}
+
+		
+
+		$session_data['message']								=	'Successfully added transfer data..';
+		$this->session->set_userdata($session_data);
+
+		redirect('inventory/dealer_transfer','refresh');
+	}
+
+
+
+
+
+	public function yard_transfer(){
+		if($this->session->userdata('role') == 15 || $this->session->userdata('role')== 9){
+
+			$data               				=   array();
+			$inventory_data 					=	array();
+			
+			$inventory_data['yard_list']		=	$this->yard_model->get_all_delivery_yards();
+
+			$inventory_data['transfer_list']	=	$this->yard_transfer_model->get_all_yard_transfers();
+
+	        $data['navigation'] =   $this->load->view('template/navigation','',TRUE);
+	        $data['content']    =   $this->load->view('pages/inventory/yard_transfer',$inventory_data,TRUE);
+	        $data['footer']     =   $this->load->view('template/footer','',TRUE);
+			$this->load->view('template/main_template',$data);
+
+		} else {
+			
+			redirect('dashboard','refresh');
+		}
+	}
+
+
+
+	public function add_yard_transfer()
+	{
+		$session_data										=	array();
+
+		$transfer_data 										=	array();
+
+		$transfer_data['user_id']							=	$this->session->userdata('employee_id');
+
+		$transfer_data['yard_transfer_date']						=	$this->input->post('yard_transfer_date', '', TRUE);
+
+		$transfer_data['soruce_yard_id']					=	$this->input->post('soruce_yard_id', '', TRUE);
+
+		$transfer_data['target_yard_id']					=	$this->input->post('target_yard_id', '', TRUE);
+
+		$transfer_data['remarks']							=	$this->input->post('remarks','',TRUE);
+
+		$result 											=	$this->yard_transfer_model->add_yard_transfer($transfer_data);
+
+		if(!$result){
+			$session_data['error']								=	'insertion failed!';
+			$this->session->set_userdata($session_data);
+			redirect('inventory/yard_transfer','refresh');
+		}
+
+		$count 												=	0;
+
+		$transfer_detail_data 								=	array();
+
+		$stock_detail_data									=	array();
+
+		$transfer_detail_data['yard_transfer_id']			=	$result;
+
+		$chassis_no						=	$this->input->post('chassis_no','',TRUE);
+		$engine_no						=	$this->input->post('engine_no','',TRUE);
+		$stock_id						=	$this->input->post('stock_id','',TRUE);
+
+		
+		for ($i=0; $i < count($chassis_no) ; $i++) {
+			$transfer_detail_data['chassis_no'] 				=	$chassis_no[$i];
+			$transfer_detail_data['engine_no'] 					=	$engine_no[$i];
+			$transfer_detail_data['stock_id'] 					=	$stock_id[$i];
+
+			$detail_result										=	$this->yard_transfer_model->add_yard_transfer_detail($transfer_detail_data);
+
+			$stock_detail_data['yard_id']						=	$transfer_data['target_yard_id'];
+			
+			$stock_update_result								=	$this->stock_model->update_stock($stock_detail_data, $transfer_detail_data['stock_id']);
+
+			if(!$detail_result){
+				$session_data['error']							=	'insertion failed!';
+				$this->session->set_userdata($session_data);
+				redirect('inventory/yard_transfer','refresh');
 			}
 		}
 
@@ -485,6 +578,15 @@ class Inventory extends CI_Controller {
 		$dealer_id 					=	$this->input->post('dealer_id');
 
 		$result						=	$this->stock_model->get_stock_by_dealer_id($dealer_id);
+
+		echo json_encode($result);
+		// a die here helps ensure a clean ajax call
+	}
+
+	public function ajax_generate_items_by_yard_id(){
+		$yard_id 					=	$this->input->post('yard_id');
+
+		$result						=	$this->stock_model->get_current_stock_by_yard_id($yard_id);
 
 		echo json_encode($result);
 		// a die here helps ensure a clean ajax call

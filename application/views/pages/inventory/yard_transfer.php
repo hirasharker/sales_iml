@@ -2,7 +2,7 @@
 <div class="">
   <div class="page-title">
     <div class="title_left">
-      <h3>Dealer Transfer <small></small></h3>
+      <h3>Yard Transfer <small></small></h3>
     </div>
 
     <div class="title_right">
@@ -35,7 +35,7 @@
             </div>
             <div class="x_content" style="display:block">
             <br />
-            <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url();?>inventory/add_dealer_transfer/" enctype='multipart/form-data'>
+            <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url();?>inventory/add_yard_transfer/" enctype='multipart/form-data'>
               <!-- <form class="form-horizontal form-label-left" method="get" action="#" enctype='multipart/form-data'> -->
 
             <div class="x_title">
@@ -63,10 +63,10 @@
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                     <label class="control-label col-md-3 col-sm-12 col-xs-12">Transfer From </label>
                     <div class="col-md-8 col-sm-9 col-xs-12">
-                        <select class="form-control select-tag" name="transfer_from_dealer_id" required id="dealer-id">
+                        <select class="form-control select-tag" name="source_yard_id" required id="yard-id">
                           <option value="">select</option>
-                          <?php foreach($dealer_list as $value){?>
-                          <option value="<?php echo $value->dealer_id;?>"><?php echo $value->dealer_name;?></option>
+                          <?php foreach($yard_list as $value){?>
+                          <option value="<?php echo $value->delivery_yard_id;?>"><?php echo $value->yard_name;?></option>
                           <?php }?>
                         </select>
                     </div>
@@ -75,26 +75,26 @@
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                     <label class="control-label col-md-3 col-sm-12 col-xs-12">Transfer To </label>
                     <div class="col-md-8 col-sm-9 col-xs-12">
-                        <select class="form-control select-tag" name="transfer_to_dealer_id" required>
+                        <select class="form-control select-tag" name="target_yard_id" required>
                           <option value="">select</option>
-                          <?php foreach($dealer_list as $value){?>
-                          <option value="<?php echo $value->dealer_id;?>"><?php echo $value->dealer_name;?></option>
+                          <?php foreach($yard_list as $value){?>
+                          <option value="<?php echo $value->delivery_yard_id;?>"><?php echo $value->yard_name;?></option>
                           <?php }?>
                         </select>
                     </div>
                 </div>
                 
-                <!-- <div class="row dealer-stock-container">
+                <!-- <div class="row yard-stock-container">
                   <div class="form-group col-md-12 col-sm-12 col-xs-12">
                     
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12 col-md-offset-1">Dealer Stock Limit</label>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12 col-md-offset-1">yard Stock Limit</label>
                     <div class="col-md-1 col-sm-1 col-xs-12">
-                       <input type="text" class="form-control" id="dealer-stock-limit" disabled="true" />
+                       <input type="text" class="form-control" id="yard-stock-limit" disabled="true" />
                     </div>
 
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Current Stock</label>
                     <div class="col-md-1 col-sm-1 col-xs-12">
-                       <input type="text" class="form-control" id="dealer-current-stock" disabled="true" />
+                       <input type="text" class="form-control" id="yard-current-stock" disabled="true" />
                     </div>
 
                   </div>
@@ -127,7 +127,7 @@
                           <div class="control-group">
                             <div class="controls">
                               <div class="col-md-12 xdisplay_inputx form-group has-feedback">
-                                <input type="text" name="transfer_date" class="form-control has-feedback-left" id="single_cal4" placeholder="transfer_date" aria-describedby="inputSuccess2Status4">
+                                <input type="text" name="yard_transfer_date" class="form-control has-feedback-left" id="single_cal4" placeholder="yard_transfer_date" aria-describedby="inputSuccess2Status4">
                                 <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
                                 <span id="inputSuccess2Status4" class="sr-only">(success)</span>
                               </div>
@@ -201,22 +201,22 @@
               <tr>
                 <td><?php echo $value->transfer_date; ?></td>
                 <td>
-                  <?php 
-                    foreach ($dealer_list as $d_value) {
-                      if($d_value->dealer_id == $value->transfer_from_dealer_id){
-                        echo $d_value->dealer_name;
+                  <!-- <?php 
+                    foreach ($yard_list as $d_value) {
+                      if($d_value->yard_id == $value->transfer_from_yard_id){
+                        echo $d_value->yard_name;
                       }
                     }
-                  ?>
+                  ?> -->
                 </td>
                 <td>
-                  <?php 
-                    foreach ($dealer_list as $d_value) {
-                      if($d_value->dealer_id == $value->transfer_to_dealer_id){
-                        echo $d_value->dealer_name;
+                  <!-- <?php 
+                    foreach ($yard_list as $d_value) {
+                      if($d_value->yard_id == $value->transfer_to_yard_id){
+                        echo $d_value->yard_name;
                       }
                     }
-                  ?>
+                  ?> -->
                 </td>
                 <td><?php echo $value->chassis_no ?></td>
                 <td><?php echo $value->engine_no; ?></td>
@@ -234,16 +234,16 @@
 
 <script>
 
-  $("#dealer-id").change(function(){
+  $("#yard-id").change(function(){
     $('#item').empty();
     $(".item-container").css("display", "block");
 
-    var dealerId = $('#dealer-id option:selected').val();
+    var yardId = $('#yard-id option:selected').val();
 
     $.ajax({
         type: "POST",
-        url: "<?php echo base_url()?>inventory/ajax_generate_items_by_dealer_id/",
-        data: { 'dealer_id': dealerId },
+        url: "<?php echo base_url()?>inventory/ajax_generate_items_by_yard_id/",
+        data: { 'yard_id': yardId },
         success: function(data){
             // Parse the returned json data
             var opts = $.parseJSON(data);

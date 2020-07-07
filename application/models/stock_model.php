@@ -67,6 +67,16 @@ class Stock_Model extends CI_Model {
         return $result;
     }
 
+    public function get_current_stock_by_yard_id($yard_id){
+        $this->db->select('*');
+        $this->db->from('tbl_stock');
+        $this->db->where('yard_id',$yard_id);
+        $this->db->where('stock_position <=',3);
+        $this->db->where('stock_position >',0);
+        $result_query        =   $this->db->get();
+        $result              =   $result_query->result();
+        return $result;
+    }
     
     public function get_stock_by_dealer_id($dealer_id){
         $this->db->select('*');

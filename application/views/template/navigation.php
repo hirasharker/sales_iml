@@ -6,8 +6,14 @@
         <ul class="nav child_menu">
             <li><a href="<?php echo base_url();?>inventory/receive">Receive</a></li>
             <li><a href="<?php echo base_url();?>inventory/issue">Issue</a></li>
-            <li><a href="<?php echo base_url();?>inventory/dealer_transfer">Dealer Transfer</a></li>
+            
             <!-- <li><a href="<?php echo base_url();?>inventory/status">Invenotry Stauts</a></li> -->
+            <li><a>Stock Transfer <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="<?php echo base_url();?>inventory/yard_transfer">Yard Transfer </a></li>
+                    <li><a href="<?php echo base_url();?>inventory/dealer_transfer">Dealer Transfer</a></li>
+                </ul>
+            </li>
         </ul>
         </li>
 
@@ -69,6 +75,11 @@
             <li><a href="<?php echo base_url();?>crm_report">report</a></li>
         </ul>
         </li>
+
+
+
+        
+
 
 
         <li><a><i class="fa fa-phone"></i> Call Center <span class="fa fa-chevron-down"></span></a>
