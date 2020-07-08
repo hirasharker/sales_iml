@@ -199,24 +199,24 @@
             <tbody>
             <?php foreach($transfer_list as $value){?>
               <tr>
-                <td><?php echo $value->transfer_date; ?></td>
+                <td><?php echo $value->yard_transfer_date; ?></td>
                 <td>
-                  <!-- <?php 
-                    foreach ($yard_list as $d_value) {
-                      if($d_value->yard_id == $value->transfer_from_yard_id){
-                        echo $d_value->yard_name;
+                  <?php 
+                    foreach ($yard_list as $y_value) {
+                      if($value->source_yard_id == $y_value->delivery_yard_id){
+                        echo $y_value->yard_name;
                       }
                     }
-                  ?> -->
+                  ?>
                 </td>
                 <td>
-                  <!-- <?php 
-                    foreach ($yard_list as $d_value) {
-                      if($d_value->yard_id == $value->transfer_to_yard_id){
-                        echo $d_value->yard_name;
+                  <?php 
+                    foreach ($yard_list as $y_value) {
+                      if($value->target_yard_id == $y_value->delivery_yard_id){
+                        echo $y_value->yard_name;
                       }
                     }
-                  ?> -->
+                  ?>
                 </td>
                 <td><?php echo $value->chassis_no ?></td>
                 <td><?php echo $value->engine_no; ?></td>

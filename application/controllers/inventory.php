@@ -454,7 +454,7 @@ class Inventory extends CI_Controller {
 
 		$transfer_data['yard_transfer_date']						=	$this->input->post('yard_transfer_date', '', TRUE);
 
-		$transfer_data['soruce_yard_id']					=	$this->input->post('soruce_yard_id', '', TRUE);
+		$transfer_data['source_yard_id']					=	$this->input->post('source_yard_id', '', TRUE);
 
 		$transfer_data['target_yard_id']					=	$this->input->post('target_yard_id', '', TRUE);
 
@@ -504,7 +504,7 @@ class Inventory extends CI_Controller {
 		$session_data['message']								=	'Successfully added transfer data..';
 		$this->session->set_userdata($session_data);
 
-		redirect('inventory/dealer_transfer','refresh');
+		redirect('inventory/yard_transfer','refresh');
 	}
 
 
