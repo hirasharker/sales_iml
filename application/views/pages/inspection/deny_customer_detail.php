@@ -1,14 +1,14 @@
 <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h3 class="modal-title" id="approveLabel">Customer Detail</h3>
+            <h3 class="modal-title" id="denyLabel">Customer Detail</h3>
             
         </div>
-        <form action="<?php echo base_url();?>inspection/address_verification/" method="post" enctype='multipart/form-data'>
+        <form action="<?php echo base_url();?>inspection/address_verification_deny/" method="post" enctype='multipart/form-data'>
 
         <div class="modal-body">
             
-            <div class="x_content" id="modalContent">
+            <div id="modalContent">
                 <table class="table">
                     <tbody>
                         <tr>
@@ -69,7 +69,7 @@
                         
                         <tr>
                         <th scope="row">Upload Inspection Form </th>
-                        <input type="hidden" name="customer_id" value="" required >
+                        <input type="hidden" name="customer_id" value="<?php echo $customer_detail->customer_id; ?>" required >
                         <td><input type="file" class="form-control" name="inspection_form"></td>
                         </tr>
                         
@@ -80,7 +80,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">approve</button>
+            <button type="submit" class="btn btn-primary">deny</button>
         </div>
 
         </form>

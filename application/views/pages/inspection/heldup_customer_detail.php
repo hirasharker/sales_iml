@@ -1,14 +1,14 @@
 <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-header">
-            <h3 class="modal-title" id="approveLabel">Customer Detail</h3>
+            <h3 class="modal-title" id="heldupLabel">Customer Detail</h3>
             
         </div>
-        <form action="<?php echo base_url();?>inspection/address_verification/" method="post" enctype='multipart/form-data'>
+        <form action="<?php echo base_url();?>inspection/address_verification_temporary_heldup/" method="post" enctype='multipart/form-data'>
 
         <div class="modal-body">
             
-            <div class="x_content" id="modalContent">
+            <div id="modalContent">
                 <table class="table">
                     <tbody>
                         <tr>
@@ -67,11 +67,9 @@
                         <td><textarea class="col-md-8 col-sm-8 col-xs-8" name="address_verification_note" required></textarea></td>
                         </tr>
                         
-                        <tr>
-                        <th scope="row">Upload Inspection Form </th>
-                        <input type="hidden" name="customer_id" value="" required >
-                        <td><input type="file" class="form-control" name="inspection_form"></td>
-                        </tr>
+                        
+                        <input type="hidden" name="customer_id" value="<?php echo $customer_detail->customer_id; ?>" required >
+                        
                         
                     </tbody>
                 </table>
@@ -80,7 +78,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">approve</button>
+            <button type="submit" class="btn btn-primary">heldup</button>
         </div>
 
         </form>

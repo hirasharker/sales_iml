@@ -69,7 +69,7 @@ class Inspection extends CI_Controller {
 			$status 									=	array(13,56);
 			$customer_data['denied_customer_list']		=	$this->customer_model->get_all_customers_by_status($status);
 
-			$status 									=	array(19,57);
+			$status 									=	array(19,17);
 			$customer_data['temp_customer_list']		=	$this->customer_model->get_all_customers_by_status($status);
 			// echo '<pre>';print_r($customer_data['pending_customer_list']); echo '</pre>';exit();
 		}
@@ -214,7 +214,7 @@ class Inspection extends CI_Controller {
 		$customer_status['inspection_time']				=	date('Y-m-d H:i:s');
 
 		$this->customer_model->update_customer_status($customer_status, $customer_id);
-
+		
 		redirect('inspection', 'refresh');
 	}
 
@@ -233,7 +233,7 @@ class Inspection extends CI_Controller {
 		$customer_status['inspection_time']				=	date('Y-m-d H:i:s');
 
 		$this->customer_model->update_customer_status($customer_status, $customer_id);
-
+		
 		redirect('inspection', 'refresh');
 
 	}
@@ -326,7 +326,7 @@ class Inspection extends CI_Controller {
 
 	}
 
-	public function ajax_generate_customer_detail(){
+	public function ajax_generate_customer_detail_to_approve(){
 		$report_data										=	array();
 		$customer_data										=	array();
 
@@ -334,7 +334,39 @@ class Inspection extends CI_Controller {
 		
 		$customer_data['customer_detail']					=	$this->customer_model->get_customer_by_id($customer_id);
 		
-        $report_data['content']								=	$this->load->view('pages/inspection/customer_detail',$customer_data,TRUE);
+        $report_data['content']								=	$this->load->view('pages/inspection/approve_customer_detail',$customer_data,TRUE);
+		
+		echo json_encode($report_data['content']);
+		// echo json_encode();
+			// a die here helps ensure a clean ajax call
+			die();
+	}
+
+	public function ajax_generate_customer_detail_to_heldup(){
+		$report_data										=	array();
+		$customer_data										=	array();
+
+		$customer_id										=	$this->input->post('customer_id');
+		
+		$customer_data['customer_detail']					=	$this->customer_model->get_customer_by_id($customer_id);
+		
+        $report_data['content']								=	$this->load->view('pages/inspection/heldup_customer_detail',$customer_data,TRUE);
+		
+		echo json_encode($report_data['content']);
+		// echo json_encode();
+			// a die here helps ensure a clean ajax call
+			die();
+	}
+
+	public function ajax_generate_customer_detail_to_deny(){
+		$report_data										=	array();
+		$customer_data										=	array();
+
+		$customer_id										=	$this->input->post('customer_id');
+		
+		$customer_data['customer_detail']					=	$this->customer_model->get_customer_by_id($customer_id);
+		
+        $report_data['content']								=	$this->load->view('pages/inspection/deny_customer_detail',$customer_data,TRUE);
 		
 		echo json_encode($report_data['content']);
 		// echo json_encode();

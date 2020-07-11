@@ -49,6 +49,9 @@
                             case 19:
                             echo "Address verification temporary heldup";
                             break;
+                            case 17:
+                            echo "Address verification temporary heldup";
+                            break;
                             case 5:
                             echo "Waiting for accounts clearence";
                             break;

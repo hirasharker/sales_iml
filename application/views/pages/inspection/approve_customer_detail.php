@@ -8,7 +8,7 @@
 
         <div class="modal-body">
             
-            <div class="x_content" id="modalContent">
+            <div id="modalContent">
                 <table class="table">
                     <tbody>
                         <tr>
@@ -64,13 +64,13 @@
                         <tr>
                         <th scope="row">Note </th>
                         <input type="hidden" name="customer_id" value="">
-                        <td><textarea class="col-md-8 col-sm-8 col-xs-8" name="address_verification_note" required></textarea></td>
+                        <td><textarea class="col-md-12 col-sm-12 col-xs-12" name="address_verification_note" required></textarea></td>
                         </tr>
                         
                         <tr>
                         <th scope="row">Upload Inspection Form </th>
-                        <input type="hidden" name="customer_id" value="" required >
-                        <td><input type="file" class="form-control" name="inspection_form"></td>
+                        <input type="hidden" name="customer_id" value="<?php echo $customer_detail->customer_id; ?>" required >
+                        <td><input type="file" class="form-control" name="inspection_form" required></td>
                         </tr>
                         
                     </tbody>

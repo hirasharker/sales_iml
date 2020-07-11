@@ -78,7 +78,7 @@
                                 <strong><?php echo $this->session->userdata('inspection_error'); $this->session->unset_userdata('inspection_error');?></strong>
                               </div>
                               <?php }?>
-                                <table id="datatable-buttons1" class="table table-striped table-bordered no-print">
+                                <table id="" class="table table-striped table-bordered no-print">
                                     <thead>
                                     <tr>
                                         <th>ID</th>
@@ -130,7 +130,12 @@
                                             <td><?php echo $value->period;?></td>
                                             <td><?php echo $value->phone; ?></td>
                                             <td><?php echo $value->time_stamp; ?></td>
-                                            <td><a id="button-verify-<?php echo $value->customer_id;?>" href="#" data-toggle="modal" data-target=".bs-example-modal-lg-verify<?php echo $value->customer_id;?>"  style="color:#269414"><i class="fa fa-check" aria-hidden="true" ></i> Verify</a> | <a id="button-temporary-heldup-<?php echo $value->customer_id;?>" href="#" data-toggle="modal" data-target=".bs-example-modal-lg-verify<?php echo $value->customer_id;?>" style="color:#e7812b"><i class="fa fa-times" aria-hidden="true" ></i> Temporary Heldup</a> | <a  id="button-deny-<?php echo $value->customer_id;?>" href="#" data-toggle="modal" data-target=".bs-example-modal-lg-verify<?php echo $value->customer_id;?>" style="color:#f00"><i class="fa fa-times" aria-hidden="true" ></i> Deny</a> |
+                                            <td><a type="button" class="btn btn-primary approve" data-toggle="modal" data-target="#approve" data-whatever="@mdo" data-customer-id="<?php echo $value->customer_id; ?>">approve</a>
+
+                                                <a type="button" class="btn btn-primary heldup" data-toggle="modal" data-target="#heldup" data-whatever="@mdo" data-customer-id="<?php echo $value->customer_id; ?>">heldup</a>
+
+                                                <a type="button" class="btn btn-primary deny" data-toggle="modal" data-target="#deny" data-whatever="@mdo" data-customer-id="<?php echo $value->customer_id; ?>">deny</a>
+
                                                 <form action="<?php echo base_url(); ?>inspection/print_inspection_form" target="_blank" method="post">
                                                     <input type="hidden" value="<?php echo $value->customer_id; ?>" name="customer_id">
                                                     <a onclick='this.parentNode.submit(); return false;' href="#"><i class="fa fa-print"></i> print</a>
@@ -205,11 +210,14 @@
                                             <td><?php echo $value->business_address; ?></td>
                                             <td><?php echo $value->phone; ?></td>
                                             <td><?php echo $value->time_stamp; ?></td>
-                                            <td><a data-toggle="modal" data-target=".bs-example-modal-lg<?php echo $value->customer_id;?>" ><i class="fa fa-expand" aria-hidden="true" ></i> Detail</a> | <a href="#" data-toggle="modal" data-target=".bs-example-modal-lg-verify-heldups<?php echo $value->customer_id;?>"  style="color:#269414"><i class="fa fa-check" aria-hidden="true" ></i> Verify</a> | <a href="#" data-toggle="modal" data-target=".bs-example-modal-lg-deny<?php echo $value->customer_id;?>" style="color:#f00"><i class="fa fa-times" aria-hidden="true" ></i> Deny</a> | 
-                                            <form action="<?php echo base_url(); ?>inspection/print_inspection_form" target="_blank" method="post">
-                                                <input type="hidden" value="<?php echo $value->customer_id; ?>" name="customer_id">
-                                                <a onclick='this.parentNode.submit(); return false;' href="#"><i class="fa fa-print"></i> print</a>
-                                            </form>
+                                            <td><a type="button" class="btn btn-primary approve" data-toggle="modal" data-target="#approve" data-whatever="@mdo" data-customer-id="<?php echo $value->customer_id; ?>">approve</a>
+
+                                                <a type="button" class="btn btn-primary deny" data-toggle="modal" data-target="#deny" data-whatever="@mdo" data-customer-id="<?php echo $value->customer_id; ?>">deny</a>
+
+                                                <form action="<?php echo base_url(); ?>inspection/print_inspection_form" target="_blank" method="post">
+                                                    <input type="hidden" value="<?php echo $value->customer_id; ?>" name="customer_id">
+                                                    <a onclick='this.parentNode.submit(); return false;' href="#"><i class="fa fa-print"></i> print</a>
+                                                </form>
                                             </td>
                                         </tr>
                                     <?php }?>
@@ -496,17 +504,25 @@
 
     <?php }?>
 
-<a type="button" class="btn btn-primary verify" data-toggle="modal" data-target="#verify" data-whatever="@mdo" data-customer-id="20435">verify</a>
-
-<a type="button" class="btn btn-primary" data-toggle="modal" data-target="#deny" data-whatever="@mdo">deny</a>
 
 
-<div class="modal fade" id="verify" tabindex="-1" role="dialog" aria-labelledby="verifyLabel" aria-hidden="true">
+<!-- <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#deny" data-whatever="@mdo">deny</a> -->
+
+
+<div class="modal fade" id="approve" tabindex="-1" role="dialog" aria-labelledby="approveLabel" aria-hidden="true">
+    <!-- AJAX OUTPUT GOES HERE -->
+</div>
+
+<div class="modal fade" id="heldup" tabindex="-1" role="dialog" aria-labelledby="heldupLabel" aria-hidden="true">
+    <!-- AJAX OUTPUT GOES HERE -->
+</div>
+
+<div class="modal fade" id="deny" tabindex="-1" role="dialog" aria-labelledby="denyLabel" aria-hidden="true">
     <!-- AJAX OUTPUT GOES HERE -->
 </div>
 
 
-<div class="modal fade" id="deny" tabindex="-1" role="dialog" aria-labelledby="denyLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="deny" tabindex="-1" role="dialog" aria-labelledby="denyLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -533,25 +549,71 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 
 <script type="text/javascript">
-    $( ".verify" ).click(function() {
+    $( ".approve" ).click(function() {
           // alert( "Handler for .change() called."+this.value);
           var customerId            =   $(this).data("customer-id")
 
-          alert(customerId);
+          // alert(customerId);
 
             $.ajax({
               type: "POST",
-              url: "<?php echo base_url()?>inspection/ajax_generate_customer_detail/",
+              url: "<?php echo base_url()?>inspection/ajax_generate_customer_detail_to_approve/",
               data: { 'customer_id': customerId },
               success: function(data){
                 // Parse the returned json data
                 var opts = $.parseJSON(data);
 
-                $('#verify').html(opts);
+                $('#approve').html(opts);
+                  
+              }
+            }); //ajax
+          
+
+          
+    });
+
+    $( ".heldup" ).click(function() {
+          // alert( "Handler for .change() called."+this.value);
+          var customerId            =   $(this).data("customer-id")
+
+          // alert(customerId);
+
+            $.ajax({
+              type: "POST",
+              url: "<?php echo base_url()?>inspection/ajax_generate_customer_detail_to_heldup/",
+              data: { 'customer_id': customerId },
+              success: function(data){
+                // Parse the returned json data
+                var opts = $.parseJSON(data);
+
+                $('#heldup').html(opts);
+                  
+              }
+            }); //ajax
+          
+
+          
+    });
+
+    $( ".deny" ).click(function() {
+          // alert( "Handler for .change() called."+this.value);
+          var customerId            =   $(this).data("customer-id")
+
+          // alert(customerId);
+
+            $.ajax({
+              type: "POST",
+              url: "<?php echo base_url()?>inspection/ajax_generate_customer_detail_to_deny/",
+              data: { 'customer_id': customerId },
+              success: function(data){
+                // Parse the returned json data
+                var opts = $.parseJSON(data);
+
+                $('#deny').html(opts);
                   
               }
             }); //ajax
