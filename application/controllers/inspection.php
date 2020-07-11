@@ -38,6 +38,8 @@ class Inspection extends CI_Controller {
 	 */
 	public function index()
 	{
+		
+
 		if($this->session->userdata('role')!=2 && $this->session->userdata('role')!=15){
 			redirect('dashboard','refresh');
 		}
@@ -45,10 +47,31 @@ class Inspection extends CI_Controller {
 		$customer_data		=	array();
 		
 		if($this->session->userdata('role')!=15){
-			$customer_data['customer_list']		=	$this->customer_model->get_all_customers_by_rm_id($this->session->userdata('employee_id'));
+			$status 									=	array(2,4);
+			$customer_data['pending_customer_list']		=	$this->customer_model->get_all_customers_by_rm_id_and_status($this->session->userdata('employee_id'), $status= array());
+			
+			$status 									=	array(5,6);
+			$customer_data['approved_customer_list']	=	$this->customer_model->get_all_customers_by_rm_id_and_status($this->session->userdata('employee_id'), $status= array());
+			
+			$status 									=	array(13,NULL);
+			$customer_data['denied_customer_list']		=	$this->customer_model->get_all_customers_by_rm_id_and_status($this->session->userdata('employee_id'), $status= array());
+
+			$status 									=	array(19,NULL);
+			$customer_data['temp_customer_list']		=	$this->customer_model->get_all_customers_by_rm_id_and_status($this->session->userdata('employee_id'), $status= array());
+
 		} else {
-			$customer_data['customer_list']		=	$this->customer_model->get_all_customers();
-			// echo '<pre>';print_r($customer_data['customer_list']); echo '</pre>';exit();
+			$status 									=	array(2,4);
+			$customer_data['pending_customer_list']		=	$this->customer_model->get_all_customers_by_status($status);
+			
+			$status 									=	array(5,6);
+			$customer_data['approved_customer_list']	=	$this->customer_model->get_all_customers_by_status($status);
+			
+			$status 									=	array(13,56);
+			$customer_data['denied_customer_list']		=	$this->customer_model->get_all_customers_by_status($status);
+
+			$status 									=	array(19,57);
+			$customer_data['temp_customer_list']		=	$this->customer_model->get_all_customers_by_status($status);
+			// echo '<pre>';print_r($customer_data['pending_customer_list']); echo '</pre>';exit();
 		}
 		
 		// echo '<pre>';print_r($customer_data['customer_list']); echo '</pre>';exit();
@@ -301,6 +324,22 @@ class Inspection extends CI_Controller {
         $pdf = $this->pdf->load_view('pages/inspection/inspection_form_pdf',$customer_data);
         print_r($pdf);exit();
 
+	}
+
+	public function ajax_generate_customer_detail(){
+		$report_data										=	array();
+		$customer_data										=	array();
+
+		$customer_id										=	$this->input->post('customer_id');
+		
+		$customer_data['customer_detail']					=	$this->customer_model->get_customer_by_id($customer_id);
+		
+        $report_data['content']								=	$this->load->view('pages/inspection/customer_detail',$customer_data,TRUE);
+		
+		echo json_encode($report_data['content']);
+		// echo json_encode();
+			// a die here helps ensure a clean ajax call
+			die();
 	}
 
 }

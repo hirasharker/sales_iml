@@ -429,6 +429,17 @@ class Customer_Model extends CI_Model {
         return $result;
     }
 
+    public function get_all_customers_by_status($status=array()){
+        $this->db->select('tbl_customer.*,tbl_city.rm_id');
+        $this->db->from('tbl_customer');
+        $this->db->join('tbl_city','tbl_city.city_id = tbl_customer.city_id','inner');
+        $this->db->where('tbl_customer.status',$status[0]);
+        $this->db->or_where('tbl_customer.status',$status[1]);
+
+        $result_query=$this->db->get();
+        $result=$result_query->result();
+        return $result;
+    }
     
 
     public function get_all_customers_by_head_of_sales_id($head_of_sales_id){
@@ -446,6 +457,19 @@ class Customer_Model extends CI_Model {
         $this->db->from('tbl_customer');
         $this->db->join('tbl_city','tbl_city.city_id = tbl_customer.city_id','inner');
         $this->db->where('tbl_city.rm_id',$rm_id);
+
+        $result_query=$this->db->get();
+        $result=$result_query->result();
+        return $result;
+    }
+
+    public function get_all_customers_by_rm_id_and_status($rm_id,$status=array()){
+        $this->db->select('tbl_customer.*,tbl_city.rm_id');
+        $this->db->from('tbl_customer');
+        $this->db->join('tbl_city','tbl_city.city_id = tbl_customer.city_id','inner');
+        $this->db->where('tbl_city.rm_id',$rm_id);
+        $this->db->where('tbl_customer.status',$status[0]);
+        $this->db->or_where('tbl_customer.status',$status[1]);
 
         $result_query=$this->db->get();
         $result=$result_query->result();
