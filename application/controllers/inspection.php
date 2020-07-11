@@ -45,7 +45,7 @@ class Inspection extends CI_Controller {
 		$customer_data		=	array();
 		
 		if($this->session->userdata('role')!=15){
-			$customer_data['customer_list']		=	$this->customer_model->get_all_customers_by_rm_id($this->session->userdata('employee_id'));	
+			$customer_data['customer_list']		=	$this->customer_model->get_all_customers_by_rm_id($this->session->userdata('employee_id'));
 		} else {
 			$customer_data['customer_list']		=	$this->customer_model->get_all_customers();
 			// echo '<pre>';print_r($customer_data['customer_list']); echo '</pre>';exit();
@@ -159,7 +159,7 @@ class Inspection extends CI_Controller {
 		$customer_status['inspection_time']				=	date('Y-m-d H:i:s');
 
 		$inspection_form									=	$this->upload_model->upload_file('inspection_form','inspection_form'); //after upload
-		$sdata=array();
+		$sdata 												=	array();
 
 		if(isset($inspection_form['file_name'])){
 			$customer_status['inspection_form'] 			=	$inspection_form['file_name'];

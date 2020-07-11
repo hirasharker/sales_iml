@@ -182,6 +182,12 @@ class Customer extends CI_Controller {
 		$customer_data['stock_id']							=	$this->input->post('stock_id','0',TRUE);
 		$customer_data['engine_no']							=	$this->input->post('engine_no','',TRUE);
 		$customer_data['chassis_no']						=	$this->input->post('chassis_no','',TRUE);
+
+		// $duplicate_chassis 									=	$this->check_duplicate_chassis($customer_data['chassis_no']);
+		// if($duplicate_chassis != NULL){
+		// 	redirect('customer','refresh');
+		// }
+
 		$customer_data['application_id']					=	$this->input->post('application_id','0',TRUE);
 		$customer_data['body_type']							=	$this->input->post('body_type','0',TRUE);
 		$customer_data['body_builder_id']					=	$this->input->post('body_builder_id','0',TRUE);
@@ -333,6 +339,18 @@ class Customer extends CI_Controller {
 		$data 							=	array();
 		$data['customer_id']			=	$customer_id;
 		$this->load->view('pages/customer/customer_entry_confirmation',$data);
+	}
+
+
+	public function check_duplicate_chassis($chassis_no){
+		$duplicate_chassis 						=	NULL;
+		
+		$chassis_found 							=	$this->stock_model->get_stock_by_chassis_no_($chassis_no);
+		if($chassis_found){
+			$duplicate_chassis 					=	$chassis_found->chassis_no;
+		}
+		
+		return $duplicate_chassis;
 	}
 
 	public function update_customer()
