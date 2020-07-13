@@ -245,9 +245,20 @@ class Inspection extends CI_Controller {
 		}
 		$data               =   array();
 		$customer_data		=	array();
+
 		
-		$customer_data['customer_list']		=	$this->customer_model->get_all_customers_for_history_verification();
-		$customer_data['model_list']		=	$this->model_model->get_all_models();
+		$status 									=	array(2,3);
+		$customer_data['pending_customer_list']		=	$this->customer_model->get_all_customers_for_history_verification_by_status($status);
+		
+		$status 									=	array(5,6);
+		$customer_data['approved_customer_list']	=	$this->customer_model->get_all_customers_for_history_verification_by_status($status);
+		
+		$status 									=	array(14,NULL);
+		$customer_data['denied_customer_list']		=	$this->customer_model->get_all_customers_for_history_verification_by_status($status);
+
+		$status 									=	array(19,17);
+		$customer_data['temp_customer_list']		=	$this->customer_model->get_all_customers_for_history_verification_by_status($status);
+			// echo '<pre>';print_r($customer_data['pending_customer_list']); echo '</pre>';exit();
 
         $data['navigation'] =   $this->load->view('template/navigation','',TRUE);
         $data['content']    =   $this->load->view('pages/inspection/history_verification',$customer_data,TRUE);
@@ -288,7 +299,7 @@ class Inspection extends CI_Controller {
 
 		$this->customer_model->update_customer_status($customer_status, $customer_id);
 
-		redirect('inspection', 'refresh');
+		redirect('inspection/customer_history', 'refresh');
 		
 	}
 
