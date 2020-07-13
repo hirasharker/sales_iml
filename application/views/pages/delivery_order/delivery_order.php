@@ -62,7 +62,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <?php foreach($customer_list as $value){if($this->session->userdata('role')==3){ if($value->coordinator_id ==$this->session->userdata('employee_id') ){ ?>
+                                    <?php foreach($customer_list as $value){if($this->session->userdata('role')==3){ ?>
                                     <tr>
                                     <form action="<?php echo base_url();?>delivery_order/update_delivery_yard" method="post">
                                         <td><?php echo $value->customer_code; ?></td>
@@ -85,7 +85,7 @@
                                         <td><button type="submit" class="btn btn-primary">Generate DO</button></td>
                                     </form>
                                     </tr>
-                                    <?php } }?>
+                                    <?php  }?>
                                     </tbody>
                                 </table>
                             </div>

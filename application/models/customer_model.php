@@ -37,7 +37,7 @@ class Customer_Model extends CI_Model {
     }
     
 
-    public function get_all_customers_booking_data_by_search_criteria($zone_id='',$city_id='',$mkt_id='',$model_id='',$payment_mode='',$start_date='',$end_date='',$status){
+    public function get_all_customers_booking_data_by_search_criteria($zone_id='',$city_id='',$mkt_id='',$model_id='',$payment_mode='',$start_date='',$end_date='',$status, $zhead_id=''){
         $this->db->select('tbl_customer.*');
         $this->db->from('tbl_customer');
         if($zone_id!=''){
@@ -60,6 +60,11 @@ class Customer_Model extends CI_Model {
             $this->db->where('date(time_stamp) >=',$start_date);
             $this->db->where('date(time_stamp) <=',$end_date);  
         }
+
+        if($zhead_id!=''){
+            $this->db->where('zhead_id',$zhead_id);    
+        }
+
         if($status==9){
             $this->db->where('status',$status);
         }elseif($status==30){
@@ -70,7 +75,7 @@ class Customer_Model extends CI_Model {
         $result=$result_query->result();
         return $result;
     }
-    public function get_all_customers_sales_data_by_search_criteria($zone_id='',$city_id='',$district_id = '', $sub_district_id = '', $mkt_id='',$model_id='',$yard_id='',$payment_mode='',$start_date='',$end_date='',$status){
+    public function get_all_customers_sales_data_by_search_criteria($zone_id='',$city_id='',$district_id = '', $sub_district_id = '', $mkt_id='',$model_id='',$yard_id='',$payment_mode='',$start_date='',$end_date='',$status, $zhead_id = ''){
         $this->db->select('tbl_customer.*,tbl_district.district_name, tbl_sub_district.sub_district_name');
         $this->db->from('tbl_customer');
         if($zone_id!=''){
@@ -100,6 +105,9 @@ class Customer_Model extends CI_Model {
         if($start_date!=''){
             $this->db->where('date(do_update_time) >=',$start_date);
             $this->db->where('date(do_update_time) <=',$end_date);
+        }
+        if($zhead_id!=''){
+            $this->db->where('zhead_id',$zhead_id);    
         }
         if($status!=''){
             $this->db->where('status',$status);

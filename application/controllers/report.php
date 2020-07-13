@@ -47,9 +47,13 @@ class Report extends CI_Controller {
 	}
 
 	public function booking_report(){
+		if($this->session->userdata('role')!=7 && $this->session->userdata('role')!=15 && $this->session->userdata('role') != 8 && $this->session->userdata('role')!=4 && $this->session->userdata('role')!=5){
+			redirect('dashboard','refresh');
+		}
 		$report_data										=	array();
 		$booking_data										=	array();
 		
+
 		$booking_data['customer_list']						=	$this->customer_model->get_all_customers();
 		$booking_data['employee_list']						=	$this->employee_model->get_all_employees();
 		$booking_data['zone_list']							=	$this->zone_model->get_all_zones();
@@ -79,8 +83,12 @@ class Report extends CI_Controller {
 
 
 
-		
-		$booking_data['customer_list']						=	$this->customer_model->get_all_customers_booking_data_by_search_criteria($zone_id,$city_id,$mkt_id,$model_id,$payment_mode, $start_date,$end_date, $status);
+		if($this->session->userdata('role')==4){
+			$booking_data['customer_list']					=	$this->customer_model->get_all_customers_booking_data_by_search_criteria($zone_id,$city_id,$mkt_id,$model_id,$payment_mode, $start_date,$end_date, $status, $this->session->userdata('employee_id'));
+		} else {
+			$booking_data['customer_list']						=	$this->customer_model->get_all_customers_booking_data_by_search_criteria($zone_id,$city_id,$mkt_id,$model_id,$payment_mode, $start_date,$end_date, $status);
+		}
+
 		$booking_data['employee_list']						=	$this->employee_model->get_all_employees();
 		$booking_data['zone_list']							=	$this->zone_model->get_all_zones();
 		$booking_data['city_list']							=	$this->city_model->get_all_cities();
@@ -131,8 +139,14 @@ class Report extends CI_Controller {
 		$end_date											=	$date[1];
 		$status 											=	$this->input->post('status');
 		// echo json_encode($sub_district_id);die();
+
+		if($this->session->userdata('role')==4){
+			$sales_data['customer_list']						=	$this->customer_model->get_all_customers_sales_data_by_search_criteria($zone_id,$city_id,$district_id,$sub_district_id,$mkt_id,$model_id, $yard_id , $payment_mode,$start_date,$end_date,$status, $this->session->userdata('employee_id') );
+		} else {
+			$sales_data['customer_list']						=	$this->customer_model->get_all_customers_sales_data_by_search_criteria($zone_id,$city_id,$district_id,$sub_district_id,$mkt_id,$model_id, $yard_id , $payment_mode,$start_date,$end_date,$status);
+		}
 		
-		$sales_data['customer_list']						=	$this->customer_model->get_all_customers_sales_data_by_search_criteria($zone_id,$city_id,$district_id,$sub_district_id,$mkt_id,$model_id, $yard_id , $payment_mode,$start_date,$end_date,$status);
+		
 		$sales_data['employee_list']						=	$this->employee_model->get_all_employees();
 		$sales_data['zone_list']							=	$this->zone_model->get_all_zones();
 		$sales_data['city_list']							=	$this->city_model->get_all_cities();

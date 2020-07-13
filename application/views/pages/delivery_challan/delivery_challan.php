@@ -70,7 +70,7 @@
 
                                     <?php if($this->session->userdata('role')!=15){?>
 
-                                    <?php foreach($customer_list as $value){ if($value->delivery_yard_id==$yard_detail->delivery_yard_id){?>
+                                    <?php foreach($customer_list as $value){ ?>
 
 
                                     <tr>
@@ -91,7 +91,7 @@
                                     </tr>
 
 
-                                    <?php } } ?>
+                                    <?php }  ?>
 
                                     <?php } else {?>
 
