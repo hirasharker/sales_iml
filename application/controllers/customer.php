@@ -326,9 +326,9 @@ class Customer extends CI_Controller {
 
 			$mail_body											=	$this->load->view('template/mail',$customer_data,TRUE);
 
-			echo '<h4>Sending Email ....</h4>';
+			// echo '<h4>Sending Email ....</h4>';
 
-			$this->mail_model->send_email($zonal_head_info->email_id,$update_code_data['customer_code']. ' Waiting for Approval',$mail_body);
+			// $this->mail_model->send_email($zonal_head_info->email_id,$update_code_data['customer_code']. ' Waiting for Approval',$mail_body);
 		}
 		
 

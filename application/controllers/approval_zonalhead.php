@@ -131,7 +131,7 @@ class Approval_Zonalhead extends CI_Controller {
 
 				$mail_body				=	$this->load->view('template/mail',$customer_detail,TRUE);
 				
-				$this->mail_model->send_email($head_of_sales_info->email_id,$customer_detail->customer_code. ' Waiting for Approval',$mail_body);
+				// $this->mail_model->send_email($head_of_sales_info->email_id,$customer_detail->customer_code. ' Waiting for Approval',$mail_body);
 
 			}
 		}
