@@ -48,16 +48,16 @@ class Inspection extends CI_Controller {
 		
 		if($this->session->userdata('role')!=15){
 			$status 									=	array(2,4);
-			$customer_data['pending_customer_list']		=	$this->customer_model->get_all_customers_by_rm_id_and_status($this->session->userdata('employee_id'), $status= array());
+			$customer_data['pending_customer_list']		=	$this->customer_model->get_all_customers_by_rm_id_and_status($this->session->userdata('employee_id'), $status);
 			
 			$status 									=	array(5,6);
-			$customer_data['approved_customer_list']	=	$this->customer_model->get_all_customers_by_rm_id_and_status($this->session->userdata('employee_id'), $status= array());
+			$customer_data['approved_customer_list']	=	$this->customer_model->get_all_customers_by_rm_id_and_status($this->session->userdata('employee_id'), $status);
 			
 			$status 									=	array(13,NULL);
-			$customer_data['denied_customer_list']		=	$this->customer_model->get_all_customers_by_rm_id_and_status($this->session->userdata('employee_id'), $status= array());
+			$customer_data['denied_customer_list']		=	$this->customer_model->get_all_customers_by_rm_id_and_status($this->session->userdata('employee_id'), $status);
 
 			$status 									=	array(19,NULL);
-			$customer_data['temp_customer_list']		=	$this->customer_model->get_all_customers_by_rm_id_and_status($this->session->userdata('employee_id'), $status= array());
+			$customer_data['temp_customer_list']		=	$this->customer_model->get_all_customers_by_rm_id_and_status($this->session->userdata('employee_id'), $status);
 
 		} else {
 			$status 									=	array(2,4);
