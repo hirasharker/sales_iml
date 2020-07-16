@@ -74,6 +74,13 @@
                   </div>
                 </div>
 
+                <div class="form-group col-md-6 col-sm-12 col-xs-12" style="display: none;">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Chassis No </label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                      <input id="chassisNo" type="text" name="chassis_no">
+                  </div>
+                </div>
+
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Payment Mode </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
@@ -232,13 +239,14 @@
                           var cityId = $('#cityId').val();
                           var mktId  = $('#salesPerson').val();
                           var modelId= $('#vehicleModel').val();
+                          var chassisNo= $('#chassisNo').val();
                           var paymentMode = $('#paymentMode').val();
                           var status = $('#status').val();
                           var date   = $('#date').val();
                           $.ajax({
                                   type: "POST",
                                   url: "<?php echo base_url()?>report/generate_booking_report/",
-                                  data: { 'zone_id': zoneId, 'city_id' : cityId, 'mkt_id' : mktId, 'model_id': modelId, 'payment_mode': paymentMode,'status': status, 'date': date  },
+                                  data: { 'zone_id': zoneId, 'city_id' : cityId, 'mkt_id' : mktId, 'model_id': modelId,'chassis_no': chassisNo, 'payment_mode': paymentMode,'status': status, 'date': date  },
                                   success: function(data){
                                       // Parse the returned json data
                                       var opts = $.parseJSON(data);

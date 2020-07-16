@@ -10,6 +10,7 @@ class Sms_Gateway extends CI_Controller {
 		if($this->session->userdata('role')!=15){
 			redirect('dashboard','refresh');
 		}
+		$this->load->library('utfconverter');
 		
 	}
 
@@ -37,7 +38,9 @@ class Sms_Gateway extends CI_Controller {
 		// $city_data['city_list']		=	$this->city_model->get_all_cities();
 		// $city_data['employee_list']	=	$this->employee_model->get_all_employees();
 
-		
+		$sms_data['total_amount']		=	$this->utfconverter->convert_to_utf16(100000);
+
+
 
         $data['navigation'] =   $this->load->view('template/navigation','',TRUE);
         $data['content']    =   $this->load->view('pages/sms_gateway/sms_gateway_ssl',$sms_data,TRUE);

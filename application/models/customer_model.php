@@ -37,7 +37,7 @@ class Customer_Model extends CI_Model {
     }
     
 
-    public function get_all_customers_booking_data_by_search_criteria($zone_id='',$city_id='',$mkt_id='',$model_id='',$payment_mode='',$start_date='',$end_date='',$status, $zhead_id=''){
+    public function get_all_customers_booking_data_by_search_criteria($zone_id='',$city_id='',$mkt_id='',$model_id='', $chassis_no = '', $payment_mode='',$start_date='',$end_date='',$status, $zhead_id=''){
         $this->db->select('tbl_customer.*');
         $this->db->from('tbl_customer');
         if($zone_id!=''){
@@ -52,6 +52,11 @@ class Customer_Model extends CI_Model {
         if($model_id!=''){
             $this->db->where('model_id',$model_id);    
         }
+
+        if($chassis_no!=''){
+            $this->db->where('chassis_no',$chassis_no);    
+        }
+
         if($payment_mode!=''){
             $this->db->where('payment_mode',$payment_mode);    
         }

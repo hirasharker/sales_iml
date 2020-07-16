@@ -75,6 +75,7 @@ class Report extends CI_Controller {
 		$city_id 											=	$this->input->post('city_id');
 		$mkt_id												=	$this->input->post('mkt_id');
 		$model_id											=	$this->input->post('model_id');
+		$chassis_no											=	$this->input->post('chassis_no');
 		$payment_mode										=	$this->input->post('payment_mode');
 		$status												=	$this->input->post('status');
 		$date 												=	explode('-',$this->input->post('date'));
@@ -84,9 +85,9 @@ class Report extends CI_Controller {
 
 
 		if($this->session->userdata('role')==4){
-			$booking_data['customer_list']					=	$this->customer_model->get_all_customers_booking_data_by_search_criteria($zone_id,$city_id,$mkt_id,$model_id,$payment_mode, $start_date,$end_date, $status, $this->session->userdata('employee_id'));
+			$booking_data['customer_list']					=	$this->customer_model->get_all_customers_booking_data_by_search_criteria($zone_id,$city_id,$mkt_id,$model_id, $chassis_no, $payment_mode, $start_date,$end_date, $status, $this->session->userdata('employee_id'));
 		} else {
-			$booking_data['customer_list']						=	$this->customer_model->get_all_customers_booking_data_by_search_criteria($zone_id,$city_id,$mkt_id,$model_id,$payment_mode, $start_date,$end_date, $status);
+			$booking_data['customer_list']						=	$this->customer_model->get_all_customers_booking_data_by_search_criteria($zone_id,$city_id,$mkt_id,$model_id, $chassis_no, $payment_mode, $start_date,$end_date, $status);
 		}
 
 		$booking_data['employee_list']						=	$this->employee_model->get_all_employees();

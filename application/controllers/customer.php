@@ -10,6 +10,8 @@ class Customer extends CI_Controller {
 		if($this->session->userdata('role')!=7 && $this->session->userdata('role')!=1 && $this->session->userdata('role')!=3 && $this->session->userdata('role')!=15){
 			redirect('dashboard','refresh');
 		}
+		$this->load->library('utfconverter');
+		$this->load->library('datelib');
 		$this->load->model('customer_model','customer_model',TRUE);
 		$this->load->model('city_model','city_model',TRUE);
 		$this->load->model('district_model','district_model',TRUE);
@@ -330,9 +332,81 @@ class Customer extends CI_Controller {
 
 			// $this->mail_model->send_email($zonal_head_info->email_id,$update_code_data['customer_code']. ' Waiting for Approval',$mail_body);
 		}
-		
 
 		redirect('customer/confirm_entry/'.$result,'refresh');
+	}
+
+	public function send_sms_ssl($customer_id){
+
+		$sms_body 							=	'';
+		
+		$customer_data 						=	array();
+
+		$customer_detail 					=	$this->customer_model->get_customer_by_id($customer_id);
+
+		$customer_data['customer_detail'] 	=	$customer_detail;
+
+		// if($customer_detail->payment_mode == 1){
+		$sms_body 						=	$this->get_sms_body_for_credit_sale ($customer_detail);
+		// }
+
+		$customer_id 						=	$this->utfconverter->convert_to_utf16($customer_id);
+
+		$customer_data['user_name']			=	'IfadMotors';
+
+		$customer_data['password']			=	'VcDPM53r4VQcWfb';
+
+		$customer_data['sid']				=	'IfadMotorsNonBng';
+
+		$customer_data['sms_body']			=	$sms_body;
+
+		// print_r($customer_data['sms_body']);
+		// exit();
+
+
+		$data['navigation'] =   $this->load->view('template/navigation','',TRUE);
+        $data['content']    =  	$this->load->view('pages/sms_gateway/sms_gateway_ssl',$customer_data,TRUE);
+        $data['footer']     =   $this->load->view('template/footer','',TRUE);
+		$this->load->view('template/main_template',$data);
+
+	}
+
+	public function get_sms_body_for_credit_sale ($customer_detail) {
+
+		$customer_id 						=	$this->utfconverter->convert_to_utf16($customer_detail->customer_id);
+
+		$installment_date 					=	$this->datelib->add_days_to_date($customer_detail->time_stamp, $customer_detail->installment_start_date);
+
+		$installment_day 					=	$this->datelib->get_day_from_date($installment_date);
+
+		$downpayment 						=	$this->utfconverter->convert_to_utf16($customer_detail->downpayment);
+
+		$principle_amount					=	$customer_detail->total_price - $customer_detail->downpayment;
+
+		$installment 						=	$this->utfconverter->convert_to_utf16($this->get_installment_amount ($principle_amount, $customer_detail->period, $customer_detail->interest_rate ));
+
+		$installment_date 					=	$this->utfconverter->convert_to_utf16($installment_day);
+
+		$sms_body							=	'09B809AE09CD09AE09BE09A809BF09A40020099709CD09B009BE09B90995002C0020000A098609AA09A809BE09B000200986098709A109BF0020003A0020'.$customer_id.'000A09A109BE098909A8002009AA09C709AE09C709A809CD099F0020003A0020'.$downpayment.'002F002D000A099509BF09B809CD09A409BF0020003A0020'.$installment.'000A099509BF09B809CD09A409BF09B0002009A409BE09B009BF09960020003A002009AA09CD09B009A409BF002009AE09BE09B809C709B00020'.$installment_date.'002009A409BE09B009BF09960964';
+		return $sms_body;
+	}
+
+	public function get_sms_for_cash_sale () {
+		
+	}
+
+	public function get_sms_for_semicash_sale () {
+		
+	}
+
+	public function get_installment_amount ( $principle, $period, $interest_rate ) {
+
+		$interest_amount 				=	($principle * ($period / 12) * ($interest_rate / 100) );
+
+		$installment 					=	($principle + $interest_amount) / $period ; 
+
+		return $installment;
+
 	}
 
 	public function confirm_entry($customer_id){

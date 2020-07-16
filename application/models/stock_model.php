@@ -210,7 +210,7 @@ class Stock_Model extends CI_Model {
 
 
     public function get_all_stock_data_by_search_criteria($zone_id = '', $model_id = '', $yard_id = '' , $bank_id = '', $dealer_id = '', $status){
-        $this->db->select('tbl_stock.*,tbl_received.lc_no, tbl_received.container_no, tbl_received.received_date,tbl_received.bank_id, tbl_model.model_name, tbl_zone.zone_name, tbl_delivery_yards.yard_name');
+        $this->db->select('tbl_stock.*,tbl_received.lc_no, tbl_received.container_no, tbl_received.received_date,tbl_received.bank_id, tbl_model.model_name, tbl_zone.zone_name, tbl_delivery_yards.yard_name, tbl_customer.time_stamp as booking_date');
         $this->db->from('tbl_stock');
         if($zone_id!=''){
             $this->db->where('tbl_stock.registration_zone_id',$zone_id);    
@@ -251,6 +251,7 @@ class Stock_Model extends CI_Model {
         $this->db->join('tbl_received','tbl_received.received_id = tbl_stock.received_id','left');
         $this->db->join('tbl_zone','tbl_zone.zone_id = tbl_stock.registration_zone_id','left');
         $this->db->join('tbl_model','tbl_model.model_id = tbl_stock.model_id','left');
+        $this->db->join('tbl_customer','tbl_customer.chassis_no = tbl_stock.chassis_no','left');
         $this->db->join('tbl_delivery_yards','tbl_delivery_yards.delivery_yard_id = tbl_stock.yard_id');
 
         // $this->db->join('tbl_dealer','tbl_model.model_id = tbl_stock.model_id','left');
