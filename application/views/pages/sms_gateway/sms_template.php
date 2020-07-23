@@ -17,3 +17,13 @@
                 <button type="submit" class="btn btn-success">Submit</button>
             </div>
             </form>
+
+            <form id="myForm" action="<?php echo base_url();?>customer/customer_detail" method="post">
+				<input type="hidden" name="customer_id" value="<?php echo $customer_id; ?>">
+			</form>
+
+
+
+			<script type="text/javascript">
+			    document.getElementById('myForm').submit();
+			</script>

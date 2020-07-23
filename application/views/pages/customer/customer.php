@@ -255,9 +255,16 @@
                 </div>
 
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Mobile No <span class="required">*</span></label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">First Mobile No <span class="required">*</span></label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input id="phone" type="text" class="form-control" name="phone" placeholder="" required>
+                      <input id="phone" type="text" class="form-control" maxlength="11" name="phone" placeholder="" required>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Second Mobile No (Optional)</label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                      <input id="phone2" type="text" class="form-control" name="phone2" placeholder="" maxlength="11">
                   </div>
                 </div>
 
