@@ -446,13 +446,13 @@
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Proposed Discount <span class="required">*</span></label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input id="discount" type="text" class="form-control" name="discount"  min="0" value="0" placeholder="" required>
+                      <input id="discount" type="number" class="form-control" name="discount"  min="0" value="0" placeholder="" required>
                   </div>
                 </div>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12 additional-charge-container" style="display: none;">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Additional Charge <span class="required">*</span></label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input id="additional-charge" type="text" class="form-control" name="additional_charge"  min="0" value="0" placeholder="" required>
+                      <input id="additional-charge" type="number" class="form-control" name="additional_charge"  min="0" value="0" placeholder="" required>
                   </div>
                 </div>
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">

@@ -78,10 +78,6 @@
 
 
 
-        
-
-
-
         <li><a><i class="fa fa-phone"></i> Call Center <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
             <li><a href="<?php echo base_url();?>call_center/">Customer List</a></li>
@@ -94,7 +90,14 @@
             <li><a href="<?php echo base_url();?>report/sales_report">Sales Report</a></li>
             <li><a href="<?php echo base_url();?>report/booking_report">Booking Report</a></li>
             <li><a href="<?php echo base_url();?>report/individual_customer">Individual Customer</a></li>
-            <li><a href="<?php echo base_url();?>report/stock_report">Stock Report</a></li>
+            <!-- <li><a href="<?php echo base_url();?>report/stock_report">Stock Report</a></li> -->
+            <li><a>Stock Report <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="<?php echo base_url();?>report/stock_report">General Stock Report </a></li>
+                    <li><a href="<?php echo base_url();?>report/stock_summary">Stock Summary</a></li>
+                </ul>
+            </li>
+            <li><a href="<?php echo base_url();?>report/stock_report">General Stock Report </a></li>
         </ul>
         </li>
 

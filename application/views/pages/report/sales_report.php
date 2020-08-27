@@ -138,7 +138,7 @@
                     <input id="date" type="hidden" name="date" />
                   </div>
                 </div>
-                <input type="submit" name="">
+                <!-- <input type="submit" name=""> -->
               </form>
                 <script>
                   $(function() { 

@@ -38,6 +38,19 @@ class Stock_Model extends CI_Model {
         return $result;
     }
 
+    
+
+    public function get_stock_summary(){
+        $this->db->select('tbl_stock.yard_id, count(tbl_stock.chassis_no) as total_vehicle');
+        $this->db->from('tbl_stock');
+        $this->db->where('stock_position <', 4);
+        $this->db->group_by('tbl_stock.yard_id');
+
+        $result_query        =   $this->db->get();
+        $result              =   $result_query->result();
+        return $result;
+    }
+
     public function get_stock_by_id($stock_id){
         $this->db->select('*');
         $this->db->from('tbl_stock');
@@ -230,7 +243,11 @@ class Stock_Model extends CI_Model {
         }
 
         if($status!=''){
-            $this->db->where('tbl_stock.stock_position',$status);    
+            if($status == 100){
+                $this->db->where('tbl_stock.stock_position <=', 3);
+            }else {
+                $this->db->where('tbl_stock.stock_position',$status);  
+            }
         }
 
         // if($status!=''){

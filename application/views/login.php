@@ -63,7 +63,7 @@
                 <br />
 
                 <div>
-                  <h1> Ifad Autos Ltd</h1>
+                  <h1> Ifad Motors Ltd</h1>
                   <p>©2017 All Rights Reserved. </p>
                 </div>
               </div>

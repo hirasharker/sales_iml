@@ -259,6 +259,8 @@ class Customer extends CI_Controller {
 		$customer_data['dealer_commission']						=	$this->input->post('dealer_commission','0',TRUE);
 		$customer_data['registration_cost']						=	$this->input->post('registration_cost','0',TRUE);
 
+		// $customer_data['upload_path']							=	date("Y");
+
 		$image_upload										=	$this->upload_model->upload_file('customer_image','files'); //after upload
 		if(isset($image_upload['file_name'])){
 			$customer_data['image_path'] 					=	$image_upload['file_name'];
@@ -295,6 +297,12 @@ class Customer extends CI_Controller {
 			$this->session->set_userdata($sdata);
 		}
 
+		$current_stock_position 							=	$this->stock_model->get_stock_by_chassis_no($customer_data['chassis_no'])->stock_position;
+
+		if($current_stock_position != 4 && $current_stock_position != 6){
+			redirect('customer','refresh');
+		}
+
 		
 		if($this->session->userdata('token')==1){
 
@@ -307,7 +315,7 @@ class Customer extends CI_Controller {
 
 			$stock_data['customer_id']							=	$result;
 
-			$current_stock_position 							=	$this->stock_model->get_stock_by_chassis_no($customer_data['chassis_no'])->stock_position;
+			
 			$stock_data['stock_position']						=	$current_stock_position + 1;
 
 			$update_stock										=	$this->stock_model->update_stock_by_chassis_no($stock_data, $customer_data['chassis_no']);
@@ -336,102 +344,17 @@ class Customer extends CI_Controller {
 			// $this->mail_model->send_email($zonal_head_info->email_id,$update_code_data['customer_code']. ' Waiting for Approval',$mail_body);
 		}
 
-		redirect('customer/send_sms_ssl/'.$result,'refresh');
+		redirect('sms_gateway/send_sms_to_customer_bengali/'.$result,'refresh');
 	}
 
-	public function send_sms_ssl($customer_id){
-
-		$sms_body 							=	'';
-		
-		$customer_data 						=	array();
-
-		$customer_detail 					=	$this->customer_model->get_customer_by_id($customer_id);
-
-		$customer_data['customer_detail'] 	=	$customer_detail;
-
-		if($customer_detail->payment_mode == 1){
-
-			$sms_body_for_customer 							=	$this->get_sms_body_for_credit_sale ($customer_detail);
-
-			$sms_body_for_zhead 							=	$this->get_sms_body_for_credit_sale_zonal_head ($customer_detail);
-
-		}elseif ($customer_detail->payment_mode == 3) {
-			// $sms_body 							=	$this->get_sms_for_cash_sale ($customer_detail);
-		}
-
-		$customer_id 						=	$this->utfconverter->convert_to_utf16($customer_id);
-
-		$customer_data['user_name']			=	'IfadMotors';
-
-		$customer_data['password']			=	'VcDPM53r4VQcWfb';
-
-		$customer_data['sid']				=	'IfadMotorsNonBng';
-
-		$customer_data['sms_body_for_customer']		=	$sms_body_for_customer;
-
-		$customer_data['sms_body_for_zhead']		=	$sms_body_for_zhead;
-
-		$this->load->view('pages/sms_gateway/sms_gateway_ssl',$customer_data);
-
-	}
-
-	public function get_sms_body_for_credit_sale_zonal_head ($customer_detail) {
-
-		$sms_body 							=	$this->utfconverter->convert_to_utf16('For Apporval Customer ID: 20025 Model Code : 600 Price : 420000 (R) Downpayment : 100000 Period: 24 Interest Rate : 15 202.191.122.105:3003/sales_iml');
-		return $sms_body;
-
-	}
-
-	public function get_sms_body_for_credit_sale ($customer_detail) {
-		$customer_id 						=	$this->banglaconverter->english_to_bengali($customer_detail->customer_id);
-
-		$customer_id 						=	$this->utfconverter->convert_to_utf16($customer_id);
-
-		$installment_date 					=	$this->datelib->add_days_to_date(date("Y-m-d"), $customer_detail->installment_start_date);
-
-		$installment_day 					=	$this->datelib->get_day_from_date($installment_date);
-
-		$downpayment 						=	$this->banglaconverter->english_to_bengali($customer_detail->downpayment);
-
-		$downpayment 						=	$this->utfconverter->convert_to_utf16($downpayment);
-
-		$principle_amount					=	($customer_detail->total_price + $customer_detail->registration_cost) - $customer_detail->downpayment;
+	
 
 
-		$installment 						=	$this->get_installment_amount ($principle_amount, $customer_detail->period, $customer_detail->interest_rate );
+	
 
-		$installment 						=	$this->banglaconverter->english_to_bengali($installment);
+	
 
-		$installment 						=	$this->utfconverter->convert_to_utf16($installment);
-
-		$installment_day 					=	$this->banglaconverter->english_to_bengali($installment_day);
-
-		$installment_day 					=	$this->utfconverter->convert_to_utf16($installment_day);
-
-
-
-		$sms_body							=	'09B809AE09CD09AE09BE09A809BF09A40020099709CD09B009BE09B90995002C0020000A098609AA09A809BE09B000200986098709A109BF0020003A0020'.$customer_id.'000A09A109BE098909A8002009AA09C709AE09C709A809CD099F0020003A0020'.$downpayment.'002F002D000A099509BF09B809CD09A409BF0020003A0020'.$installment.'002F002D000A099509BF09B809CD09A409BF09B0002009A409BE09B009BF09960020003A002009AA09CD09B009A409BF002009AE09BE09B809C709B00020'.$installment_day.'002009A409BE09B009BF09960964000A098709AB09BE09A6002009AE099F09B009B8002009B209BF0983';
-		
-		return $sms_body;
-	}
-
-	public function get_sms_for_cash_sale () {
-		
-	}
-
-	public function get_sms_for_semicash_sale () {
-		
-	}
-
-	public function get_installment_amount ( $principle, $period, $interest_rate ) {
-
-		$interest_amount 				=	($principle * ($period / 12) * ($interest_rate / 100) );
-
-		$installment 					=	($principle + $interest_amount) / $period ; 
-
-		return round($installment,0);
-
-	}
+	
 
 	public function confirm_entry($customer_id){
 		$data 							=	array();

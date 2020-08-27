@@ -32,7 +32,8 @@
     <!-- JQVMap -->
     <link href="<?php echo base_url();?>vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
-    <link href="<?php echo base_url();?>vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- <link href="<?php echo base_url();?>vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <link rel="icon" type="image/png" sizes="32x32" href="<?php echo base_url();?>images/favicon-32x32.png">
 
     <!-- Datatables -->
@@ -54,6 +55,12 @@
     <!-- anchor -->
     <script src="<?php echo base_url();?>vendors/anchor.js"></script>
     <script type="text/javascript" src="<?php echo base_url();?>build/js/loader.js"></script>
+
+
+   <!--  <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" /> -->
     
   </head>
   
@@ -321,7 +328,7 @@
     <script src="<?php echo base_url();?>vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
     <!-- bootstrap-daterangepicker -->
     <script src="<?php echo base_url();?>vendors/moment/min/moment.min.js"></script>
-    <script src="<?php echo base_url();?>vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="<?php echo base_url();?>vendors/bootstrap-daterangepicker/daterangepicker.min.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="<?php echo base_url();?>build/js/custom.js"></script>
