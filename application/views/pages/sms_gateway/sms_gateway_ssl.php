@@ -23,11 +23,11 @@
             data: { 'user': '<?php echo $user_name; ?>',
                     'pass': '<?php echo $password; ?>',
                     'sid': '<?php echo $sid; ?>',
-                    'sms[0][0]': '8801672496524',
+                    'sms[0][0]': '8801701227977',
                     // 'sms[0][0]': '88'+'<?php echo $customer_detail->phone; ?>',
-                    'sms[0][1]': '<?php echo $sms_body_for_customer; ?>',
-                    'sms[1][0]': '8801713388741',
-                    'sms[1][1]': '<?php echo $sms_body_for_customer; ?>',
+                    // 'sms[0][1]': '<?php echo $sms_body_for_customer; ?>',
+                    'sms[1][0]': '8801730069555',
+                    // 'sms[1][1]': '<?php echo $sms_body_for_customer; ?>',
                     
 
                   },

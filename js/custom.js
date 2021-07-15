@@ -1584,7 +1584,7 @@ if (typeof NProgress != 'undefined') {
 			  startDate: moment().subtract(29, 'days'),
 			  endDate: moment(),
 			  minDate: '01/01/2012',
-			  maxDate: '12/31/2015',
+			  maxDate: '12/31/2022',
 			  dateLimit: {
 				days: 60
 			  },
@@ -1658,8 +1658,8 @@ if (typeof NProgress != 'undefined') {
 				var optionSet1 = {
 				  startDate: moment().subtract(29, 'days'),
 				  endDate: moment(),
-				  minDate: '01/01/2012',
-				  maxDate: '12/31/2020',
+				  minDate: '01/01/2017',
+				  maxDate: '12/31/2022',
 				  dateLimit: {
 					days: 60
 				  },

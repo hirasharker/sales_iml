@@ -1,5 +1,0 @@
------------SET AUTO INCREMENT IN TBL_LEAD-------
-create sequence lead_id_seq;
-ALTER TABLE tbl_lead ALTER lead_id SET DEFAULT NEXTVAL ('lead_id_seq');
------------RESET INITIAL AUTO INCREMENT VALUE---------------
-ALTER SEQUENCE tbl_customer_customer_id_seq RESTART WITH 50001

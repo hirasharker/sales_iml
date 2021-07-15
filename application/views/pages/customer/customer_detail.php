@@ -88,6 +88,13 @@ $( window ).load(function() {
                     }
                  ?>
             </small></h3>
+            <?php if($this->session->userdata('role')==15){?>
+            <form action="<?php echo base_url(); ?>customer/" method="post" target="_blank">
+              <input type="hidden" value="<?php echo $customer_detail->customer_id; ?>" name="customer_id">
+              <a onclick='this.parentNode.submit(); return false;' href="#" style="color:#005102"><i class="fa fa-edit" aria-hidden="true" ></i>edit</a>
+            </form>
+            <?php } ?>
+
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>

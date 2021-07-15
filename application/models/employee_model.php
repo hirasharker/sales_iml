@@ -48,6 +48,16 @@ class Employee_Model extends CI_Model {
         $result=$result_query->result();
         return $result;
     }
+    public function get_sales_person(){
+        $this->db->select('*');
+        $this->db->from('tbl_employee');
+        $this->db->where('role',1);
+        $this->db->or_where('role',2);
+       
+        $result_query=$this->db->get();
+        $result=$result_query->result();
+        return $result;
+    }
 
     
     public function add_employee($data){

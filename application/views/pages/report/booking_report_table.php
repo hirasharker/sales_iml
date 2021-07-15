@@ -8,6 +8,7 @@
                     <th>Status</th>
                     <th>Present Address</th>
                     <th>Phone</th>
+                    <th>Zone</th>
                     <th>Model</th>
                     <th>Chassis No</th>
                     <th>Engine No</th>
@@ -94,6 +95,11 @@
                         ?></td>
                         <td><?php echo $value->present_address; ?></td>
                         <td><?php echo $value->phone; ?></td>
+                        <td>
+                        <?php foreach($zone_list as $z_value){if($z_value->zone_id==$value->zone_id){
+                            echo $z_value->zone_name;
+                            }}?>
+                        </td>
                         <td>
                         <?php foreach($model_list as $m_value){if($m_value->model_id==$value->model_id){
                             echo $m_value->model_name;

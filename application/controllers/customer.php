@@ -7,7 +7,7 @@ class Customer extends CI_Controller {
 		if($this->session->userdata('employee_id')==NULL){
 			redirect('login','refresh');
 		}
-		if($this->session->userdata('role')!=7 && $this->session->userdata('role')!=1 && $this->session->userdata('role')!=3 && $this->session->userdata('role')!=15){
+		if($this->session->userdata('role')!=7 && $this->session->userdata('role')!=1 && $this->session->userdata('role')!=2 && $this->session->userdata('role')!=3 && $this->session->userdata('role')!=15){
 			redirect('dashboard','refresh');
 		}
 		$this->load->library('utfconverter');
@@ -106,7 +106,7 @@ class Customer extends CI_Controller {
 
 		// $customer_data['marketing_person_list']	=	$this->employee_model->get_employee_by_zone_id_and_role($zone_id,1);
 
-		$customer_data['marketing_person_list']	=	$this->employee_model->get_employee_by_role(1);
+		$customer_data['marketing_person_list']	=	$this->employee_model->get_sales_person();
 		$customer_data['zonal_head_list']		=	$this->employee_model->get_employee_by_role(4);
 		$customer_data['head_of_sales_list']	=	$this->employee_model->get_employee_by_role(5);
 
@@ -376,35 +376,43 @@ class Customer extends CI_Controller {
 
 	public function update_customer()
 	{
+		if($this->session->userdata('role')!=15){
+			redirect('customer/index','refresh');
+		}
 		echo '<h4>Udating record .... </h4>';
+		
 		$customer_id 										=	$this->input->post('customer_id','',TRUE);
-		$customer_detail									=	$this->customer_model->get_customer_by_id($customer_id);
 
 		$customer_data										=	array();
-		$customer_data['modified_by']						=	$this->session->userdata('employee_id');
+		$customer_data['user_id']							=	$this->session->userdata('employee_id');
+		$customer_data['user_name']							=	$this->session->userdata('email_id');
 		$customer_data['user_comment']						=	$this->input->post('user_comment','',TRUE);
-		$customer_data['status']							=	$this->input->post('status','',TRUE);
+		
 		$customer_data['customer_name']						=	$this->input->post('customer_name','',TRUE);
 		$customer_data['present_address']					=	$this->input->post('present_address','',TRUE);
 		$customer_data['permanent_address']					=	$this->input->post('permanent_address','',TRUE);
 		$customer_data['father_name']						=	$this->input->post('father_name','',TRUE);
 		$customer_data['mother_name']						=	$this->input->post('mother_name','',TRUE);
 		$customer_data['phone']								=	$this->input->post('phone','',TRUE);
-		$customer_data['post_code']							=	$this->input->post('post_code','',TRUE);
+		$customer_data['phone2']								=	$this->input->post('phone2','',TRUE);
+		$customer_data['post_code']							=	$this->input->post('post_code','0',TRUE);
 		$customer_data['finance_name']						=	$this->input->post('finance_name','',TRUE);
 		$customer_data['national_id']						=	$this->input->post('national_id','',TRUE);
 		$customer_data['occupation']						=	$this->input->post('occupation','',TRUE);
 		$customer_data['business_address']					=	$this->input->post('business_address','',TRUE);
 		$customer_data['spouse_address']					=	$this->input->post('spouse_address','',TRUE);
-		$customer_data['city_id']							=	$this->input->post('city_id','',TRUE);
-		$customer_data['district_id']						=	$this->input->post('district_id','',TRUE);
-		$customer_data['sub_district_id']					=	$this->input->post('sub_district_id','',TRUE);
-		$customer_data['dealer_id']							=	$this->input->post('dealer_id','',TRUE);
+		$customer_data['city_id']							=	$this->input->post('city_id','0',TRUE);
+		$customer_data['district_id']						=	$this->input->post('district_id','0',TRUE);
+		$customer_data['sub_district_id']					=	$this->input->post('sub_district_id','0',TRUE);
+		$customer_data['dealer_id']							=	$this->input->post('dealer_id','0',TRUE);
 		$customer_data['city_code']							=	$this->input->post('city_code','',TRUE);
-		$customer_data['zone_id']							=	$this->input->post('zone_id','',TRUE);
+		$customer_data['zone_id']							=	$this->input->post('zone_id','0',TRUE);
 		$zone_info 											=	$this->zone_model->get_zone_by_id($customer_data['zone_id']);
 		
-		$customer_data['zhead_id']							=	$this->input->post('zhead_id','',TRUE);
+		$customer_data['zhead_id']							=	$this->input->post('zhead_id','0',TRUE);
+
+
+
 
 		$customer_data['coordinator_id']					=	$zone_info->coordinator_id;
 		$head_of_sales_id									=	$zone_info->head_of_sales_id;
@@ -417,33 +425,68 @@ class Customer extends CI_Controller {
 		if($this->session->userdata('user_type')==1){
 		$customer_data['mkt_id']							=	$this->session->userdata('employee_id');
 		} else {
-			$customer_data['mkt_id']						=	$this->input->post('mkt_id','',TRUE);
+			$customer_data['mkt_id']						=	$this->input->post('mkt_id','0',TRUE);
 		}
-		$customer_data['sales_generated_by']				=	$this->input->post('sales_generated_by','',TRUE);
+		$customer_data['sales_generated_by']				=	$this->input->post('sales_generated_by','0',TRUE);
 		// print_r($customer_data); exit();
 		$customer_data['email_id']							=	$this->input->post('email_id','',TRUE);
-		$customer_data['model_id']							=	$this->input->post('model_id','',TRUE);
-		$customer_data['model_code']						=	$this->input->post('model_code','',TRUE);
-		$customer_data['engine_no']							=	$this->input->post('engine_no','',TRUE);
-		$customer_data['chassis_no']						=	$this->input->post('chassis_no','',TRUE);
-		$customer_data['application_id']					=	$this->input->post('application_id','',TRUE);
-		$customer_data['body_type']							=	$this->input->post('body_type','',TRUE);
-		$customer_data['body_builder_id']					=	$this->input->post('body_builder_id','',TRUE);
-		$customer_data['registration_no']					=	$this->input->post('registration_no','',TRUE);
-		$customer_data['payment_mode']						=	$this->input->post('payment_mode','',TRUE);
+
 		
-		$model_detail										=	$this->model_model->get_model_by_id($customer_data['model_id']);
+		$customer_data['delivery_yard_id']					=	$this->input->post('delivery_yard_id','0',TRUE);
+		// $customer_data['stock_id']							=	$this->input->post('stock_id','0',TRUE);
+		// $customer_data['engine_no']							=	$this->input->post('engine_no','',TRUE);
+		// $customer_data['chassis_no']						=	$this->input->post('chassis_no','',TRUE);
+
+		// $duplicate_chassis 									=	$this->check_duplicate_chassis($customer_data['chassis_no']);
+		// if($duplicate_chassis != NULL){
+		// 	redirect('customer','refresh');
+		// }
+
+		$customer_data['application_id']					=	$this->input->post('application_id','0',TRUE);
+		$customer_data['body_type']							=	$this->input->post('body_type','0',TRUE);
+		$customer_data['body_builder_id']					=	$this->input->post('body_builder_id','0',TRUE);
+		$customer_data['registration_no']					=	$this->input->post('registration_no','0',TRUE);
+		$customer_data['payment_mode']						=	$this->input->post('payment_mode','0',TRUE);
+
+
+		$model_id											=	$this->input->post('model_id','0',TRUE);
+		
+		$model_detail										=	$this->model_model->get_model_by_id($model_id);
+
+		$control_account									=	$model_detail->control_account;
 
 		if($customer_data['payment_mode'] == 1){
 			$customer_data['total_price']						=	$model_detail->credit_price;
 			// $customer_data['downpayment']						=	$model_detail->min_dp_credit;
-			$customer_data['downpayment']						=	$this->input->post('downpayment','',TRUE);
-			$customer_data['period']							=	$this->input->post('period','',TRUE);
+			$customer_data['downpayment']						=	$this->input->post('downpayment','0',TRUE);
+			$customer_data['period']							=	$this->input->post('period','0',TRUE);
+		
 		} elseif ($customer_data['payment_mode'] == 2){
-			$customer_data['total_price']						=	$model_detail->credit_price;
-			// $customer_data['downpayment']						=	$model_detail->min_dp_semicash;
+			
+			$customer_data['period']							=	$this->input->post('period','0',TRUE);
+			switch ($customer_data['period']) {
+				case 3 || 1 || 2:
+					$customer_data['total_price']				=	$model_detail->credit_price + 5000;
+					break;
+				case 6:
+					$customer_data['total_price']				=	$model_detail->credit_price + 10000;
+					break;
+				case 9:
+					$customer_data['total_price']				=	$model_detail->credit_price + 15000;
+					break;
+				case 12:
+					$customer_data['total_price']				=	$model_detail->credit_price + 20000;
+					break;
+				case 15:
+					$customer_data['total_price']				=	$model_detail->credit_price + 30000;
+					break;
+				
+				default:
+					$customer_data['total_price']				=	$model_detail->credit_price + 30000;
+			}
+
 			$customer_data['downpayment']						=	$this->input->post('downpayment','',TRUE);
-			$customer_data['period']							=	$this->input->post('period','',TRUE);
+			
 		} elseif ($customer_data['payment_mode'] == 3){
 			// $customer_data['total_price']						=	$model_detail->retail_cash_price;
 			$customer_data['total_price']						=	$model_detail->credit_price;
@@ -457,19 +500,21 @@ class Customer extends CI_Controller {
 		}
 
 		
-		$customer_data['discount']								=	$this->input->post('discount','',TRUE);
-		$customer_data['interest_rate']							=	$this->input->post('interest_rate','',TRUE);
-		$customer_data['installment_start_date']				=	$this->input->post('installment_start_date','',TRUE);
+		$customer_data['discount']								=	$this->input->post('discount','0',TRUE);
+		$customer_data['additional_charge']						=	$this->input->post('additional_charge','0',TRUE);
+		$customer_data['interest_rate']							=	$this->input->post('interest_rate','0',TRUE);
+		$customer_data['deposit_amount']						=	$this->input->post('deposit_amount','0',TRUE);
+		$customer_data['installment_start_date']				=	$this->input->post('installment_start_date','0',TRUE);
 		$customer_data['broker_name']							=	$this->input->post('broker_name','',TRUE);
-		$customer_data['broker_nid']							=	$this->input->post('broker_nid','',TRUE);
-		$customer_data['broker_commission']						=	$this->input->post('broker_commission','',TRUE);
-		$customer_data['dealer_commission']						=	$this->input->post('dealer_commission','',TRUE);
+		$customer_data['broker_nid']							=	$this->input->post('broker_nid','0',TRUE);
+		$customer_data['broker_commission']						=	$this->input->post('broker_commission','0',TRUE);
+		$customer_data['dealer_commission']						=	$this->input->post('dealer_commission','0',TRUE);
+		$customer_data['registration_cost']						=	$this->input->post('registration_cost','0',TRUE);
 
-		$image_upload											=	$this->upload_model->upload_file('customer_image','files'); //after upload
+		// $customer_data['upload_path']							=	date("Y");
+
+		$image_upload										=	$this->upload_model->upload_file('customer_image','files'); //after upload
 		if(isset($image_upload['file_name'])){
-			if($customer_detail->image_path != NULL){
-				unlink('files/'.$customer_detail->imge_path);
-			}
 			$customer_data['image_path'] 					=	$image_upload['file_name'];
 		}else{
 			$sdata=array();
@@ -478,9 +523,6 @@ class Customer extends CI_Controller {
 		}
 		$nid_upload											=	$this->upload_model->upload_file('nid_file','nid'); //after upload
 		if(isset($nid_upload['file_name'])){
-			if($customer_detail->nid_path != NULL){
-				unlink('nid/'.$customer_detail->nid_path);
-			}
 			$customer_data['nid_path'] 						=	$nid_upload['file_name'];
 		}else{
 			$sdata=array();
@@ -488,11 +530,18 @@ class Customer extends CI_Controller {
 			$this->session->set_userdata($sdata);
 		}
 
+		$deposit_slip_upload								=	$this->upload_model->upload_file('deposit_slip','ds'); //after upload
+		if(isset($deposit_slip_upload['file_name'])){
+			$customer_data['deposit_slip_path'] 			=	$deposit_slip_upload['file_name'];
+		}else{
+			$sdata=array();
+			$sdata['deposit_slip_error'] = $deposit_slip_upload['error'];
+			$this->session->set_userdata($sdata);
+		}
+
+
 		$purchase_order_upload								=	$this->upload_model->upload_file('purchase_order','purchase_order'); //after upload
 		if(isset($purchase_order_upload['file_name'])){
-			if($customer_detail->purchase_order != NULL){
-				unlink('purchase_order/'.$customer_detail->purchase_order);
-			}
 			$customer_data['purchase_order'] 				=	$purchase_order_upload['file_name'];
 		}else{
 			$sdata=array();
@@ -500,10 +549,19 @@ class Customer extends CI_Controller {
 			$this->session->set_userdata($sdata);
 		}
 
-		
+		// $current_stock_position 							=	$this->stock_model->get_stock_by_chassis_no($customer_data['chassis_no'])->stock_position;
+
+		// if($current_stock_position != 4 && $current_stock_position != 6){
+		// 	redirect('customer','refresh');
+		// }
+
+
+
 		if($this->session->userdata('token')==1){
 
 			$this->session->unset_userdata('token');
+
+			$customer_detail 									=	$this->customer_model->get_customer_by_id($customer_id);
 
 			$result												=	$this->customer_model->update_customer($customer_data, $customer_id);
 
@@ -511,7 +569,7 @@ class Customer extends CI_Controller {
 
 			$year_code 											=	substr($customer_detail->customer_code, 0,2);
 			
-			$update_code_data['customer_code']					=	$year_code.'-'.'00'.'-'.$customer_data['city_code'].'-'.$customer_data['model_code'].'-'.$customer_id;
+			$update_code_data['customer_code']					=	$year_code.'-'.'00'.'-'.$customer_data['city_code'].'-'.$model_detail->model_code.'-'.$customer_id;
 
 			$this->customer_model->update_customer($update_code_data,$customer_id);
 
@@ -823,8 +881,14 @@ class Customer extends CI_Controller {
 		$customer_id 										=	$this->input->post('customer_id');
 
 		$user_id 											=	$this->session->userdata('employee_id');
+
+		if($this->session->userdata('role')==15){
+			$sales_data['customer_detail']						=	$this->customer_model->get_customer_by_id($customer_id);
+		}else {
+			$sales_data['customer_detail']						=	$this->customer_model->get_customer_by_customer_id_and_user_id($customer_id,$user_id);
+		}
 		
-		$sales_data['customer_detail']						=	$this->customer_model->get_customer_by_customer_id_and_user_id($customer_id,$user_id);
+		
 
 		if($sales_data['customer_detail'] == NULL){
 			echo json_encode('Not Found!');

@@ -78,16 +78,16 @@ class Report extends CI_Controller {
 		$chassis_no											=	$this->input->post('chassis_no');
 		$payment_mode										=	$this->input->post('payment_mode');
 		$status												=	$this->input->post('status');
-		$date 												=	explode('-',$this->input->post('date'));
-		$start_date											=	$date[0];
-		$end_date											=	$date[1];
+		// $date 												=	explode('-',$this->input->post('date'));
+		$start_date											=	$this->input->post('start_date');
+		$end_date											=	$this->input->post('end_date');
 
 
 
 		if($this->session->userdata('role')==4){
 			$booking_data['customer_list']					=	$this->customer_model->get_all_customers_booking_data_by_search_criteria($zone_id,$city_id,$mkt_id,$model_id, $chassis_no, $payment_mode, $start_date,$end_date, $status, $this->session->userdata('employee_id'));
 		} else {
-			$booking_data['customer_list']						=	$this->customer_model->get_all_customers_booking_data_by_search_criteria($zone_id,$city_id,$mkt_id,$model_id, $chassis_no, $payment_mode, $start_date,$end_date, $status);
+			$booking_data['customer_list']					=	$this->customer_model->get_all_customers_booking_data_by_search_criteria($zone_id,$city_id,$mkt_id,$model_id, $chassis_no, $payment_mode, $start_date,$end_date, $status);
 		}
 
 		$booking_data['employee_list']						=	$this->employee_model->get_all_employees();

@@ -14,6 +14,9 @@
                     <li><a href="<?php echo base_url();?>inventory/dealer_transfer">Dealer Transfer</a></li>
                 </ul>
             </li>
+            <li><a href="<?php echo base_url();?>inventory/yard_transfer">Yard Transfer </a></li>
+            <li><a href="<?php echo base_url();?>inventory/dealer_transfer">Dealer Transfer</a></li>
+            <li><a href="<?php echo base_url();?>inventory/stock_return">Stock Return</a></li>
         </ul>
         </li>
 

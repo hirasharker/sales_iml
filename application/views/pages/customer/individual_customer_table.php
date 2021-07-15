@@ -60,7 +60,7 @@
 					<form action="<?php echo base_url(); ?>customer/customer_detail" method="post" target="_blank">
                       <input type="hidden" value="<?php echo $customer_detail->customer_id; ?>" name="customer_id">
                       <a onclick='this.parentNode.submit(); return false;' href="#" style="color:#005102"><i class="fa fa-edit" aria-hidden="true" ></i>detail</a>
-                  </form>
+                  	</form>
               	</td>
 
 			</tr>

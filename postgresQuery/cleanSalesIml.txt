@@ -1,9 +1,0 @@
-delete from tbl_customer;
-delete from tbl_checklist;
-delete from tbl_issued;
-delete from tbl_issued_detail;
-delete from tbl_received;
-delete from tbl_received_detail;
-delete from tbl_registration;
-delete from tbl_registration_detail;
-delete from tbl_stock;

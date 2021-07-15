@@ -12,6 +12,7 @@ class Inventory extends CI_Controller {
 		// }
 		$this->load->model('received_model','received_model',TRUE);
 		$this->load->model('issued_model','issued_model',TRUE);
+		$this->load->model('stock_return_model','returned_model',TRUE);
 		$this->load->model('dealer_transfer_model','dealer_transfer_model',TRUE);
 		$this->load->model('dealer_model','dealer_model',TRUE);
 		$this->load->model('stock_model','stock_model',TRUE);
@@ -623,4 +624,92 @@ class Inventory extends CI_Controller {
 		
 		$this->load->view('template/main_template',$report_data);
 	}
+
+
+	public function stock_return()
+	{
+		if($this->session->userdata('role') == 15 || $this->session->userdata('role')== 9 || $this->session->userdata('role')==3){
+
+			$data               				=   array();
+			$inventory_data 					=	array();
+			
+			$inventory_data['returned_list']	=	$this->returned_model->get_all_returns();
+			$inventory_data['model_list']		=	$this->model_model->get_all_models();
+			$inventory_data['yard_list']		=	$this->yard_model->get_all_delivery_yards();
+			$inventory_data['dealer_list']		=	$this->dealer_model->get_all_dealers_by_status($dealer_status = 2);
+			$inventory_data['stock_list']		=	$this->stock_model->get_all_stocks_for_isssue();
+			$inventory_data['employee_list']	=	$this->employee_model->get_all_employees();
+
+			
+
+	        $data['navigation'] =   $this->load->view('template/navigation','',TRUE);
+	        $data['content']    =   $this->load->view('pages/inventory/stock_return',$inventory_data,TRUE);
+	        $data['footer']     =   $this->load->view('template/footer','',TRUE);
+			$this->load->view('template/main_template',$data);
+
+		} else {
+			
+			redirect('dashboard','refresh');
+		}
+		
+	}
+
+	public function add_stock_return(){
+		$returned_data 										=	array();
+
+		$returned_data['user_id']							=	$this->session->userdata('employee_id');
+
+		$returned_data['yard_id']							=	$this->input->post('yard_id', '', TRUE);
+
+		$returned_data['returned_date']						=	$this->input->post('returned_date', '', TRUE);
+
+		$returned_data['dealer_id']							=	$this->input->post('dealer_id', '', TRUE);
+
+		$result 											=	$this->returned_model->add_stock_return_data($returned_data);
+
+		$count 												=	0;
+
+		$stock_return_detail_data 							=	array();
+
+		$stock_detail_data									=	array();
+
+		$stock_return_detail_data['returned_id']			=	$result;
+
+		$model_id						=	$this->input->post('model_id','',TRUE);
+		$model_name						=	$this->input->post('model_name','',TRUE);
+		$chassis_no						=	$this->input->post('chassis_no','',TRUE);
+		$engine_no						=	$this->input->post('engine_no','',TRUE);
+		$stock_id						=	$this->input->post('stock_id','',TRUE);
+
+
+		for ($i=0; $i < count($model_id) ; $i++) {
+			$stock_return_detail_data['model_id'] 					=	$model_id[$i];
+			$stock_return_detail_data['model_name'] 				=	$model_name[$i];
+			$stock_return_detail_data['chassis_no'] 				=	$chassis_no[$i];
+			$stock_return_detail_data['engine_no'] 					=	$engine_no[$i];
+			$stock_return_detail_data['stock_id'] 					=	$stock_id[$i];
+
+			$detail_result											=	$this->returned_model->add_stock_return_detail($stock_return_detail_data);
+
+			$stock_detail_data['returned_id']						=	$result;
+			$stock_detail_data['dealer_id']							=	NULL;
+			$stock_detail_data['issued_id']							=	NULL;
+			
+			$current_stock_position 								=	$this->stock_model->get_stock_by_id($stock_return_detail_data['stock_id'])->stock_position;
+			$stock_detail_data['stock_position']					=	$current_stock_position - 3;
+
+			$stock_update_result									=	$this->stock_model->update_stock($stock_detail_data, $stock_return_detail_data['stock_id']);
+		}
+
+		$session_data												=	array();
+
+		redirect('inventory/stock_return','refresh');
+	}
+
 }
+
+
+// STOCK RETURN
+
+
+	

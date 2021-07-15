@@ -104,14 +104,46 @@
                   </div>
                 </div>
                 
-                <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                <!-- <div class="form-group col-md-6 col-sm-12 col-xs-12">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Date </label>
                   <div id="reportrange_right" class="pull-left col-md-9 col-sm-9 col-xs-12" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc" >
                     <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
                     <span name="date">Click here to select range</span> <b class="caret"></b>
                     <input id="date" type="hidden" name="date" />
                   </div>
+                </div> -->
+
+                <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                  <label class="control-label col-md-2 col-sm-2 col-xs-12">From </label>
+                  <div class="col-md-4 col-sm-4 col-xs-12">
+                    <!-- <input type="text" id="datepicker" name="start_date"> -->
+                    <div class="control-group">
+                      <div class="controls">
+                        <div class="col-md-11 xdisplay_inputx form-group has-feedback">
+                          <input type="text" class="form-control has-feedback-left" id="single_cal3" placeholder="" aria-describedby="inputSuccess2Status3" name="start_date">
+                          <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                          <span id="inputSuccess2Status3" class="sr-only">(success)</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <label class="control-label col-md-2 col-sm-2 col-xs-12">To </label>
+                  
+                  <div class="col-md-4 col-sm-4 col-xs-12">
+                    <!-- <input type="text" id="datepicker1" name="end_date"> -->
+                    <div class="control-group">
+                      <div class="controls">
+                        <div class="col-md-11 xdisplay_inputx form-group has-feedback">
+                          <input type="text" class="form-control has-feedback-left" id="single_cal4" placeholder="" aria-describedby="inputSuccess2Status3" name="end_date">
+                          <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                          <span id="inputSuccess2Status3" class="sr-only">(success)</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+
               </form>
                 <script>
                   $(function() { 
@@ -242,11 +274,12 @@
                           var chassisNo= $('#chassisNo').val();
                           var paymentMode = $('#paymentMode').val();
                           var status = $('#status').val();
-                          var date   = $('#date').val();
+                          var startDate   = $('#single_cal3').val();
+                          var endDate   = $('#single_cal4').val();
                           $.ajax({
                                   type: "POST",
                                   url: "<?php echo base_url()?>report/generate_booking_report/",
-                                  data: { 'zone_id': zoneId, 'city_id' : cityId, 'mkt_id' : mktId, 'model_id': modelId,'chassis_no': chassisNo, 'payment_mode': paymentMode,'status': status, 'date': date  },
+                                  data: { 'zone_id': zoneId, 'city_id' : cityId, 'mkt_id' : mktId, 'model_id': modelId,'chassis_no': chassisNo, 'payment_mode': paymentMode,'status': status, 'start_date': startDate, 'end_date': endDate  },
                                   success: function(data){
                                       // Parse the returned json data
                                       var opts = $.parseJSON(data);
