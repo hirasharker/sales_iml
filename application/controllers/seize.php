@@ -13,6 +13,7 @@ class Seize extends CI_Controller {
 		$this->load->model('zone_model','zone_model',TRUE);
 		$this->load->model('city_model','city_model',TRUE);
 		$this->load->model('employee_model','employee_model',TRUE);
+		$this->load->model('customer_model','customer_model',TRUE);
 		
 	}
 
@@ -40,17 +41,15 @@ class Seize extends CI_Controller {
 		$seize_data['city_list']		=	$this->city_model->get_all_cities();
 		$seize_data['employee_list']	=	$this->employee_model->get_all_employees();
 
-		
 
         $data['navigation'] =   $this->load->view('template/navigation','',TRUE);
-        $data['content']    =   $this->load->view('pages/city/city',$seize_data,TRUE);
+        $data['content']    =   $this->load->view('pages/seize/seize',$seize_data,TRUE);
         $data['footer']     =   $this->load->view('template/footer','',TRUE);
 		$this->load->view('template/main_template',$data);
 	}
 
 	public function seize_depot()
 	{
-		echo "hello"; exit();
 		$data               =   array();
 		$seize_data 			=	array();
 		
@@ -98,4 +97,27 @@ class Seize extends CI_Controller {
 
 		redirect('city/index','refresh');
 	}
+
+
+
+	public function generate_customer_detail(){
+		$search_key 										=	$this->input->post('search_key');
+
+		$user_id 											=	$this->session->userdata('employee_id');
+
+		// if($this->session->userdata('role')==15){
+		// 	$customer_detail 									=	$this->customer_model->get_customer_by_search_key($search_key, $user_id = "")
+		// }else {
+		// 	$customer_detail 									=	$this->customer_model->get_customer_by_search_key($search_key, $user_id)
+		// }
+
+		$customer_detail 									=	$this->customer_model->get_customer_by_search_key($search_key);
+
+		echo json_encode($customer_detail);
+		// echo json_encode();
+			// a die here helps ensure a clean ajax call
+		die();
+	}
+
+
 }

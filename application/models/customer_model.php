@@ -35,6 +35,9 @@ class Customer_Model extends CI_Model {
         $result=$result_query->result();
         return $result;
     }
+
+    
+    
     
 
     public function get_all_customers_booking_data_by_search_criteria($zone_id='',$city_id='',$mkt_id='',$model_id='', $chassis_no = '', $payment_mode='',$start_date='',$end_date='',$status, $zhead_id=''){
@@ -543,6 +546,27 @@ class Customer_Model extends CI_Model {
         $this->db->from('tbl_customer');
         $result_query = $this->db->get();
         $result       = $result_query->row();
+        return $result;
+    }
+
+
+    public function get_customer_by_search_key($search_key){
+        $this->db->select('tbl_customer.*');
+        $this->db->from('tbl_customer');
+        
+        if(is_numeric($search_key)){
+            $this->db->where('customer_id', $search_key);
+            $this->db->or_where('engine_no', $search_key);
+            $this->db->or_where('chassis_no', $search_key);
+        }else {
+            $this->db->where('engine_no', $search_key);
+            $this->db->or_where('chassis_no', $search_key);
+        }
+        // $this->db->where('customer_id', $search_key);
+        
+
+        $result_query=$this->db->get();
+        $result=$result_query->row();
         return $result;
     }
 
