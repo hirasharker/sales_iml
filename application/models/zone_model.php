@@ -22,8 +22,9 @@ class Zone_Model extends CI_Model {
     }
 
     public function get_zone_by_id($zone_id){
-        $this->db->select('*');
+        $this->db->select('tbl_zone.*, ,tbl_employee.employee_name as zonal_head');
         $this->db->from('tbl_zone');
+        $this->db->join('tbl_employee','tbl_employee.employee_id = tbl_zone.zhead_id', 'left');
         $this->db->where('zone_id',$zone_id);
         $result_query=$this->db->get();
         $result=$result_query->row();

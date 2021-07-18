@@ -2,7 +2,7 @@
 <div class="">
   <div class="page-title">
     <div class="title_left">
-      <h3>Seize Depot <small></small></h3>
+      <h3>Seize Form <small></small></h3>
     </div>
 
     <div class="title_right">
@@ -53,6 +53,11 @@
                         </div>
                     </div>
                 </div>
+
+                <input id="stockId" type="hidden" name="stock_id">
+
+
+
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
                         <label class="control-label col-md-3 col-sm-12 col-xs-12">Customer ID </label>
@@ -154,7 +159,7 @@
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                     <label class="control-label col-md-3 col-sm-12 col-xs-12">Battery Condition </label>
                     <div class="col-md-8 col-sm-9 col-xs-12">
-                        <select class="form-control select-tag" name="vehicle_condition">
+                        <select class="form-control select-tag" name="battery_condition">
                           <option value="">select</option>
                           <option value="good">Good</option>
                           <option value="damaged">Damaged</option>
@@ -179,7 +184,7 @@
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                     <label class="control-label col-md-3 col-sm-12 col-xs-12">Key </label>
                     <div class="col-md-8 col-sm-9 col-xs-12">
-                        <select class="form-control select-tag" name="gas_cylinder">
+                        <select class="form-control select-tag" name="key_status">
                           <option value="">select</option>
                           <option value="found">Found</option>
                           <option value="not_found">Not Found</option>
@@ -191,10 +196,10 @@
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                     <label class="control-label col-md-3 col-sm-12 col-xs-12">Select Garage </label>
                     <div class="col-md-8 col-sm-9 col-xs-12">
-                        <select class="form-control select-tag" name="seize_depot_id">
+                        <select class="form-control select-tag" name="depot_id">
                           <option value="">select</option>
-                          <?php foreach($zone_list as $value){?>
-                          <option value="<?php echo $value->zone_id;?>"><?php echo $value->zone_name;?></option>
+                          <?php foreach($depot_list as $value){?>
+                          <option value="<?php echo $value->depot_id;?>"><?php echo $value->depot_name;?></option>
                           <?php }?>
                         </select>
                     </div>
@@ -204,7 +209,7 @@
                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
                         <label class="control-label col-md-3 col-sm-12 col-xs-12">Sieze Cost </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            <input type="number" class="form-control" name="tyre_quantity" min="0">
+                            <input type="number" class="form-control" name="seize_cost" min="0">
                         </div>
                     </div>
                 </div>
@@ -313,11 +318,18 @@
                       // Parse the returned json data
                     var opts = $.parseJSON(data);
                       // Use jQuery's each to iterate over the opts value
-                    $('#customerId').val(opts.customer_id);
-                    $('#customerName').val(opts.customer_name);
-                    $('#engineNo').val(opts.engine_no);
-                    $('#chassisNo').val(opts.chassis_no);
-                    console.log(opts.chassis_no);
+                    if(opts.seize_status == 't'){
+                      alert('Already under seize!')
+                    }else{
+                      $('#customerId').val(opts.customer_id);
+                      $('#customerName').val(opts.customer_name);
+                      $('#engineNo').val(opts.engine_no);
+                      $('#chassisNo').val(opts.chassis_no);
+                      $('#stockId').val(opts.stock_id);
+                      console.log(opts.chassis_no);
+                      console.log(opts.seize_status);
+                    }
+                    
                      
                   }
               });

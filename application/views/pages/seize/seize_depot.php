@@ -35,77 +35,193 @@
             </div>
             <div class="x_content" style="display:none">
             <br />
-            <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url();?>city/add_city/">
+            <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url();?>seize/add_seize_depot/">
 
             <div class="x_title">
-                <h2>City Info <small></small></h2>
+                <h2>Sieze Depot Info <small></small></h2>
                 <div class="clearfix"></div>
             </div>
 
             <div class="row">
 
-
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Customer ID/ Engine /Chassis </label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                            <input id="searchKey" type="text" class="form-control" name="search_key" placeholder="">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Customer ID </label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                            <input type="number" class="form-control" name="customer_id" placeholder="Customer ID">
-                        </div>
+                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                    <label class="control-label col-md-3 col-sm-12 col-xs-12">SVD/Garage </label>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <select class="form-control select-tag" name="depot_type">
+                          <option value="">select</option>
+                          <option value="svd">SVD</option>
+                          <option value="garage">Garage</option>
+                        </select>
                     </div>
                 </div>
 
+
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Customer Name </label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">SVD/Garage Name </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            <input type="text" class="form-control" name="customer_name" placeholder="Customer Name">
+                            <input type="text" class="form-control" name="depot_name" placeholder="">
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Engine No </label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                            <input type="text" class="form-control" name="engine_no" placeholder="Engine No">
-                        </div>
+                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                    <label class="control-label col-md-3 col-sm-12 col-xs-12">OWN/Rented </label>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <select class="form-control select-tag" name="ownership_type">
+                          <option value="">select</option>
+                          <option value="owned">Owned</option>
+                          <option value="rented">Rented</option>
+                        </select>
                     </div>
                 </div>
 
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Chassis No </label>
+                        <label class="control-label col-md-3 col-sm-12 col-xs-12">SVD/Garage Address </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            <input type="text" class="form-control" name="chassis_no" placeholder="Chassis No">
+                            <textarea class="form-control" rows="3" name="address" placeholder="" required></textarea>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Customer Name (if different from records) </label>
+                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Name of Land/Garage Owner</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            <input type="text" class="form-control" name="different_customer" placeholder="Different Customer">
+                            <input type="text" class="form-control" name="depot_owner" placeholder="Land/Garage Owner Name">
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Phone (if different from records) </label>
+                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Phone No </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            <input type="text" class="form-control" name="different_phone" placeholder="Different Phone">
+                            <input type="text" class="form-control" name="phone" placeholder="Phone No">
                         </div>
                     </div>
                 </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Space </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="text" class="form-control" name="space" placeholder="Space">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Vehicle Capacity</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="text" class="form-control" name="vehicle_capacity" placeholder="Vehicle Capacity">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Shade Space </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="text" class="form-control" name="shade_space" placeholder="Shade Space">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Advance </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="number" min="0" class="form-control" name="advance" placeholder="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Rent Type </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="text" class="form-control" name="rent_type" placeholder="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Per Day Rent (if applicabe) </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="number" min="0" class="form-control" name="daily_rent" placeholder="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Rent </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="number" min="0" class="form-control" name="rent" placeholder="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Adjust from Advance </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="number" min="0" class="form-control" name="adjust_from_advance" placeholder="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Payment Mode </label>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <select class="form-control select-tag" name="payment_mode">
+                          <option value="">select</option>
+                          <option value="cash">Cash</option>
+                          <option value="cheque">Cheque</option>
+                        </select>
+                    </div>
+                </div>
+
+                
+
+                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Select Area </label>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <select id="cityId" class="form-control select-tag" name="city_id" required>
+                          <option value="0">select</option>
+                          <?php foreach($city_list as $value){?> 
+                          <option cityCode="<?php echo $value->city_code; ?>" zoneId="<?php echo $value->zone_id; ?>" value="<?php echo $value->city_id; ?>"><?php echo $value->city_name;?></option>
+                          <?php }?>
+                      </select>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Unit Head </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="text" id="rmName" class="form-control" name="rm_name" placeholder="" readonly="true">
+                            <input type="hidden" id="rmId" class="form-control" name="rm_id">
+                            <input type="hidden" id="zoneId" class="form-control" name="zone_id">
+                            <input type="hidden" id="zheadId" class="form-control" name="zhead_id">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Divisional Head </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="text" id="zheadName" class="form-control" name="zhead_name" placeholder="" readonly="true">
+                        </div>
+                    </div>
+                </div>
+
+
 
                 <!-- <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
@@ -117,28 +233,7 @@
                 </div> -->
 
 
-                <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Select Zone </label>
-                    <div class="col-md-8 col-sm-9 col-xs-12">
-                        <select class="form-control select-tag" name="zone_id">
-                          <option value="">select</option>
-                          <?php foreach($zone_list as $value){?>
-                          <option value="<?php echo $value->zone_id;?>"><?php echo $value->zone_name;?></option>
-                          <?php }?>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-12 col-xs-12">Select Recovery Manager </label>
-                  <div class="col-md-8 col-sm-9 col-xs-12">
-                      <select class="form-control select-tag" name="rm_id" required>
-                          <option value="">Select</option>
-                          <?php foreach($employee_list as $value){if($value->role==2){?>
-                          <option value="<?php echo $value->employee_id?>"><?php echo $value->employee_name; ?></option>
-                          <?php }} ?>
-                      </select>
-                  </div>
-              </div>
+                
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
 				        <button class="btn btn-primary" type="reset">Reset</button>
@@ -155,7 +250,7 @@
     <div class="col-md-5 col-sm-6 col-xs-12">
       <div class="x_panel">
         <div class="x_title">
-          <h2>City List <small></small></h2>
+          <h2>Seize Depot List <small></small></h2>
           <ul class="nav navbar-right panel_toolbox">
             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
             </li>
@@ -180,29 +275,28 @@
           <table id="datatable-buttons" class="table table-striped table-bordered responsive">
             <thead>
               <tr>
-                <th>City Name</th>
-                <th>Zone</th>
-                <th>Code</th>
-                <th>Recovery Manager</th>
-                <th>Email</th>
+                <th>Depot Name</th>
+                <th>Chassis No</th>
+                <th>Engine No</th>
+                <!-- <th>Recovery Manager</th> -->
+                <!-- <th>Email</th> -->
                 <th>Action</th>
               </tr>
             </thead>
 
             <tbody>
-            <?php foreach($city_list as $value){?>
+            <?php foreach($depot_list as $value){?>
               <tr>
-                <td><?php echo $value->city_name; ?></td>
-                <td><?php echo $value->zone_name; ?></td>
-                <td><?php echo $value->city_code ?></td>
-                <td><?php foreach($employee_list as $emp_value){if($emp_value->employee_id==$value->rm_id){
+                <td><?php echo $value->depot_name; ?></td>
+                
+                <!-- <td><?php foreach($employee_list as $emp_value){if($emp_value->employee_id==$value->rm_id){
                       echo $emp_value->employee_name;
                 } }
                 ?></td>
                 <td><?php foreach($employee_list as $emp_value){if($emp_value->employee_id==$value->rm_id){
                       echo $emp_value->email_id;
                 } }
-                ?></td>
+                ?></td> -->
                 <td><a href="#">edit </a>|<a href="#"> delete</a></td>
               </tr>
             <?php }?>
@@ -215,51 +309,36 @@
 </div>
 </div>
 
-<script>
-  $(function() { 
-     
-      $( "#searchKey" ).keyup(function() {
+<script type="text/javascript">
+  $("#cityId").change(function(){
 
-          $('#report-view').html('');
-          var searchKey = $('#searchKey').val();
-          console.log('clicked!'+searchKey);
-          $.ajax({
-                  type: "POST",
-                  url: "<?php echo base_url()?>customer/generate_individual_customer/",
-                  data: { 'customer_id': searchKey  },
-                  success: function(data){
-                      // Parse the returned json data
-                    var opts = $.parseJSON(data);
-                      // Use jQuery's each to iterate over the opts value
-                    $('#report-view').html(opts);
-                     
-                  }
-              });
-      });
+    var cityId = $('#cityId option:selected').val();
+    var element = $(this).find('option:selected'); 
+    var zoneId = element.attr("zoneId");
+    console.log(zoneId);
 
-      $("#reset").click(function(){
-          $('#searchKey').val("");
-      });
+    console.log(cityId);
 
-      $("#generate").click(function(){ 
-          $('#report-view').html('');
+    
+    
 
-          var searchKey = $('#searchKey').val();
-          $.ajax({
-                  type: "POST",
-                  url: "<?php echo base_url()?>customer/generate_individual_customer/",
-                  data: { 'customer_id': searchKey},
-                  success: function(data){
-                      // Parse the returned json data
-                      var opts = $.parseJSON(data);
-                      // Use jQuery's each to iterate over the opts value
-                      $('#report-view').html(opts);
+    $.ajax({
+        type: "POST",
+        url: "<?php echo base_url()?>seize/ajax_generate_city_detail/",
+        data: { 'city_id': cityId, 'zone_id': zoneId  },
+        success: function(data){
+            // Parse the returned json data
+            var opts = $.parseJSON(data);
+            // Use jQuery's each to iterate over the opts value
+            console.log(opts);
 
-                  }
-              });
-          
-      });
+            $('#rmName').val(opts.recovery_manager);
+            $('#rmId').val(opts.rm_id);
+            $('#zoneId').val(opts.zone_id);
+            // $('#zheadId').val(opts.zonal_head);
+            console.log(opts.rm_id);
 
-
-  }); 
+        }
+    });
+  });
 </script>
