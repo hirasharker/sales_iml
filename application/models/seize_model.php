@@ -76,5 +76,28 @@ class seize_Model extends CI_Model {
     }
 
 
+    public function get_seize_by_search_key($search_key){
+        $this->db->select('tbl_seize.*, tbl_customer.customer_name, tbl_customer.seize_status,tbl_customer.stock_id, tbl_seize_depot.depot_name');
+        $this->db->from('tbl_seize');
+        $this->db->join('tbl_customer','tbl_customer.customer_id = tbl_seize.customer_id','left');
+        $this->db->join('tbl_seize_depot','tbl_seize_depot.depot_id = tbl_seize.depot_id','left');
+        
+        if(is_numeric($search_key)){
+            $this->db->where('tbl_seize.customer_id', $search_key);
+            $this->db->or_where('tbl_seize.engine_no', $search_key);
+            $this->db->or_where('tbl_seize.chassis_no', $search_key);
+        }else {
+            $this->db->where('tbl_seize.engine_no', $search_key);
+            $this->db->or_where('tbl_seize.chassis_no', $search_key);
+        }
+        // $this->db->where('customer_id', $search_key);
+        
+
+        $result_query=$this->db->get();
+        $result=$result_query->row();
+        return $result;
+    }
+
+
 }
 ?>

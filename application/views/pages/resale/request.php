@@ -19,7 +19,7 @@
 
   <div class="clearfix"></div>
   <div class="row">
-    <div class="col-md-10 col-sm-12 col-xs-12">
+    <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
             <!-- <h2>Add new Employees <small>click the plus icon to add new employee..</small></h2> -->
@@ -35,10 +35,10 @@
             </div>
             <div class="x_content" style="display:block;">
             <br />
-            <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url();?>registration/add_registration/" enctype='multipart/form-data'>
+            <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url();?>resale/add_request/" enctype='multipart/form-data'>
 
             <div class="x_title">
-                <h2>Registration Info <small class="alert"><?php if($this->session->userdata('error')!=NULL){  } ?></small></h2>
+                <h2>Resale Info <small class="alert"><?php if($this->session->userdata('error')!=NULL){  } ?></small></h2>
                 <div class="clearfix"></div>
             </div>
 
@@ -62,66 +62,362 @@
                 </div>
                 <?php }?>
 
-                <div class="form-group col-md-12 col-sm-12 col-xs-12 col-lg-12">
-                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Registration Area </label>
-                    <div class="col-md-8 col-sm-9 col-xs-12">
-                        <select class="form-control select-tag" name="registration_location" required>
-                          <option value="">select</option>
-                          <?php foreach($reg_area_list as $value){?>
-                          <option value="<?php echo $value->registration_area_id.'-'.$value->registration_zone_id;?>"><?php echo $value->registration_area_name;?></option>
-                          <?php }?>
-                        </select>
+                
+
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Customer ID/ Engine /Chassis </label>
+                        <div class="col-md-5 col-sm-5 col-xs-12">
+                            <input id="searchKey" type="text" class="form-control" name="search_key" placeholder="">
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-group col-md-12 col-sm-12 col-xs-12 col-lg-12">
-                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Select Yard </label>
-                    <div class="col-md-8 col-sm-9 col-xs-12">
-                        <select class="form-control select-tag" name="delivery_yard_id" id="delivery-yard">
-                          <option value="">select</option>
-                          <?php foreach($yard_list as $value){?>
-                          <option value="<?php echo $value->delivery_yard_id;?>"><?php echo $value->yard_name;?></option>
-                          <?php }?>
-                        </select>
+                <input id="stockId" type="hidden" name="stock_id">
+                <input id="seizeId" type="hidden" name="seize_id">
+
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Customer ID </label>
+                        <div class="col-md-5 col-sm-5 col-xs-12">
+                            <input type="number" id="customerId"  readonly="true" class="form-control" name="customer_id" placeholder="Customer ID">
+                        </div>
                     </div>
                 </div>
 
 
-                 <div class="form-group col-md-12 col-sm-12 col-xs-12 col-lg-12 item-container" id="manuallyAddItem" style="display: none;">
-                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Select Vehicle</label>
-                    <div class="col-md-8 col-sm-9 col-xs-12">
-                      <select class="form-control select-tag" id="item" name="item_id" >
-                          <option value="0">select</option>
-                          <?php foreach($stock_list as $value){?>
-                            <option value="<?php echo $value->stock_id; ?>" engineNo="<?php echo $value->engine_no; ?>" chassisNo="<?php echo $value->chassis_no;?>"><?php echo $value->chassis_no;?></option>
-                          <?php }?>
-                      </select>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Customer Name </label>
+                        <div class="col-md-5 col-sm-5 col-xs-12">
+                            <input  id="customerName"  readonly="true"  type="text" class="form-control" name="customer_name" placeholder="Customer Name">
+                        </div>
                     </div>
                 </div>
 
-                <div class="col-lg-12" id="create">
-                    <div id="quantity-error">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Engine No </label>
+                        <div class="col-md-5 col-sm-5 col-xs-12">
+                            <input type="text"  id="engineNo"  readonly="true" class="form-control" name="engine_no" placeholder="Engine No">
+                        </div>
                     </div>
-                    <input type="hidden" id="count" value="0" name="count">
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Chassis No </label>
+                        <div class="col-md-5 col-sm-5 col-xs-12">
+                            <input type="text"  id="chassisNo"  readonly="true" class="form-control" name="chassis_no" placeholder="Chassis No">
+                        </div>
+                    </div>
                 </div>
 
 
-                <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Registration Issue Date </label>
-                    <div class="col-md-8 col-sm-9 col-xs-12">
-                        <fieldset>
-                          <div class="control-group">
-                            <div class="controls">
-                              <div class="col-md-12 xdisplay_inputx form-group has-feedback">
-                                <input type="text" name="registration_issue_date" class="form-control has-feedback-left" id="single_cal5" placeholder="Invoice Date" aria-describedby="inputSuccess2Status4">
-                                <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
-                                <span id="inputSuccess2Status4" class="sr-only">(success)</span>
-                              </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Seized Date </label>
+                        <div class="col-md-5 col-sm-5 col-xs-12">
+                            <input type="text"  id="seizeDate"  readonly="true" class="form-control" name="seized_date" placeholder="Seized Date">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Vehicle Condition </label>
+                        <div class="col-md-5 col-sm-5 col-xs-12">
+                            <input type="text"  id="vehicleCondition"  readonly="true" class="form-control" name="vehicle_condition" placeholder="Vehicle Condition">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Tyre Quantity </label>
+                        <div class="col-md-5 col-sm-5 col-xs-12">
+                            <input type="text"  id="tyreQuantity"  readonly="true" class="form-control" name="tyre_quantity" placeholder="Tyre Quantity">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Battery Condition </label>
+                        <div class="col-md-5 col-sm-5 col-xs-12">
+                            <input type="text"  id="batteryCondition"  readonly="true" class="form-control" name="battery_condition" placeholder="Battery Condition">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Gas Cylinder </label>
+                        <div class="col-md-5 col-sm-5 col-xs-12">
+                            <input type="text"  id="gasCylinder"  readonly="true" class="form-control" name="gas_cylinder" placeholder="Gas Cylinder">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Key </label>
+                        <div class="col-md-5 col-sm-5 col-xs-12">
+                            <input type="text"  id="keyStatus"  readonly="true" class="form-control" name="key_status" placeholder="Key">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                        <label class="control-label col-md-3 col-sm-12 col-xs-12">SVD/Garage Name </label>
+                        <div class="col-md-5 col-sm-5 col-xs-12">
+                            <input type="text"  id="depotName"  readonly="true" class="form-control" name="depot_name" placeholder="SVD/Garage Name">
+                            <input id="depotId" type="hidden" name="depot_id">
+                        </div>
+                    </div>
+                </div>
+
+                
+
+              
+                <div class="row">
+                    <div class="page-title">
+                      <div class="title_left">
+                        <h3>Customer 1 <small></small></h3>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                  
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="customer_name[]" placeholder="Customer Name">
                             </div>
-                          </div>
-                        </fieldset>
+                        </div>
                     </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" value="0" name="proposed_value[]" placeholder="Proposed Value">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="phone_no[]" placeholder="Phone No">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <select class="form-control select-tag" name="sales_mode[]">
+                                  <option value="">Sales Mode</option>
+                                  <option value="1">Credit</option>
+                                  <option value="2">Semi Cash</option>
+                                  <option value="3">Cash</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" value="0" name="downpayment[]" placeholder="Downpayment">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" value="0" name="period[]" placeholder="Tenure">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" value="0" name="interest_rate[]" placeholder="Interest Rate">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="reference[]" placeholder="Reference">
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
+
+
+                <div class="row">
+                    <div class="page-title">
+                      <div class="title_left">
+                        <h3>Customer 2 <small></small></h3>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                  
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="customer_name[]" placeholder="Customer Name">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="proposed_value[]" placeholder="Proposed Value">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="phone_no[]" placeholder="Phone No">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <select class="form-control select-tag" name="sales_mode[]">
+                                  <option value="">Sales Mode</option>
+                                  <option value="1">Credit</option>
+                                  <option value="2">Semi Cash</option>
+                                  <option value="3">Cash</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" value="0" name="downpayment[]" placeholder="Downpayment">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" value="0" name="period[]" placeholder="Tenure">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" value="0" name="interest_rate[]" placeholder="Interest Rate">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="reference[]" placeholder="Reference">
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+
+                <div class="row">
+                    <div class="page-title">
+                      <div class="title_left">
+                        <h3>Customer 3 <small></small></h3>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                  
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="customer_name[]" placeholder="Customer Name">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" value="0" name="proposed_value[]" placeholder="Proposed Value">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="phone_no[]" placeholder="Phone No">
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <select class="form-control select-tag" name="sales_mode[]">
+                                  <option value="">Sales Mode</option>
+                                  <option value="1">Credit</option>
+                                  <option value="2">Semi Cash</option>
+                                  <option value="3">Cash</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" value="0" name="downpayment[]" placeholder="Downpayment">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" value="0" name="period[]" placeholder="Tenure">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" value="0" name="interest_rate[]" placeholder="Interest Rate">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input type="text" class="form-control" name="reference[]" placeholder="Reference">
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                 
+
+
+                
 
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
@@ -195,106 +491,74 @@
 </div>
 </div>
 
+<form class="form-horizontal form-label-left" method="post" action="<?php echo base_url();?>resale/generate_seize_detail/">
+    <input type="text" name="search_key">
+    <input type="submit" >
+</form>
+
+
 <script>
-  $("#delivery-yard").change(function(){
-          // $('#subDistrictId').val('');
-          // $('#subDistrictId').change();
-          if($('#delivery-yard').val()!="NULL"){
-            $('#item').empty();
-            $(".item-container").css("display", "block");
-            // $('.sub-district-container').show(500);
-          }
-          $('#create').empty();
-          var preCode = '<div id="quantity-error">'
-                        +'</div>'
-                        +'<input type="hidden" id="count" value="0" name="count">';
-          $('#create').append(preCode);
-          var yardId = $('#delivery-yard option:selected').val();
-          console.log(yardId);
+  $(function() { 
+     
+      $( "#searchKey" ).keyup(function() {
+
+          $('#customerId').val("");
+          $('#customerName').val("");
+          $('#engineNo').val("");
+          $('#chassisNo').val("");
+          $('#dealerName').val("");
+          $('#stockId').val("");
+
+          $('#vehicleCondition').val("");
+          $('#tyreQuantity').val("");
+          $('#batteryCondition').val("");
+          $('#gasCylinder').val("");
+          $('#keyStatus').val("");
+          $('#depotName').val("");
+          $('#depotId').val("");
+          $('#seizeId').val("");
+
+          $('#report-view').html('');
+          var searchKey = $('#searchKey').val();
+          console.log('clicked!'+searchKey);
           $.ajax({
-              type: "POST",
-              url: "<?php echo base_url()?>registration/ajax_generate_items/",
-              data: { 'yard_id': yardId },
-              success: function(data){
-                  // Parse the returned json data
-                  var opts = $.parseJSON(data);
-                  // Use jQuery's each to iterate over the opts value
-                  console.log(opts);
-                  $('#item').append('<option value="">Select </option>');
+                  type: "POST",
+                  url: "<?php echo base_url()?>resale/generate_seize_detail/",
+                  data: { 'search_key': searchKey  },
+                  success: function(data){
+                      // Parse the returned json data
+                    var opts = $.parseJSON(data);
+                    console.log(opts);
+                      // Use jQuery's each to iterate over the opts value
+                    if(opts.seize_status == 't'){
+                      $('#customerId').val(opts.customer_id);
+                      $('#customerName').val(opts.customer_name);
+                      $('#engineNo').val(opts.engine_no);
+                      $('#chassisNo').val(opts.chassis_no);
+                      $('#stockId').val(opts.stock_id);
+                      $('#vehicleCondition').val(opts.vehicle_condition);
+                      $('#tyreQuantity').val(opts.tyre_quantity);
+                      $('#batteryCondition').val(opts.battery_condition);
+                      $('#gasCylinder').val(opts.gas_cylinder);
+                      $('#keyStatus').val(opts.key_status);
+                      $('#depotName').val(opts.depot_name);
+                      $('#depotId').val(opts.depot_id);
+                      $('#seizeId').val(opts.seize_id);
 
-                  $.each(opts, function(i, d) {
-                    console.log(d.sub_district_id);
-                      // You will need to alter the below to get the right values from your json object.  Guessing that d.id / d.modelName are columns in your carModels data
-                      $('#item').append('<option value="' + d.stock_id + '" modelId="'+d.model_id+'" modelName="'+d.model_name+'" engineNo="'+d.engine_no+'" chassisNo="'+d.chassis_no+'">' + d.chassis_no + '</option>');
-
-                  });
-              }
-          });
+                    }else {
+                      alert('Currently not under seize!')
+                      console.log(opts.chassis_no);
+                      console.log(opts.seize_status);
+                    }
+                    
+                     
+                  }
+              });
       });
-</script>
 
-<script>
-        $( "#item" ).change(function() {
-          // alert( "Handler for .change() called."+this.value);
-          var element = $(this).find('option:selected'); 
-          var chassisNo = element.attr("chassisNo");
-          var engineNo = element.attr("engineNo");
-          var modelId = element.attr("modelId");
-          var modelName = element.attr("modelName");
+      $("#reset").click(function(){
+          $('#searchKey').val("");
+      });
 
-          // var itemName = $('#item option:selected').text();
-          count = document.getElementById('count').value;
-
-          if(count == 0){
-            var itemHeader  = '<div class="col-lg-8 col-lg-offset-3" style="margin-bottom: 10px;border-bottom: 2px solid #09192a;" id="itemHeader">'
-            +'<div class="col-lg-6"><label class="lblItem">Engine No</label></div>'
-            +'<div class="col-lg-6"><label class="lblItem">Chassis No</label></div>'
-            +'</div>';
-            
-            $('#create').append(itemHeader);
-          }
-
-          var val = $('#item option:selected').val();
-          if(val!=0){
-            count++;
-            var code = '<div class="col-lg-8 col-lg-offset-3" style="margin-bottom: 10px">'
-                        +'<div class="col-lg-6">'
-                          +'<input type="hidden" class="stock-id" name="stock_id[]" value="'+val+'" />'
-                          +'<label class="lblEngineNo">'+engineNo+'</label>'
-                          +'<input class="form-control engine-no" type="hidden" name="engine_no[]" value="'+engineNo+'">'
-                          +'<input class="form-control model-id" type="hidden" name="model_id[]" value="'+modelId+'">'
-                          +'<input class="form-control model_name" type="hidden" name="model_name[]" value="'+modelName+'">'
-                          
-                          +'</div>'
-                          +'<div class="col-lg-5">'
-                            +'<label class="lblChassisNo">'+chassisNo+'</label>'
-                            +'<input class="form-control chassis-no" type="hidden" name="chassis_no[]" value="'+chassisNo+'">'
-                          +'</div>'
-                        +'<a href="" class="col-lg-1 remove"><i class="fa fa-times fa-lg text-danger" aria-hidden="true"></i></a></div>';
-
-                  $('#create').append(code);
-                    document.getElementById('count').value = count;
-
-            $("#item option[value='"+this.value+"']").remove();
-
-        }
-          
-        });
-
-       $('#create').on('click', '.remove', function(e){ //Once remove button is clicked
-            e.preventDefault();
-             var engineNo = $(this).parent('div').find(".engine-no").val();
-             var chassisNo = $(this).parent('div').find('.chassis-no').val();
-             var stockId = $(this).parent('div').find('.stock-id').val();
-             // alert(itemId);
-             count--;
-             document.getElementById('count').value = count;
-            $('#item').append('<option value="'+stockId+'" engineNo="'+engineNo+'" chassisNo="'+chassisNo+'">'+chassisNo+'</option>');
-            $(this).parent('div').remove(); //Remove field html
-
-            if(count == 0){
-              $('#itemHeader').remove();
-            }
-        });
-
+  }); 
 </script>

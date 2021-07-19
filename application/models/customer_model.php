@@ -551,8 +551,9 @@ class Customer_Model extends CI_Model {
 
 
     public function get_customer_by_search_key($search_key){
-        $this->db->select('tbl_customer.*');
+        $this->db->select('tbl_customer.*, tbl_dealer.dealer_name');
         $this->db->from('tbl_customer');
+        $this->db->join('tbl_dealer','tbl_dealer.dealer_id = tbl_customer.dealer_id','left');
         
         if(is_numeric($search_key)){
             $this->db->where('customer_id', $search_key);

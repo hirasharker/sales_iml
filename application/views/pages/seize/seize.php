@@ -307,6 +307,12 @@
      
       $( "#searchKey" ).keyup(function() {
 
+          $('#customerId').val("");
+          $('#customerName').val("");
+          $('#engineNo').val("");
+          $('#chassisNo').val("");
+          $('#stockId').val("");
+
           $('#report-view').html('');
           var searchKey = $('#searchKey').val();
           console.log('clicked!'+searchKey);
@@ -338,9 +344,6 @@
       $("#reset").click(function(){
           $('#searchKey').val("");
       });
-
-      
-
 
   }); 
 </script>
