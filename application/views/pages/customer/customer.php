@@ -1203,10 +1203,10 @@
 
 <script>
   $(function() { 
-      $("#period option[value='3']").remove();
-      $("#period option[value='6']").remove();
-      $("#period option[value='9']").remove();
-      $("#period option[value='12']").remove();
+      // $("#period option[value='3']").remove();
+      // $("#period option[value='6']").remove();
+      // $("#period option[value='9']").remove();
+      // $("#period option[value='12']").remove();
       // $("#period option[value='15']").remove();
 
 
@@ -1390,7 +1390,8 @@
           var chassisNo = $('#chassisNo option:selected').val();
           var period  = $('#period option:selected').val();
           var modelId = $("#modelId"). val();
-         
+          var paymentMode = $("#paymentMode").val();
+
           $.ajax({
               type: "POST",
               url: "<?php echo base_url()?>customer/ajax_generate_engine_no/",
@@ -1398,56 +1399,59 @@
               success: function(data){
                   var opts = $.parseJSON(data);
                   var totalPrice  = opts.credit_price;
-                  switch(period){
-                    case "1":
-                    case "2":
-                    case "3":
-                      console.log(period);
+                  if(paymentMode == 2){
+                    switch(period){
+                      case "1":
+                      case "2":
+                      case "3":
+                        console.log(period);
 
-                      if(modelId == 71 || modelId == 72){
-                        $(".additional-charge-container").css("display", "block");
-                      } else {
+                        if(modelId == 71 || modelId == 72){
+                          $(".additional-charge-container").css("display", "block");
+                        } else {
+                          $(".additional-charge-container").css("display", "none");
+                          $('#totalPrice').val(parseFloat(totalPrice) + 5000);
+                        }
+                        break;
+                      case "6":
+                        if(modelId == 71 || modelId == 72){
+                          $(".additional-charge-container").css("display", "block");
+                        } else {
+                          $(".additional-charge-container").css("display", "none");
+                          $('#totalPrice').val(parseFloat(totalPrice) + 10000);
+                        }
+                        break;
+                      case "9":
+                        if(modelId == 71 || modelId == 72){
+                          $(".additional-charge-container").css("display", "block");
+                        } else {
+                          $(".additional-charge-container").css("display", "none");
+                          $('#totalPrice').val(parseFloat(totalPrice) + 15000);
+                        }
+                        break;
+                      case "12":
+                        if(modelId == 71 || modelId == 72){
+                          $(".additional-charge-container").css("display", "block");
+                        } else {
+                          $(".additional-charge-container").css("display", "none");
+                          $('#totalPrice').val(parseFloat(totalPrice) + 20000);
+                        }
+                        break;
+                      case "15":
+                        if(modelId == 71 || modelId == 72){
+                          $(".additional-charge-container").css("display", "block");
+                        } else {
+                          $(".additional-charge-container").css("display", "none");
+                          $('#totalPrice').val(parseFloat(totalPrice) + 30000);
+                        }
+                        break;
+                      default:
                         $(".additional-charge-container").css("display", "none");
-                        $('#totalPrice').val(parseFloat(totalPrice) + 5000);
-                      }
-                      break;
-                    case "6":
-                      if(modelId == 71 || modelId == 72){
-                        $(".additional-charge-container").css("display", "block");
-                      } else {
-                        $(".additional-charge-container").css("display", "none");
-                        $('#totalPrice').val(parseFloat(totalPrice) + 10000);
-                      }
-                      break;
-                    case "9":
-                      if(modelId == 71 || modelId == 72){
-                        $(".additional-charge-container").css("display", "block");
-                      } else {
-                        $(".additional-charge-container").css("display", "none");
-                        $('#totalPrice').val(parseFloat(totalPrice) + 15000);
-                      }
-                      break;
-                    case "12":
-                      if(modelId == 71 || modelId == 72){
-                        $(".additional-charge-container").css("display", "block");
-                      } else {
-                        $(".additional-charge-container").css("display", "none");
-                        $('#totalPrice').val(parseFloat(totalPrice) + 20000);
-                      }
-                      break;
-                    case "15":
-                      if(modelId == 71 || modelId == 72){
-                        $(".additional-charge-container").css("display", "block");
-                      } else {
-                        $(".additional-charge-container").css("display", "none");
-                        $('#totalPrice').val(parseFloat(totalPrice) + 30000);
-                      }
-                      break;
-                    default:
-                      $(".additional-charge-container").css("display", "none");
-                      $('#totalPrice').val(parseFloat(totalPrice));
-                      break;
-                  } // Switch---
+                        $('#totalPrice').val(parseFloat(totalPrice));
+                        break;
+                    } // Switch---
+                  }
+                  
                  
               }
           });
@@ -1488,16 +1492,16 @@
             $('#period').val("0");
             $('#interestRate').val("0");
             $('#downpayment').val("0");
-            $("#period option[value='24']").remove();
-            $("#period option[value='30']").remove();
-            $("#period option[value='36']").remove();
-            $("#period option[value='42']").remove();
-            $('#period').append('<option value="3">3</option>');
-            $('#period').append('<option value="6">6</option>');
-            $('#period').append('<option value="9">9</option>');
-            $('#period').append('<option value="12">12</option>');
-            $('#period').append('<option value="18">18</option>');
-            $('#period').append('<option value="15">15</option>');
+            $("#period option[value='15']").remove();
+            $("#period option[value='18']").remove();
+            // $("#period option[value='36']").remove();
+            // $("#period option[value='42']").remove();
+            // $('#period').append('<option value="3">3</option>');
+            // $('#period').append('<option value="6">6</option>');
+            // $('#period').append('<option value="9">9</option>');
+            // $('#period').append('<option value="12">12</option>');
+            // $('#period').append('<option value="18">18</option>');
+            // $('#period').append('<option value="15">15</option>');
           } else{
             $('#period').prop('disabled', false);
             $('#totalPrice').prop('disabled', false);
@@ -1506,16 +1510,16 @@
             $('#period').val("0");
             $('#interestRate').val("0");
             $('#downpayment').val("0");
-            $("#period option[value='3']").remove();
-            $("#period option[value='6']").remove();
-            $("#period option[value='9']").remove();
-            $("#period option[value='12']").remove();
-            $("#period option[value='15']").remove();
-            $("#period option[value='18']").remove();
-            $('#period').append('<option value="24">24</option>');
-            $('#period').append('<option value="30">30</option>');
-            $('#period').append('<option value="36">36</option>');
-            $('#period').append('<option value="42">42</option>');
+            // $("#period option[value='3']").remove();
+            // $("#period option[value='6']").remove();
+            // $("#period option[value='9']").remove();
+            // $("#period option[value='12']").remove();
+            // $("#period option[value='15']").remove();
+            // $("#period option[value='18']").remove();
+            $('#period').append('<option value="15">15</option>');
+            $('#period').append('<option value="18">18</option>');
+            // $('#period').append('<option value="36">36</option>');
+            // $('#period').append('<option value="42">42</option>');
           }
           // $('#zoneId').val(zoneId);
       });
