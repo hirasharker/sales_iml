@@ -425,10 +425,10 @@
                       <option value="12">12</option>
                       <option value="15">15</option>
                       <option value="18">18</option>
-                      <option value="24">24</option>
+                      <!-- <option value="24">24</option>
                       <option value="30">30</option>
                       <option value="36">36</option>
-                      <option value="42">42</option>
+                      <option value="42">42</option> -->
                       <!-- <option value="4">Corporate</option> -->
                       </select>
                   </div>
@@ -1207,7 +1207,7 @@
       $("#period option[value='6']").remove();
       $("#period option[value='9']").remove();
       $("#period option[value='12']").remove();
-      $("#period option[value='15']").remove();
+      // $("#period option[value='15']").remove();
 
 
       $("#reference").change(function(){ 

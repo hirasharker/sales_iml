@@ -76,6 +76,9 @@
 
                 <input id="stockId" type="hidden" name="stock_id">
                 <input id="seizeId" type="hidden" name="seize_id">
+                <input id="cityId" type="hidden" name="city_id">
+                <input id="rmId" type="hidden" name="rm_id">
+                <input id="zheadId" type="hidden" name="zhead_id">
 
 
                 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -496,13 +499,15 @@
     <input type="submit" >
 </form>
 
-
 <script>
   $(function() { 
      
       $( "#searchKey" ).keyup(function() {
 
           $('#customerId').val("");
+          $('#cityId').val("");
+          $('#rmId').val("");
+          $('#zheadId').val("");
           $('#customerName').val("");
           $('#engineNo').val("");
           $('#chassisNo').val("");
@@ -544,6 +549,11 @@
                       $('#depotName').val(opts.depot_name);
                       $('#depotId').val(opts.depot_id);
                       $('#seizeId').val(opts.seize_id);
+                      $('#cityId').val(opts.city_id);
+                      $('#rmId').val(opts.rm_id);
+                      $('#zheadId').val(opts.seize_id);
+
+
 
                     }else {
                       alert('Currently not under seize!')

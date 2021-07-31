@@ -83,7 +83,8 @@
                                     <thead>
                                     <tr>
                                         <th>Customer ID</th>
-                                        <th>Stock ID</th>
+                                        <th>Engine No</th>
+                                        <th>Chassis No</th>
                                         <th>RO</th>
                                         <th>Request Timestamp</th>
                                         <th>Action</th>
@@ -93,7 +94,8 @@
                                     <?php foreach($pending_resale_list as $value){ ?>
                                         <tr>
                                             <td><?php echo $value->customer_id; ?></td>
-                                            <td><?php echo $value->stock_id; ?></td>
+                                            <td><?php echo $value->engine_no; ?></td>
+                                            <td><?php echo $value->chassis_no; ?></td>
                                             <td><?php echo $value->user_id; ?></td>
                                             <td><?php echo $value->time_stamp; ?></td>
                                             <td><a type="button" class="btn btn-primary approve" data-toggle="modal" data-target="#approve" data-whatever="@mdo" data-resale-id="<?php echo $value->resale_id; ?>">approve</a>
@@ -291,7 +293,7 @@
 
             $.ajax({
               type: "POST",
-              url: "<?php echo base_url()?>approval_rm/ajax_generate_resale_detail_to_approve/",
+              url: "<?php echo base_url()?>approval_resale/ajax_generate_resale_detail_to_approve/",
               data: { 'resale_id': resaleId },
               success: function(data){
                 // Parse the returned json data

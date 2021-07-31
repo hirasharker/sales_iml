@@ -46,12 +46,10 @@ class Resale extends CI_Controller {
 		$data               				=   array();
 		$resale_data 					=	array();
 		
-		$resale_data['registration_list']	=	$this->reg_model->get_all_registrations();
+
 		$resale_data['model_list']	=	$this->model_model->get_all_models();
 		$resale_data['yard_list']		=	$this->yard_model->get_all_delivery_yards();
 		$resale_data['employee_list']	=	$this->employee_model->get_all_employees();
-		$resale_data['reg_area_list']	=	$this->reg_model->get_all_registration_areas();
-		$resale_data['bank_list']		=	$this->bank_model->get_all_banks();
 
 		
 
@@ -66,10 +64,13 @@ class Resale extends CI_Controller {
 		$resale_data 										=	array();
 
 		$resale_data['user_id']								=	$this->session->userdata('employee_id');
-
 		$resale_data['seize_id']							=	$this->input->post('seize_id', '0', TRUE);
-
+		$resale_data['previous_customer_id']				=	$this->input->post('customer_id', '0', TRUE);
 		$resale_data['stock_id']							=	$this->input->post('stock_id', '0', TRUE);
+		$resale_data['city_id']							=	$this->input->post('city_id', '0', TRUE);
+		$resale_data['ro_id']							=	$this->session->userdata('employee_id');
+		$resale_data['rm_id']							=	$this->input->post('rm_id', '0', TRUE);
+		$resale_data['zhead_id']							=	$this->input->post('zhead_id', '0', TRUE);
 
 		$result 											=	$this->resale_model->add_resale($resale_data);
 
@@ -84,6 +85,7 @@ class Resale extends CI_Controller {
 		$phone_no						=	$this->input->post('phone_no','',TRUE);
 		$proposed_value						=	$this->input->post('proposed_value','0',TRUE);
 		$sales_mode						=	$this->input->post('sales_mode','0',TRUE);
+		$downpayment						=	$this->input->post('downpayment','0',TRUE);
 		$period						=	$this->input->post('period','0',TRUE);
 		$interest_rate						=	$this->input->post('interest_rate','0',TRUE);
 		$reference						=	$this->input->post('reference','',TRUE);
@@ -97,6 +99,7 @@ class Resale extends CI_Controller {
 			$resale_detail_data['proposed_value'] 				=	$proposed_value[$i];
 			$resale_detail_data['sales_mode'] 					=	$sales_mode[$i];
 			$resale_detail_data['period'] 					=	$period[$i];
+			$resale_detail_data['downpayment'] 					=	$downpayment[$i];
 			$resale_detail_data['interest_rate'] 					=	$interest_rate[$i];
 			$resale_detail_data['reference'] 					=	$reference[$i];
 

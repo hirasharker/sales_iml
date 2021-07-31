@@ -77,8 +77,9 @@ class seize_Model extends CI_Model {
 
 
     public function get_seize_by_search_key($search_key){
-        $this->db->select('tbl_seize.*, tbl_customer.customer_name, tbl_customer.seize_status,tbl_customer.stock_id, tbl_seize_depot.depot_name');
+        $this->db->select('tbl_seize.*, tbl_customer.customer_name, tbl_customer.city_id, tbl_customer.zhead_id, tbl_customer.dealer_id, tbl_customer.seize_status,tbl_customer.stock_id, tbl_city.rm_id, tbl_seize_depot.depot_name');
         $this->db->from('tbl_seize');
+        $this->db->join('tbl_city', 'tbl_city.city_id = tbl_seize.city_id', 'left');
         $this->db->join('tbl_customer','tbl_customer.customer_id = tbl_seize.customer_id','left');
         $this->db->join('tbl_seize_depot','tbl_seize_depot.depot_id = tbl_seize.depot_id','left');
         

@@ -54,32 +54,33 @@ class Seize extends CI_Controller {
 
 	public function add_seize()
 	{
-		$seize_data						=	array();
+		$seize_data								=	array();
 
-		$seize_data['user_id']			=	$this->session->userdata('employee_id');
-		$seize_data['user_name']			=	$this->session->userdata('email_id');
+		$seize_data['user_id']					=	$this->session->userdata('employee_id');
+		$seize_data['user_name']				=	$this->session->userdata('email_id');
 
 		$seize_data['customer_id']				=	$this->input->post('customer_id','0',TRUE);
 		$seize_data['engine_no']				=	$this->input->post('engine_no','',TRUE);
 		$seize_data['chassis_no']				=	$this->input->post('chassis_no','',TRUE);
-		$seize_data['customer_name']				=	$this->input->post('customer_name','',TRUE);
-		$seize_data['different_customer']				=	$this->input->post('different_customer','',TRUE);
-		$seize_data['different_phone']				=	$this->input->post('different_phone','',TRUE);
-		$seize_data['seize_location']				=	$this->input->post('seize_location','',TRUE);
-		$seize_data['vehicle_condition']				=	$this->input->post('vehicle_condition','',TRUE);
-		$seize_data['tyre_quantity']				=	$this->input->post('tyre_quantity','0',TRUE);
-		$seize_data['battery_condition']				=	$this->input->post('battery_condition','',TRUE);
+		$seize_data['customer_name']			=	$this->input->post('customer_name','',TRUE);
+		$seize_data['different_customer']		=	$this->input->post('different_customer','',TRUE);
+		$seize_data['different_phone']			=	$this->input->post('different_phone','',TRUE);
+		$seize_data['seize_location']			=	$this->input->post('seize_location','',TRUE);
+		$seize_data['vehicle_condition']		=	$this->input->post('vehicle_condition','',TRUE);
+		$seize_data['tyre_quantity']			=	$this->input->post('tyre_quantity','0',TRUE);
+		$seize_data['battery_condition']		=	$this->input->post('battery_condition','',TRUE);
 		$seize_data['gas_cylinder']				=	$this->input->post('gas_cylinder','',TRUE);
 		$seize_data['key_status']				=	$this->input->post('key_status','',TRUE);
-		$seize_data['depot_id']				=	$this->input->post('depot_id','0',TRUE);
+		$seize_data['depot_id']					=	$this->input->post('depot_id','0',TRUE);
+		$seize_data['city_id']					=	$this->input->post('city_id','0',TRUE);
 		$seize_data['seize_cost']				=	$this->input->post('seize_cost','0',TRUE);
 
 
-		$result							=	$this->seize_model->add_seize($seize_data);
+		$result									=	$this->seize_model->add_seize($seize_data);
 
 		if($result){
-			$stock_id 									=	$this->input->post('stock_id','',TRUE);
-			$data['seize_status'] 						=	true;
+			$stock_id 							=	$this->input->post('stock_id','',TRUE);
+			$data['seize_status'] 				=	true;
 			$this->stock_model->update_stock($data, $stock_id);
 			$this->customer_model->update_customer($data, $seize_data['customer_id']);
 		}
@@ -137,24 +138,7 @@ class Seize extends CI_Controller {
 	}
 
 
-	public function add_city()
-	{
-		$seize_data						=	array();
-
-		$seize_data['user_id']			=	$this->session->userdata('employee_id');
-		$seize_data['user_name']			=	$this->session->userdata('email_id');
-		$seize_data['rm_id']				=	$this->input->post('rm_id','',TRUE);
-		$seize_data['city_name']			=	$this->input->post('city_name','',TRUE);
-		$seize_data['city_code']			=	$this->input->post('city_code','',TRUE);
-		$seize_data['zone_id']			=	$this->input->post('zone_id','',TRUE);
-
-		$result							=	$this->city_model->add_city($seize_data);
-
-		redirect('city/index','refresh');
-	}
-
-
-
+	
 	public function generate_customer_detail(){
 		$search_key 										=	$this->input->post('search_key');
 

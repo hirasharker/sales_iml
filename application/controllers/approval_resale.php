@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Approval_Rm extends CI_Controller {
+class Approval_Resale extends CI_Controller {
 	public function __construct(){
 		parent:: __construct();
 		date_default_timezone_set('Asia/Dhaka');
@@ -62,19 +62,251 @@ class Approval_Rm extends CI_Controller {
 			
 			$status 									=	array(12,14);
 			$resale_data['denied_resale_list']		=	$this->resale_model->get_all_resales_by_status($status);
-
-			// echo '<pre>';print_r($resale_data['pending_customer_list']); echo '</pre>';exit();
 		}
 		
-		// echo '<pre>';print_r($resale_data['pending_resale_list']); echo '</pre>';exit();
-		// $resale_data['model_list']		=	$this->model_model->get_all_models();
-
-
         $data['navigation'] =   $this->load->view('template/navigation','',TRUE);
-        $data['content']    =   $this->load->view('pages/approvals/rm_resale',$resale_data,TRUE);
+        $data['content']    =   $this->load->view('pages/approvals/approval_resale/rm_resale',$resale_data,TRUE);
         $data['footer']     =   $this->load->view('template/footer','',TRUE);
 		$this->load->view('template/main_template',$data);
 	}
+
+	//RM Approval Section starts here-------------------------
+
+	//RM = Unit Head
+
+	public function unit_head()
+	{
+		
+
+		if($this->session->userdata('role')!=2 && $this->session->userdata('role')!=15){
+			redirect('dashboard','refresh');
+		}
+		$data               =   array();
+		$resale_data		=	array();
+		
+		if($this->session->userdata('role')!=15){
+			$status 									=	array(0,2);
+			$resale_data['pending_resale_list']		=	$this->resale_model->get_all_resales_by_rm_id_and_status($this->session->userdata('employee_id'), $status);
+			
+			
+			$status 									=	array(12,14);
+			$resale_data['denied_customer_list']		=	$this->customer_model->get_all_resales_by_rm_id_and_status($this->session->userdata('employee_id'), $status);
+
+
+		} else {
+			$status 									=	array(0,2);
+			$resale_data['pending_resale_list']		=	$this->resale_model->get_all_resales_by_status($status);
+			
+			$status 									=	array(12,14);
+			$resale_data['denied_resale_list']		=	$this->resale_model->get_all_resales_by_status($status);
+		}
+		
+        $data['navigation'] =   $this->load->view('template/navigation','',TRUE);
+        $data['content']    =   $this->load->view('pages/approvals/approval_resale/rm_resale',$resale_data,TRUE);
+        $data['footer']     =   $this->load->view('template/footer','',TRUE);
+		$this->load->view('template/main_template',$data);
+	}
+	
+
+	public function approve_unit_head(){
+		if($this->session->userdata('role')!=2 && $this->session->userdata('role')!=15){
+			redirect('dashboard','refresh');
+		}
+		$customer_status		=	array();
+
+		$resale_id							=	$this->input->post('resale_id','0',TRUE);
+
+		// print($resale_id);exit();
+
+
+		$current_status						=	$this->resale_model->get_resale_by_id($resale_id);
+
+		$updated_status						=	$current_status->status +1;
+
+		$resale_data['status']				=	$updated_status;
+		$resale_data['rm_note']				=	$this->input->post('rm_note','',TRUE);
+		$resale_data['resale_customer_id']	=	$this->input->post('resale_customer_id','',TRUE);
+
+		$resale_data['rm_approval_time']	=	date('Y-m-d H:i:s');
+
+		$this->resale_model->update_resale($resale_data, $resale_id);
+		redirect('approval_resale/unit_head/', 'refresh');
+	}
+	
+
+	public function ajax_generate_resale_detail_to_approve(){
+		$report_data										=	array();
+		$resale_data										=	array();
+
+		$resale_id										=	$this->input->post('resale_id');
+		
+		$resale_data['resale_detail']					=	$this->resale_model->get_resale_by_id($resale_id);
+
+		$resale_data['resale_customers']				=	$this->resale_model->get_resale_customer_by_resale_id($resale_id);
+		
+        $report_data['content']								=	$this->load->view('pages/approvals/approval_resale/approve_resale_detail_rm',$resale_data,TRUE);
+		
+		echo json_encode($report_data['content']);
+		// echo json_encode();
+			// a die here helps ensure a clean ajax call
+			die();
+	}
+
+
+	public function ajax_generate_resale_detail_to_deny(){
+		$report_data										=	array();
+		$resale_data										=	array();
+
+		$customer_id										=	$this->input->post('customer_id');
+		
+		$resale_data['customer_detail']					=	$this->customer_model->get_customer_by_id($customer_id);
+		
+        $report_data['content']								=	$this->load->view('pages/inspection/deny_customer_detail',$resale_data,TRUE);
+		
+		echo json_encode($report_data['content']);
+		// echo json_encode();
+			// a die here helps ensure a clean ajax call
+			die();
+	}
+
+	// RM = UNIT Head approval section ends here
+
+
+
+//ZM Approval Section starts here-------------------------
+
+	//ZM = Divisional Head
+
+	public function dvisional_head()
+	{
+		
+
+		if($this->session->userdata('role')!=2 && $this->session->userdata('role')!=15){
+			redirect('dashboard','refresh');
+		}
+		$data               =   array();
+		$resale_data		=	array();
+		
+		if($this->session->userdata('role')!=15){
+			$status 									=	array(0,2);
+			$resale_data['pending_resale_list']		=	$this->resale_model->get_all_resales_by_rm_id_and_status($this->session->userdata('employee_id'), $status);
+			
+			
+			$status 									=	array(12,14);
+			$resale_data['denied_customer_list']		=	$this->customer_model->get_all_resales_by_rm_id_and_status($this->session->userdata('employee_id'), $status);
+
+
+		} else {
+			$status 									=	array(0,2);
+			$resale_data['pending_resale_list']		=	$this->resale_model->get_all_resales_by_status($status);
+			
+			$status 									=	array(12,14);
+			$resale_data['denied_resale_list']		=	$this->resale_model->get_all_resales_by_status($status);
+		}
+		
+        $data['navigation'] =   $this->load->view('template/navigation','',TRUE);
+        $data['content']    =   $this->load->view('pages/approvals/approval_resale/rm_resale',$resale_data,TRUE);
+        $data['footer']     =   $this->load->view('template/footer','',TRUE);
+		$this->load->view('template/main_template',$data);
+	}
+	
+
+	public function approve_zonal_head(){
+		if($this->session->userdata('role')!=2 && $this->session->userdata('role')!=15){
+			redirect('dashboard','refresh');
+		}
+		$customer_status		=	array();
+
+		$resale_id							=	$this->input->post('resale_id','0',TRUE);
+
+		// print($resale_id);exit();
+
+
+		$current_status						=	$this->resale_model->get_resale_by_id($resale_id);
+
+		$updated_status						=	$current_status->status +1;
+
+		$resale_data['status']				=	$updated_status;
+		$resale_data['rm_note']				=	$this->input->post('rm_note','',TRUE);
+		$resale_data['resale_customer_id']	=	$this->input->post('resale_customer_id','',TRUE);
+
+		$resale_data['rm_approval_time']	=	date('Y-m-d H:i:s');
+
+		$this->resale_model->update_resale($resale_data, $resale_id);
+		redirect('approval_resale/unit_head/', 'refresh');
+	}
+	
+	
+
+	// ZHEAD = Divisional Head approval section ends here
+
+	//Service Approval Section starts here-------------------------
+
+	public function service()
+	{
+		
+
+		if($this->session->userdata('role')!=2 && $this->session->userdata('role')!=15){
+			redirect('dashboard','refresh');
+		}
+		$data               =   array();
+		$resale_data		=	array();
+		
+		if($this->session->userdata('role')!=15){
+			$status 									=	array(0,2);
+			$resale_data['pending_resale_list']		=	$this->resale_model->get_all_resales_by_rm_id_and_status($this->session->userdata('employee_id'), $status);
+			
+			
+			$status 									=	array(12,14);
+			$resale_data['denied_customer_list']		=	$this->customer_model->get_all_resales_by_rm_id_and_status($this->session->userdata('employee_id'), $status);
+
+
+		} else {
+			$status 									=	array(0,2);
+			$resale_data['pending_resale_list']		=	$this->resale_model->get_all_resales_by_status($status);
+			
+			$status 									=	array(12,14);
+			$resale_data['denied_resale_list']		=	$this->resale_model->get_all_resales_by_status($status);
+		}
+		
+        $data['navigation'] =   $this->load->view('template/navigation','',TRUE);
+        $data['content']    =   $this->load->view('pages/approvals/approval_resale/service',$resale_data,TRUE);
+        $data['footer']     =   $this->load->view('template/footer','',TRUE);
+		$this->load->view('template/main_template',$data);
+	}
+	
+
+	public function approve_service(){
+		if($this->session->userdata('role')!=2 && $this->session->userdata('role')!=15){
+			redirect('dashboard','refresh');
+		}
+		$customer_status		=	array();
+
+		$resale_id							=	$this->input->post('resale_id','0',TRUE);
+
+		// print($resale_id);exit();
+
+
+		$current_status						=	$this->resale_model->get_resale_by_id($resale_id);
+
+		$updated_status						=	$current_status->status +1;
+
+		$resale_data['status']				=	$updated_status;
+		$resale_data['rm_note']				=	$this->input->post('rm_note','',TRUE);
+		$resale_data['resale_customer_id']	=	$this->input->post('resale_customer_id','',TRUE);
+
+		$resale_data['rm_approval_time']	=	date('Y-m-d H:i:s');
+
+		$this->resale_model->update_resale($resale_data, $resale_id);
+		redirect('approval_resale/unit_head/', 'refresh');
+	}
+	
+	
+
+	// Service approval section ends here
+
+
+
 
 	public function inspection_test()
 	{
@@ -117,13 +349,7 @@ class Approval_Rm extends CI_Controller {
        	$data["links"] = $this->pagination->create_links();
  
        	$this->load->view("pages/inspection/test", $data);
-       	
-		// $resale_data['model_list']		=	$this->model_model->get_all_models();
-
-  //       $data['navigation'] =   $this->load->view('template/navigation','',TRUE);
-  //       $data['content']    =   $this->load->view('pages/inspection/inspection',$resale_data,TRUE);
-  //       $data['footer']     =   $this->load->view('template/footer','',TRUE);
-		// $this->load->view('template/main_template',$data);
+      
 	}
 
 	private function load_resale_data(){
@@ -150,65 +376,6 @@ class Approval_Rm extends CI_Controller {
  
        	$this->load->view("pages/inspection/test", $data);
        	exit();
-	}
-
-	public function address_verification(){
-		if($this->session->userdata('role')!=2 && $this->session->userdata('role')!=15){
-			redirect('dashboard','refresh');
-		}
-		
-		$customer_status		=	array();
-		
-		$customer_id			=	$this->input->post('customer_id','',TRUE);
-		
-
-		$current_status			=	$this->customer_model->get_customers_status_by_id($customer_id);
-
-		if($current_status->status>15){
-			$updated_status			=	$current_status->status - 14;
-		}else{
-			$updated_status			=	$current_status->status +1;	
-		}
-
-		$customer_status['status']	=	$updated_status;
-		$customer_status['address_verification_note']	=	$this->input->post('address_verification_note','',TRUE);
-		$customer_status['inspection_time']				=	date('Y-m-d H:i:s');
-
-		$inspection_form									=	$this->upload_model->upload_file('inspection_form','inspection_form'); //after upload
-		$sdata 												=	array();
-
-		if(isset($inspection_form['file_name'])){
-			$customer_status['inspection_form'] 			=	$inspection_form['file_name'];
-			$this->customer_model->update_customer_status($customer_status, $customer_id);
-			$sdata['message'] = 'Verification Successfull';
-			$this->session->set_userdata($sdata);
-		}else{
-			$sdata['inspection_error'] = $inspection_form['error'];
-			$this->session->set_userdata($sdata);
-		}
-		redirect('inspection', 'refresh');
-	}
-	public function address_verification_temporary_heldup(){
-		if($this->session->userdata('role')!=2 && $this->session->userdata('role')!=15){
-			redirect('dashboard','refresh');
-		}
-		
-		$customer_status		=	array();
-		
-		$customer_id			=	$this->input->post('customer_id','',TRUE);
-		
-
-		$current_status			=	$this->customer_model->get_customers_status_by_id($customer_id);
-
-		$updated_status			=	$current_status->status +15;
-
-		$customer_status['status']	=	$updated_status;
-		$customer_status['address_verification_note']	=	$this->input->post('address_verification_note','',TRUE);
-		$customer_status['inspection_time']				=	date('Y-m-d H:i:s');
-
-		$this->customer_model->update_customer_status($customer_status, $customer_id);
-		
-		redirect('inspection', 'refresh');
 	}
 
 	
@@ -330,23 +497,7 @@ class Approval_Rm extends CI_Controller {
 
 	}
 
-	public function ajax_generate_resale_detail_to_approve(){
-		$report_data										=	array();
-		$resale_data										=	array();
-
-		$resale_id										=	$this->input->post('resale_id');
-		
-		$resale_data['resale_detail']					=	$this->resale_model->get_resale_by_id($resale_id);
-
-		$resale_data['resale_customer_detail']			=	$this->resale_model->get_resale_customer_by_resale_id($resale_id);
-		
-        $report_data['content']								=	$this->load->view('pages/approvals/approve_resale_detail_rm',$resale_data,TRUE);
-		
-		echo json_encode($report_data['content']);
-		// echo json_encode();
-			// a die here helps ensure a clean ajax call
-			die();
-	}
+	
 
 	public function ajax_generate_customer_detail_to_heldup(){
 		$report_data										=	array();
@@ -364,20 +515,6 @@ class Approval_Rm extends CI_Controller {
 			die();
 	}
 
-	public function ajax_generate_resale_detail_to_deny(){
-		$report_data										=	array();
-		$resale_data										=	array();
-
-		$customer_id										=	$this->input->post('customer_id');
-		
-		$resale_data['customer_detail']					=	$this->customer_model->get_customer_by_id($customer_id);
-		
-        $report_data['content']								=	$this->load->view('pages/inspection/deny_customer_detail',$resale_data,TRUE);
-		
-		echo json_encode($report_data['content']);
-		// echo json_encode();
-			// a die here helps ensure a clean ajax call
-			die();
-	}
+	
 
 }

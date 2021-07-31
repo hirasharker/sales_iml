@@ -63,6 +63,7 @@
                         <label class="control-label col-md-3 col-sm-12 col-xs-12">Customer ID </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
                             <input type="number" id="customerId"  readonly="true" class="form-control" name="customer_id" placeholder="Customer ID">
+                            <input type="hidden" id="cityId" name="city_id">
                         </div>
                     </div>
                 </div>
@@ -125,7 +126,7 @@
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                     <label class="control-label col-md-3 col-sm-12 col-xs-12">Seized From </label>
                     <div class="col-md-8 col-sm-9 col-xs-12">
-                        <select class="form-control select-tag" name="seize_location">
+                        <select class="form-control select-tag" name="seize_location" required>
                           <option value="">select</option>
                           <option value="road">Road</option>
                           <option value="stand">Stand</option>
@@ -139,7 +140,7 @@
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                     <label class="control-label col-md-3 col-sm-12 col-xs-12">Vehicle Condition </label>
                     <div class="col-md-8 col-sm-9 col-xs-12">
-                        <select class="form-control select-tag" name="vehicle_condition">
+                        <select class="form-control select-tag" name="vehicle_condition" required>
                           <option value="">select</option>
                           <option value="running">Running</option>
                           <option value="damaged">Damaged</option>
@@ -159,7 +160,7 @@
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                     <label class="control-label col-md-3 col-sm-12 col-xs-12">Battery Condition </label>
                     <div class="col-md-8 col-sm-9 col-xs-12">
-                        <select class="form-control select-tag" name="battery_condition">
+                        <select class="form-control select-tag" name="battery_condition" required>
                           <option value="">select</option>
                           <option value="good">Good</option>
                           <option value="damaged">Damaged</option>
@@ -171,7 +172,7 @@
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                     <label class="control-label col-md-3 col-sm-12 col-xs-12">Gas Cylinder </label>
                     <div class="col-md-8 col-sm-9 col-xs-12">
-                        <select class="form-control select-tag" name="gas_cylinder">
+                        <select class="form-control select-tag" name="gas_cylinder" required>
                           <option value="">select</option>
                           <option value="cng">CNG</option>
                           <option value="lpg">LPG</option>
@@ -184,7 +185,7 @@
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                     <label class="control-label col-md-3 col-sm-12 col-xs-12">Key </label>
                     <div class="col-md-8 col-sm-9 col-xs-12">
-                        <select class="form-control select-tag" name="key_status">
+                        <select class="form-control select-tag" name="key_status" required>
                           <option value="">select</option>
                           <option value="found">Found</option>
                           <option value="not_found">Not Found</option>
@@ -196,7 +197,7 @@
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                     <label class="control-label col-md-3 col-sm-12 col-xs-12">Select Garage </label>
                     <div class="col-md-8 col-sm-9 col-xs-12">
-                        <select class="form-control select-tag" name="depot_id">
+                        <select class="form-control select-tag" name="depot_id" required>
                           <option value="">select</option>
                           <?php foreach($depot_list as $value){?>
                           <option value="<?php echo $value->depot_id;?>"><?php echo $value->depot_name;?></option>
@@ -209,7 +210,7 @@
                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
                         <label class="control-label col-md-3 col-sm-12 col-xs-12">Sieze Cost </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            <input type="number" class="form-control" name="seize_cost" min="0">
+                            <input type="number" class="form-control" name="seize_cost" min="0" required>
                         </div>
                     </div>
                 </div>
@@ -309,6 +310,7 @@
 
           $('#customerId').val("");
           $('#customerName').val("");
+          $('#cityId').val("");
           $('#engineNo').val("");
           $('#chassisNo').val("");
           $('#stockId').val("");
@@ -329,6 +331,7 @@
                     }else{
                       $('#customerId').val(opts.customer_id);
                       $('#customerName').val(opts.customer_name);
+                      $('#cityId').val(opts.city_id);
                       $('#engineNo').val(opts.engine_no);
                       $('#chassisNo').val(opts.chassis_no);
                       $('#stockId').val(opts.stock_id);
