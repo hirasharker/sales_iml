@@ -49,7 +49,7 @@ class Resale extends CI_Controller {
 
 		$resale_data['model_list']	=	$this->model_model->get_all_models();
 		$resale_data['yard_list']		=	$this->yard_model->get_all_delivery_yards();
-		$resale_data['employee_list']	=	$this->employee_model->get_all_employees();
+		$resale_data['resale_list']	=	$this->resale_model->get_all_resales();
 
 		
 

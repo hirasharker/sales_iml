@@ -33,7 +33,7 @@
 	<div class="col-md-12">
         <div class="card"><!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#waiting-for-resale-approval" aria-controls="waiting-for-resale-approval" role="tab" data-toggle="tab">Waiting for Approvals</a></li>
+                <li role="presentation" class="active"><a href="#waiting-for-resale-approval" aria-controls="waiting-for-resale-approval" role="tab" data-toggle="tab">Waiting for Approvals - Unit Head</a></li>
                 <!-- <li role="presentation"><a href="#temporary-heldup" aria-controls="temporary-heldup" role="tab" data-toggle="tab">Temporary Heldup</a></li> -->
                 <li role="presentation"><a href="#denied" aria-controls="denied" role="tab" data-toggle="tab">Denied</a></li>
                 <!-- <li role="presentation"><a href="#verified" aria-controls="verified" role="tab" data-toggle="tab">Verified</a></li> -->
@@ -45,7 +45,7 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                            <h2>Customer List for Address Verification<small></small></h2>
+                            <h2>Resale List for Approval<small></small></h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>

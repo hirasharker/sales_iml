@@ -106,16 +106,16 @@
 
         <li><a><i class="fa fa-file"></i>Resale <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
-            <li><a href="<?php echo base_url();?>resale/request">Request</a></li>
+            <li><a href="<?php echo base_url();?>resale/">Request</a></li>
             <!-- <li><a href="<?php echo base_url();?>report/booking_report">Booking Report</a></li>
             <li><a href="<?php echo base_url();?>report/individual_customer">Individual Customer</a></li> -->
             <!-- <li><a href="<?php echo base_url();?>report/stock_report">Stock Report</a></li> -->
             <li><a>Approval <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <li><a href="<?php echo base_url();?>approval_resale/unit_head">Unit Head </a></li>
-                    <li><a href="<?php echo base_url();?>approval_resale/service">Service Head </a></li>
+                    <li><a href="<?php echo base_url();?>approval_resale/service">Service </a></li>
                     <li><a href="<?php echo base_url();?>approval_resale/divisional_head">Divisional Head</a></li>
-                    <li><a href="<?php echo base_url();?>approval_resale/approval_mgt">Management</a></li>
+                    <li><a href="<?php echo base_url();?>approval_resale/management">Management</a></li>
                 </ul>
             </li>
             <li><a href="<?php echo base_url();?>resale_report/general_resale_report">General Resale Report </a></li>
@@ -133,7 +133,7 @@
                 <ul class="nav child_menu">
                     <li><a href="<?php echo base_url();?>approval_release/unit_head">Unit Head </a></li>
                     <li><a href="<?php echo base_url();?>approval_release/divisional_head">Divisional Head</a></li>
-                    <li><a href="<?php echo base_url();?>approval_release/approval_mgt">Management</a></li>
+                    <li><a href="<?php echo base_url();?>approval_release/management">Management</a></li>
                 </ul>
             </li>
             <li><a href="<?php echo base_url();?>seize_report/general_release_report">General Seize Report </a></li>

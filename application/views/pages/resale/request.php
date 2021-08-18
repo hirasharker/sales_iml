@@ -435,10 +435,10 @@
   </div>
 
   <div class="row">
-    <div class="col-md-10 col-sm-10 col-xs-12">
+    <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="x_panel">
         <div class="x_title">
-          <h2>Registration Records <small></small></h2>
+          <h2>Resale Records <small></small></h2>
           <ul class="nav navbar-right panel_toolbox">
             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
             </li>
@@ -463,26 +463,24 @@
           <table id="datatable-buttons" class="table table-striped table-bordered responsive">
             <thead>
               <tr>
-                <th>Registration Issue Date</th>
-                <th>Delivery Yard</th>
-                <th>Registration Area</th>
+                <th>Resale ID</th>
+                <th>Customer ID</th>
                 <th>Chassis No</th>
                 <th>Engine No</th>
-                <th>Registratoin Cost</th>
-                <th>Action</th>
+                <th>Seize ID</th>
+                <!-- <th>Action</th> -->
               </tr>
             </thead>
 
             <tbody>
-            <?php foreach($registration_list as $value){?>
+            <?php foreach($resale_list as $value){?>
               <tr>
-                <td><?php echo $value->registration_issue_date; ?></td>
-                <td><?php echo $value->yard_name; ?></td>
-                <td><?php echo $value->registration_area_name; ?></td>
+                <td>000<?php echo $value->resale_id; ?></td>
+                <td><?php echo $value->previous_customer_id; ?></td>
                 <td><?php echo $value->chassis_no; ?></td>
                 <td><?php echo $value->engine_no; ?></td>
-                <td><?php echo $value->registration_cost; ?></td>
-                <td><a href="#">edit </a>|<a href="#"> delete</a></td>
+                <td>000<?php echo $value->seize_id; ?></td>
+                <!-- <td><a href="#">edit </a>|<a href="#"> delete</a></td> -->
               </tr>
             <?php }?>
             </tbody>
@@ -494,10 +492,10 @@
 </div>
 </div>
 
-<form class="form-horizontal form-label-left" method="post" action="<?php echo base_url();?>resale/generate_seize_detail/">
+<!-- <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url();?>resale/generate_seize_detail/">
     <input type="text" name="search_key">
     <input type="submit" >
-</form>
+</form> -->
 
 <script>
   $(function() { 

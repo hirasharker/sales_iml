@@ -12,7 +12,7 @@
 <div class="">
   <div class="page-title no-print">
     <div class="title_left">
-      <h3>Service Inspection<small></small></h3>
+      <h3>Resale Approvals - Divisional Head<small></small></h3>
     </div>
 
     <div class="title_right no-print">
@@ -45,7 +45,7 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                            <h2>Resale List for Service Inspection<small></small></h2>
+                            <h2>Resale List for Approvals<small></small></h2>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                 </li>
@@ -82,25 +82,63 @@
                                 <table id="" class="table table-striped table-bordered no-print">
                                     <thead>
                                     <tr>
-                                        <th>Customer ID</th>
+                                        <th>Resale ID</th>
                                         <th>Engine No</th>
                                         <th>Chassis No</th>
+                                        <th>Seized ID</th>
+                                        <th>Seized From</th>
+                                        <th>Resale Customer</th>
+                                        <th>Proposed Value</th>
+                                        <th>Sales Mode</th>
+                                        <th>Downpayment</th>
+                                        <th>Period</th>
+                                        <th>Interest Rate</th>
+                                        <th>Unit Head</th>
+                                        <th>Unit Head Note</th>
                                         <th>RO</th>
-                                        <th>Request Timestamp</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    <!-- <?php print_r($pending_resale_list); ?> -->
                                     <?php foreach($pending_resale_list as $value){ ?>
                                         <tr>
-                                            <td><?php echo $value->customer_id; ?></td>
+                                            <td>000<?php echo $value->resale_id; ?></td>
                                             <td><?php echo $value->engine_no; ?></td>
                                             <td><?php echo $value->chassis_no; ?></td>
+                                            <td><?php echo $value->seize_id; ?></td>
+                                            <td><?php echo $value->previous_customer_id; ?></td>
+                                            <td><?php echo $value->resale_customer_name; ?></td>
+                                            <td><?php echo $value->proposed_value; ?></td>
+                                            <td><?php echo $value->sales_mode; ?></td>
+                                            <td><?php echo $value->downpayment; ?></td>
+                                            <td><?php echo $value->period; ?></td>
+                                            <td><?php echo $value->interest_rate; ?></td>
+                                            <td><?php echo $value->rm_id; ?></td>
+                                            <td><?php echo $value->rm_note; ?></td>
                                             <td><?php echo $value->user_id; ?></td>
-                                            <td><?php echo $value->time_stamp; ?></td>
                                             <td>
-                                                <!-- <a type="button" class="btn btn-primary approve" data-toggle="modal" data-target="#approve" data-whatever="@mdo" data-resale-id="<?php echo $value->resale_id; ?>">detail</a> -->
-                                                <a type="button" class="btn btn-primary approve" href="<?php echo base_url().'approval_resale/service_detail/'.$value->resale_id; ?>" >detail</a>
+                                                <!-- <a type="button" class="btn btn-primary approve" data-toggle="modal" data-target="#approve" data-whatever="@mdo" data-resale-id="<?php echo $value->resale_id; ?>">approve</a> -->
+
+
+                                                
+
+                                                <a type="button" class="btn btn-primary deny" href="<?php echo base_url();?>approval_resale/approve_divisional_head/<?php echo $value->resale_id; ?>">Approve</a>
+
+                                               <form action="<?php echo base_url(); ?>approval_resale/print_service_inspection_form" target="_blank" method="post">
+                                                    <input type="hidden" value="<?php echo $value->resale_id; ?>" name="resale_id">
+                                                    <a onclick='this.parentNode.submit(); return false;' href="#"><i class="fa fa-print"></i> Service Inspection</a>
+                                                </form>
+
+                                                <!-- <form action="<?php echo base_url(); ?>inspection/print_inspection_form" target="_blank" method="post">
+                                                    <input type="hidden" value="<?php echo $value->customer_id; ?>" name="customer_id">
+                                                    <a onclick='this.parentNode.submit(); return false;' href="#"><i class="fa fa-print"></i> print</a>
+                                                </form> -->
+                                                <?php if($this->session->userdata('role')==15){?>
+                                                
+
+                                                
+                                                <?php }?>
 
                                             </td>
                                         </tr>
