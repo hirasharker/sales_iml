@@ -118,7 +118,9 @@
                     <li><a href="<?php echo base_url();?>approval_resale/management">Management</a></li>
                 </ul>
             </li>
+             <li><a href="<?php echo base_url();?>resale_customer/">Resale Customer</a></li>
             <li><a href="<?php echo base_url();?>resale_report/general_resale_report">General Resale Report </a></li>
+
         </ul>
         </li>
 

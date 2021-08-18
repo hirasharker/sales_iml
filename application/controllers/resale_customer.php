@@ -111,7 +111,7 @@ class Resale_Customer extends CI_Controller {
 		$customer_data['head_of_sales_list']	=	$this->employee_model->get_employee_by_role(5);
 
         $data['navigation'] =   $this->load->view('template/navigation','',TRUE);
-        $data['content']    =   $this->load->view('pages/customer/customer',$customer_data,TRUE);
+        $data['content']    =   $this->load->view('pages/customer/resale_customer',$customer_data,TRUE);
         $data['footer']     =   $this->load->view('template/footer','',TRUE);
 		$this->load->view('template/main_template',$data);
 	}
