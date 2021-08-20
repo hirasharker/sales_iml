@@ -955,4 +955,24 @@ class Resale_Customer extends CI_Controller {
 
 
 	}
+
+	public function generate_customer_detail(){
+		$search_key 										=	$this->input->post('search_key');
+
+		$user_id 											=	$this->session->userdata('employee_id');
+
+		// if($this->session->userdata('role')==15){
+		// 	$customer_detail 									=	$this->customer_model->get_customer_by_search_key($search_key, $user_id = "")
+		// }else {
+		// 	$customer_detail 									=	$this->customer_model->get_customer_by_search_key($search_key, $user_id)
+		// }
+
+		$customer_detail 									=	$this->customer_model->get_resale_customer_by_search_key($search_key);
+
+		echo json_encode($customer_detail);
+		// echo json_encode();
+			// a die here helps ensure a clean ajax call
+		die();
+	}
+
 }

@@ -46,6 +46,16 @@
                 <h2>Basic Info <small></small></h2>
                   <div class="clearfix"></div>
                 </div>
+
+                <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Customer ID/ Engine /Chassis </label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                      <input id="searchKey" type="text" class="form-control" name="search_key" placeholder="">
+                  </div>
+                </div>
+
+                <div class="clearfix"></div>
+
                 <div class="form-group col-md-6 col-sm-12 col-xs-12" style="display: none;">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Reference </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
@@ -295,21 +305,19 @@
                   </div>
                 </div> -->
 
-                <div class="form-group col-md-6 col-sm-12 col-xs-12 chassis-container" style="display: none;">
+                <div class="form-group col-md-6 col-sm-12 col-xs-12 chassis-container" style="display: block;">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Chassis No <span class="required">*</span></label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <select id="chassisNo" class="form-control select-tag" name="chassis_no" required>
-                        <option value="">select</option>
-                      </select>
+                    <input id="chassisNo" readonly type="text" class="form-control" name="chassis_no" placeholder="" >
                   </div>
                 </div>
 
-                <div class="form-group col-md-6 col-sm-12 col-xs-12 engine-container" style="display: none;">
+                <div class="form-group col-md-6 col-sm-12 col-xs-12 engine-container" style="display: block;">
                   <input type="hidden" name="stock_id" id="stockId">
                   <input type="hidden" name="delivery_yard_id" id="delivery-yard-id">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Engine No </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input id="engineNo" readonly type="text" class="form-control" name="engine_no" placeholder="" >
+                      <input id="engineNo" readonly type="text" class="form-control" name="engine_no" placeholder="" required>
                   </div>
                 </div>
 
@@ -1596,4 +1604,52 @@
           });
       }
   });
+</script>
+
+<script>
+  $(function() { 
+     
+      $( "#searchKey" ).keyup(function() {
+
+          $('#customerId').val("");
+          $('#customerName').val("");
+          $('#cityId').val("");
+          $('#engineNo').val("");
+          $('#chassisNo').val("");
+          $('#stockId').val("");
+
+          $('#report-view').html('');
+          var searchKey = $('#searchKey').val();
+          console.log('clicked!'+searchKey);
+          $.ajax({
+                  type: "POST",
+                  url: "<?php echo base_url()?>resale_customer/generate_customer_detail/",
+                  data: { 'search_key': searchKey  },
+                  success: function(data){
+                      // Parse the returned json data
+                    var opts = $.parseJSON(data);
+                      // Use jQuery's each to iterate over the opts value
+                    if(opts.resale_status == 'f'){
+                      alert('Not for resale!')
+                    }else{
+                      $('#customerId').val(opts.customer_id);
+                      $('#customerName').val(opts.customer_name);
+                      $('#cityId').val(opts.city_id);
+                      $('#engineNo').val(opts.engine_no);
+                      $('#chassisNo').val(opts.chassis_no);
+                      $('#stockId').val(opts.stock_id);
+                      console.log(opts.chassis_no);
+                      console.log(opts.seize_status);
+                    }
+                    
+                     
+                  }
+              });
+      });
+
+      $("#reset").click(function(){
+          $('#searchKey').val("");
+      });
+
+  }); 
 </script>

@@ -571,6 +571,28 @@ class Customer_Model extends CI_Model {
         return $result;
     }
 
+    public function get_resale_customer_by_search_key($search_key){
+        $this->db->select('tbl_customer.*, tbl_dealer.dealer_name');
+        $this->db->from('tbl_customer');
+        $this->db->join('tbl_dealer','tbl_dealer.dealer_id = tbl_customer.dealer_id','left');
+        $this->db->where('tbl_customer.resale_status','true');
+        
+        if(is_numeric($search_key)){
+            $this->db->where('customer_id', $search_key);
+            $this->db->or_where('engine_no', $search_key);
+            $this->db->or_where('chassis_no', $search_key);
+        }else {
+            $this->db->where('engine_no', $search_key);
+            $this->db->or_where('chassis_no', $search_key);
+        }
+        // $this->db->where('customer_id', $search_key);
+        
+
+        $result_query=$this->db->get();
+        $result=$result_query->row();
+        return $result;
+    }
+
     
 
     
