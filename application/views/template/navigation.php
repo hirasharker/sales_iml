@@ -126,6 +126,7 @@
 
         <li><a><i class="fa fa-file"></i>Seize Process <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
+            <li><a href="<?php echo base_url();?>seize/seize_depot/">SVD/Garage</a></li>
             <li><a href="<?php echo base_url();?>seize/">Seize</a></li>
             <li><a href="<?php echo base_url();?>seize/release/">Release</a></li>
             <!-- <li><a href="<?php echo base_url();?>report/booking_report">Booking Report</a></li>
