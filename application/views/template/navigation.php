@@ -128,7 +128,7 @@
         <ul class="nav child_menu">
             <li><a href="<?php echo base_url();?>seize/seize_depot/">SVD/Garage</a></li>
             <li><a href="<?php echo base_url();?>seize/">Seize</a></li>
-            <li><a href="<?php echo base_url();?>seize/release/">Release</a></li>
+            <li><a href="<?php echo base_url();?>release/">Release</a></li>
             <!-- <li><a href="<?php echo base_url();?>report/booking_report">Booking Report</a></li>
             <li><a href="<?php echo base_url();?>report/individual_customer">Individual Customer</a></li> -->
             <!-- <li><a href="<?php echo base_url();?>report/stock_report">Stock Report</a></li> -->

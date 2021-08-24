@@ -2,7 +2,7 @@
 <div class="">
   <div class="page-title">
     <div class="title_left">
-      <h3>Seize Form <small></small></h3>
+      <h3>Release Form <small></small></h3>
     </div>
 
     <div class="title_right">
@@ -35,10 +35,10 @@
             </div>
             <div class="x_content" style="display:none">
             <br />
-            <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url();?>seize/add_seize/">
+            <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url();?>release/add_release/">
 
             <div class="x_title">
-                <h2>Seize Info <small></small></h2>
+                <h2>Release Info <small></small></h2>
                 <div class="clearfix"></div>
             </div>
 
@@ -55,8 +55,8 @@
                 </div>
 
                 <input id="stockId" type="hidden" name="stock_id">
-
-
+                <input id="seizeId" type="hidden" name="seize_id">
+                <input id="dealerId" type="hidden" name="dealer_id">
 
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
@@ -70,12 +70,31 @@
 
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Seize Date </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="text" id="seizeDate"  readonly="true" class="form-control" name="seize_date" placeholder="Seize Date">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
                         <label class="control-label col-md-3 col-sm-12 col-xs-12">Customer Name </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
                             <input  id="customerName"  readonly="true"  type="text" class="form-control" name="customer_name" placeholder="Customer Name">
                         </div>
                     </div>
                 </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Dealer </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input  id="dealerName"  readonly="true"  type="text" class="form-control" name="dealer_name" placeholder="Dealer">
+                        </div>
+                    </div>
+                </div>
+                
 
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
@@ -95,128 +114,55 @@
                     </div>
                 </div>
 
+                
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Customer Name (if different from records) </label>
+                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Proposed Collection Amount</label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            <input type="text" class="form-control" name="different_customer" placeholder="Different Customer">
+                            <input type="number"  class="form-control" name="proposed_collection_amount" min="0" required>
                         </div>
-                    </div>
-                </div>
-
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Phone (if different from records) </label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                            <input type="text" class="form-control" name="different_phone" placeholder="Different Phone">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Previous Seize History </label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                            <input type="text" class="form-control" name="different_customer" placeholder="Different Customer">
-                        </div>
-                    </div>
-                </div> -->
-
-
-                <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Seized From </label>
-                    <div class="col-md-8 col-sm-9 col-xs-12">
-                        <select class="form-control select-tag" name="seize_location" required>
-                          <option value="">select</option>
-                          <option value="road">Road</option>
-                          <option value="stand">Stand</option>
-                          <option value="garage">Garage</option>
-                          <option value="home">Customer's Home</option>
-                          <option value="abandoned">Abandoned</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Vehicle Condition </label>
-                    <div class="col-md-8 col-sm-9 col-xs-12">
-                        <select class="form-control select-tag" name="vehicle_condition" required>
-                          <option value="">select</option>
-                          <option value="running">Running</option>
-                          <option value="damaged">Damaged</option>
-                        </select>
                     </div>
                 </div>
 
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Tyre Qty </label>
+                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Committed Next Payment Amount </label>
                         <div class="col-md-9 col-sm-9 col-xs-12">
-                            <input type="number" class="form-control" name="tyre_quantity" min="0" max="4">
+                            <input type="number"  class="form-control" name="committed_next_payment_amount" min="0" required>
                         </div>
                     </div>
                 </div>
-
-                <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Battery Condition </label>
-                    <div class="col-md-8 col-sm-9 col-xs-12">
-                        <select class="form-control select-tag" name="battery_condition" required>
-                          <option value="">select</option>
-                          <option value="good">Good</option>
-                          <option value="damaged">Damaged</option>
-                          <option value="not_found">Not Found</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Gas Cylinder </label>
-                    <div class="col-md-8 col-sm-9 col-xs-12">
-                        <select class="form-control select-tag" name="gas_cylinder" required>
-                          <option value="">select</option>
-                          <option value="cng">CNG</option>
-                          <option value="lpg">LPG</option>
-                          <option value="cooking">Cooking</option>
-                          <option value="not_found">Not Found</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Key </label>
-                    <div class="col-md-8 col-sm-9 col-xs-12">
-                        <select class="form-control select-tag" name="key_status" required>
-                          <option value="">select</option>
-                          <option value="found">Found</option>
-                          <option value="not_found">Not Found</option>
-                        </select>
-                    </div>
-                </div>
-
-
-                <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Select Garage </label>
-                    <div class="col-md-8 col-sm-9 col-xs-12">
-                        <select class="form-control select-tag" name="depot_id" required>
-                          <option value="">select</option>
-                          <?php foreach($depot_list as $value){?>
-                          <option value="<?php echo $value->depot_id;?>"><?php echo $value->depot_name;?></option>
-                          <?php }?>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Sieze Cost </label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                            <input type="number" class="form-control" name="seize_cost" min="0" required>
-                        </div>
-                    </div>
-                </div>
-
 
                 
+
+                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Committed next payment date </label>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <fieldset>
+                          <div class="control-group">
+                            <div class="controls">
+                              <div class="col-md-12 xdisplay_inputx form-group has-feedback">
+                                <input type="text" name="committed_next_payment_date" class="form-control has-feedback-left" id="single_cal5" placeholder="Invoice Date" aria-describedby="inputSuccess2Status4">
+                                <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                                <span id="inputSuccess2Status4" class="sr-only">(success)</span>
+                              </div>
+                            </div>
+                          </div>
+                        </fieldset>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                        <label class="control-label col-md-3 col-sm-12 col-xs-12">Rest Amount of OD </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <input type="number"  class="form-control" name="rest_amount_of_od" min="0" required>
+                        </div>
+                    </div>
+                </div>
+
+               
+
             </div>
 
             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
@@ -230,11 +176,11 @@
         </div>
   </div>
 
-  <!-- <div class="row">
+  <div class="row">
     <div class="col-md-5 col-sm-6 col-xs-12">
       <div class="x_panel">
         <div class="x_title">
-          <h2>City List <small></small></h2>
+          <h2>Release List <small></small></h2>
           <ul class="nav navbar-right panel_toolbox">
             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
             </li>
@@ -257,30 +203,27 @@
           <table id="datatable-buttons" class="table table-striped table-bordered responsive">
             <thead>
               <tr>
-                <th>City Name</th>
-                <th>Zone</th>
-                <th>Code</th>
-                <th>Recovery Manager</th>
-                <th>Email</th>
-                <th>Action</th>
+                <th>Customer ID</th>
+                <th>Customer Name</th>
+                <th>Chassis No</th>
+                <th>Engine No</th>
+                <th>Date</th>
+                <th>Status</th>
               </tr>
             </thead>
 
             <tbody>
-            <?php foreach($city_list as $value){?>
+            <?php foreach($release_list as $value){?>
               <tr>
-                <td><?php echo $value->city_name; ?></td>
-                <td><?php echo $value->zone_name; ?></td>
-                <td><?php echo $value->city_code ?></td>
-                <td><?php foreach($employee_list as $emp_value){if($emp_value->employee_id==$value->rm_id){
-                      echo $emp_value->employee_name;
-                } }
-                ?></td>
-                <td><?php foreach($employee_list as $emp_value){if($emp_value->employee_id==$value->rm_id){
-                      echo $emp_value->email_id;
-                } }
-                ?></td>
-                <td><a href="#">edit </a>|<a href="#"> delete</a></td>
+                <td><?php echo $value->customer_id; ?></td>
+                <td><?php echo $value->customer_name; ?></td>
+                <td><?php echo $value->chassis_no; ?></td>
+                <td><?php echo $value->engine_no; ?></td>
+                <td><?php echo date('d-m-Y', strtotime($value->time_stamp)); ?></td>
+                <td><?php echo $value->release_status; ?></td>
+
+                
+                <!-- <td><a href="#">edit </a>|<a href="#"> delete</a></td> -->
               </tr>
             <?php }?>
             </tbody>
@@ -288,7 +231,7 @@
         </div>
       </div>
       </div>
-  </div> -->
+  </div>
 
 
 
@@ -314,20 +257,25 @@
           $('#engineNo').val("");
           $('#chassisNo').val("");
           $('#stockId').val("");
+          $('#dealerName').val("");
+          $('#seizeDate').val("");
+
+          $('#seizeId').val("");
+          $('#dealerId').val("");
 
           $('#report-view').html('');
           var searchKey = $('#searchKey').val();
           console.log('clicked!'+searchKey);
           $.ajax({
                   type: "POST",
-                  url: "<?php echo base_url()?>seize/generate_customer_detail/",
+                  url: "<?php echo base_url()?>release/generate_customer_detail/",
                   data: { 'search_key': searchKey  },
                   success: function(data){
                       // Parse the returned json data
                     var opts = $.parseJSON(data);
                       // Use jQuery's each to iterate over the opts value
-                    if(opts.seize_status == 't'){
-                      alert('Already under seize!')
+                    if(opts.seize_status == 'f'){
+                      alert('Not Under Seize!')
                     }else{
                       $('#customerId').val(opts.customer_id);
                       $('#customerName').val(opts.customer_name);
@@ -335,6 +283,14 @@
                       $('#engineNo').val(opts.engine_no);
                       $('#chassisNo').val(opts.chassis_no);
                       $('#stockId').val(opts.stock_id);
+                      $('#dealerName').val(opts.dealer_name);
+
+                      $('#seizeDate').val(opts.seize_date);
+
+                      $('#seizeId').val(opts.seize_id);
+                      $('#dealerId').val(opts.dealer_id);
+
+
                       console.log(opts.chassis_no);
                       console.log(opts.seize_status);
                     }
