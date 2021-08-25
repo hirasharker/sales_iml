@@ -195,7 +195,7 @@
 
 
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Select Garage </label>
+                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Select Garage/SVD </label>
                     <div class="col-md-8 col-sm-9 col-xs-12">
                         <select class="form-control select-tag" name="depot_id" required>
                           <option value="">select</option>

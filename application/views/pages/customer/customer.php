@@ -425,10 +425,8 @@
                       <option value="12">12</option>
                       <option value="15">15</option>
                       <option value="18">18</option>
-                      <!-- <option value="24">24</option>
-                      <option value="30">30</option>
+                      <option value="24">24</option>
                       <option value="36">36</option>
-                      <option value="42">42</option> -->
                       <!-- <option value="4">Corporate</option> -->
                       </select>
                   </div>
@@ -1494,6 +1492,8 @@
             $('#downpayment').val("0");
             $("#period option[value='15']").remove();
             $("#period option[value='18']").remove();
+            $("#period option[value='24']").remove();
+            $("#period option[value='36']").remove();
             // $("#period option[value='36']").remove();
             // $("#period option[value='42']").remove();
             // $('#period').append('<option value="3">3</option>');
@@ -1518,7 +1518,8 @@
             // $("#period option[value='18']").remove();
             $('#period').append('<option value="15">15</option>');
             $('#period').append('<option value="18">18</option>');
-            // $('#period').append('<option value="36">36</option>');
+            $('#period').append('<option value="24">24</option>');
+            $('#period').append('<option value="36">36</option>');
             // $('#period').append('<option value="42">42</option>');
           }
           // $('#zoneId').val(zoneId);
