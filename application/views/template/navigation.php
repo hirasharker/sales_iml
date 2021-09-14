@@ -138,6 +138,7 @@
                     <li><a href="<?php echo base_url();?>approval_release/divisional_head">Divisional Head</a></li>
                 </ul>
             </li>
+            <li><a href="<?php echo base_url();?>seize/upload_receivable">Upload Receivable</a></li>
             <li><a href="<?php echo base_url();?>seize_report/general_release_report">General Seize Report </a></li>
         </ul>
         </li>

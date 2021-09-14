@@ -7,7 +7,7 @@ class Seize extends CI_Controller {
 		if($this->session->userdata('employee_id')==NULL){
 			redirect('login','refresh');
 		}
-		if($this->session->userdata('role')!=15){
+		if($this->session->userdata('role')!=15 && $this->session->userdata('role')!=11){
 			redirect('dashboard','refresh');
 		}
 		$this->load->model('zone_model','zone_model',TRUE);
@@ -16,6 +16,7 @@ class Seize extends CI_Controller {
 		$this->load->model('customer_model','customer_model',TRUE);
 		$this->load->model('seize_model','seize_model',TRUE);
 		$this->load->model('stock_model','stock_model',TRUE);
+		$this->load->model('upload_model', 'upload_model', TRUE);
 
 		
 	}
@@ -37,6 +38,10 @@ class Seize extends CI_Controller {
 	 */
 	public function index()
 	{
+		if($this->session->userdata('role')!=15 && $this->session->userdata('role')!=11){
+			redirect('dashboard','refresh');
+		}
+
 		$data               =   array();
 		$seize_data 			=	array();
 		
@@ -54,6 +59,10 @@ class Seize extends CI_Controller {
 
 	public function add_seize()
 	{
+		if($this->session->userdata('role')!=15 && $this->session->userdata('role')!=11){
+			redirect('dashboard','refresh');
+		}
+
 		$seize_data								=	array();
 
 		$seize_data['user_id']					=	$this->session->userdata('employee_id');
@@ -75,7 +84,6 @@ class Seize extends CI_Controller {
 		$seize_data['city_id']					=	$this->input->post('city_id','0',TRUE);
 		$seize_data['seize_cost']				=	$this->input->post('seize_cost','0',TRUE);
 
-
 		$result									=	$this->seize_model->add_seize($seize_data);
 
 		if($result){
@@ -91,6 +99,10 @@ class Seize extends CI_Controller {
 
 	public function seize_depot()
 	{
+		if($this->session->userdata('role')!=15 && $this->session->userdata('role')!=8){
+			redirect('dashboard','refresh');
+		}
+
 		$data               =   array();
 		$seize_data 			=	array();
 		
@@ -109,6 +121,10 @@ class Seize extends CI_Controller {
 
 	public function add_seize_depot()
 	{
+		if($this->session->userdata('role')!=15 && $this->session->userdata('role')!=8){
+			redirect('dashboard','refresh');
+		}
+
 		$seize_data							=	array();
 
 		$seize_data['user_id']				=	$this->session->userdata('employee_id');
@@ -137,6 +153,72 @@ class Seize extends CI_Controller {
 
 		redirect('seize/seize_depot','refresh');
 	}
+
+	public function upload_receivable(){
+
+		if($this->session->userdata('role')!=15 && $this->session->userdata('role')!=8){
+			redirect('dashboard','refresh');
+		}
+
+		$data               =   array();
+		$seize_data 			=	array();
+		
+
+
+        $data['navigation'] =   $this->load->view('template/navigation','',TRUE);
+        $data['content']    =   $this->load->view('pages/seize/upload_seize',$seize_data,TRUE);
+        $data['footer']     =   $this->load->view('template/footer','',TRUE);
+		$this->load->view('template/main_template',$data);
+	}
+
+
+	public function update_receivables() {
+
+		$received_data 										=	array();
+
+		$received_upload									=	$this->upload_model->upload_file('received_list',''); //after upload
+		if(isset($received_upload['file_name'])){
+			$file_name 			 							=	$received_upload['file_name'];
+		}else{
+			$session_data['error'] 							=	$received_upload['error'];
+			$this->session->set_userdata($session_data);
+			print_r($session_data['error']);
+			redirect('receive','refresh');
+		}
+		
+		$upload_result 										=	$this->upload_received_list($received_data, $file_name);
+		redirect('seize/upload_receivable','refresh');
+	}
+
+
+	public function upload_received_list($received_data, $file_name){
+
+		$this->load->library('csvreader');
+
+		$result												=	$this->csvreader->parse_file($file_name);
+
+		$count 												=	0;
+
+		$receivable_data 									=	array();
+
+
+		for ($i=1; $i <= count($result) ; $i++) {
+			$customer_id 									=	$result[$i]['customer_id'];
+			$receivable_data['number_of_overdue'] 			=	$result[$i]['number_of_overdue'];
+			$receivable_data['overdue_amount'] 				=	$result[$i]['overdue_amount'];
+			$receivable_data['outstanding_amount'] 			=	$result[$i]['outstanding_amount'];
+			$receivable_data['installment_start_from'] 		=	$result[$i]['installment_start_from'];
+			$receivable_data['last_installment_date'] 		=	$result[$i]['last_installment_date'];
+
+			$detail_result									=	$this->customer_model->update_customer($receivable_data, $customer_id);
+			
+		}
+		$session_data['message']							=	'successfully updated!';
+		$this->session->set_userdata($session_data);
+		redirect('seize/upload_receivable','refresh');
+		// redirect('inventory/receive','refresh');
+	}
+
 
 
 	
