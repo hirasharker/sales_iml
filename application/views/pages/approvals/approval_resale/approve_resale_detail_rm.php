@@ -132,6 +132,8 @@
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary">approve</button>
+            <a href="<?php echo base_url();?>approval_resale/deny_unit_head/<?php echo $resale_detail->resale_id?>" class="btn btn-danger">deny</a>
+
         </div>
 
         </form>

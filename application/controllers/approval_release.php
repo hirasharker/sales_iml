@@ -132,6 +132,24 @@ class Approval_Release extends CI_Controller {
 		$this->release_model->update_release($release_data, $release_id);
 		redirect('approval_release/unit_head', 'refresh');
 	}
+
+	public function deny_unit_head($release_id){
+		$customer_status 				=	array();
+
+		$updated_status 				=	10;
+
+		$release_data 					=	array();
+
+		$release_data['rm_note']										=	$this->input->post('rm_note','',TRUE);
+		$release_data['release_status']		=	$updated_status;
+
+		$release_data['rm_approval_time']	=	date('Y-m-d H:i:s');
+
+		$this->release_model->update_release($release_data, $release_id);
+		redirect('approval_release/unit_head', 'refresh');
+
+
+	}
 	
 
 	public function ajax_generate_release_detail_rm_to_approve(){
@@ -151,22 +169,7 @@ class Approval_Release extends CI_Controller {
 	}
 
 
-	public function ajax_generate_release_detail_to_deny(){
-		$report_data										=	array();
-		$release_data										=	array();
-
-		$customer_id										=	$this->input->post('customer_id');
-		
-		$release_data['customer_detail']					=	$this->customer_model->get_customer_by_id($customer_id);
-		
-        $report_data['content']								=	$this->load->view('pages/inspection/deny_customer_detail',$release_data,TRUE);
-		
-		echo json_encode($report_data['content']);
-		// echo json_encode();
-			// a die here helps ensure a clean ajax call
-			die();
-	}
-
+	
 	// RM = UNIT Head approval section ends here
 
 
@@ -213,7 +216,7 @@ class Approval_Release extends CI_Controller {
 		if($this->session->userdata('role')!=2 && $this->session->userdata('role')!=15){
 			redirect('dashboard','refresh');
 		}
-		$customer_status		=	array();
+		$customer_data		=	array();
 
 		$release_id							=	$this->input->post('release_id','0',TRUE);
 
@@ -226,13 +229,40 @@ class Approval_Release extends CI_Controller {
 
 		$release_data['release_status']				=	$updated_status;
 
+		$customer_data['seize_status'] 		=	false;
+
 		$release_data['dh_approval_time']	=	date('Y-m-d H:i:s');
 		$release_data['proposed_collection_amount_by_dh']				=	$this->input->post('proposed_collection_amount_by_dh','',TRUE);
 		$release_data['dh_note']										=	$this->input->post('dh_note','',TRUE);
 
 		$this->release_model->update_release($release_data, $release_id);
+		$this->customer_model->update_customer($customer_data, $current_status->customer_id);
+
 		redirect('approval_release/divisional_head/', 'refresh');
 	}
+
+	public function deny_divisional_head(){
+		if($this->session->userdata('role')!=2 && $this->session->userdata('role')!=15){
+			redirect('dashboard','refresh');
+		}
+
+		$release_id							=	$this->input->post('release_id','0',TRUE);
+
+		// print($release_id);exit();
+
+		$updated_status						=	11;
+
+		$release_data['release_status']				=	$updated_status;
+
+		$release_data['dh_approval_time']	=	date('Y-m-d H:i:s');
+		$release_data['proposed_collection_amount_by_dh']				=	$this->input->post('proposed_collection_amount_by_dh','',TRUE);
+		$release_data['dh_note']										=	$this->input->post('dh_note','',TRUE);
+
+		$this->release_model->update_release($release_data, $release_id);
+
+		redirect('approval_release/divisional_head/', 'refresh');
+	}
+
 
 	public function print_service_inspection_form () {
 		$release_data							=	array();
@@ -264,6 +294,22 @@ class Approval_Release extends CI_Controller {
 		$release_data['release_detail']					=	$this->release_model->get_release_by_id($release_id);
 
         $report_data['content']								=	$this->load->view('pages/approvals/approval_release/approve_release_detail_dh',$release_data,TRUE);
+		
+		echo json_encode($report_data['content']);
+		// echo json_encode();
+			// a die here helps ensure a clean ajax call
+			die();
+	}
+
+	public function ajax_generate_release_detail_dh_to_deny(){
+		$report_data										=	array();
+		$release_data										=	array();
+
+		$release_id										=	$this->input->post('release_id');
+		
+		$release_data['release_detail']					=	$this->release_model->get_release_by_id($release_id);
+
+        $report_data['content']								=	$this->load->view('pages/approvals/approval_release/deny_release_detail_dh',$release_data,TRUE);
 		
 		echo json_encode($report_data['content']);
 		// echo json_encode();

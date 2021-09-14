@@ -125,6 +125,8 @@
 
                                                 <a type="button" class="btn btn-primary deny" href="<?php echo base_url();?>approval_resale/approve_divisional_head/<?php echo $value->resale_id; ?>">Approve</a>
 
+                                                <a type="button" class="btn btn-primary deny" href="<?php echo base_url();?>approval_resale/deny_divisional_head/<?php echo $value->resale_id; ?>">Deny</a>
+
                                                <form action="<?php echo base_url(); ?>approval_resale/print_service_inspection_form" target="_blank" method="post">
                                                     <input type="hidden" value="<?php echo $value->resale_id; ?>" name="resale_id">
                                                     <a onclick='this.parentNode.submit(); return false;' href="#"><i class="fa fa-print"></i> Service Inspection</a>

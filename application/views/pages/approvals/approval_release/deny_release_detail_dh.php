@@ -4,7 +4,7 @@
             <h3 class="modal-title" id="approveLabel">Release Detail</h3>
             
         </div>
-        <form action="<?php echo base_url();?>approval_release/approve_unit_head" method="post" enctype='multipart/form-data'>
+        <form action="<?php echo base_url();?>approval_release/deny_divisional_head" method="post" enctype='multipart/form-data'>
 
             
 
@@ -74,15 +74,15 @@
                         </tr>
 
                         <tr>
-                        <th scope="row">Proposed Collection Amount by Unit Head </th>
-                        <td><input type="number" class="col-md-12 col-sm-12 col-xs-12" name="proposed_collection_amount_by_uh" required min="0"></td>
+                        <th scope="row">Proposed Collection Amount (UH)</th>
+                        <td><?php echo strtoupper($release_detail->proposed_collection_amount_by_uh); ?></td>
                         </tr>
                         
 
                         <tr>
                         <th scope="row">Note </th>
                         <input type="hidden" name="release_id" value="<?php echo $release_detail->release_id ?>">
-                        <td><textarea class="col-md-12 col-sm-12 col-xs-12" name="rm_note" required></textarea></td>
+                        <td><textarea class="col-md-12 col-sm-12 col-xs-12" name="dh_note" required></textarea></td>
                         </tr>
                         
                         <!-- <tr>
@@ -98,8 +98,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">approve</button>
-            <a href="<?php echo base_url();?>approval_release/deny_unit_head/<?php echo $release_detail->release_id;?>" class="btn btn-danger">deny</a>
+            <button type="submit" class="btn btn-danger">deny</button>
         </div>
 
         </form>

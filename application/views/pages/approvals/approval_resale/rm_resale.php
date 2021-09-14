@@ -98,16 +98,8 @@
                                             <td><?php echo $value->chassis_no; ?></td>
                                             <td><?php echo $value->user_id; ?></td>
                                             <td><?php echo $value->time_stamp; ?></td>
-                                            <td><a type="button" class="btn btn-primary approve" data-toggle="modal" data-target="#approve" data-whatever="@mdo" data-resale-id="<?php echo $value->resale_id; ?>">approve</a>
+                                            <td><a type="button" class="btn btn-primary approve" data-toggle="modal" data-target="#approve" data-whatever="@mdo" data-resale-id="<?php echo $value->resale_id; ?>">detail</a>
 
-                                                
-
-                                                <a type="button" class="btn btn-primary deny" data-toggle="modal" data-target="#deny" data-whatever="@mdo" data-resale-id="<?php echo $value->resale_id; ?>">deny</a>
-
-                                                <!-- <form action="<?php echo base_url(); ?>inspection/print_inspection_form" target="_blank" method="post">
-                                                    <input type="hidden" value="<?php echo $value->customer_id; ?>" name="customer_id">
-                                                    <a onclick='this.parentNode.submit(); return false;' href="#"><i class="fa fa-print"></i> print</a>
-                                                </form> -->
                                                 <?php if($this->session->userdata('role')==15){?>
                                                 
 

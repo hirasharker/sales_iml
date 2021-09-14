@@ -268,7 +268,7 @@
           console.log('clicked!'+searchKey);
           $.ajax({
                   type: "POST",
-                  url: "<?php echo base_url()?>release/generate_customer_detail/",
+                  url: "<?php echo base_url()?>release/generate_customer_detail_for_release/",
                   data: { 'search_key': searchKey  },
                   success: function(data){
                       // Parse the returned json data
@@ -276,6 +276,8 @@
                       // Use jQuery's each to iterate over the opts value
                     if(opts.seize_status == 'f'){
                       alert('Not Under Seize!')
+                    }else if(opts.release_status == 0 || opts.release_status == 1 || opts.release_status == 2){
+                      alert('Duplicate Entry!')
                     }else{
                       $('#customerId').val(opts.customer_id);
                       $('#customerName').val(opts.customer_name);
@@ -293,6 +295,8 @@
 
                       console.log(opts.chassis_no);
                       console.log(opts.seize_status);
+                      console.log(opts.seize_id);
+                      console.log(opts.release_status);
                     }
                     
                      

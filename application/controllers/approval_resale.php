@@ -132,6 +132,29 @@ class Approval_Resale extends CI_Controller {
 		$this->resale_model->update_resale($resale_data, $resale_id);
 		redirect('approval_resale/unit_head/', 'refresh');
 	}
+
+	public function deny_unit_head($resale_id){
+		if($this->session->userdata('role')!=2 && $this->session->userdata('role')!=15){
+			redirect('dashboard','refresh');
+		}
+		$customer_status		=	array();
+
+		// print($resale_id);exit();
+
+
+		// $current_status						=	$this->resale_model->get_resale_by_id($resale_id);
+
+		$updated_status						=	10;
+
+		$resale_data['status']				=	$updated_status;
+		$resale_data['rm_note']				=	$this->input->post('rm_note','',TRUE);
+		$resale_data['resale_customer_id']	=	$this->input->post('resale_customer_id','',TRUE);
+
+		$resale_data['rm_approval_time']	=	date('Y-m-d H:i:s');
+
+		$this->resale_model->update_resale($resale_data, $resale_id);
+		redirect('approval_resale/unit_head/', 'refresh');
+	}
 	
 
 	public function ajax_generate_resale_detail_to_approve(){
@@ -231,8 +254,31 @@ class Approval_Resale extends CI_Controller {
 		$resale_data['zonal_head_approval_time']	=	date('Y-m-d H:i:s');
 
 		$this->resale_model->update_resale($resale_data, $resale_id);
+		redirect('approval_resale/divisional_head', 'refresh');
+	}
+
+	public function deny_divisional_head($resale_id){
+		if($this->session->userdata('role')!=2 && $this->session->userdata('role')!=15){
+			redirect('dashboard','refresh');
+		}
+		$customer_status		=	array();
+
+		// $resale_id							=	$this->input->post('resale_id','0',TRUE);
+
+		// print($resale_id);exit();
+
+		$current_status						=	$this->resale_model->get_resale_by_id($resale_id);
+
+		$updated_status						=	11;
+
+		$resale_data['status']				=	$updated_status;
+
+		$resale_data['zonal_head_approval_time']	=	date('Y-m-d H:i:s');
+
+		$this->resale_model->update_resale($resale_data, $resale_id);
 		redirect('approval_resale/divisional_head/', 'refresh');
 	}
+
 
 	public function print_service_inspection_form () {
 		$resale_data							=	array();

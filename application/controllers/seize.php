@@ -86,7 +86,7 @@ class Seize extends CI_Controller {
 			$this->customer_model->update_customer($data, $seize_data['customer_id']);
 		}
 
-		redirect('seize/index','refresh');
+		redirect('seize/','refresh');
 	}
 
 	public function seize_depot()

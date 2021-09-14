@@ -520,6 +520,8 @@
           $('#depotName').val("");
           $('#depotId').val("");
           $('#seizeId').val("");
+          $('#seizeDate').val("");
+          
 
           $('#report-view').html('');
           var searchKey = $('#searchKey').val();
@@ -539,19 +541,18 @@
                       $('#engineNo').val(opts.engine_no);
                       $('#chassisNo').val(opts.chassis_no);
                       $('#stockId').val(opts.stock_id);
-                      $('#vehicleCondition').val(opts.vehicle_condition);
+                      $('#vehicleCondition').val(opts.vehicle_condition.toUpperCase());
                       $('#tyreQuantity').val(opts.tyre_quantity);
-                      $('#batteryCondition').val(opts.battery_condition);
-                      $('#gasCylinder').val(opts.gas_cylinder);
-                      $('#keyStatus').val(opts.key_status);
+                      $('#batteryCondition').val(opts.battery_condition.toUpperCase());
+                      $('#gasCylinder').val(opts.gas_cylinder.toUpperCase());
+                      $('#keyStatus').val(opts.key_status.toUpperCase());
                       $('#depotName').val(opts.depot_name);
                       $('#depotId').val(opts.depot_id);
                       $('#seizeId').val(opts.seize_id);
                       $('#cityId').val(opts.city_id);
                       $('#rmId').val(opts.rm_id);
                       $('#zheadId').val(opts.seize_id);
-
-
+                      $('#seizeDate').val(opts.time_stamp);
 
                     }else {
                       alert('Currently not under seize!')

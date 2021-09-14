@@ -136,7 +136,6 @@
                 <ul class="nav child_menu">
                     <li><a href="<?php echo base_url();?>approval_release/unit_head">Unit Head </a></li>
                     <li><a href="<?php echo base_url();?>approval_release/divisional_head">Divisional Head</a></li>
-                    <li><a href="<?php echo base_url();?>approval_release/management">Management</a></li>
                 </ul>
             </li>
             <li><a href="<?php echo base_url();?>seize_report/general_release_report">General Seize Report </a></li>

@@ -551,11 +551,35 @@ class Customer_Model extends CI_Model {
 
 
     public function get_customer_by_search_key($search_key){
-        $this->db->select('tbl_customer.*, tbl_dealer.dealer_name, tbl_seize.time_stamp as seize_date');
+        $this->db->select('tbl_customer.*, tbl_dealer.dealer_name, tbl_seize.time_stamp as seize_date, tbl_release.release_status, tbl_release.release_id');
         $this->db->from('tbl_customer');
         $this->db->join('tbl_dealer','tbl_dealer.dealer_id = tbl_customer.dealer_id','left');
         $this->db->join('tbl_seize','tbl_seize.seize_id = tbl_customer.seize_id','left');
+        $this->db->join('tbl_release','tbl_release.seize_id = tbl_customer.seize_id','left');
         
+        if(is_numeric($search_key)){
+            $this->db->where('tbl_customer.customer_id', $search_key);
+            $this->db->or_where('tbl_customer.engine_no', $search_key);
+            $this->db->or_where('tbl_customer.chassis_no', $search_key);
+        }else {
+            $this->db->where('tbl_customer.engine_no', $search_key);
+            $this->db->or_where('tbl_customer.chassis_no', $search_key);
+        }
+        // $this->db->where('customer_id', $search_key);
+
+        $result_query=$this->db->get();
+        $result=$result_query->row();
+        return $result;
+    }
+
+    public function get_customer_for_release_by_search_key($search_key){
+        $this->db->select('tbl_customer.*, tbl_dealer.dealer_name, tbl_seize.time_stamp as seize_date, tbl_release.release_status, tbl_release.release_id');
+        $this->db->from('tbl_customer');
+        $this->db->join('tbl_dealer','tbl_dealer.dealer_id = tbl_customer.dealer_id','left');
+        $this->db->join('tbl_seize','tbl_seize.seize_id = tbl_customer.seize_id','left');
+        $this->db->join('tbl_release','tbl_release.seize_id = tbl_customer.seize_id','left');
+        
+
         if(is_numeric($search_key)){
             $this->db->where('tbl_customer.customer_id', $search_key);
             $this->db->or_where('tbl_customer.engine_no', $search_key);

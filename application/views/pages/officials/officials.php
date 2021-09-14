@@ -69,6 +69,7 @@
                       <option value="8">Accounts</option>
                       <option value="9">Delivery Yard</option>
                       <option value="10">Service</option>
+                      <option value="11">Recovery Officer</option>
                       </select>
                   </div>
                 </div>

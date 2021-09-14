@@ -133,6 +133,8 @@ class Resale extends CI_Controller {
 
 		$customer_detail 									=	$this->seize_model->get_seize_by_search_key($search_key);
 
+		$customer_detail->time_stamp						=	date('d-m-Y', strtotime($customer_detail->time_stamp));
+
 		echo json_encode($customer_detail);
 		// echo json_encode();
 			// a die here helps ensure a clean ajax call

@@ -102,7 +102,7 @@
 
                                                 
 
-                                                <a type="button" class="btn btn-primary deny" data-toggle="modal" data-target="#deny" data-whatever="@mdo" data-release-id="<?php echo $value->release_id; ?>">deny</a>
+                                                <a type="button" class="btn btn-danger deny" data-toggle="modal" data-target="#deny" data-whatever="@mdo" data-release-id="<?php echo $value->release_id; ?>">deny</a>
 
                                                 <!-- <form action="<?php echo base_url(); ?>inspection/print_inspection_form" target="_blank" method="post">
                                                     <input type="hidden" value="<?php echo $value->customer_id; ?>" name="customer_id">
@@ -333,13 +333,14 @@
 
     $( ".deny" ).click(function() {
           // alert( "Handler for .change() called."+this.value);
+          // alert( "Handler for .change() called."+this.value);
           var releaseId            =   $(this).data("release-id")
 
           // alert(customerId);
 
             $.ajax({
               type: "POST",
-              url: "<?php echo base_url()?>release/ajax_generate_release_detail_to_deny/",
+              url: "<?php echo base_url()?>approval_release/ajax_generate_release_detail_dh_to_deny/",
               data: { 'release_id': releaseId },
               success: function(data){
                 // Parse the returned json data

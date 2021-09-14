@@ -85,7 +85,7 @@ class Release extends CI_Controller {
 
 
 	
-	public function generate_customer_detail(){
+	public function generate_customer_detail_for_release(){
 		$search_key 										=	$this->input->post('search_key');
 
 		$user_id 											=	$this->session->userdata('employee_id');
@@ -96,7 +96,7 @@ class Release extends CI_Controller {
 		// 	$customer_detail 									=	$this->customer_model->get_customer_by_search_key($search_key, $user_id)
 		// }
 
-		$customer_detail 									=	$this->customer_model->get_customer_by_search_key($search_key);
+		$customer_detail 									=	$this->customer_model->get_customer_for_release_by_search_key($search_key);
 
 		$customer_detail->seize_date					=	date('d-m-Y', strtotime($customer_detail->seize_date));
 
