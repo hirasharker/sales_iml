@@ -104,6 +104,9 @@ class seize_Model extends CI_Model {
         $this->db->from('tbl_seize');
         $this->db->join('tbl_city','tbl_city.city_id = tbl_seize.city_id', 'left');
         $this->db->join('tbl_zone', 'tbl_zone.zone_id = tbl_city.zone_id', 'left');
+
+        // $this->db->where('tbl_city.zone_id',29);
+        
         if($zone_id!=''){
             $this->db->where('tbl_city.zone_id',$zone_id);    
         }

@@ -135,12 +135,12 @@
                       $("#generate").click(function(){ 
                           $('#report-view').html('');
 
-                          
-                          var zoneId = $('#zoneId').val();
+                          var zoneId = $('#zoneId option:selected').val();
                           var rmId = $('#rmId').val();
                           var zmId  = $('#zmId').val();
                           var svdId= $('#svdId').val();
                           var status = $('#status').val();
+                          // alert(zoneId);
                           // var startDate   = $('#single_cal3').val();
                           // var endDate   = $('#single_cal4').val();
                           $.ajax({

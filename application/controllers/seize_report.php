@@ -52,7 +52,7 @@ class Seize_Report extends CI_Controller {
 		$seize_data['seize_depot_list']						=	$this->seize_model->get_all_seize_depots();
 		
 		$seize_data['employee_list']						=	$this->employee_model->get_all_employees();
-		
+
 		$seize_data['zone_list']							=	$this->zone_model->get_all_zones();
 
 		$report_data['navigation'] 							=   $this->load->view('template/navigation','',TRUE);
@@ -72,13 +72,15 @@ class Seize_Report extends CI_Controller {
 		$depot_id											=	$this->input->post('depot_id');
 		$status												=	$this->input->post('status');
 		// $date 												=	explode('-',$this->input->post('date'));
-		$start_date											=	$this->input->post('start_date');
-		$end_date											=	$this->input->post('end_date');
+		// $start_date											=	$this->input->post('start_date');
+		// $end_date											=	$this->input->post('end_date');
 
 
 
 		
-		$seize_data['seize_list']					=	$this->seize_model->get_all_seize_data_by_search_criteria($zone_id='',$rm_id='',$zm_id='',$depot_id='', $status);
+		$seize_data['seize_list']					=	$this->seize_model->get_all_seize_data_by_search_criteria($zone_id, $rm_id, $zm_id, $depot_id, $status);
+
+		// echo json_encode($zone_id); exit();
 		
 
 		$seize_data['employee_list']						=	$this->employee_model->get_all_employees();
