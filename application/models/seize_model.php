@@ -99,6 +99,44 @@ class seize_Model extends CI_Model {
         return $result;
     }
 
+    public function get_all_seize_data_by_search_criteria($zone_id='',$rm_id='',$zm_id='',$depot_id='', $status){
+        $this->db->select('tbl_seize.*');
+        $this->db->from('tbl_seize');
+        $this->db->join('tbl_city','tbl_city.city_id = tbl_seize.city_id', 'left');
+        $this->db->join('tbl_zone', 'tbl_zone.zone_id = tbl_city.zone_id', 'left');
+        if($zone_id!=''){
+            $this->db->where('tbl_city.zone_id',$zone_id);    
+        }
+        if($rm_id!=''){
+            $this->db->where('tbl_city.rm_id',$rm_id);    
+        }
+        if($zm_id!=''){
+            $this->db->where('tbl_zone.zhead_id',$zm_id);    
+        }
+        if($depot_id!=''){
+            $this->db->where('depot_id',$depot_id);    
+        }
+
+        
+        
+        // if($start_date!=''){
+        //     $this->db->where('date(tbl_seize.time_stamp) >=',$start_date);
+        //     $this->db->where('date(tbl_seize.time_stamp) <=',$end_date);  
+        // }
+
+        
+
+        // if($status==9){
+        //     $this->db->where('status',$status);
+        // }elseif($status==30){
+        //     $this->db->where('status !=',9);
+        //     $this->db->where('status !=',8);
+        // }
+        $result_query=$this->db->get();
+        $result=$result_query->result();
+        return $result;
+    }
+
 
 }
 ?>
