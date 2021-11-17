@@ -26,14 +26,35 @@
 	<tr>
 		<td><?php echo $i; $i++; ?></td>
 		<td><?php echo $value->time_stamp; ?></td>			
-		<td></td>
-		<td></td>
-		<td><?php echo $value->user_id; ?></td>
-		<td></td>
-		<td></td>
+		<td><?php echo $value->dh_approval_time; ?></td>
+		<td><?php echo $value->zone_name; ?></td>
+		<td><?php
+			foreach ($employee_list as $emp_value) {
+				if($emp_value->employee_id == $value->user_id){
+					echo $emp_value->employee_name;	
+				}
+			}
+		 	?>
+		</td>
+		<td><?php
+			foreach ($employee_list as $emp_value) {
+				if($emp_value->employee_id == $value->rm_id){
+					echo $emp_value->employee_name;	
+				}
+			}
+		 	?>
+		</td>
+		<td><?php
+			foreach ($employee_list as $emp_value) {
+				if($emp_value->employee_id == $value->zhead_id){
+					echo $emp_value->employee_name;	
+				}
+			}
+		 	?>
+		</td>
 		<td><?php echo $value->customer_id; ?></td>
 		<td><?php echo $value->customer_name; ?></td>
-		<td><?php echo $value->depot_id; ?></td>
+		<td><?php echo $value->depot_name; ?></td>
 		<td><?php echo $value->engine_no; ?></td>
 		<td><?php echo $value->chassis_no; ?></td>
 		<td></td>

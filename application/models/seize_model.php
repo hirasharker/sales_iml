@@ -100,10 +100,12 @@ class seize_Model extends CI_Model {
     }
 
     public function get_all_seize_data_by_search_criteria($zone_id='',$rm_id='',$zm_id='',$depot_id='', $status){
-        $this->db->select('tbl_seize.*');
+        $this->db->select('tbl_seize.*,tbl_zone.zone_name, tbl_zone.zhead_id, tbl_city.rm_id, tbl_release.dh_approval_time, tbl_seize_depot.depot_name');
         $this->db->from('tbl_seize');
         $this->db->join('tbl_city','tbl_city.city_id = tbl_seize.city_id', 'left');
         $this->db->join('tbl_zone', 'tbl_zone.zone_id = tbl_city.zone_id', 'left');
+        $this->db->join('tbl_release', 'tbl_seize.seize_id = tbl_release.seize_id', 'left');
+        $this->db->join('tbl_seize_depot', 'tbl_seize_depot.depot_id = tbl_seize.depot_id','left');
 
         // $this->db->where('tbl_city.zone_id',29);
         
