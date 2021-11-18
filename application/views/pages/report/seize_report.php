@@ -19,8 +19,8 @@
             </div>
             <div class="x_content" style="height:auto">
             <br />
-            <!-- <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url();?>report/generate_booking_report/" enctype='multipart/form-data'> -->
-            <form class="form-horizontal form-label-left" method="post"  enctype='multipart/form-data'>
+            <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url();?>seize_report/test/" enctype='multipart/form-data'>
+            <!-- <form class="form-horizontal form-label-left" method="post"  enctype='multipart/form-data'> -->
 
 
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
@@ -75,7 +75,7 @@
 
                 
                 <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Delivery Status </label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Seize Status </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <select id="status" class="form-control select-tag" name="status" >
                       <option value="">Any</option>
@@ -126,6 +126,7 @@
                   </div>
                 </div>
 
+                <!-- <input type="submit" name=""> -->
               </form>
                 <script>
                   $(function() { 
@@ -141,12 +142,12 @@
                           var svdId= $('#svdId').val();
                           var status = $('#status').val();
                           // alert(zoneId);
-                          // var startDate   = $('#single_cal3').val();
-                          // var endDate   = $('#single_cal4').val();
+                          var startDate   = $('#single_cal3').val();
+                          var endDate   = $('#single_cal4').val();
                           $.ajax({
                                   type: "POST",
                                   url: "<?php echo base_url()?>seize_report/generate_seize_report/",
-                                  data: { 'zone_id': zoneId, 'rm_id' : rmId, 'zm_id' : zmId, 'depot_id': svdId, 'status': status },
+                                  data: { 'zone_id': zoneId, 'rm_id' : rmId, 'zm_id' : zmId, 'depot_id': svdId, 'status': status, 'start_date': startDate, 'end_date': endDate },
                                   success: function(data){
                                       // Parse the returned json data
                                       var opts = $.parseJSON(data);

@@ -99,8 +99,8 @@ class seize_Model extends CI_Model {
         return $result;
     }
 
-    public function get_all_seize_data_by_search_criteria($zone_id='',$rm_id='',$zm_id='',$depot_id='', $status){
-        $this->db->select('tbl_seize.*,tbl_zone.zone_name, tbl_zone.zhead_id, tbl_city.rm_id, tbl_release.dh_approval_time, tbl_seize_depot.depot_name');
+    public function get_all_seize_data_by_search_criteria($zone_id='',$rm_id='',$zm_id='',$depot_id='', $status, $start_date, $end_date){
+        $this->db->select("tbl_seize.*,tbl_zone.zone_name, tbl_zone.zhead_id, tbl_city.rm_id, tbl_release.dh_approval_time, tbl_seize_depot.depot_name, abs(tbl_seize.time_stamp :: date - CURRENT_TIMESTAMP :: date) as seize_period, date_part('day','".$end_date."' :: timestamp -tbl_seize.time_stamp ) as seize_period_till_report_date, tbl_seize_depot.daily_rent");
         $this->db->from('tbl_seize');
         $this->db->join('tbl_city','tbl_city.city_id = tbl_seize.city_id', 'left');
         $this->db->join('tbl_zone', 'tbl_zone.zone_id = tbl_city.zone_id', 'left');
@@ -124,10 +124,10 @@ class seize_Model extends CI_Model {
 
         
         
-        // if($start_date!=''){
-        //     $this->db->where('date(tbl_seize.time_stamp) >=',$start_date);
-        //     $this->db->where('date(tbl_seize.time_stamp) <=',$end_date);  
-        // }
+        if($start_date!=''){
+            $this->db->where('date(tbl_seize.time_stamp) >=',$start_date);
+            $this->db->where('date(tbl_seize.time_stamp) <=',$end_date);  
+        }
 
         
 

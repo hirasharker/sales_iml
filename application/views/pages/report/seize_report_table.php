@@ -13,10 +13,11 @@
     <th>Garaze/SVD Name</th>
     <th>Engine No</th>
     <th>Chassis No</th>
+    <th>Seize Period(till given date)</th>
+    
     <th>Seize Period (Days)</th>
     <th>Seized Cost</th>
     <th>Garaze Rent (Per Day)</th>
-    <th>Total Rent</th>
     <th>Status</th>
     
   </tr>
@@ -57,10 +58,33 @@
 		<td><?php echo $value->depot_name; ?></td>
 		<td><?php echo $value->engine_no; ?></td>
 		<td><?php echo $value->chassis_no; ?></td>
-		<td></td>
+		<td>
+			<?php if ($value->dh_approval_time == NULL){ 
+			 echo $value->seize_period_till_report_date;
+			}elseif (strtotime($value->dh_approval_time) > strtotime($end_date) ){
+				$seize_date = new DateTime($value->time_stamp);
+			 	$report_date = new DateTime($end_date);
+			 	$interval = date_diff($seize_date,$report_date);
+			 	echo $interval->format('%d');
+			 }else{
+			 	$seize_date = new DateTime($value->time_stamp);
+			 	$report_date = new DateTime($value->dh_approval_time);
+			 	$interval = date_diff($seize_date,$report_date);
+			 	echo $interval->format('%d');
+			 } ?>
+		</td>
+		<td>
+			<?php if ($value->dh_approval_time == NULL){ 
+			 echo $value->seize_period;
+			 }else{
+			 	$seize_date = new DateTime($value->time_stamp);
+			 	$report_date = new DateTime($value->dh_approval_time);
+			 	$interval = date_diff($seize_date,$report_date);
+			 	echo $interval->format('%d');
+			 } ?>
+		</td>
 		<td><?php echo $value->seize_cost; ?></td>
-		<td></td>
-		<td></td>
+		<td><?php echo $value->daily_rent; ?></td>
 		<td><?php echo $value->status; ?></td>
 
 	</tr>
