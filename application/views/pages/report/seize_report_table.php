@@ -13,6 +13,16 @@
     <th>Garaze/SVD Name</th>
     <th>Engine No</th>
     <th>Chassis No</th>
+    
+    <th>Seized From</th>
+    <th>Vehicle Condition</th>
+    <th>Tyre Quantity</th>
+    <th>Battery Condition</th>
+    <th>Gas Cylinder</th>
+    <th>Key</th>
+    <th>Customer Name (If Different)</th>
+    <th>Phone (If Different)</th>
+
     <th>Seize Period(till given date)</th>
     
     <th>Seize Period (Days)</th>
@@ -58,6 +68,16 @@
 		<td><?php echo $value->depot_name; ?></td>
 		<td><?php echo $value->engine_no; ?></td>
 		<td><?php echo $value->chassis_no; ?></td>
+
+		<td><?php echo strtoupper($value->seize_location); ?></td>
+		<td><?php echo strtoupper($value->vehicle_condition); ?></td>
+		<td><?php echo $value->tyre_quantity; ?></td>
+		<td><?php echo strtoupper($value->battery_condition); ?></td>
+		<td><?php echo strtoupper($value->gas_cylinder); ?></td>
+		<td><?php echo strtoupper($value->key_status); ?></td>
+		<td><?php echo strtoupper($value->different_customer); ?></td>
+		<td><?php echo $value->different_phone; ?></td>
+
 		<td>
 			<?php if ($value->dh_approval_time == NULL){ 
 			 echo $value->seize_period_till_report_date;
@@ -85,7 +105,20 @@
 		</td>
 		<td><?php echo $value->seize_cost; ?></td>
 		<td><?php echo $value->daily_rent; ?></td>
-		<td><?php echo $value->status; ?></td>
+		<td>
+			<?php 
+				switch ($value->status) {
+					case 1:
+						echo 'Released';
+						break;
+					case 2:
+						echo 'Sold';
+					default:
+						echo 'Under Seize';
+						break;
+				}
+			?>
+		</td>
 
 	</tr>
 	<?php }?>
