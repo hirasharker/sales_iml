@@ -193,6 +193,18 @@
                     </div>
                 </div>
 
+                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Soft-top </label>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <select class="form-control select-tag" name="softtop" required>
+                          <option value="">select</option>
+                          <option value="good">Good</option>
+                          <option value="average">Average</option>
+                          <option value="damaged">Damaged</option>
+                        </select>
+                    </div>
+                </div>
+
 
                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                     <label class="control-label col-md-3 col-sm-12 col-xs-12">Select Garage/SVD </label>

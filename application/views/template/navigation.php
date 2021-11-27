@@ -140,6 +140,7 @@
             </li>
             <li><a href="<?php echo base_url();?>seize/upload_receivable">Upload Receivable</a></li>
             <li><a href="<?php echo base_url();?>seize_report/general_seize_report">General Seize Report </a></li>
+            <li><a href="<?php echo base_url();?>seize_report/service_inspection_report">Service Inspection Report </a></li>
         </ul>
         </li>
 

@@ -80,6 +80,7 @@ class Seize extends CI_Controller {
 		$seize_data['battery_condition']		=	$this->input->post('battery_condition','',TRUE);
 		$seize_data['gas_cylinder']				=	$this->input->post('gas_cylinder','',TRUE);
 		$seize_data['key_status']				=	$this->input->post('key_status','',TRUE);
+		$seize_data['softtop']					=	$this->input->post('softtop','',TRUE);
 		$seize_data['depot_id']					=	$this->input->post('depot_id','0',TRUE);
 		$seize_data['city_id']					=	$this->input->post('city_id','0',TRUE);
 		$seize_data['seize_cost']				=	$this->input->post('seize_cost','0',TRUE);

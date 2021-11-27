@@ -4,6 +4,7 @@
     <th>SN</th>
     <th>Seized Date</th>
     <th>Release Date</th>
+    <th>Resale Date</th>
     <th>Zone</th>
     <th>Recovery Officer</th>
     <th>Unit Head</th>
@@ -38,6 +39,7 @@
 		<td><?php echo $i; $i++; ?></td>
 		<td><?php echo $value->time_stamp; ?></td>			
 		<td><?php echo $value->dh_approval_time; ?></td>
+		<td><?php echo $value->resale_date; ?></td>
 		<td><?php echo $value->zone_name; ?></td>
 		<td><?php
 			foreach ($employee_list as $emp_value) {
@@ -113,6 +115,7 @@
 						break;
 					case 2:
 						echo 'Sold';
+						break;
 					default:
 						echo 'Under Seize';
 						break;

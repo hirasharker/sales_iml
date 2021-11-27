@@ -384,6 +384,7 @@ class Approval_Resale extends CI_Controller {
 		$inspection_data['self_starter']		=	$this->input->post('self_starter','0',TRUE);
 		$inspection_data['ignition_switch']		=	$this->input->post('ignition_switch','0',TRUE);
 		$inspection_data['key_status']		=	$this->input->post('key_status','0',TRUE);
+		$inspection_data['softtop']		=	$this->input->post('softtop','0',TRUE);
 		$inspection_data['body_condition']		=	$this->input->post('body_condition','0',TRUE);
 		$inspection_data['denting_painting']		=	$this->input->post('denting_painting','0',TRUE);
 		$inspection_data['overall_vehicle_condition']		=	$this->input->post('overall_vehicle_condition','0',TRUE);

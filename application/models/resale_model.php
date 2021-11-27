@@ -21,7 +21,7 @@ class Resale_Model extends CI_Model {
     
 
     public function get_resale_by_id($resale_id){
-       $this->db->select('tbl_resale.*, tbl_employee.employee_name as ro_name, tbl_seize.vehicle_condition, tbl_seize.tyre_quantity, tbl_seize.battery_condition, tbl_seize.gas_cylinder, tbl_seize.key_status, tbl_seize.engine_no, tbl_seize.chassis_no, tbl_seize.time_stamp as seize_date, tbl_customer.customer_name as previous_customer_name, tbl_customer.phone');
+       $this->db->select('tbl_resale.*, tbl_employee.employee_name as ro_name, tbl_seize.vehicle_condition, tbl_seize.tyre_quantity, tbl_seize.battery_condition, tbl_seize.gas_cylinder, tbl_seize.key_status, tbl_seize.softtop, tbl_seize.engine_no, tbl_seize.chassis_no, tbl_seize.time_stamp as seize_date, tbl_customer.customer_name as previous_customer_name, tbl_customer.phone');
        $this->db->from('tbl_resale');
        $this->db->join('tbl_employee','tbl_employee.employee_id = tbl_resale.ro_id','left');
        $this->db->join('tbl_seize','tbl_seize.seize_id = tbl_resale.seize_id','left');

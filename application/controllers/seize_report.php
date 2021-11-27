@@ -93,6 +93,61 @@ class Seize_Report extends CI_Controller {
 			die();
 	}
 
+	
+	public function service_inspection_report(){
+		if($this->session->userdata('role')!=11 && $this->session->userdata('role')!=15){
+			redirect('dashboard','refresh');
+		}
+		$report_data										=	array();
+		$service_data											=	array();
+		
+
+		$service_data['customer_list']						=	$this->customer_model->get_all_customers();
+		$service_data['seize_list']							=	$this->seize_model->get_all_seizes();
+
+		$service_data['seize_depot_list']						=	$this->seize_model->get_all_seize_depots();
+		
+		$service_data['employee_list']						=	$this->employee_model->get_all_employees();
+
+		$service_data['zone_list']							=	$this->zone_model->get_all_zones();
+
+		$report_data['navigation'] 							=   $this->load->view('template/navigation','',TRUE);
+        $report_data['content']								=	$this->load->view('pages/report/service_report',$service_data,TRUE);
+        $report_data['footer']     							=   $this->load->view('template/footer','',TRUE);
+		$this->load->view('template/main_template',$report_data);
+	}
+
+	public function generate_service_report(){
+		$report_data										=	array();
+		$seize_data											=	array();
+
+		$zone_id											=	$this->input->post('zone_id');
+		$rm_id 												=	$this->input->post('rm_id');
+		$zm_id												=	$this->input->post('zm_id');
+		$depot_id											=	$this->input->post('depot_id');
+		// $date 												=	explode('-',$this->input->post('date'));
+		$start_date											=	$this->input->post('start_date');
+		$end_date											=	$this->input->post('end_date');
+
+
+		
+		$seize_data['seize_list']					=	$this->seize_model->get_all_service_data_by_search_criteria($zone_id, $rm_id, $zm_id, $depot_id, $status=0, $start_date, $end_date);
+
+		// echo json_encode($zone_id); exit();
+		$seize_data['end_date']								=	$end_date;
+
+		$seize_data['employee_list']						=	$this->employee_model->get_all_employees();
+		$seize_data['zone_list']							=	$this->zone_model->get_all_zones();
+
+        $report_data['content']								=	$this->load->view('pages/report/service_report_table',$seize_data,TRUE);
+		
+		echo json_encode($report_data['content']);
+		// echo json_encode($start_date);
+			// a die here helps ensure a clean ajax call
+			die();
+	}
+
+
 	public function test(){
 		$report_data										=	array();
 		$seize_data											=	array();
@@ -115,272 +170,7 @@ class Seize_Report extends CI_Controller {
 		exit();
 	}
 
-	public function sales_report(){
-		$report_data										=	array();
-		$sales_data										=	array();
-		
-		$sales_data['customer_list']						=	$this->customer_model->get_all_customers();
-		$sales_data['employee_list']						=	$this->employee_model->get_all_employees();
-		$sales_data['zone_list']							=	$this->zone_model->get_all_zones();
-		$sales_data['city_list']							=	$this->city_model->get_all_cities();
-		$sales_data['district_list']						=	$this->district_model->get_all_districts();
-		$sales_data['model_list']							=	$this->model_model->get_all_models();
-		$sales_data['yard_list']							=	$this->yard_model->get_all_delivery_yards();
-		
-		$report_data['navigation'] 							=   $this->load->view('template/navigation','',TRUE);
-        $report_data['content']								=	$this->load->view('pages/report/sales_report',$sales_data,TRUE);
-        $report_data['footer']     							=   $this->load->view('template/footer','',TRUE);
-		
-		$this->load->view('template/main_template',$report_data);
-	}
-
-	public function generate_sales_report(){
-		$report_data										=	array();
-		$sales_data											=	array();
-
-		$zone_id											=	$this->input->post('zone_id');
-		$city_id 											=	$this->input->post('city_id');
-		$district_id 										=	$this->input->post('district_id');
-		$sub_district_id 									=	$this->input->post('sub_district_id');
-		$mkt_id												=	$this->input->post('mkt_id');
-		$model_id											=	$this->input->post('model_id');
-		$yard_id											=	$this->input->post('yard_id');
-		$payment_mode										=	$this->input->post('payment_mode');
-		$date 												=	explode('-',$this->input->post('date'));
-		$start_date											=	$date[0];
-		$end_date											=	$date[1];
-		$status 											=	$this->input->post('status');
-		// echo json_encode($sub_district_id);die();
-
-		if($this->session->userdata('role')==4){
-			$sales_data['customer_list']						=	$this->customer_model->get_all_customers_sales_data_by_search_criteria($zone_id,$city_id,$district_id,$sub_district_id,$mkt_id,$model_id, $yard_id , $payment_mode,$start_date,$end_date,$status, $this->session->userdata('employee_id') );
-		} else {
-			$sales_data['customer_list']						=	$this->customer_model->get_all_customers_sales_data_by_search_criteria($zone_id,$city_id,$district_id,$sub_district_id,$mkt_id,$model_id, $yard_id , $payment_mode,$start_date,$end_date,$status);
-		}
-		
-		
-		$sales_data['employee_list']						=	$this->employee_model->get_all_employees();
-		$sales_data['zone_list']							=	$this->zone_model->get_all_zones();
-		$sales_data['city_list']							=	$this->city_model->get_all_cities();
-		$sales_data['model_list']							=	$this->model_model->get_all_models();
-		$sales_data['application_list']						=	$this->application_model->get_all_applications();
-		$sales_data['yard_list']							=	$this->yard_model->get_all_delivery_yards();
-		$sales_data['dealer_list']							=	$this->dealer_model->get_all_dealers();
-		$sales_data['bank_list']							=	$this->bank_model->get_all_banks();		
-		
-        $report_data['content']								=	$this->load->view('pages/report/sales_report_table',$sales_data,TRUE);
-		
-		echo json_encode($report_data['content']);
-		// echo json_encode();
-			// a die here helps ensure a clean ajax call
-			die();
-	}
-
-	public function individual_customer(){
-		$report_data										=	array();
-		
-		$report_data['navigation'] 							=   $this->load->view('template/navigation','',TRUE);
-        $report_data['content']								=	$this->load->view('pages/report/individual_report','',TRUE);
-        $report_data['footer']     							=   $this->load->view('template/footer','',TRUE);
-		
-		$this->load->view('template/main_template',$report_data);
-	}
-
-	public function generate_individual_customer(){
-		$report_data										=	array();
-		$sales_data											=	array();
-
-		$customer_id										=	$this->input->post('customer_id');
-		
-		$sales_data['customer_detail']						=	$this->customer_model->get_customer_by_id($customer_id);
-
-		if($sales_data['customer_detail'] == NULL){
-			echo json_encode('Not Found!');
-			die();
-		}
-		$sales_data['employee_list']						=	$this->employee_model->get_all_employees();
-		$sales_data['zone_list']							=	$this->zone_model->get_all_zones();
-		$sales_data['city_list']							=	$this->city_model->get_all_cities();
-		$sales_data['model_list']							=	$this->model_model->get_all_models();
-		$sales_data['application_list']						=	$this->application_model->get_all_applications();
-		$sales_data['yard_list']							=	$this->yard_model->get_all_delivery_yards();
-		$sales_data['dealer_list']							=	$this->dealer_model->get_all_dealers();
-		$sales_data['bank_list']							=	$this->bank_model->get_all_banks();		
-		
-        $report_data['content']								=	$this->load->view('pages/report/individual_customer_table',$sales_data,TRUE);
-		
-		echo json_encode($report_data['content']);
-		// echo json_encode();
-			// a die here helps ensure a clean ajax call
-			die();
-	}
-
-
-	public function get_city_list_ajax(){
-		$zone_id 							=	$this->input->post('zoneId');
-
-		$city_list							=	$this->city_model->get_city_by_zone_id($zone_id);
-			
-			// Add below to output the json for your javascript to pick up.
-			echo json_encode($city_list);
-			// a die here helps ensure a clean ajax call
-			die();
-	}
-
-
-
-
-
-
-
-
-	public function stock_report(){
-		$report_data										=	array();
-		$sales_data										=	array();
-		
-		$sales_data['zone_list']							=	$this->zone_model->get_all_zones();
-		$sales_data['model_list']							=	$this->model_model->get_all_models();
-		$sales_data['yard_list']							=	$this->yard_model->get_all_delivery_yards();
-		$sales_data['dealer_list']							=	$this->dealer_model->get_all_dealers();
-		$sales_data['bank_list']							=	$this->bank_model->get_all_banks();	
-		
-		$report_data['navigation'] 							=   $this->load->view('template/navigation','',TRUE);
-        $report_data['content']								=	$this->load->view('pages/report/stock_report',$sales_data,TRUE);
-        $report_data['footer']     							=   $this->load->view('template/footer','',TRUE);
-		
-		$this->load->view('template/main_template',$report_data);
-	}
-
-	public function generate_stock_report(){
-		$report_data										=	array();
-		$stock_data											=	array();
-
-		$zone_id											=	$this->input->post('zone_id');
-		$model_id											=	$this->input->post('model_id');
-		$yard_id											=	$this->input->post('yard_id');
-		$bank_id											=	$this->input->post('bank_id');
-		$dealer_id											=	$this->input->post('dealer_id');
-		$status 											=	$this->input->post('status');
-		// echo json_encode($sub_district_id);die();
-		
-		$stock_data['stock_list']						=	$this->stock_model->get_all_stock_data_by_search_criteria($zone_id, $model_id, $yard_id , $bank_id, $dealer_id, $status);
-
-		$stock_data['dealer_list']							=	$this->dealer_model->get_all_dealers();
-		$stock_data['bank_list']							=	$this->bank_model->get_all_banks();
-		
-        $report_data['content']								=	$this->load->view('pages/report/stock_report_table',$stock_data,TRUE);
-		
-		echo json_encode($report_data['content']);
-		// echo json_encode();
-			// a die here helps ensure a clean ajax call
-			die();
-	}
-
-
-	// stock_summary report starts here
-
-	public function stock_summary(){
-		$report_data										=	array();
-		$stock_data											=	array();
-		
-		$report_data['navigation'] 							=   $this->load->view('template/navigation','',TRUE);
-        $report_data['content']								=	$this->load->view('pages/report/stock_summary',$stock_data,TRUE);
-        $report_data['footer']     							=   $this->load->view('template/footer','',TRUE);
-		
-		$this->load->view('template/main_template',$report_data);
-	}
-
-
-	public function generate_model_wise_stock_summary(){
-		$report_data										=	array();
-		$stock_data											=	array();
-
-		$date 												=	explode('-',$this->input->post('date'));
-		// $start_date											=	$date[0];
-		// $end_date											=	$date[1];
-		// echo json_encode($sub_district_id);die();
-		
-		$stock_data['stock_summary']						=	$this->stock_model->get_stock_summary();
-
-		echo '<pre>'; print_r($stock_data['stock_summary']); echo '</pre>';
-		exit();
-
-		$stock_data['dealer_list']							=	$this->dealer_model->get_all_dealers();
-		$stock_data['bank_list']							=	$this->bank_model->get_all_banks();
-		
-        $report_data['content']								=	$this->load->view('pages/report/stock_report_table',$stock_data,TRUE);
-		
-		echo json_encode($report_data['content']);
-		// echo json_encode();
-			// a die here helps ensure a clean ajax call
-			die();
-	}
-
-
-
-
-
-
-
-	public function registration_report(){
-		$report_data										=	array();
-		$registration_data 					=	array();
-		
-		$registration_data['registration_list']	=	$this->reg_model->get_all_registrations();
-		$registration_data['model_list']	=	$this->model_model->get_all_models();
-		$registration_data['yard_list']		=	$this->yard_model->get_all_delivery_yards();
-		$registration_data['employee_list']	=	$this->employee_model->get_all_employees();
-		$registration_data['reg_area_list']	=	$this->reg_model->get_all_registration_areas();
-		$registration_data['bank_list']		=	$this->bank_model->get_all_banks();
-		
-		$report_data['navigation'] 							=   $this->load->view('template/navigation','',TRUE);
-        $report_data['content']								=	$this->load->view('pages/report/registration_report',$registration_data,TRUE);
-        $report_data['footer']     							=   $this->load->view('template/footer','',TRUE);
-		
-		$this->load->view('template/main_template',$report_data);
-	}
-
-	public function generate_registration_report(){
-		$report_data										=	array();
-		$sales_data											=	array();
-
-		$zone_id											=	$this->input->post('zone_id');
-		$city_id 											=	$this->input->post('city_id');
-		$district_id 										=	$this->input->post('district_id');
-		$sub_district_id 									=	$this->input->post('sub_district_id');
-		$mkt_id												=	$this->input->post('mkt_id');
-		$model_id											=	$this->input->post('model_id');
-		$yard_id											=	$this->input->post('yard_id');
-		$payment_mode										=	$this->input->post('payment_mode');
-		$date 												=	explode('-',$this->input->post('date'));
-		$start_date											=	$date[0];
-		$end_date											=	$date[1];
-		$status 											=	$this->input->post('status');
-		// echo json_encode($sub_district_id);die();
-
-		if($this->session->userdata('role')==4){
-			$sales_data['customer_list']						=	$this->customer_model->get_all_customers_sales_data_by_search_criteria($zone_id,$city_id,$district_id,$sub_district_id,$mkt_id,$model_id, $yard_id , $payment_mode,$start_date,$end_date,$status, $this->session->userdata('employee_id') );
-		} else {
-			$sales_data['customer_list']						=	$this->customer_model->get_all_customers_sales_data_by_search_criteria($zone_id,$city_id,$district_id,$sub_district_id,$mkt_id,$model_id, $yard_id , $payment_mode,$start_date,$end_date,$status);
-		}
-		
-		
-		$sales_data['employee_list']						=	$this->employee_model->get_all_employees();
-		$sales_data['zone_list']							=	$this->zone_model->get_all_zones();
-		$sales_data['city_list']							=	$this->city_model->get_all_cities();
-		$sales_data['model_list']							=	$this->model_model->get_all_models();
-		$sales_data['application_list']						=	$this->application_model->get_all_applications();
-		$sales_data['yard_list']							=	$this->yard_model->get_all_delivery_yards();
-		$sales_data['dealer_list']							=	$this->dealer_model->get_all_dealers();
-		$sales_data['bank_list']							=	$this->bank_model->get_all_banks();		
-		
-        $report_data['content']								=	$this->load->view('pages/report/sales_report_table',$sales_data,TRUE);
-		
-		echo json_encode($report_data['content']);
-		// echo json_encode();
-			// a die here helps ensure a clean ajax call
-			die();
-	}
+	
 
 
 }
