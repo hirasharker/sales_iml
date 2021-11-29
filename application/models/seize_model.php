@@ -132,12 +132,10 @@ class seize_Model extends CI_Model {
 
         
 
-        // if($status==9){
-        //     $this->db->where('status',$status);
-        // }elseif($status==30){
-        //     $this->db->where('status !=',9);
-        //     $this->db->where('status !=',8);
-        // }
+        if($status!=''){
+            $this->db->where('tbl_seize.status',$status);
+        }
+
         $result_query=$this->db->get();
         $result=$result_query->result();
         return $result;

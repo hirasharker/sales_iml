@@ -81,13 +81,21 @@
 		<td><?php echo $value->different_phone; ?></td>
 
 		<td>
-			<?php if ($value->dh_approval_time == NULL){ 
-			 echo $value->seize_period_till_report_date;
+			<?php 
+			if($value->resale_date != NULL){
+				$seize_date = new DateTime($value->time_stamp);
+			 	$report_date = new DateTime($value->resale_date);
+			 	$interval = date_diff($seize_date,$report_date);
+			 	echo $interval->format('%d');
+			}elseif ($value->dh_approval_time == NULL){ 
+			 	echo $value->seize_period_till_report_date;
+
 			}elseif (strtotime($value->dh_approval_time) > strtotime($end_date) ){
 				$seize_date = new DateTime($value->time_stamp);
 			 	$report_date = new DateTime($end_date);
 			 	$interval = date_diff($seize_date,$report_date);
 			 	echo $interval->format('%d');
+
 			 }else{
 			 	$seize_date = new DateTime($value->time_stamp);
 			 	$report_date = new DateTime($value->dh_approval_time);

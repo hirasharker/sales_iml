@@ -165,6 +165,16 @@ class Stock_Model extends CI_Model {
         $result              =   $result_query->result();
         return $result;
     }
+
+    public function get_stock_by_depot_id_for_booking($depot_id){
+        $this->db->select('*');
+        $this->db->from('tbl_stock');
+        $this->db->where('seize_depot_id',$depot_id);
+        $result_query        =   $this->db->get();
+        $result              =   $result_query->result();
+        return $result;
+    }
+    
     
     public function get_stock_by_chassis_no($chassis_no){
         $this->db->select('tbl_stock.*,tbl_model.model_code, tbl_model.credit_price, tbl_registration.registration_cost');

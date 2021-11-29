@@ -90,6 +90,7 @@ class Seize extends CI_Controller {
 		if($result){
 			$stock_id 							=	$this->input->post('stock_id','',TRUE);
 			$data['seize_status'] 				=	true;
+			$data['seize_depot_id'] 			=	$seize_data['depot_id'];
 			$this->stock_model->update_stock($data, $stock_id);
 			$data['seize_id']					=	$result;
 			$this->customer_model->update_customer($data, $seize_data['customer_id']);

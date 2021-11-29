@@ -2,7 +2,7 @@
 <div class="">
   <div class="page-title">
     <div class="title_left">
-      <h3>Resale Customer <small></small></h3>
+      <h3>Customers <small></small></h3>
     </div>
 
     <div class="title_right">
@@ -46,16 +46,6 @@
                 <h2>Basic Info <small></small></h2>
                   <div class="clearfix"></div>
                 </div>
-
-                <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Customer ID/ Engine /Chassis </label>
-                  <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input id="searchKey" type="text" class="form-control" name="search_key" placeholder="">
-                  </div>
-                </div>
-
-                <div class="clearfix"></div>
-
                 <div class="form-group col-md-6 col-sm-12 col-xs-12" style="display: none;">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Reference </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
@@ -242,13 +232,13 @@
 
 
 
-                <div class="form-group col-md-6 col-sm-12 col-xs-12" id="dealer" style="display:block;">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Dealer <span class="required">*</span></label>
+                <div class="form-group col-md-6 col-sm-12 col-xs-12" id="seize-depot" style="display:block;">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">SVD/Garage <span class="required">*</span></label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <select id="dealerId" class="form-control select-tag" name="dealer_id" required>
-                        <option value="">Select Dealer</option>
-                        <?php foreach($dealer_list as $value){?> 
-                        <option value="<?php echo $value->dealer_id; ?>"><?php echo $value->dealer_name;?></option>
+                      <select id="depotId" class="form-control select-tag" name="depot_id" required>
+                        <option value="">Select SVD/Garage</option>
+                        <?php foreach($depot_list as $value){?> 
+                        <option value="<?php echo $value->depot_id; ?>"><?php echo $value->depot_name;?></option>
                         <?php }?>
                       </select>
                   </div>
@@ -305,19 +295,21 @@
                   </div>
                 </div> -->
 
-                <div class="form-group col-md-6 col-sm-12 col-xs-12 chassis-container" style="display: block;">
+                <div class="form-group col-md-6 col-sm-12 col-xs-12 chassis-container" style="display: none;">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Chassis No <span class="required">*</span></label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                    <input id="chassisNo" readonly type="text" class="form-control" name="chassis_no" placeholder="" >
+                      <select id="chassisNo" class="form-control select-tag" name="chassis_no" required>
+                        <option value="">select</option>
+                      </select>
                   </div>
                 </div>
 
-                <div class="form-group col-md-6 col-sm-12 col-xs-12 engine-container" style="display: block;">
+                <div class="form-group col-md-6 col-sm-12 col-xs-12 engine-container" style="display: none;">
                   <input type="hidden" name="stock_id" id="stockId">
                   <input type="hidden" name="delivery_yard_id" id="delivery-yard-id">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Engine No </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
-                      <input id="engineNo" readonly type="text" class="form-control" name="engine_no" placeholder="" required>
+                      <input id="engineNo" readonly type="text" class="form-control" name="engine_no" placeholder="" >
                   </div>
                 </div>
 
@@ -433,10 +425,8 @@
                       <option value="12">12</option>
                       <option value="15">15</option>
                       <option value="18">18</option>
-                      <!-- <option value="24">24</option>
-                      <option value="30">30</option>
+                      <option value="24">24</option>
                       <option value="36">36</option>
-                      <option value="42">42</option> -->
                       <!-- <option value="4">Corporate</option> -->
                       </select>
                   </div>
@@ -1311,10 +1301,10 @@
           });
       });
 
-      $("#dealerId").change(function(){
+      $("#depotId").change(function(){
           // $('#subDistrictId').val('');
           // $('#subDistrictId').change();
-          if($('#dealerId').val()!="NULL"){
+          if($('#depotId').val()!="NULL"){
             $('#chassisNo').empty();
             $('#engineNo').val('');
             $('#modelId').val('');
@@ -1325,12 +1315,12 @@
             $(".chassis-container").css("display", "block");
             // $('.sub-district-container').show(500);
           }
-          var dealerId = $('#dealerId option:selected').val();
-          console.log(dealerId);
+          var depotId = $('#depotId option:selected').val();
+          console.log(depotId);
           $.ajax({
               type: "POST",
-              url: "<?php echo base_url()?>customer/ajax_generate_stock/",
-              data: { 'dealer_id': dealerId  },
+              url: "<?php echo base_url()?>resale_customer/ajax_generate_stock/",
+              data: { 'depot_id': depotId  },
               success: function(data){
                   // Parse the returned json data
                   var opts = $.parseJSON(data);
@@ -1502,6 +1492,8 @@
             $('#downpayment').val("0");
             $("#period option[value='15']").remove();
             $("#period option[value='18']").remove();
+            $("#period option[value='24']").remove();
+            $("#period option[value='36']").remove();
             // $("#period option[value='36']").remove();
             // $("#period option[value='42']").remove();
             // $('#period').append('<option value="3">3</option>');
@@ -1526,7 +1518,8 @@
             // $("#period option[value='18']").remove();
             $('#period').append('<option value="15">15</option>');
             $('#period').append('<option value="18">18</option>');
-            // $('#period').append('<option value="36">36</option>');
+            $('#period').append('<option value="24">24</option>');
+            $('#period').append('<option value="36">36</option>');
             // $('#period').append('<option value="42">42</option>');
           }
           // $('#zoneId').val(zoneId);
@@ -1583,12 +1576,12 @@
 </script>
 
 <script type="text/javascript">
-  var dealerId = $('#dealerId option:selected').val();
-  console.log(dealerId);
+  var depotId = $('#depotId option:selected').val();
+  console.log(depotId);
   $.ajax({
       type: "POST",
-      url: "<?php echo base_url()?>customer/ajax_generate_stock/",
-      data: { 'dealer_id': dealerId  },
+      url: "<?php echo base_url()?>resale_customer/ajax_generate_stock/",
+      data: { 'depot_id': depotId  },
       success: function(data){
           // Parse the returned json data
           var opts = $.parseJSON(data);
@@ -1604,52 +1597,4 @@
           });
       }
   });
-</script>
-
-<script>
-  $(function() { 
-     
-      $( "#searchKey" ).keyup(function() {
-
-          $('#customerId').val("");
-          $('#customerName').val("");
-          $('#cityId').val("");
-          $('#engineNo').val("");
-          $('#chassisNo').val("");
-          $('#stockId').val("");
-
-          $('#report-view').html('');
-          var searchKey = $('#searchKey').val();
-          console.log('clicked!'+searchKey);
-          $.ajax({
-                  type: "POST",
-                  url: "<?php echo base_url()?>resale_customer/generate_customer_detail/",
-                  data: { 'search_key': searchKey  },
-                  success: function(data){
-                      // Parse the returned json data
-                    var opts = $.parseJSON(data);
-                      // Use jQuery's each to iterate over the opts value
-                    if(opts.resale_status == 'f'){
-                      alert('Not for resale!')
-                    }else{
-                      $('#customerId').val(opts.customer_id);
-                      $('#customerName').val(opts.customer_name);
-                      $('#cityId').val(opts.city_id);
-                      $('#engineNo').val(opts.engine_no);
-                      $('#chassisNo').val(opts.chassis_no);
-                      $('#stockId').val(opts.stock_id);
-                      console.log(opts.chassis_no);
-                      console.log(opts.seize_status);
-                    }
-                    
-                     
-                  }
-              });
-      });
-
-      $("#reset").click(function(){
-          $('#searchKey').val("");
-      });
-
-  }); 
 </script>

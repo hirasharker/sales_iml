@@ -31,6 +31,7 @@ class Resale_Customer extends CI_Controller {
 		$this->load->model('upload_model','upload_model',TRUE);
 
 		$this->load->model('stock_model','stock_model',TRUE);
+		$this->load->model('seize_model','seize_model',TRUE);
 	}
 
 	/**
@@ -65,19 +66,19 @@ class Resale_Customer extends CI_Controller {
 
 			$zone_id 								=	$this->employee_model->get_employee_by_id($this->session->userdata('employee_id'))->zone_id;
 
-			$customer_data['dealer_list']			=	$this->dealer_model->get_all_dealers_by_status_and_zone_id($dealer_status = 2,$zone_id);
+			$customer_data['depot_list']			=	$this->seize_model->get_all_seize_depots();
 
 		} elseif ($this->session->userdata('role')==3) {
 
 			$customer_data['city_list']				=	$this->city_model->get_all_cities_by_coordinator_id($this->session->userdata('employee_id'));
 
-			$customer_data['dealer_list']			=	$this->dealer_model->get_all_dealers_by_coordinator_id($dealer_status = 2,$this->session->userdata('employee_id'));
+			$customer_data['depot_list']			=	$this->seize_model->get_all_seize_depots();
 		
 		}else {
 			
 			$customer_data['city_list']			=	$this->city_model->get_all_cities();
 
-			$customer_data['dealer_list']			=	$this->dealer_model->get_all_dealers_by_status($dealer_status = 2);
+			$customer_data['depot_list']			=	$this->seize_model->get_all_seize_depots();
 		
 		}
 
@@ -155,7 +156,7 @@ class Resale_Customer extends CI_Controller {
 		$customer_data['city_id']							=	$this->input->post('city_id','0',TRUE);
 		$customer_data['district_id']						=	$this->input->post('district_id','0',TRUE);
 		$customer_data['sub_district_id']					=	$this->input->post('sub_district_id','0',TRUE);
-		$customer_data['dealer_id']							=	$this->input->post('dealer_id','0',TRUE);
+		$customer_data['seize_depot_id']							=	$this->input->post('depot_id','0',TRUE);
 		$customer_data['city_code']							=	$this->input->post('city_code','',TRUE);
 		$customer_data['zone_id']							=	$this->input->post('zone_id','0',TRUE);
 		$zone_info 											=	$this->zone_model->get_zone_by_id($customer_data['zone_id']);
@@ -856,9 +857,9 @@ class Resale_Customer extends CI_Controller {
 	}
 
 	public function ajax_generate_stock(){
-		$dealer_id 					=	$this->input->post('dealer_id');
+		$depot_id 					=	$this->input->post('depot_id');
 
-		$result						=	$this->stock_model->get_stock_by_dealer_id_for_booking($dealer_id);
+		$result						=	$this->stock_model->get_stock_by_depot_id_for_booking($depot_id);
 
 		echo json_encode($result);
 		// a die here helps ensure a clean ajax call

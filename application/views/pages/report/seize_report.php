@@ -79,9 +79,9 @@
                   <div class="col-md-9 col-sm-9 col-xs-12">
                       <select id="status" class="form-control select-tag" name="status" >
                       <option value="">Any</option>
-                      <option value="9">Pending</option>
-                      <option value="30">Released</option>
-                      <option value="30">Sold</option>
+                      <option value="0">Seized</option>
+                      <option value="1">Released</option>
+                      <option value="2">Sold</option>
                       </select>
                   </div>
                 </div>
