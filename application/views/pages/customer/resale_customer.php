@@ -306,6 +306,7 @@
 
                 <div class="form-group col-md-6 col-sm-12 col-xs-12 engine-container" style="display: none;">
                   <input type="hidden" name="stock_id" id="stockId">
+                  <input type="hidden" name="resale_id" id="resaleId">
                   <input type="hidden" name="delivery_yard_id" id="delivery-yard-id">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Engine No </label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
@@ -1346,6 +1347,7 @@
             // $('.sub-district-container').show(500);
           }else {
             $('#stockId').val('');
+            $('#resaleId').val('');
             $('#engineNo').val('');
             $(".engine-container").css("display", "none");
             $('#modelId').val('');
@@ -1359,7 +1361,7 @@
           console.log(chassisNo);
           $.ajax({
               type: "POST",
-              url: "<?php echo base_url()?>customer/ajax_generate_engine_no/",
+              url: "<?php echo base_url()?>resale_customer/ajax_generate_engine_no/",
               data: { 'chassis_no': chassisNo  },
               success: function(data){
                   // Parse the returned json data
@@ -1367,6 +1369,7 @@
                   // Use jQuery's each to iterate over the opts value
                   // console.log(opts);
                   $('#stockId').val(opts.stock_id);
+                  $('#resaleId').val(opts.resale_id);
                   $('#engineNo').val(opts.engine_no);
                   $('#modelId').val(opts.model_id);
                   $('#modelCode').val(opts.model_code);

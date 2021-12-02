@@ -111,7 +111,13 @@ class Resale extends CI_Controller {
 		}
 		$stock_detail_data['stock_position']			=	30;
 
+		$stock_detail_data['resale_id']					=	$resale_detail_data['resale_id'];
+
 		$stock_update_result							=	$this->stock_model->update_stock($stock_detail_data, $resale_data['stock_id']);
+
+		$customer_data['resale_status'] 				=	true;
+
+		$customer_update_result 						=	$this->customer_model->update_customer($customer_data, $resale_data['previous_customer_id']);
 
 
 		$session_data										=	array();

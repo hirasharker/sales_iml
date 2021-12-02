@@ -188,6 +188,7 @@ class Resale_Customer extends CI_Controller {
 		$customer_data['stock_id']							=	$this->input->post('stock_id','0',TRUE);
 		$customer_data['engine_no']							=	$this->input->post('engine_no','',TRUE);
 		$customer_data['chassis_no']						=	$this->input->post('chassis_no','',TRUE);
+		$customer_data['resale_id']							=	$this->input->post('resale_id','',TRUE);
 
 		// $duplicate_chassis 									=	$this->check_duplicate_chassis($customer_data['chassis_no']);
 		// if($duplicate_chassis != NULL){
