@@ -142,7 +142,7 @@ class Resale_Model extends CI_Model {
 
 
     public function get_all_resale_data_by_search_criteria($zone_id='',$rm_id='',$zm_id='',$depot_id='', $status, $start_date, $end_date){
-        $this->db->select("tbl_resale.*,tbl_zone.zone_name, tbl_zone.zhead_id, tbl_city.rm_id, tbl_stock.chassis_no, tbl_stock.engine_no, tbl_stock.registration_zone_id, (tbl_customer.total_price - tbl_customer.discount) as resale_price, tbl_customer.interest_rate, tbl_customer.period, tbl_seize_depot.depot_name, tbl_service_inspection.overall_vehicle_condition");
+        $this->db->select("tbl_resale.*,tbl_zone.zone_name, tbl_zone.zhead_id, tbl_city.rm_id, tbl_stock.chassis_no, tbl_stock.engine_no, tbl_stock.registration_zone_id, tbl_stock.model_name, (tbl_customer.total_price - tbl_customer.discount) as resale_price, tbl_customer.payment_mode, tbl_customer.interest_rate, tbl_customer.period, tbl_customer.downpayment, tbl_customer.customer_id as resale_customer_id, tbl_customer.dc_update_time, tbl_seize_depot.depot_name, tbl_service_inspection.overall_vehicle_condition, tbl_service_inspection.time_stamp as service_inspection_time");
         $this->db->from('tbl_resale');
         $this->db->join('tbl_service_inspection', 'tbl_service_inspection.resale_id = tbl_resale.resale_id', 'left');
         $this->db->join('tbl_customer', 'tbl_customer.resale_id = tbl_resale.resale_id', 'left');
