@@ -301,9 +301,9 @@ class Resale_Customer extends CI_Controller {
 
 		$current_stock_position 							=	$this->stock_model->get_stock_by_chassis_no($customer_data['chassis_no'])->stock_position;
 
-		if($current_stock_position != 4 && $current_stock_position != 6){
-			redirect('customer','refresh');
-		}
+		// if($current_stock_position != 4 && $current_stock_position != 6){
+		// 	redirect('customer','refresh');
+		// }
 
 		
 		if($this->session->userdata('token')==1){
@@ -318,9 +318,9 @@ class Resale_Customer extends CI_Controller {
 			$stock_data['customer_id']							=	$result;
 
 			
-			$stock_data['stock_position']						=	$current_stock_position + 1;
+			// $stock_data['stock_position']						=	$current_stock_position + 1;
 
-			$update_stock										=	$this->stock_model->update_stock_by_chassis_no($stock_data, $customer_data['chassis_no']);
+			// $update_stock										=	$this->stock_model->update_stock_by_chassis_no($stock_data, $customer_data['chassis_no']);
 
 			$update_code_data									=	array();
 			
