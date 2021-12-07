@@ -40,7 +40,7 @@
             </div>
             <div class="x_content" style="display:block;">
             <br />
-            <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url();?>customer/add_customer/" enctype='multipart/form-data'>
+            <form class="form-horizontal form-label-left" method="post" action="<?php echo base_url();?>resale_customer/add_customer/" enctype='multipart/form-data'>
 
                 <div class="x_title">
                 <h2>Basic Info <small></small></h2>
