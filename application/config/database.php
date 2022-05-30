@@ -121,7 +121,7 @@ $db['default'] = array(
 
 $db['ms_db'] = array(
 	'dsn'	=> '',
-	'hostname' => '192.168.10.115\SQLEXPRESS',
+	'hostname' => '192.168.10.251\SQLEXPRESS',
 	'port'	   => 1433,
 	'username' => 'sa',
 	'password' => 'Ifad12345#',
