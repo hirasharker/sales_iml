@@ -31,6 +31,7 @@ class Resale_Customer extends CI_Controller {
 		$this->load->model('upload_model','upload_model',TRUE);
 
 		$this->load->model('stock_model','stock_model',TRUE);
+		$this->load->model('seize_model','seize_model',TRUE);
 	}
 
 	/**
@@ -65,19 +66,19 @@ class Resale_Customer extends CI_Controller {
 
 			$zone_id 								=	$this->employee_model->get_employee_by_id($this->session->userdata('employee_id'))->zone_id;
 
-			$customer_data['dealer_list']			=	$this->dealer_model->get_all_dealers_by_status_and_zone_id($dealer_status = 2,$zone_id);
+			$customer_data['depot_list']			=	$this->seize_model->get_all_seize_depots();
 
 		} elseif ($this->session->userdata('role')==3) {
 
 			$customer_data['city_list']				=	$this->city_model->get_all_cities_by_coordinator_id($this->session->userdata('employee_id'));
 
-			$customer_data['dealer_list']			=	$this->dealer_model->get_all_dealers_by_coordinator_id($dealer_status = 2,$this->session->userdata('employee_id'));
+			$customer_data['depot_list']			=	$this->seize_model->get_all_seize_depots();
 		
 		}else {
 			
 			$customer_data['city_list']			=	$this->city_model->get_all_cities();
 
-			$customer_data['dealer_list']			=	$this->dealer_model->get_all_dealers_by_status($dealer_status = 2);
+			$customer_data['depot_list']			=	$this->seize_model->get_all_seize_depots();
 		
 		}
 
@@ -155,7 +156,7 @@ class Resale_Customer extends CI_Controller {
 		$customer_data['city_id']							=	$this->input->post('city_id','0',TRUE);
 		$customer_data['district_id']						=	$this->input->post('district_id','0',TRUE);
 		$customer_data['sub_district_id']					=	$this->input->post('sub_district_id','0',TRUE);
-		$customer_data['dealer_id']							=	$this->input->post('dealer_id','0',TRUE);
+		$customer_data['seize_depot_id']							=	$this->input->post('depot_id','0',TRUE);
 		$customer_data['city_code']							=	$this->input->post('city_code','',TRUE);
 		$customer_data['zone_id']							=	$this->input->post('zone_id','0',TRUE);
 		$zone_info 											=	$this->zone_model->get_zone_by_id($customer_data['zone_id']);
@@ -187,6 +188,7 @@ class Resale_Customer extends CI_Controller {
 		$customer_data['stock_id']							=	$this->input->post('stock_id','0',TRUE);
 		$customer_data['engine_no']							=	$this->input->post('engine_no','',TRUE);
 		$customer_data['chassis_no']						=	$this->input->post('chassis_no','',TRUE);
+		$customer_data['resale_id']							=	$this->input->post('resale_id','',TRUE);
 
 		// $duplicate_chassis 									=	$this->check_duplicate_chassis($customer_data['chassis_no']);
 		// if($duplicate_chassis != NULL){
@@ -299,9 +301,9 @@ class Resale_Customer extends CI_Controller {
 
 		$current_stock_position 							=	$this->stock_model->get_stock_by_chassis_no($customer_data['chassis_no'])->stock_position;
 
-		if($current_stock_position != 4 && $current_stock_position != 6){
-			redirect('customer','refresh');
-		}
+		// if($current_stock_position != 4 && $current_stock_position != 6){
+		// 	redirect('customer','refresh');
+		// }
 
 		
 		if($this->session->userdata('token')==1){
@@ -316,9 +318,9 @@ class Resale_Customer extends CI_Controller {
 			$stock_data['customer_id']							=	$result;
 
 			
-			$stock_data['stock_position']						=	$current_stock_position + 1;
+			// $stock_data['stock_position']						=	$current_stock_position + 1;
 
-			$update_stock										=	$this->stock_model->update_stock_by_chassis_no($stock_data, $customer_data['chassis_no']);
+			// $update_stock										=	$this->stock_model->update_stock_by_chassis_no($stock_data, $customer_data['chassis_no']);
 
 			$update_code_data									=	array();
 			
@@ -856,9 +858,9 @@ class Resale_Customer extends CI_Controller {
 	}
 
 	public function ajax_generate_stock(){
-		$dealer_id 					=	$this->input->post('dealer_id');
+		$depot_id 					=	$this->input->post('depot_id');
 
-		$result						=	$this->stock_model->get_stock_by_dealer_id_for_booking($dealer_id);
+		$result						=	$this->stock_model->get_stock_by_depot_id_for_booking($depot_id);
 
 		echo json_encode($result);
 		// a die here helps ensure a clean ajax call

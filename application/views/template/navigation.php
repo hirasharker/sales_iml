@@ -106,13 +106,13 @@
 
         <li><a><i class="fa fa-file"></i>Resale <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
-            <li><a href="<?php echo base_url();?>resale/">Request</a></li>
+            <li><a href="<?php echo base_url();?>resale">Request</a></li>
             <!-- <li><a href="<?php echo base_url();?>report/booking_report">Booking Report</a></li>
             <li><a href="<?php echo base_url();?>report/individual_customer">Individual Customer</a></li> -->
             <!-- <li><a href="<?php echo base_url();?>report/stock_report">Stock Report</a></li> -->
             <li><a>Approval <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                    <li><a href="<?php echo base_url();?>approval_resale/unit_head">Unit Head </a></li>
+                    <li><a href="<?php echo base_url();?>approval_resale/unit_head/">Unit Head </a></li>
                     <li><a href="<?php echo base_url();?>approval_resale/service">Service </a></li>
                     <li><a href="<?php echo base_url();?>approval_resale/divisional_head">Divisional Head</a></li>
                     <li><a href="<?php echo base_url();?>approval_resale/management">Management</a></li>
@@ -138,7 +138,9 @@
                     <li><a href="<?php echo base_url();?>approval_release/divisional_head">Divisional Head</a></li>
                 </ul>
             </li>
-            <li><a href="<?php echo base_url();?>seize_report/general_release_report">General Seize Report </a></li>
+            <li><a href="<?php echo base_url();?>seize/upload_receivable">Upload Receivable</a></li>
+            <li><a href="<?php echo base_url();?>seize_report/general_seize_report">General Seize Report </a></li>
+            <li><a href="<?php echo base_url();?>seize_report/service_inspection_report">Service Inspection Report </a></li>
         </ul>
         </li>
 

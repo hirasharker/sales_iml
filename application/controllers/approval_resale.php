@@ -17,6 +17,7 @@ class Approval_Resale extends CI_Controller {
 		$this->load->model('upload_model','upload_model',TRUE);
 		$this->load->model('dealer_model','dealer_model',TRUE);
 		$this->load->model('resale_model', 'resale_model', TRUE);
+		$this->load->model('seize_model', 'seize_model', TRUE);
 
 		$this->load->library('pagination');
 
@@ -383,6 +384,7 @@ class Approval_Resale extends CI_Controller {
 		$inspection_data['self_starter']		=	$this->input->post('self_starter','0',TRUE);
 		$inspection_data['ignition_switch']		=	$this->input->post('ignition_switch','0',TRUE);
 		$inspection_data['key_status']		=	$this->input->post('key_status','0',TRUE);
+		$inspection_data['softtop']		=	$this->input->post('softtop','0',TRUE);
 		$inspection_data['body_condition']		=	$this->input->post('body_condition','0',TRUE);
 		$inspection_data['denting_painting']		=	$this->input->post('denting_painting','0',TRUE);
 		$inspection_data['overall_vehicle_condition']		=	$this->input->post('overall_vehicle_condition','0',TRUE);
@@ -455,19 +457,24 @@ class Approval_Resale extends CI_Controller {
 			redirect('dashboard','refresh');
 		}
 		$customer_status		=	array();
+		$seize_data 			=	array();
 
 		// $resale_id							=	$this->input->post('resale_id','0',TRUE);
 
 		// print($resale_id);exit();
 
 
-		$current_status						=	$this->resale_model->get_resale_by_id($resale_id);
+		$resale_detail						=	$this->resale_model->get_resale_by_id($resale_id);
 
-		$updated_status						=	$current_status->status +1;
+		$updated_status						=	$resale_detail->status +1;
 
 		$resale_data['status']				=	$updated_status;
 
 		$resale_data['mgt_approval_time']	=	date('Y-m-d H:i:s');
+
+		$seize_data['status']				=	2;
+
+		$this->seize_model->update_seize($seize_data, $resale_detail->seize_id);
 
 		$this->resale_model->update_resale($resale_data, $resale_id);
 		redirect('approval_resale/management/', 'refresh');

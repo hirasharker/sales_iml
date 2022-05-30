@@ -535,7 +535,7 @@
                     var opts = $.parseJSON(data);
                     console.log(opts);
                       // Use jQuery's each to iterate over the opts value
-                    if(opts.seize_status == 't'){
+                    if(opts.seize_status == 't' && opts.resale_status == 'f'){
                       $('#customerId').val(opts.customer_id);
                       $('#customerName').val(opts.customer_name);
                       $('#engineNo').val(opts.engine_no);
@@ -553,9 +553,10 @@
                       $('#rmId').val(opts.rm_id);
                       $('#zheadId').val(opts.seize_id);
                       $('#seizeDate').val(opts.time_stamp);
-
+                    } else if (opts.resale_status == 't') {
+                      alert('Already under resale process!');
                     }else {
-                      alert('Currently not under seize!')
+                      alert('Currently not under seize!');
                       console.log(opts.chassis_no);
                       console.log(opts.seize_status);
                     }

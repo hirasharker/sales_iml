@@ -213,7 +213,7 @@
       $("#role").change(function(){ 
           // var element = $(this).find('option:selected'); 
           
-          if($("#role").val()!=1){
+          if($("#role").val()!=1 && $("#role").val()!=11){
             // $('#zone').attr('disabled', 'disabled');
             $('#zone').hide();
             $('#zone').val=1;

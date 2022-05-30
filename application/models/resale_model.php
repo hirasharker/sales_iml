@@ -21,7 +21,7 @@ class Resale_Model extends CI_Model {
     
 
     public function get_resale_by_id($resale_id){
-       $this->db->select('tbl_resale.*, tbl_employee.employee_name as ro_name, tbl_seize.vehicle_condition, tbl_seize.tyre_quantity, tbl_seize.battery_condition, tbl_seize.gas_cylinder, tbl_seize.key_status, tbl_seize.engine_no, tbl_seize.chassis_no, tbl_seize.time_stamp as seize_date, tbl_customer.customer_name as previous_customer_name, tbl_customer.phone');
+       $this->db->select('tbl_resale.*, tbl_employee.employee_name as ro_name, tbl_seize.vehicle_condition, tbl_seize.tyre_quantity, tbl_seize.battery_condition, tbl_seize.gas_cylinder, tbl_seize.key_status, tbl_seize.softtop, tbl_seize.engine_no, tbl_seize.chassis_no, tbl_seize.time_stamp as seize_date, tbl_customer.customer_name as previous_customer_name, tbl_customer.phone');
        $this->db->from('tbl_resale');
        $this->db->join('tbl_employee','tbl_employee.employee_id = tbl_resale.ro_id','left');
        $this->db->join('tbl_seize','tbl_seize.seize_id = tbl_resale.seize_id','left');
@@ -137,6 +137,52 @@ class Resale_Model extends CI_Model {
       $result_query        =   $this->db->get();
       $result              =   $result_query->row();
       return $result;
+    }
+
+
+
+    public function get_all_resale_data_by_search_criteria($zone_id='',$rm_id='',$zm_id='',$depot_id='', $status, $start_date, $end_date){
+        $this->db->select("tbl_resale.*,tbl_zone.zone_name, tbl_zone.zhead_id, tbl_city.rm_id, tbl_stock.chassis_no, tbl_stock.engine_no, tbl_stock.registration_zone_id, tbl_stock.model_name, (tbl_customer.total_price - tbl_customer.discount) as resale_price, tbl_customer.payment_mode, tbl_customer.interest_rate, tbl_customer.period, tbl_customer.downpayment, tbl_customer.customer_id as resale_customer_id, tbl_customer.dc_update_time, tbl_seize_depot.depot_name, tbl_service_inspection.overall_vehicle_condition, tbl_service_inspection.time_stamp as service_inspection_time");
+        $this->db->from('tbl_resale');
+        $this->db->join('tbl_service_inspection', 'tbl_service_inspection.resale_id = tbl_resale.resale_id', 'left');
+        $this->db->join('tbl_customer', 'tbl_customer.resale_id = tbl_resale.resale_id', 'left');
+        $this->db->join('tbl_stock', 'tbl_stock.stock_id = tbl_resale.stock_id');
+        $this->db->join('tbl_seize', 'tbl_seize.seize_id = tbl_resale.seize_id', 'left');
+        $this->db->join('tbl_city','tbl_city.city_id = tbl_resale.city_id', 'left');
+        $this->db->join('tbl_zone', 'tbl_zone.zone_id = tbl_city.zone_id', 'left');
+        $this->db->join('tbl_seize_depot', 'tbl_seize_depot.depot_id = tbl_seize.depot_id', 'left');
+
+        // $this->db->where('tbl_city.zone_id',29);
+        
+        if($zone_id!=''){
+            $this->db->where('tbl_city.zone_id',$zone_id);    
+        }
+        if($rm_id!=''){
+            $this->db->where('tbl_city.rm_id',$rm_id);    
+        }
+        if($zm_id!=''){
+            $this->db->where('tbl_zone.zhead_id',$zm_id);    
+        }
+        if($depot_id!=''){
+            $this->db->where('depot_id',$depot_id);    
+        }
+
+        
+        
+        if($start_date!=''){
+            $this->db->where('date(tbl_seize.time_stamp) >=',$start_date);
+            $this->db->where('date(tbl_seize.time_stamp) <=',$end_date);  
+        }
+
+        
+
+        if($status!=''){
+            $this->db->where('tbl_seize.status',$status);
+        }
+
+        $result_query=$this->db->get();
+        $result=$result_query->result();
+        return $result;
     }
 }
 ?>

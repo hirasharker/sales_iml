@@ -17,6 +17,7 @@ class Approval_Release extends CI_Controller {
 		$this->load->model('upload_model','upload_model',TRUE);
 		$this->load->model('dealer_model','dealer_model',TRUE);
 		$this->load->model('resale_model', 'resale_model', TRUE);
+		$this->load->model('seize_model','seize_model', TRUE);
 		$this->load->model('release_model', 'release_model', TRUE);
 		$this->load->library('pagination');
 
@@ -216,16 +217,18 @@ class Approval_Release extends CI_Controller {
 		if($this->session->userdata('role')!=2 && $this->session->userdata('role')!=15){
 			redirect('dashboard','refresh');
 		}
-		$customer_data		=	array();
+		$customer_data						=	array();
+		$seize_data 						=	array();
 
 		$release_id							=	$this->input->post('release_id','0',TRUE);
 
 		// print($release_id);exit();
 
 
-		$current_status						=	$this->release_model->get_release_by_id($release_id);
+		$release_detail						=	$this->release_model->get_release_by_id($release_id);
 
-		$updated_status						=	$current_status->release_status +1;
+
+		$updated_status						=	$release_detail->release_status +1;
 
 		$release_data['release_status']				=	$updated_status;
 
@@ -235,8 +238,12 @@ class Approval_Release extends CI_Controller {
 		$release_data['proposed_collection_amount_by_dh']				=	$this->input->post('proposed_collection_amount_by_dh','',TRUE);
 		$release_data['dh_note']										=	$this->input->post('dh_note','',TRUE);
 
+		$seize_data['status']				=	1;
+
+		$this->seize_model->update_seize($seize_data, $release_detail->seize_id);
+		
 		$this->release_model->update_release($release_data, $release_id);
-		$this->customer_model->update_customer($customer_data, $current_status->customer_id);
+		$this->customer_model->update_customer($customer_data, $release_detail->customer_id);
 
 		redirect('approval_release/divisional_head/', 'refresh');
 	}

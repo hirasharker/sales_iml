@@ -118,12 +118,13 @@
 
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Key </label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Soft-top </label>
                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                    <input type="text" class="form-control" readonly="true" value="<?php echo $resale_detail->key_status; ?>">
+                                    <input type="text" class="form-control" readonly="true" value="<?php echo $resale_detail->softtop; ?>">
                                 </div>
                             </div>
                         </div>
+
 
                     </div>
 
@@ -266,6 +267,18 @@
                           <option value="good">Good</option>
                           <option value="average">Average</option>
                           <option value="not_good">Not Good</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                    <label class="control-label col-md-3 col-sm-12 col-xs-12">Soft-top </label>
+                    <div class="col-md-8 col-sm-9 col-xs-12">
+                        <select class="form-control select-tag" name="softtop" required>
+                          <option value="">select</option>
+                          <option value="good">Good</option>
+                          <option value="average">Average</option>
+                          <option value="damaged">Damaged</option>
                         </select>
                     </div>
                 </div>
